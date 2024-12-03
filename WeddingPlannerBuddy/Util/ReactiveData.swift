@@ -1,8 +1,8 @@
 //
 //  ReactiveData.swift
-//  ArtistsLand
+//  WeddingPlannerBuddy
 //
-//  Created by Alexia Aldea on 08.11.2024.
+//  Created by Alexia Aldea on 03.12.2024.
 //
 
 import Combine
