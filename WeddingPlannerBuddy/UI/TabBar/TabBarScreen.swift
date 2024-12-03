@@ -9,8 +9,9 @@ import SwiftUI
 
 enum TabBarNavigation {
     case home
-    case search
-    case chats
+    case wedding
+    case guests
+    case media
     case profile
 }
 
@@ -27,10 +28,11 @@ struct TabBarScreen: View {
     @StateObject private var viewModel = TabBarViewModel()
     
     @StateObject private var homeNavigation = Navigation(root: HomeScreen().asDestination())
-    @StateObject private var searchNavigation = Navigation(root: HomeScreen().asDestination())
-    @StateObject private var chatsNavigation = Navigation(root: HomeScreen().asDestination())
-    @StateObject private var profileNavigation = Navigation(root: HomeScreen().asDestination())
-    
+    @StateObject private var weddingNavigation = Navigation(root: WeddingScreen().asDestination())
+    @StateObject private var guestsNavigation = Navigation(root: GuestsScreen().asDestination())
+    @StateObject private var mediaNavigation = Navigation(root: MediaScreen().asDestination())
+    @StateObject private var profileNavigation = Navigation(root: ProfileScreen().asDestination())
+   
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             GeometryReader { proxy in
@@ -39,18 +41,21 @@ struct TabBarScreen: View {
                         switch viewModel.selectedTabItem {
                         case .home:
                             NavigationHostView(navigation: homeNavigation)
-                        case .search:
-                            NavigationHostView(navigation: searchNavigation)
-                        case .chats:
-                            NavigationHostView(navigation: chatsNavigation)
+                        case .wedding:
+                            NavigationHostView(navigation: weddingNavigation)
+                        case .guests:
+                            NavigationHostView(navigation: guestsNavigation)
+                        case .media:
+                            NavigationHostView(navigation: mediaNavigation)
                         case .profile:
                             NavigationHostView(navigation: profileNavigation)
                         }
                     }.frame(width: proxy.size.width, height: proxy.size.height)
                 }.onReceive(viewModel.$selectedTabItem) { newValue in
                     homeNavigation.popToRoot(animated: false)
-                    searchNavigation.popToRoot(animated: false)
-                    chatsNavigation.popToRoot(animated: false)
+                    weddingNavigation.popToRoot(animated: false)
+                    guestsNavigation.popToRoot(animated: false)
+                    mediaNavigation.popToRoot(animated: false)
                     profileNavigation.popToRoot(animated: false)
                     self.viewModel.oldSelectedTab = newValue
                 }.onReceive(tabBarCoordinator.$tabBarNavigation, perform: { value in
@@ -61,16 +66,21 @@ struct TabBarScreen: View {
                                 viewModel.selectedTabItem = .home
                             }
                             homeNavigation.popToRoot(animated: true)
-                        case .search:
-                            if viewModel.selectedTabItem != .search {
-                                viewModel.selectedTabItem = .search
+                        case .wedding:
+                            if viewModel.selectedTabItem != .wedding {
+                                viewModel.selectedTabItem = .wedding
                             }
-                            searchNavigation.popToRoot(animated: true)
-                        case .chats:
-                            if viewModel.selectedTabItem != .chats {
-                                viewModel.selectedTabItem = .chats
+                            weddingNavigation.popToRoot(animated: true)
+                        case .guests:
+                            if viewModel.selectedTabItem != .guests {
+                                viewModel.selectedTabItem = .guests
                             }
-                            chatsNavigation.popToRoot(animated: true)
+                            guestsNavigation.popToRoot(animated: true)
+                        case .media:
+                            if viewModel.selectedTabItem != .media {
+                                viewModel.selectedTabItem = .media
+                            }
+                            mediaNavigation.popToRoot(animated: true)
                         case .profile:
                             if viewModel.selectedTabItem != .profile {
                                 viewModel.selectedTabItem = .profile

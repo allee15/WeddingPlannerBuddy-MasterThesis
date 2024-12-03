@@ -74,7 +74,20 @@
 		0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */; };
 		0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */; };
 		0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */; };
-		0FE5153A2CF76E2400CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515392CF76E2400CA9601 /* HomeScreen.swift */; };
+		0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515402CFF9BE800CA9601 /* HomeScreen.swift */; };
+		0FE515432CFF9C1E00CA9601 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515422CFF9C1C00CA9601 /* HomeViewModel.swift */; };
+		0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515452CFF9C5A00CA9601 /* WeddingScreen.swift */; };
+		0FE515482CFF9C7B00CA9601 /* WeddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515472CFF9C7B00CA9601 /* WeddingViewModel.swift */; };
+		0FE5154B2CFF9CA200CA9601 /* GuestsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5154A2CFF9CA200CA9601 /* GuestsViewModel.swift */; };
+		0FE5154D2CFF9CB000CA9601 /* GuestsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5154C2CFF9CB000CA9601 /* GuestsScreen.swift */; };
+		0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5154F2CFF9CDF00CA9601 /* ProfileViewModel.swift */; };
+		0FE515522CFF9CF100CA9601 /* ProfileScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515512CFF9CF100CA9601 /* ProfileScreen.swift */; };
+		0FE515552CFF9D2A00CA9601 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515542CFF9D2A00CA9601 /* LoginScreen.swift */; };
+		0FE515582CFF9D4200CA9601 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515572CFF9D4200CA9601 /* LoginViewModel.swift */; };
+		0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5155B2CFF9D6200CA9601 /* RegisterScreen.swift */; };
+		0FE5155E2CFF9D8600CA9601 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5155D2CFF9D8600CA9601 /* RegisterViewModel.swift */; };
+		0FE515612CFF9E2900CA9601 /* MediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515602CFF9E2900CA9601 /* MediaViewModel.swift */; };
+		0FE515632CFF9E3600CA9601 /* MediaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515622CFF9E3600CA9601 /* MediaScreen.swift */; };
 		9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */; };
 		9B1A69722CC041AC00B19BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69712CC041AC00B19BF1 /* Assets.xcassets */; };
 		9B1A69752CC041AC00B19BF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69742CC041AC00B19BF1 /* Preview Assets.xcassets */; };
@@ -139,7 +152,20 @@
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsScreen.swift; sourceTree = "<group>"; };
 		0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewModel.swift; sourceTree = "<group>"; };
-		0FE515392CF76E2400CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		0FE515402CFF9BE800CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		0FE515422CFF9C1C00CA9601 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		0FE515452CFF9C5A00CA9601 /* WeddingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingScreen.swift; sourceTree = "<group>"; };
+		0FE515472CFF9C7B00CA9601 /* WeddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingViewModel.swift; sourceTree = "<group>"; };
+		0FE5154A2CFF9CA200CA9601 /* GuestsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsViewModel.swift; sourceTree = "<group>"; };
+		0FE5154C2CFF9CB000CA9601 /* GuestsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsScreen.swift; sourceTree = "<group>"; };
+		0FE5154F2CFF9CDF00CA9601 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		0FE515512CFF9CF100CA9601 /* ProfileScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreen.swift; sourceTree = "<group>"; };
+		0FE515542CFF9D2A00CA9601 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		0FE515572CFF9D4200CA9601 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		0FE5155B2CFF9D6200CA9601 /* RegisterScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreen.swift; sourceTree = "<group>"; };
+		0FE5155D2CFF9D8600CA9601 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		0FE515602CFF9E2900CA9601 /* MediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewModel.swift; sourceTree = "<group>"; };
+		0FE515622CFF9E3600CA9601 /* MediaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaScreen.swift; sourceTree = "<group>"; };
 		9B1A696A2CC041AA00B19BF1 /* WeddingPlannerBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeddingPlannerBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B1A69712CC041AC00B19BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -172,12 +198,16 @@
 		0F24D5972CC0F8B100A833E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				0FE515362CF76E1200CA9601 /* ThemeSettingsScreen */,
 				0F24D5DF2CC1B73500A833E1 /* ReusableViews */,
 				0F24D5D32CC1B44100A833E1 /* Onboarding */,
+				0FE515532CFF9D1900CA9601 /* Auth */,
+				0FE5153F2CFF9BDC00CA9601 /* Home */,
+				0FE515442CFF9C4100CA9601 /* Wedding */,
+				0FE515492CFF9C8E00CA9601 /* Guests */,
+				0FE5155F2CFF9E1900CA9601 /* Media */,
+				0FE5154E2CFF9CD300CA9601 /* Profile */,
 				0F24D5982CC0F8CD00A833E1 /* TabBar */,
 				0F24D5952CC0F89A00A833E1 /* RootView.swift */,
-				0FE515392CF76E2400CA9601 /* HomeScreen.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -324,6 +354,79 @@
 			path = ThemeSettingsScreen;
 			sourceTree = "<group>";
 		};
+		0FE5153F2CFF9BDC00CA9601 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0FE515402CFF9BE800CA9601 /* HomeScreen.swift */,
+				0FE515422CFF9C1C00CA9601 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0FE515442CFF9C4100CA9601 /* Wedding */ = {
+			isa = PBXGroup;
+			children = (
+				0FE515452CFF9C5A00CA9601 /* WeddingScreen.swift */,
+				0FE515472CFF9C7B00CA9601 /* WeddingViewModel.swift */,
+			);
+			path = Wedding;
+			sourceTree = "<group>";
+		};
+		0FE515492CFF9C8E00CA9601 /* Guests */ = {
+			isa = PBXGroup;
+			children = (
+				0FE5154C2CFF9CB000CA9601 /* GuestsScreen.swift */,
+				0FE5154A2CFF9CA200CA9601 /* GuestsViewModel.swift */,
+			);
+			path = Guests;
+			sourceTree = "<group>";
+		};
+		0FE5154E2CFF9CD300CA9601 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0FE515512CFF9CF100CA9601 /* ProfileScreen.swift */,
+				0FE5154F2CFF9CDF00CA9601 /* ProfileViewModel.swift */,
+				0FE515362CF76E1200CA9601 /* ThemeSettingsScreen */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		0FE515532CFF9D1900CA9601 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				0FE515562CFF9D2D00CA9601 /* Login */,
+				0FE515592CFF9D4C00CA9601 /* Register */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		0FE515562CFF9D2D00CA9601 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0FE515542CFF9D2A00CA9601 /* LoginScreen.swift */,
+				0FE515572CFF9D4200CA9601 /* LoginViewModel.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0FE515592CFF9D4C00CA9601 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				0FE5155B2CFF9D6200CA9601 /* RegisterScreen.swift */,
+				0FE5155D2CFF9D8600CA9601 /* RegisterViewModel.swift */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		0FE5155F2CFF9E1900CA9601 /* Media */ = {
+			isa = PBXGroup;
+			children = (
+				0FE515622CFF9E3600CA9601 /* MediaScreen.swift */,
+				0FE515602CFF9E2900CA9601 /* MediaViewModel.swift */,
+			);
+			path = Media;
+			sourceTree = "<group>";
+		};
 		9B1A69612CC041A900B19BF1 = {
 			isa = PBXGroup;
 			children = (
@@ -466,26 +569,36 @@
 				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
 				0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */,
 				0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */,
+				0FE515552CFF9D2A00CA9601 /* LoginScreen.swift in Sources */,
 				0F327EE22CDEB4F900EDF536 /* PostsService.swift in Sources */,
 				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
+				0FE515582CFF9D4200CA9601 /* LoginViewModel.swift in Sources */,
+				0FE5154B2CFF9CA200CA9601 /* GuestsViewModel.swift in Sources */,
 				0F24D6172CC2A6CD00A833E1 /* String+.swift in Sources */,
 				0F24D6022CC1BE7100A833E1 /* BlockingErrorScreen.swift in Sources */,
 				0F24D6082CC2986C00A833E1 /* UserApi.swift in Sources */,
 				0F327EDE2CDE48CB00EDF536 /* ApiEnvironment.swift in Sources */,
+				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
 				0F327EE82CDEB91B00EDF536 /* ChatService.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
+				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
 				0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */,
 				0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */,
+				0FE515632CFF9E3600CA9601 /* MediaScreen.swift in Sources */,
+				0FE5154D2CFF9CB000CA9601 /* GuestsScreen.swift in Sources */,
 				0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */,
 				0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */,
 				0F24D5F92CC1BC9D00A833E1 /* SideButtonView.swift in Sources */,
+				0FE515522CFF9CF100CA9601 /* ProfileScreen.swift in Sources */,
 				0F24D5DE2CC1B5A200A833E1 /* UserDefaultsService.swift in Sources */,
 				0F24D59A2CC0F8D600A833E1 /* TabBarItem.swift in Sources */,
 				0F24D61D2CC2A8AB00A833E1 /* ModalChooseOptionView.swift in Sources */,
 				0F24D6212CC2AAA500A833E1 /* NavBarView.swift in Sources */,
 				0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */,
+				0FE515612CFF9E2900CA9601 /* MediaViewModel.swift in Sources */,
 				0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */,
+				0FE5155E2CFF9D8600CA9601 /* RegisterViewModel.swift in Sources */,
 				0F24D5D52CC1B47000A833E1 /* OnboardingScreen.swift in Sources */,
 				0F24D6062CC297A100A833E1 /* User.swift in Sources */,
 				0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */,
@@ -493,6 +606,7 @@
 				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
 				0F327EEC2CDEBA0800EDF536 /* Chat.swift in Sources */,
+				0FE515482CFF9C7B00CA9601 /* WeddingViewModel.swift in Sources */,
 				0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
@@ -506,12 +620,14 @@
 				0F327EE62CDEB73200EDF536 /* Post.swift in Sources */,
 				0F24D5F52CC1BC3B00A833E1 /* RightNavBar.swift in Sources */,
 				0F327EBD2CDBB16D00EDF536 /* KFImage+.swift in Sources */,
+				0FE515432CFF9C1E00CA9601 /* HomeViewModel.swift in Sources */,
 				0F24D5A32CC0F96E00A833E1 /* ControllerRepresentable.swift in Sources */,
-				0FE5153A2CF76E2400CA9601 /* HomeScreen.swift in Sources */,
+				0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */,
 				0F24D60C2CC299E500A833E1 /* LoaderView.swift in Sources */,
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
+				0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
 				0F24D59C2CC0F91600A833E1 /* TabBarScreen.swift in Sources */,
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,

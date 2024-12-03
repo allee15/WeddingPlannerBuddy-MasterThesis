@@ -10,8 +10,9 @@ import SwiftUI
 
 enum TabBarItemType: Equatable {
     case home
-    case search
-    case chats
+    case wedding
+    case guests
+    case media
     case profile
 }
 
@@ -27,16 +28,22 @@ let homeTabBarItem = TabBarItem(
     imageName: .icHome
 )
 
-let searchTabBarItem = TabBarItem(
-    type: .search,
-    title: "Search",
+let weddingTabBarItem = TabBarItem(
+    type: .wedding,
+    title: "Wedding",
     imageName: .icSearch
 )
 
-let chatsTabBarItem = TabBarItem(
-    type: .chats,
-    title: "Chats",
+let guestsTabBarItem = TabBarItem(
+    type: .guests,
+    title: "Guests",
     imageName: .icChats
+)
+
+let mediaTabBarItem = TabBarItem(
+    type: .media,
+    title: "Media",
+    imageName: .icProfile
 )
 
 let profileNewsTabBarItem = TabBarItem(

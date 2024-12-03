@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    @EnvironmentObject private var navigation: Navigation
+    @StateObject private var viewModel = HomeViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Home screen")
     }
 }
 

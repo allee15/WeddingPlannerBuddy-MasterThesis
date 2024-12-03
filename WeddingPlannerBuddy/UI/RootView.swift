@@ -135,7 +135,7 @@ struct RootView: View {
                     TabBarCoordinator.instance.tabBarNavigation = .home
                     navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
                 case .goToLogin:
-                    navigation.replaceNavigationStack([HomeScreen().asDestination(tag: "login")], animated: true)
+                    navigation.replaceNavigationStack([LoginScreen().asDestination(tag: "login")], animated: true)
                 case .goToOnboarding:
                     navigation.push(OnboardingScreen().asDestination(), animated: true)
                 }
