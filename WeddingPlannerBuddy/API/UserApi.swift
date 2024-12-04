@@ -74,15 +74,13 @@ class UserApi {
         }.eraseToAnyPublisher()
     }
     
-    func register(nickname: String, email: String, password: String, userType: String) -> AnyPublisher<UserResponse, Error> {
+    func register(email: String, password: String) -> AnyPublisher<UserResponse, Error> {
         Future { promise in
             let url = URL(string: "\(DefaultAPIEnvironment.basePath)/api/auth/register")
             
             let body: [String: Any] = [
-                "username": nickname,
                 "email": email,
-                "password": password,
-                "accType": userType
+                "password": password
             ]
             
             let jsonData = try? JSONSerialization.data(withJSONObject: body)

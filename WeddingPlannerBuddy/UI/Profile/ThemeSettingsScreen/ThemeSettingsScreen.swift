@@ -61,7 +61,7 @@ fileprivate struct ThemeWidgetView: View {
                     Image(image)
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundStyle(Color.secondaryBlueInversat)
+                        .foregroundStyle(Color.mainPink)
                         .frame(width: 50, height: 50)
                     
                     Text(title)
@@ -69,16 +69,16 @@ fileprivate struct ThemeWidgetView: View {
                         .foregroundStyle(Color.mainBlack)
                     
                     if let isSelected = isSelected {
-                        Image(isSelected ? .icOn : .icOff)
+                        Image(isSelected ? .icHome : .icMedia)
                             .resizable()
                             .renderingMode(.template)
-                            .foregroundStyle(Color.secondaryBlueInversat)
+                            .foregroundStyle(Color.mainPink)
                             .frame(width: 25, height: 25)
                     }
                 }
                 Spacer()
             }.padding(.vertical, 20)
-                .background(Color.mainGray)
+                .background(Color.mainPink.opacity(0.5))
                 .cornerRadius(4, corners: .allCorners)
         }
     }

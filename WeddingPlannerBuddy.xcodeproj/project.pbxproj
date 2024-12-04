@@ -88,6 +88,7 @@
 		0FE5155E2CFF9D8600CA9601 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE5155D2CFF9D8600CA9601 /* RegisterViewModel.swift */; };
 		0FE515612CFF9E2900CA9601 /* MediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515602CFF9E2900CA9601 /* MediaViewModel.swift */; };
 		0FE515632CFF9E3600CA9601 /* MediaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515622CFF9E3600CA9601 /* MediaScreen.swift */; };
+		0FE515692D0070E700CA9601 /* MainButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515682D0070E700CA9601 /* MainButtonView.swift */; };
 		9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */; };
 		9B1A69722CC041AC00B19BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69712CC041AC00B19BF1 /* Assets.xcassets */; };
 		9B1A69752CC041AC00B19BF1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B1A69742CC041AC00B19BF1 /* Preview Assets.xcassets */; };
@@ -166,6 +167,7 @@
 		0FE5155D2CFF9D8600CA9601 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		0FE515602CFF9E2900CA9601 /* MediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaViewModel.swift; sourceTree = "<group>"; };
 		0FE515622CFF9E3600CA9601 /* MediaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaScreen.swift; sourceTree = "<group>"; };
+		0FE515682D0070E700CA9601 /* MainButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainButtonView.swift; sourceTree = "<group>"; };
 		9B1A696A2CC041AA00B19BF1 /* WeddingPlannerBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeddingPlannerBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B1A696D2CC041AA00B19BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B1A69712CC041AC00B19BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				0F24D5E32CC1B7E400A833E1 /* BackButton.swift */,
 				0F24D5F82CC1BC9D00A833E1 /* SideButtonView.swift */,
 				0FD38F192CDBAFB500338FAC /* ClearButton.swift */,
+				0FE515682D0070E700CA9601 /* MainButtonView.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -581,6 +584,7 @@
 				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
 				0F327EE82CDEB91B00EDF536 /* ChatService.swift in Sources */,
+				0FE515692D0070E700CA9601 /* MainButtonView.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
 				0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */,

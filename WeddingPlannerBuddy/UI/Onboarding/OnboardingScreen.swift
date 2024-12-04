@@ -12,28 +12,50 @@ struct OnboardingScreen: View {
     @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
-            VStack(spacing: 16) {
-                HStack {
-                    CloseButton() {
-                        viewModel.goToLogin()
-                    }
-                    Spacer()
-                }.padding(.horizontal, 20)
+        VStack(spacing: 16) {
+            TabView(selection: $viewModel.pageIndex) {
+                ForEach(0..<3) { index in
+                    OnboardingPageView(page: viewModel.onboardingPages[index])
+                }
+            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            HStack {
+                Button {
+                    viewModel.goToLogin()
+                } label: {
+                    Text("SKIP")
+                        .font(.poppinsSemiBold(size: 14))
+                        .foregroundColor(Color.mainBlack)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.all, 16)
+                }
                 
-                TabView(selection: $viewModel.pageIndex) {
-                    ForEach(0..<3) { index in
-                        OnboardingPageView(page: viewModel.onboardingPages[index])
-                    }
-                }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                Spacer()
                 
-                VStack(spacing: 0) {
-                    NavSliderView(currentStep: viewModel.pageIndex) {
-                        viewModel.nextPage()
-                    }
-                }.padding(.horizontal, 20)
-                    .padding(.top, 20)
-            }.padding(.bottom, 32)
-            .background(Color.simpleBlue)
+                NavSliderView(currentStep: viewModel.pageIndex) {
+                    viewModel.nextPage()
+                }
+                
+                Spacer()
+                
+                Button {
+                    viewModel.nextPage()
+                } label: {
+                    Text("NEXT")
+                        .font(.poppinsSemiBold(size: 14))
+                        .foregroundColor(Color.mainWhite)
+                        .lineLimit(1)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.all, 16)
+                        .background(Color.mainBlack)
+                        .cornerRadius(4, corners: .allCorners)
+                }
+            }.padding(.horizontal, 20)
+            
+            Spacer()
+        }.padding(.bottom, 32)
+            .background(Color.mainPink.opacity(0.3))
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onReceive(viewModel.eventSubject) { event in
@@ -42,7 +64,7 @@ struct OnboardingScreen: View {
                     navigation.push(HomeScreen().asDestination(), animated: true)
                 case .goToTabBar:
                     navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
-                
+                    
                 }
             }
     }
@@ -53,7 +75,7 @@ fileprivate struct OnboardingPageView: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .center, spacing: 20) {
                 HStack {
                     Spacer()
                     Image(page.image)
@@ -66,12 +88,14 @@ fileprivate struct OnboardingPageView: View {
                 
                 Text(page.title)
                     .font(.poppinsBold(size: 28))
-                    .foregroundStyle(Color(hex: "#84BABF"))
+                    .foregroundStyle(Color.mainPink)
+                    .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Text(page.description)
                     .font(.poppinsRegular(size: 14))
-                    .foregroundStyle(Color(hex: "#84BABF"))
+                    .foregroundStyle(Color.mainPink)
+                    .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Spacer()
@@ -85,43 +109,18 @@ fileprivate struct NavSliderView: View {
     let buttonAction: () -> ()
     
     var body: some View {
-        HStack {
-            if currentStep == 2 {
+        HStack(spacing: 8) {
+            ForEach(0..<3) { step in
                 Button {
                     buttonAction()
                 } label: {
-                    Text("Login")
-                        .font(.poppinsBold(size: 16))
-                        .foregroundStyle(Color(hex: "#84BABF"))
-                }.opacity(0)
-            }
-            
-            Spacer()
-            
-            HStack(spacing: 8) {
-                ForEach(0..<3) { step in
-                    Button {
-                        buttonAction()
-                    } label: {
-                        Circle()
-                            .fill(step == currentStep ? Color(hex: "#085558") : Color(hex: "#84BABF"))
-                            .frame(height: 12)
-                            .aspectRatio(1, contentMode: .fit)
-                    }
-                }
-            }
-            
-            Spacer()
-            
-            if currentStep == 2 {
-                Button {
-                    buttonAction()
-                } label: {
-                    Text("Login")
-                        .font(.poppinsBold(size: 16))
-                        .foregroundStyle(Color(hex: "#84BABF"))
+                    Circle()
+                        .fill(step == currentStep ? Color.mainPink : Color.gray)
+                        .frame(height: 12)
+                        .aspectRatio(1, contentMode: .fit)
                 }
             }
         }
+        
     }
 }

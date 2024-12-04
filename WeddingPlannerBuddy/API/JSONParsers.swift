@@ -16,15 +16,9 @@ class JSONParsers {
     
     static func parseJsonUser(json: JSON) -> User {
         return User(
-            id: json["_id"].stringValue,
+            id: json["id"].stringValue,
             email: json["email"].stringValue,
-            nickname: json["username"].stringValue,
-            avatarUrl: json["profilePic"].stringValue,
-            isArtist: json["accType"].stringValue == "artist" ? true : false,
-            balance: json["balance"].doubleValue,
-            level: json["level"].intValue,
-            createdAt: Date(),
-            posts: [] //todo fixme
+            avatarUrl: json["profilePic"].stringValue
         )
     }
 }

@@ -76,8 +76,8 @@ class UserService {
             .eraseToAnyPublisher()
     }
     
-    func register(nickname: String, email: String, password: String, userType: String) -> AnyPublisher<UserResponse, Error> {
-        return userApi.register(nickname: nickname, email: email, password: password, userType: userType)
+    func register(email: String, password: String) -> AnyPublisher<UserResponse, Error> {
+        return userApi.register(email: email, password: password)
             .handleEvents(receiveOutput: { [weak self] user in
                 if !user.user.email.isEmpty {
                     self?.authToken = user.token

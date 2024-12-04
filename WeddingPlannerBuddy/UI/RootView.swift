@@ -61,7 +61,7 @@ class RootViewModel: BaseViewModel {
                     switch userState {
                     case .anonymous:
                         if self.userDefaultsService.getOnboardingStatus() {
-                            self.eventSubject.send(.goToTabBar)
+                            self.eventSubject.send(.goToLogin)
                         } else {
                             self.eventSubject.send(.goToOnboarding)
                         }

@@ -11,17 +11,11 @@ import SwiftUI
 extension Color {
     static let mainWhite = Color(.mainWhiteCustom)
     static let mainBlack = Color(.mainBlackCustom)
-    static let mainBlue = Color(.mainBlueCustom)
-    static let secondaryBlue = Color(.secondaryBlueCustom)
-    static let mainBlueButton = Color(.mainBlueLightCustom)
-    static let mainGray = Color(.mainGrayCustom)
-    static let mainBlueInversat = Color(.mainBlueCustomInversat)
-    static let secondaryBlueInversat = Color(.secondaryBlueCustomInversat)
     
-    static let simpleBlue = Color(hex: "#0D6F73")
+    static let mainPink = Color(hex: "#d75c77")
+    
     static let lightGreen = Color(hex: "#1B998B")
     static let lightRed = Color(hex: "#D8263E")
-    static let contentSecondary = Color(hex: "#91909B")
     static let bottomSheetLine = Color(hex: "#D5D6D8")
 }
 

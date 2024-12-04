@@ -31,19 +31,19 @@ let homeTabBarItem = TabBarItem(
 let weddingTabBarItem = TabBarItem(
     type: .wedding,
     title: "Wedding",
-    imageName: .icSearch
+    imageName: .icWedding
 )
 
 let guestsTabBarItem = TabBarItem(
     type: .guests,
     title: "Guests",
-    imageName: .icChats
+    imageName: .icGuests
 )
 
 let mediaTabBarItem = TabBarItem(
     type: .media,
     title: "Media",
-    imageName: .icProfile
+    imageName: .icMedia
 )
 
 let profileNewsTabBarItem = TabBarItem(
@@ -65,14 +65,13 @@ struct TabBarItemView: View {
                 Image(tabBarItem.imageName)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(isSelected ? Color.secondaryBlueInversat : Color.mainBlack)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 18, height: 18)
+                    .foregroundStyle(isSelected ? Color.mainPink : Color.mainBlack)
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 24, height: 24)
                 
                 Text(tabBarItem.title)
-                    .font(.system(size: 12))
-                    .foregroundColor(isSelected ? .secondaryBlueInversat : Color.mainBlack)
-                    .frame(height: 14)
+                    .font(.poppinsRegular(size: 12))
+                    .foregroundColor(isSelected ? .mainPink : Color.mainBlack)
             }
         }
     }
@@ -83,7 +82,7 @@ struct TabBarView: View {
     let items: [TabBarItem]
     
     var body: some View {
-        HStack(spacing: 0) {
+        HStack {
             ForEach(items, id: \.type) { item in
                 TabBarItemView(
                     tabBarItem: item,
