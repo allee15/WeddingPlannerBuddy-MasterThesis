@@ -7,12 +7,14 @@
 
 import Foundation
 import Combine
+import FirebaseAuth
 
 class UserService {
     static let shared = UserService()
     private let userApi = UserApi()
     var bag = Set<AnyCancellable>()
     let userDefaultsService = UserDefaultsService.shared
+    let firebaseService = FirebaseService.shared
     
     public lazy var userReactiveData = ReactiveData<UserState> { [weak self] in
         guard let self else {return nil}
@@ -65,24 +67,27 @@ class UserService {
         }
     }
     
-    func login(email: String, password: String) -> AnyPublisher<UserResponse, Error> {
-        return userApi.login(email: email, password: password)
+    func login(email: String, password: String) -> AnyPublisher<User, Error> {
+        self.firebaseService.login(email: email, password: password)
+            .flatMap { token in
+                self.authToken = token
+                return self.getUser()
+            }
             .handleEvents(receiveOutput: { [weak self] user in
-                if !user.user.email.isEmpty {
-                    self?.authToken = user.token
-                    self?.userReactiveData.pushValue(value: .loggedIn(user.user))
-                }
+                self?.userReactiveData.pushValue(value: .loggedIn(user))
             })
             .eraseToAnyPublisher()
     }
     
-    func register(email: String, password: String) -> AnyPublisher<UserResponse, Error> {
-        return userApi.register(email: email, password: password)
+    func register(email: String, password: String) -> AnyPublisher<User, Error> {
+        
+        return self.firebaseService.register(email: email, password: password)
+            .flatMap { token in
+                self.authToken = token
+                return self.getUser()
+            }
             .handleEvents(receiveOutput: { [weak self] user in
-                if !user.user.email.isEmpty {
-                    self?.authToken = user.token
-                    self?.userReactiveData.pushValue(value: .loggedIn(user.user))
-                }
+                self?.userReactiveData.pushValue(value: .loggedIn(user))
             })
             .eraseToAnyPublisher()
     }
@@ -97,62 +102,15 @@ class UserService {
             .eraseToAnyPublisher()
     }
     
-    func logout() -> AnyPublisher<Bool, Error> {
-        self.userApi.logout()
-            .handleEvents(receiveOutput: { _ in
-                self.authToken = nil
-                self.userReactiveData.pushValue(value: .anonymous)
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    func deleteAccount() -> AnyPublisher<Bool, Error> {
-        return userApi.deleteAccount()
-            .handleEvents(receiveOutput: { _ in
-                self.authToken = nil
-                self.userReactiveData.pushValue(value: .anonymous)
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    func changePassword(newPassword: String, currentPassword: String) -> AnyPublisher<Bool, Error> {
-        return userApi.changePassword(newPassword: newPassword, currentPassword: currentPassword)
-            .handleEvents(receiveOutput: { _ in
-                self.userReactiveData.reload()
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    func editAccount(nickname: String? = nil, email: String? = nil) -> AnyPublisher<Bool, Error> {
-        return userApi.editAccount(nickname: nickname, email: email)
-            .handleEvents(receiveOutput: { _ in
-                self.userReactiveData.reload()
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    func uploadProfilePicture(imageData: Data) -> AnyPublisher<Bool, Error> {
-        return userApi.uploadProfilePicture(imageData: imageData)
-            .handleEvents(receiveOutput: { _ in
-                self.userReactiveData.reload()
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    func deleteProfilePicture() -> AnyPublisher<Bool, Error> {
-        return userApi.deleteProfilePicture()
-            .handleEvents(receiveOutput: { _ in
-                self.userReactiveData.reload()
-            })
-            .eraseToAnyPublisher()
-    }
-    
-    func getAllUsers() -> AnyPublisher<[User], Error> {
-        userApi.getAllUsers()
-            .eraseToAnyPublisher()
-    }
-    
-    func getArtistInfo(artistId: Int64) {
-        userApi.getArtistInfo(artistId: artistId)
+    func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print("Error during logout")
+        }
+        
+        self.authToken?.removeAll()
+        self.userReactiveData.pushValue(value: .anonymous)
+        self.userDefaultsService.setValue(key: UserDefaultsKeys.token, value: nil)
     }
 }

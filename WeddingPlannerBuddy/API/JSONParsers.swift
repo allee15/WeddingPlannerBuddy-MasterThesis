@@ -17,8 +17,7 @@ class JSONParsers {
     static func parseJsonUser(json: JSON) -> User {
         return User(
             id: json["id"].stringValue,
-            email: json["email"].stringValue,
-            avatarUrl: json["profilePic"].stringValue
+            email: json["email"].stringValue
         )
     }
 }

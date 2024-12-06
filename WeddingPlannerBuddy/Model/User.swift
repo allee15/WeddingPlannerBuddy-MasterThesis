@@ -15,10 +15,8 @@ struct UserResponse {
 struct User {
     let id: String
     let email: String
-    let avatarUrl: String
 }
 
 let userMocked = User(id: "1",
-                      email: "alexia.elena.aldea@gmail.com",
-                      avatarUrl: "https://media.istockphoto.com/id/1368424494/photo/studio-portrait-of-a-cheerful-woman.jpg?s=612x612&w=0&k=20&c=ISNDV3ZXeNU6VvDhR7KXFd6y0saq4Eji15cep_Gj8Eg=")
+                      email: "alexia.elena.aldea@gmail.com")
 
