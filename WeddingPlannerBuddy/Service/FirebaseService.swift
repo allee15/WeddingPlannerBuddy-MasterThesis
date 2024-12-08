@@ -76,13 +76,13 @@ class FirebaseService {
         .eraseToAnyPublisher()
     }
     
-    func changePassword (currentPassword: String, newPassword: String) -> AnyPublisher<Void, Error> {
-        Future<Void, Error> { promise in
+    func changePassword(currentPassword: String, newPassword: String) -> AnyPublisher<Bool, Error> {
+        Future<Bool, Error> { promise in
             guard let user = Auth.auth().currentUser, let email = user.email else {
                 promise(.failure(NSError(domain: "NoUser", code: 404, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])))
                 return
             }
-            
+
             let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
             user.reauthenticate(with: credential) { result, error in
                 if let error = error {
@@ -92,7 +92,7 @@ class FirebaseService {
                         if let error = error {
                             promise(.failure(error))
                         } else {
-                            promise(.success(()))
+                            promise(.success(true))
                         }
                     }
                 }
@@ -101,13 +101,26 @@ class FirebaseService {
         .eraseToAnyPublisher()
     }
     
-    func deleteAccount(currentPassword: String) -> AnyPublisher<Void, Error> {
-        Future<Void, Error> { promise in
+    func resetPassword(email: String) -> AnyPublisher<Bool, Error> {
+        Future<Bool, Error> { promise in
+            Auth.auth().sendPasswordReset(withEmail: email) { error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    promise(.success(true))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    func deleteAccount(currentPassword: String) -> AnyPublisher<Bool, Error> {
+        Future<Bool, Error> { promise in
             guard let user = Auth.auth().currentUser, let email = user.email else {
                 promise(.failure(NSError(domain: "NoUser", code: 404, userInfo: [NSLocalizedDescriptionKey: "No authenticated user found"])))
                 return
             }
-            
+
             let credential = EmailAuthProvider.credential(withEmail: email, password: currentPassword)
             user.reauthenticate(with: credential) { result, error in
                 if let error = error {
@@ -117,7 +130,7 @@ class FirebaseService {
                         if let error = error {
                             promise(.failure(error))
                         } else {
-                            promise(.success(()))
+                            promise(.success(true))
                         }
                     }
                 }

@@ -61,7 +61,7 @@ struct RegisterScreen: View {
                                 .onTapGesture {
                                     let webview = WebViewScreen(
                                         title: "Terms and Conditions",
-                                        url: URL(string: "https://google.com")!
+                                        url: URL(string: "https://www.termsfeed.com/live/45bb0a23-92d0-4964-9cd4-d0b3c6a32bc1")!
                                     ).asDestination()
                                     navigation.push(webview, animated: true)
                                 }

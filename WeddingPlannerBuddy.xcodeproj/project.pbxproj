@@ -66,6 +66,12 @@
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
 		0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */; };
+		0FDE16612D05F9E700C1580E /* ChangePasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16602D05F9E700C1580E /* ChangePasswordScreen.swift */; };
+		0FDE16632D05F9F100C1580E /* ChangePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16622D05F9F100C1580E /* ChangePasswordViewModel.swift */; };
+		0FDE16662D05FB3200C1580E /* DeleteAccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16652D05FB3200C1580E /* DeleteAccountScreen.swift */; };
+		0FDE16682D05FB5600C1580E /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16672D05FB5600C1580E /* DeleteAccountViewModel.swift */; };
+		0FDE166A2D0600AB00C1580E /* ResetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16692D0600AB00C1580E /* ResetPasswordScreen.swift */; };
+		0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */; };
 		0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */; };
 		0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */; };
 		0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515402CFF9BE800CA9601 /* HomeScreen.swift */; };
@@ -142,6 +148,12 @@
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		0FDE16602D05F9E700C1580E /* ChangePasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordScreen.swift; sourceTree = "<group>"; };
+		0FDE16622D05F9F100C1580E /* ChangePasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewModel.swift; sourceTree = "<group>"; };
+		0FDE16652D05FB3200C1580E /* DeleteAccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountScreen.swift; sourceTree = "<group>"; };
+		0FDE16672D05FB5600C1580E /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
+		0FDE16692D0600AB00C1580E /* ResetPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordScreen.swift; sourceTree = "<group>"; };
+		0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsScreen.swift; sourceTree = "<group>"; };
 		0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewModel.swift; sourceTree = "<group>"; };
 		0FE515402CFF9BE800CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -337,6 +349,33 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		0FDE165F2D05F9DB00C1580E /* ChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE16602D05F9E700C1580E /* ChangePasswordScreen.swift */,
+				0FDE16622D05F9F100C1580E /* ChangePasswordViewModel.swift */,
+			);
+			path = ChangePassword;
+			sourceTree = "<group>";
+		};
+		0FDE16642D05FB1A00C1580E /* DeleteAccount */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE16652D05FB3200C1580E /* DeleteAccountScreen.swift */,
+				0FDE16672D05FB5600C1580E /* DeleteAccountViewModel.swift */,
+			);
+			path = DeleteAccount;
+			sourceTree = "<group>";
+		};
+		0FDE166D2D06026900C1580E /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE16692D0600AB00C1580E /* ResetPasswordScreen.swift */,
+				0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */,
+			);
+			path = ResetPassword;
+			sourceTree = "<group>";
+		};
 		0FE515362CF76E1200CA9601 /* ThemeSettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +417,8 @@
 			children = (
 				0FE515512CFF9CF100CA9601 /* ProfileScreen.swift */,
 				0FE5154F2CFF9CDF00CA9601 /* ProfileViewModel.swift */,
+				0FDE16642D05FB1A00C1580E /* DeleteAccount */,
+				0FDE165F2D05F9DB00C1580E /* ChangePassword */,
 				0FE515362CF76E1200CA9601 /* ThemeSettingsScreen */,
 			);
 			path = Profile;
@@ -397,6 +438,7 @@
 			children = (
 				0FE515542CFF9D2A00CA9601 /* LoginScreen.swift */,
 				0FE515572CFF9D4200CA9601 /* LoginViewModel.swift */,
+				0FDE166D2D06026900C1580E /* ResetPassword */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -583,11 +625,15 @@
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
 				0FE515692D0070E700CA9601 /* MainButtonView.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
+				0FDE16662D05FB3200C1580E /* DeleteAccountScreen.swift in Sources */,
 				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
 				0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */,
 				0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */,
+				0FDE16632D05F9F100C1580E /* ChangePasswordViewModel.swift in Sources */,
 				0FE515632CFF9E3600CA9601 /* MediaScreen.swift in Sources */,
+				0FDE16612D05F9E700C1580E /* ChangePasswordScreen.swift in Sources */,
 				0FE5154D2CFF9CB000CA9601 /* GuestsScreen.swift in Sources */,
+				0FDE166A2D0600AB00C1580E /* ResetPasswordScreen.swift in Sources */,
 				0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */,
 				0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */,
 				0F24D5F92CC1BC9D00A833E1 /* SideButtonView.swift in Sources */,
@@ -625,10 +671,12 @@
 				0F24D60C2CC299E500A833E1 /* LoaderView.swift in Sources */,
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
+				0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
 				0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
 				0F24D59C2CC0F91600A833E1 /* TabBarScreen.swift in Sources */,
+				0FDE16682D05FB5600C1580E /* DeleteAccountViewModel.swift in Sources */,
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,
 				0F24D6042CC2978600A833E1 /* JSONParsers.swift in Sources */,
 				0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */,

@@ -69,7 +69,7 @@ fileprivate struct ThemeWidgetView: View {
                         .foregroundStyle(Color.mainBlack)
                     
                     if let isSelected = isSelected {
-                        Image(isSelected ? .icHome : .icMedia)
+                        Image(isSelected ? .typeOn : .typeOff)
                             .resizable()
                             .renderingMode(.template)
                             .foregroundStyle(Color.mainPink)

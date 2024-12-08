@@ -113,4 +113,10 @@ class UserService {
         self.userReactiveData.pushValue(value: .anonymous)
         self.userDefaultsService.setValue(key: UserDefaultsKeys.token, value: nil)
     }
+    
+    func deleteAccount() {
+        self.authToken?.removeAll()
+        self.userReactiveData.pushValue(value: .anonymous)
+        self.userDefaultsService.setValue(key: UserDefaultsKeys.token, value: nil)
+    }
 }

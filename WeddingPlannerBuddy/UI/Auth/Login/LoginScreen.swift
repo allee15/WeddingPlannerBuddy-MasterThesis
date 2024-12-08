@@ -48,6 +48,10 @@ struct LoginScreen: View {
                 MainButtonView(text: "Login") {
                     viewModel.allFieldsAreValid()
                 }.padding(.horizontal, 16)
+                
+                ClearButton(text: "Forgot password?") {
+                    navigation.push(ResetPasswordScreen().asDestination(), animated: true)
+                }
             }
             
             Spacer()
