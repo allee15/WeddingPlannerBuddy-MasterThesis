@@ -35,11 +35,7 @@ class ResetPasswordViewModel: BaseViewModel {
                     
                 } receiveValue: { [weak self] response in
                     guard let self else {return}
-                    if response {
-                        self.eventSubject.send(.completed)
-                    } else {
-                        self.eventSubject.send(.error)
-                    }
+                    self.eventSubject.send(.completed)
                 }.store(in: &bag)
         }
     }

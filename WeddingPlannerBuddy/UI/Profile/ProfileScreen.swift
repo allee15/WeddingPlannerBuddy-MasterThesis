@@ -10,6 +10,7 @@ import SwiftUI
 struct ProfileScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject private var viewModel = ProfileViewModel()
+    private let mainNavigation = EnvironmentObjects.navigation
     
     var body: some View {
         VStack(spacing: 0) {
@@ -55,6 +56,10 @@ struct ProfileScreen: View {
                                 
                                 navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                             }
+                        }
+                        
+                        WidgetView(title: "Weddings you'll attend", icon: .icWeddingsProfile) {
+                            //TODO
                         }
                     }
                     
@@ -103,6 +108,12 @@ struct ProfileScreen: View {
                         
                         WidgetView(title: "App version \(viewModel.appVersion)", icon: .icAppVersion, showToggle: false) {}
                     }
+                    
+                    if viewModel.user == nil {
+                        ClearButton(text: "Login") {
+                            mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                        }
+                    }
                 }.padding(.top, 20)
                     .padding(.bottom, 32)
             }
@@ -149,9 +160,4 @@ fileprivate struct WidgetView: View {
                 .padding(.horizontal, 16)
         }
     }
-}
-
-
-#Preview {
-    ProfileScreen()
 }

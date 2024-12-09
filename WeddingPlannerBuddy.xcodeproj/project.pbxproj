@@ -72,6 +72,8 @@
 		0FDE16682D05FB5600C1580E /* DeleteAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16672D05FB5600C1580E /* DeleteAccountViewModel.swift */; };
 		0FDE166A2D0600AB00C1580E /* ResetPasswordScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16692D0600AB00C1580E /* ResetPasswordScreen.swift */; };
 		0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */; };
+		0FDE167F2D072D7700C1580E /* ResetPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE167E2D072D7700C1580E /* ResetPasswordEmailScreen.swift */; };
+		0FDE16812D072D9100C1580E /* ResetPasswordEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16802D072D9100C1580E /* ResetPasswordEmailViewModel.swift */; };
 		0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */; };
 		0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */; };
 		0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515402CFF9BE800CA9601 /* HomeScreen.swift */; };
@@ -154,6 +156,8 @@
 		0FDE16672D05FB5600C1580E /* DeleteAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountViewModel.swift; sourceTree = "<group>"; };
 		0FDE16692D0600AB00C1580E /* ResetPasswordScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordScreen.swift; sourceTree = "<group>"; };
 		0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		0FDE167E2D072D7700C1580E /* ResetPasswordEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordEmailScreen.swift; sourceTree = "<group>"; };
+		0FDE16802D072D9100C1580E /* ResetPasswordEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordEmailViewModel.swift; sourceTree = "<group>"; };
 		0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsScreen.swift; sourceTree = "<group>"; };
 		0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewModel.swift; sourceTree = "<group>"; };
 		0FE515402CFF9BE800CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -372,6 +376,8 @@
 			children = (
 				0FDE16692D0600AB00C1580E /* ResetPasswordScreen.swift */,
 				0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */,
+				0FDE167E2D072D7700C1580E /* ResetPasswordEmailScreen.swift */,
+				0FDE16802D072D9100C1580E /* ResetPasswordEmailViewModel.swift */,
 			);
 			path = ResetPassword;
 			sourceTree = "<group>";
@@ -624,6 +630,7 @@
 				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
 				0FE515692D0070E700CA9601 /* MainButtonView.swift in Sources */,
+				0FDE167F2D072D7700C1580E /* ResetPasswordEmailScreen.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0FDE16662D05FB3200C1580E /* DeleteAccountScreen.swift in Sources */,
 				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
@@ -668,6 +675,7 @@
 				0FE515432CFF9C1E00CA9601 /* HomeViewModel.swift in Sources */,
 				0F24D5A32CC0F96E00A833E1 /* ControllerRepresentable.swift in Sources */,
 				0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */,
+				0FDE16812D072D9100C1580E /* ResetPasswordEmailViewModel.swift in Sources */,
 				0F24D60C2CC299E500A833E1 /* LoaderView.swift in Sources */,
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,

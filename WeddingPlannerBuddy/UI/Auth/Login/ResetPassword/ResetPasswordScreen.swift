@@ -55,11 +55,8 @@ struct ResetPasswordScreen: View {
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .completed:
-                    let modal = ModalChooseOptionView(title: "Password reset successful!",
-                                                      description: "Now, you can go back to login.",
-                                                      topButtonText: "Login") {
-                        navigation.pop(animated: true)
-                    }
+                    let vm = ResetPasswordEmailViewModel(email: viewModel.email)
+                    navigation.push(ResetPasswordEmailScreen(viewModel: vm).asDestination(), animated: true)
                 case .error:
                     navigation.pop(animated: true)
                     let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
