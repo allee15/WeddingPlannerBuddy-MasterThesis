@@ -124,7 +124,7 @@ struct ProfileScreen: View {
 }
 
 
-fileprivate struct WidgetView: View {
+struct WidgetView: View {
     let title: String
     let icon: ImageResource
     var showToggle: Bool = true
