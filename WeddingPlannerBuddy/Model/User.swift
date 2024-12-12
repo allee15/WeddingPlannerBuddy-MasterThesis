@@ -18,7 +18,7 @@ struct User {
     let hasActiveWedding: Bool
     let tablesAtWedding: [Table]
     let otherWeddings: [WeddingGuest]
-    let guest: [Guest]
+    let guests: [Guest]
 }
 
 let userMocked = User(id: "1",
@@ -26,5 +26,5 @@ let userMocked = User(id: "1",
                       hasActiveWedding: false,
                       tablesAtWedding: [],
                       otherWeddings: [],
-                      guest: [])
+                      guests: [])
 
