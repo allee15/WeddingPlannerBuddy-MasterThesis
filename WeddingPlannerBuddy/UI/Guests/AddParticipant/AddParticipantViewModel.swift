@@ -13,8 +13,14 @@ enum AddParticipantEvent {
     case error
 }
 
+enum ProfileField {
+    case name
+    case email
+}
+
 class AddParticipantViewModel: BaseViewModel {
     @Published var name: String = ""
+    @Published var email: String = ""
     
     let eventSubject = PassthroughSubject<AddParticipantEvent, Never>()
     

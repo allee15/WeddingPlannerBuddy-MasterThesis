@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum ProfileField {
-    case name
-}
-
 struct AddParticipantScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @FocusState var focusedField: ProfileField?
@@ -37,12 +33,20 @@ struct AddParticipantScreen: View {
                     VStack(alignment: .leading, spacing: 8) {
                         FloatingField(text: $viewModel.name,
                                       placeHolder: "Participant's name")
-                        .submitLabel(.return)
+                        .submitLabel(.next)
                         .focused($focusedField, equals: .name)
+                        .onSubmit {
+                            focusedField = .email
+                        }
+                        
+                        FloatingField(text: $viewModel.email,
+                                      placeHolder: "Participant's email")
+                        .submitLabel(.return)
+                        .focused($focusedField, equals: .email)
                         
                         Spacer(minLength: 80)
                     }.padding(.horizontal, 20)
-                } //TODO: +email!!!
+                } 
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

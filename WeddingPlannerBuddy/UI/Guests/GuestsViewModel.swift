@@ -40,4 +40,12 @@ class GuestsViewModel: BaseViewModel {
                 }
             }).store(in: &bag)
     }
+    
+    func startWedding() {
+        //TODO hasActiveWedding = true
+    }
+    
+    func sendWeddingInvitation() {
+        //TODO
+    }
 }

@@ -10,4 +10,6 @@ import Foundation
 struct WeddingGuest {
     let id: String
     let tableNb: String
+    let date: String
+    let location: String
 }

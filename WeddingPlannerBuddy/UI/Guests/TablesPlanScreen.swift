@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TablesPlanScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = TablesPlanViewModel()
+    @StateObject var viewModel: TablesPlanViewModel
     @State var showBottomSheet: Bool = false
     
     var body: some View {
