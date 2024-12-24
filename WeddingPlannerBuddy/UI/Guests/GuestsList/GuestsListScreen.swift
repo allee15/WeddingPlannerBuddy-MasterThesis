@@ -57,6 +57,7 @@ fileprivate struct GuestLineView: View {
                 Text("\(counter). \(guest.name), email: \(guest.email)")
                     .font(.poppinsRegular(size: 16))
                     .foregroundStyle(Color.mainBlack)
+                    .multilineTextAlignment(.leading)
                 
                 DividerView()
             }.padding(.horizontal, 16)
