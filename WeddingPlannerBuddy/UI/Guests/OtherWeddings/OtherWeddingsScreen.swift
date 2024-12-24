@@ -66,6 +66,7 @@ fileprivate struct WeddingInvitationLineView: View {
                 Text("\(counter). \(invitation.date), location: \(invitation.location), table: \(invitation.tableNb)")
                     .font(.poppinsRegular(size: 16))
                     .foregroundStyle(Color.mainBlack)
+                    .multilineTextAlignment(.leading)
                 
                 DividerView()
             }.padding(.horizontal, 16)
