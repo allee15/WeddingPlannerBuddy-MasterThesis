@@ -15,9 +15,11 @@ class JSONParsers {
     }
     
     static func parseJsonUser(json: JSON) -> User {
-        return User(
-            id: json["id"].stringValue,
-            email: json["email"].stringValue
-        )
+        return User(id: json["id"].stringValue,
+                    email: json["email"].stringValue,
+                    hasActiveWedding: json["hasActiveWedding"].boolValue,
+                    tablesAtWedding: [],
+                    otherWeddings: [],
+                    guests: [])
     }
 }

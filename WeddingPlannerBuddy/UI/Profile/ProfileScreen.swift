@@ -18,7 +18,7 @@ struct ProfileScreen: View {
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 24) {
-                    if viewModel.user != nil {
+                    if let user = viewModel.user {
                         VStack(alignment: .leading, spacing: 12) {
                             Text("Account")
                                 .font(.poppinsSemiBold(size: 16))
@@ -45,21 +45,14 @@ struct ProfileScreen: View {
                             }
                             
                             WidgetView(title: "Delete account", icon: .icDeleteAccount) {
-                                let modal = ModalChooseOptionView(title: "Are you sure you want to delete your account?",
-                                                                  description: "You will not be able to recover it after deleting it. All your data will be lost, including your chats.",
-                                                                  topButtonText: "Delete my account",
-                                                                  bottomButtonText: "Cancel") {
-                                    navigation.push(DeleteAccountScreen().asDestination(), animated: true)
-                                } onBottomButtonTapped: {
-                                    navigation.dismissModal(animated: true, completion: nil)
-                                }
-                                
-                                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                                navigation.push(DeleteAccountScreen().asDestination(), animated: true)
                             }
                         }
                         
                         WidgetView(title: "Weddings you'll attend", icon: .icWeddingsProfile) {
-                            //TODO
+                            let vm = OtherWeddingsViewModel(otherWeddingsList: user.otherWeddings)
+                            navigation.push(OtherWeddingsScreen(viewModel: vm).asDestination(),
+                                            animated: true)
                         }
                     }
                     
@@ -124,7 +117,7 @@ struct ProfileScreen: View {
 }
 
 
-fileprivate struct WidgetView: View {
+struct WidgetView: View {
     let title: String
     let icon: ImageResource
     var showToggle: Bool = true

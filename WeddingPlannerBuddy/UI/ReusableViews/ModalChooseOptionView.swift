@@ -34,7 +34,7 @@ struct ModalChooseOptionView: View {
                     .padding(.bottom, 24)
                 
                 VStack(spacing: 12) {
-                    ClearButton(text: topButtonText) {
+                    MainButtonView(text: topButtonText) {
                         onTopButtonTapped()
                     }
                     

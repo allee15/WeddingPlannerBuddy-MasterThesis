@@ -14,9 +14,8 @@ class UserApi {
         Future { promise in
             DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
                 do {
-                    let user = User(id: "1234", email: "alexia.aldea@mready.net")
-                    promise(.success(user))
-                } 
+                    promise(.success(userMocked))
+                }
             }
         }
         .eraseToAnyPublisher()
