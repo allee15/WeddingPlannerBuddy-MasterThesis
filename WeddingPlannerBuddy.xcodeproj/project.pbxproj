@@ -74,6 +74,22 @@
 		0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */; };
 		0FDE167F2D072D7700C1580E /* ResetPasswordEmailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE167E2D072D7700C1580E /* ResetPasswordEmailScreen.swift */; };
 		0FDE16812D072D9100C1580E /* ResetPasswordEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16802D072D9100C1580E /* ResetPasswordEmailViewModel.swift */; };
+		0FDE16852D08478F00C1580E /* TablesPlanScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16842D08478F00C1580E /* TablesPlanScreen.swift */; };
+		0FDE16872D0867CC00C1580E /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16862D0867CC00C1580E /* Table.swift */; };
+		0FDE16892D08694A00C1580E /* TablesPlanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16882D08694A00C1580E /* TablesPlanViewModel.swift */; };
+		0FDE168B2D09D4C400C1580E /* AddParticipantScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE168A2D09D4C400C1580E /* AddParticipantScreen.swift */; };
+		0FDE168D2D09D51300C1580E /* AddParticipantViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE168C2D09D51300C1580E /* AddParticipantViewModel.swift */; };
+		0FDE16902D0B137F00C1580E /* WeddingGuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE168F2D0B137F00C1580E /* WeddingGuest.swift */; };
+		0FDE16922D0B153D00C1580E /* Guest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16912D0B153D00C1580E /* Guest.swift */; };
+		0FDE16AC2D1AE9D800C1580E /* GuestsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16AB2D1AE9D800C1580E /* GuestsListScreen.swift */; };
+		0FDE16AF2D1AEAC100C1580E /* OtherWeddingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16AE2D1AEAC100C1580E /* OtherWeddingsScreen.swift */; };
+		0FDE16B12D1AEADA00C1580E /* OtherWeddingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B02D1AEADA00C1580E /* OtherWeddingsViewModel.swift */; };
+		0FDE16B62D1B10ED00C1580E /* GuestsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B52D1B10ED00C1580E /* GuestsListViewModel.swift */; };
+		0FDE16B82D1B13D000C1580E /* ChooseFolderBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B72D1B13D000C1580E /* ChooseFolderBottomSheetView.swift */; };
+		0FDE16BA2D1B338000C1580E /* GuestsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B92D1B338000C1580E /* GuestsService.swift */; };
+		0FDE16BC2D1B33B900C1580E /* GuestsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */; };
+		0FDE16BE2D1B349B00C1580E /* TablesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BD2D1B349B00C1580E /* TablesApi.swift */; };
+		0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BF2D1B34A500C1580E /* TablesService.swift */; };
 		0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */; };
 		0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */; };
 		0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515402CFF9BE800CA9601 /* HomeScreen.swift */; };
@@ -158,6 +174,22 @@
 		0FDE166B2D0600E400C1580E /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
 		0FDE167E2D072D7700C1580E /* ResetPasswordEmailScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordEmailScreen.swift; sourceTree = "<group>"; };
 		0FDE16802D072D9100C1580E /* ResetPasswordEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordEmailViewModel.swift; sourceTree = "<group>"; };
+		0FDE16842D08478F00C1580E /* TablesPlanScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesPlanScreen.swift; sourceTree = "<group>"; };
+		0FDE16862D0867CC00C1580E /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
+		0FDE16882D08694A00C1580E /* TablesPlanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesPlanViewModel.swift; sourceTree = "<group>"; };
+		0FDE168A2D09D4C400C1580E /* AddParticipantScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParticipantScreen.swift; sourceTree = "<group>"; };
+		0FDE168C2D09D51300C1580E /* AddParticipantViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddParticipantViewModel.swift; sourceTree = "<group>"; };
+		0FDE168F2D0B137F00C1580E /* WeddingGuest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingGuest.swift; sourceTree = "<group>"; };
+		0FDE16912D0B153D00C1580E /* Guest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Guest.swift; sourceTree = "<group>"; };
+		0FDE16AB2D1AE9D800C1580E /* GuestsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsListScreen.swift; sourceTree = "<group>"; };
+		0FDE16AE2D1AEAC100C1580E /* OtherWeddingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherWeddingsScreen.swift; sourceTree = "<group>"; };
+		0FDE16B02D1AEADA00C1580E /* OtherWeddingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherWeddingsViewModel.swift; sourceTree = "<group>"; };
+		0FDE16B52D1B10ED00C1580E /* GuestsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsListViewModel.swift; sourceTree = "<group>"; };
+		0FDE16B72D1B13D000C1580E /* ChooseFolderBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFolderBottomSheetView.swift; sourceTree = "<group>"; };
+		0FDE16B92D1B338000C1580E /* GuestsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsService.swift; sourceTree = "<group>"; };
+		0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsApi.swift; sourceTree = "<group>"; };
+		0FDE16BD2D1B349B00C1580E /* TablesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesApi.swift; sourceTree = "<group>"; };
+		0FDE16BF2D1B34A500C1580E /* TablesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesService.swift; sourceTree = "<group>"; };
 		0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsScreen.swift; sourceTree = "<group>"; };
 		0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewModel.swift; sourceTree = "<group>"; };
 		0FE515402CFF9BE800CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -277,6 +309,9 @@
 			children = (
 				0F24D5D92CC1B4F900A833E1 /* OnboardingData.swift */,
 				0F24D6052CC297A100A833E1 /* User.swift */,
+				0FDE16862D0867CC00C1580E /* Table.swift */,
+				0FDE168F2D0B137F00C1580E /* WeddingGuest.swift */,
+				0FDE16912D0B153D00C1580E /* Guest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -287,6 +322,8 @@
 				0F24D5DD2CC1B5A200A833E1 /* UserDefaultsService.swift */,
 				0F24D6092CC298D700A833E1 /* UserService.swift */,
 				0FE5156F2D0320EB00CA9601 /* FirebaseService.swift */,
+				0FDE16B92D1B338000C1580E /* GuestsService.swift */,
+				0FDE16BF2D1B34A500C1580E /* TablesService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -298,6 +335,8 @@
 				0F327EDD2CDE48CB00EDF536 /* ApiEnvironment.swift */,
 				0F24D6032CC2978600A833E1 /* JSONParsers.swift */,
 				0F24D6072CC2986C00A833E1 /* UserApi.swift */,
+				0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */,
+				0FDE16BD2D1B349B00C1580E /* TablesApi.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -316,6 +355,7 @@
 				0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */,
 				0F327EF62CE3DA0F00EDF536 /* DividerView.swift */,
 				0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */,
+				0FDE16B72D1B13D000C1580E /* ChooseFolderBottomSheetView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -382,6 +422,43 @@
 			path = ResetPassword;
 			sourceTree = "<group>";
 		};
+		0FDE168E2D09D7C000C1580E /* AddParticipant */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE168A2D09D4C400C1580E /* AddParticipantScreen.swift */,
+				0FDE168C2D09D51300C1580E /* AddParticipantViewModel.swift */,
+			);
+			path = AddParticipant;
+			sourceTree = "<group>";
+		};
+		0FDE16A72D1AE92500C1580E /* TablesPlan */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE16842D08478F00C1580E /* TablesPlanScreen.swift */,
+				0FDE16882D08694A00C1580E /* TablesPlanViewModel.swift */,
+				0FDE168E2D09D7C000C1580E /* AddParticipant */,
+			);
+			path = TablesPlan;
+			sourceTree = "<group>";
+		};
+		0FDE16AD2D1AEAA200C1580E /* OtherWeddings */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE16AE2D1AEAC100C1580E /* OtherWeddingsScreen.swift */,
+				0FDE16B02D1AEADA00C1580E /* OtherWeddingsViewModel.swift */,
+			);
+			path = OtherWeddings;
+			sourceTree = "<group>";
+		};
+		0FDE16B42D1B10CF00C1580E /* GuestsList */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE16AB2D1AE9D800C1580E /* GuestsListScreen.swift */,
+				0FDE16B52D1B10ED00C1580E /* GuestsListViewModel.swift */,
+			);
+			path = GuestsList;
+			sourceTree = "<group>";
+		};
 		0FE515362CF76E1200CA9601 /* ThemeSettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -414,6 +491,9 @@
 			children = (
 				0FE5154C2CFF9CB000CA9601 /* GuestsScreen.swift */,
 				0FE5154A2CFF9CA200CA9601 /* GuestsViewModel.swift */,
+				0FDE16A72D1AE92500C1580E /* TablesPlan */,
+				0FDE16B42D1B10CF00C1580E /* GuestsList */,
+				0FDE16AD2D1AEAA200C1580E /* OtherWeddings */,
 			);
 			path = Guests;
 			sourceTree = "<group>";
@@ -630,10 +710,14 @@
 				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
 				0FE515692D0070E700CA9601 /* MainButtonView.swift in Sources */,
+				0FDE16AC2D1AE9D800C1580E /* GuestsListScreen.swift in Sources */,
 				0FDE167F2D072D7700C1580E /* ResetPasswordEmailScreen.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0FDE16662D05FB3200C1580E /* DeleteAccountScreen.swift in Sources */,
+				0FDE16B62D1B10ED00C1580E /* GuestsListViewModel.swift in Sources */,
 				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
+				0FDE16852D08478F00C1580E /* TablesPlanScreen.swift in Sources */,
+				0FDE16BA2D1B338000C1580E /* GuestsService.swift in Sources */,
 				0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */,
 				0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */,
 				0FDE16632D05F9F100C1580E /* ChangePasswordViewModel.swift in Sources */,
@@ -644,6 +728,7 @@
 				0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */,
 				0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */,
 				0F24D5F92CC1BC9D00A833E1 /* SideButtonView.swift in Sources */,
+				0FDE16922D0B153D00C1580E /* Guest.swift in Sources */,
 				0FE515522CFF9CF100CA9601 /* ProfileScreen.swift in Sources */,
 				0F24D5DE2CC1B5A200A833E1 /* UserDefaultsService.swift in Sources */,
 				0FE515702D0320EB00CA9601 /* FirebaseService.swift in Sources */,
@@ -655,23 +740,33 @@
 				0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */,
 				0FE5155E2CFF9D8600CA9601 /* RegisterViewModel.swift in Sources */,
 				0F24D5D52CC1B47000A833E1 /* OnboardingScreen.swift in Sources */,
+				0FDE168B2D09D4C400C1580E /* AddParticipantScreen.swift in Sources */,
 				0F24D6062CC297A100A833E1 /* User.swift in Sources */,
+				0FDE16902D0B137F00C1580E /* WeddingGuest.swift in Sources */,
 				0F24D5A72CC0F9A200A833E1 /* Navigation.swift in Sources */,
 				0F24D60E2CC29A2D00A833E1 /* FloatingField.swift in Sources */,
 				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
+				0FDE168D2D09D51300C1580E /* AddParticipantViewModel.swift in Sources */,
+				0FDE16BC2D1B33B900C1580E /* GuestsApi.swift in Sources */,
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
 				0FE515482CFF9C7B00CA9601 /* WeddingViewModel.swift in Sources */,
+				0FDE16BE2D1B349B00C1580E /* TablesApi.swift in Sources */,
 				0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */,
+				0FDE16B12D1AEADA00C1580E /* OtherWeddingsViewModel.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
+				0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */,
 				0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
+				0FDE16AF2D1AEAC100C1580E /* OtherWeddingsScreen.swift in Sources */,
+				0FDE16B82D1B13D000C1580E /* ChooseFolderBottomSheetView.swift in Sources */,
 				0F24D60A2CC298D700A833E1 /* UserService.swift in Sources */,
 				0F24D5D72CC1B4B900A833E1 /* OnboardingViewModel.swift in Sources */,
 				0F24D5F72CC1BC6200A833E1 /* TitleNavBarView.swift in Sources */,
 				0F24D5E22CC1B74C00A833E1 /* CloseButton.swift in Sources */,
 				0F24D5F52CC1BC3B00A833E1 /* RightNavBar.swift in Sources */,
 				0F327EBD2CDBB16D00EDF536 /* KFImage+.swift in Sources */,
+				0FDE16892D08694A00C1580E /* TablesPlanViewModel.swift in Sources */,
 				0FE515432CFF9C1E00CA9601 /* HomeViewModel.swift in Sources */,
 				0F24D5A32CC0F96E00A833E1 /* ControllerRepresentable.swift in Sources */,
 				0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */,
@@ -680,6 +775,7 @@
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
 				0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */,
+				0FDE16872D0867CC00C1580E /* Table.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
 				0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
