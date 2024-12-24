@@ -11,8 +11,6 @@ struct GuestsScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject private var viewModel = GuestsViewModel()
     private let mainNavigation = EnvironmentObjects.navigation
-    @State var showOtherWeddingsBottomSheet: Bool = false
-    @State var showGuestBottomSheet: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -39,26 +37,18 @@ struct GuestsScreen: View {
                             .padding(.horizontal, 16)
                         
                         if user.hasActiveWedding {
-                            if !user.tablesAtWedding.isEmpty {
-                                MainButtonView(text: "Invite more people") {
-                                    viewModel.sendWeddingInvitation()
-                                }.padding(.horizontal, 16)
-                                
-                                WidgetView(title: "Check tables plan", icon: .icTables) {
-                                    let vm = TablesPlanViewModel(tables: user.tablesAtWedding)
-                                    mainNavigation?.push(TablesPlanScreen(viewModel: vm).asDestination(), animated: true)
-                                }
-                                
-                                WidgetView(title: "Check guests list", icon: .icGuests) {
-                                    self.showGuestBottomSheet = true
-                                }.sheet(isPresented: $showGuestBottomSheet) {
-                                    //TODO check guests list
-                                }
-                            } else {
-                                MainButtonView(text: "Start planning") {
-                                    let vm = TablesPlanViewModel(tables: user.tablesAtWedding)
-                                    mainNavigation?.push(TablesPlanScreen(viewModel: vm).asDestination(), animated: true)
-                                }.padding(.horizontal, 16)
+                            MainButtonView(text: "Invite more people") {
+                                viewModel.sendWeddingInvitation()
+                            }.padding(.horizontal, 16)
+                            
+                            WidgetView(title: "Check tables plan", icon: .icTables) {
+                                let vm = TablesPlanViewModel(tables: user.tablesAtWedding)
+                                mainNavigation?.push(TablesPlanScreen(viewModel: vm).asDestination(), animated: true)
+                            }
+                            
+                            WidgetView(title: "Check guests list", icon: .icGuests) {
+                                let vm = GuestsListViewModel(guestsList: user.guests)
+                                navigation.push(GuestsListScreen(viewModel: vm).asDestination(), animated: true)
                             }
                         } else {
                             MainButtonView(text: "Start wedding") {
@@ -68,17 +58,20 @@ struct GuestsScreen: View {
                         
                         if !user.otherWeddings.isEmpty {
                             WidgetView(title: "Check other weddings", icon: .icWeddingsProfile) {
-                                self.showOtherWeddingsBottomSheet = true
-                            }.sheet(isPresented: $showOtherWeddingsBottomSheet) {
-                                //TODO check other weddings
+                                let vm = OtherWeddingsViewModel(otherWeddingsList: user.otherWeddings)
+                                navigation.push(OtherWeddingsScreen(viewModel: vm).asDestination(), animated: true)
                             }
                         }
                     }.padding(.top, 24)
                 }
             } else {
-                Text("You have to log in in order to access the content of this tab.")
-                    .foregroundStyle(Color.mainBlack)
-                    .font(.poppinsRegular(size: 16))
+                HStack {
+                    Text("You have to log in in order to access the content of this tab.")
+                        .foregroundStyle(Color.mainBlack)
+                        .font(.poppinsRegular(size: 16))
+                    Spacer()
+                }.padding(.horizontal, 16)
+                    .padding(.top, 24)
                 Spacer()
             }
         }.background(Color.mainWhite)

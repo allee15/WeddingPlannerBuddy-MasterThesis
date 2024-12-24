@@ -54,7 +54,7 @@ struct RegisterScreen: View {
                         Toggle(isOn: $viewModel.termsAccepted) {
                             Group {
                                 Text("I read and agree to ")
-                                    .foregroundColor(.black)
+                                    .foregroundColor(.mainBlack)
                                 + Text("The Terms and Conditions")
                                     .foregroundColor(Color.mainPink)
                             }.font(.poppinsRegular(size: 14))

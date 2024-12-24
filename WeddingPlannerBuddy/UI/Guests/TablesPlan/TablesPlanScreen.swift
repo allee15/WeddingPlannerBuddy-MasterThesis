@@ -41,6 +41,21 @@ struct TablesPlanScreen: View {
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .onReceive(viewModel.eventSubject) { event in
+                switch event {
+                case .tableAdded:
+                    let toast = Toast(text: "Table added successful!", textColor: Color.lightGreen)
+                    ToastManager.instance.show(toast)
+                    
+                case .rectangleAdded:
+                    let toast = Toast(text: "Object added successful!", textColor: Color.lightGreen)
+                    ToastManager.instance.show(toast)
+                    
+                case .failed:
+                    let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                    ToastManager.instance.show(toast)
+                }
+            }
     }
 }
 
