@@ -73,7 +73,20 @@ class GuestsViewModel: BaseViewModel {
         let subject = "Our wedding"
         let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         //TODO: add date and location from wedding object!!!!
-        let body = "Dear our beloved friend,\n\nAlong with our parents, we are delighted to invite you to the celebration of our love.\n\n"
+        let body = """
+        Dear our beloved friend,
+        
+        Along with our parents, we are delighted to invite you to the celebration of our love.
+        
+        Here you have more information about the big day.
+        Date:
+        Location:
+        
+        If you want to keep this information stored in one place, you can download the app "Wedding Planner Buddy".
+        
+        Warm regards,
+        The Bride and the Groom
+        """
         let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         let urlString = "mailto:?subject=\(subjectEncoded)&body=\(bodyEncoded)"
         
