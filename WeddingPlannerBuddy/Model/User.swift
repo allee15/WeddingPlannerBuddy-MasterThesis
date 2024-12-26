@@ -46,3 +46,7 @@ let userMocked = User(id: "1",
                         Guest(id: "5", name: "Dana", email: "dcsfd@.com")
                       ])
 
+let weddingsMocked: [Wedding] = [
+    Wedding(id: "1", name: "Olaf si Elsa", date: "13.06.2025", location: "Promenada Mall"),
+    Wedding(id: "2", name: "Ana si Sven", date: "07.11.2025", location: "Gara de Nord")
+]

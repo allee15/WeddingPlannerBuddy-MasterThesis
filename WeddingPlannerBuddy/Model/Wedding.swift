@@ -1,0 +1,15 @@
+//
+//  Wedding.swift
+//  WeddingPlannerBuddy
+//
+//  Created by Alexia Aldea on 26.12.2024.
+//
+
+import Foundation
+
+struct Wedding {
+    let id: String
+    let name: String
+    let date: String
+    let location: String
+}

@@ -90,6 +90,11 @@
 		0FDE16BC2D1B33B900C1580E /* GuestsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */; };
 		0FDE16BE2D1B349B00C1580E /* TablesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BD2D1B349B00C1580E /* TablesApi.swift */; };
 		0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BF2D1B34A500C1580E /* TablesService.swift */; };
+		0FDE16CB2D1DD8FF00C1580E /* Wedding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16CA2D1DD8FF00C1580E /* Wedding.swift */; };
+		0FDE16CD2D1DE43B00C1580E /* WeddingApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16CC2D1DE43B00C1580E /* WeddingApi.swift */; };
+		0FDE16CF2D1DE70700C1580E /* WeddingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16CE2D1DE70700C1580E /* WeddingService.swift */; };
+		0FDE16D22D1DEBFF00C1580E /* WeddingMediaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */; };
+		0FDE16D42D1DEC0B00C1580E /* WeddingMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */; };
 		0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */; };
 		0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */; };
 		0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515402CFF9BE800CA9601 /* HomeScreen.swift */; };
@@ -190,6 +195,11 @@
 		0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsApi.swift; sourceTree = "<group>"; };
 		0FDE16BD2D1B349B00C1580E /* TablesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesApi.swift; sourceTree = "<group>"; };
 		0FDE16BF2D1B34A500C1580E /* TablesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesService.swift; sourceTree = "<group>"; };
+		0FDE16CA2D1DD8FF00C1580E /* Wedding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wedding.swift; sourceTree = "<group>"; };
+		0FDE16CC2D1DE43B00C1580E /* WeddingApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingApi.swift; sourceTree = "<group>"; };
+		0FDE16CE2D1DE70700C1580E /* WeddingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingService.swift; sourceTree = "<group>"; };
+		0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingMediaScreen.swift; sourceTree = "<group>"; };
+		0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingMediaViewModel.swift; sourceTree = "<group>"; };
 		0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsScreen.swift; sourceTree = "<group>"; };
 		0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewModel.swift; sourceTree = "<group>"; };
 		0FE515402CFF9BE800CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -312,6 +322,7 @@
 				0FDE16862D0867CC00C1580E /* Table.swift */,
 				0FDE168F2D0B137F00C1580E /* WeddingGuest.swift */,
 				0FDE16912D0B153D00C1580E /* Guest.swift */,
+				0FDE16CA2D1DD8FF00C1580E /* Wedding.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,6 +335,7 @@
 				0FE5156F2D0320EB00CA9601 /* FirebaseService.swift */,
 				0FDE16B92D1B338000C1580E /* GuestsService.swift */,
 				0FDE16BF2D1B34A500C1580E /* TablesService.swift */,
+				0FDE16CE2D1DE70700C1580E /* WeddingService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -337,6 +349,7 @@
 				0F24D6072CC2986C00A833E1 /* UserApi.swift */,
 				0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */,
 				0FDE16BD2D1B349B00C1580E /* TablesApi.swift */,
+				0FDE16CC2D1DE43B00C1580E /* WeddingApi.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -459,6 +472,15 @@
 			path = GuestsList;
 			sourceTree = "<group>";
 		};
+		0FDE16D02D1DEBE900C1580E /* WeddingMedia */ = {
+			isa = PBXGroup;
+			children = (
+				0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */,
+				0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */,
+			);
+			path = WeddingMedia;
+			sourceTree = "<group>";
+		};
 		0FE515362CF76E1200CA9601 /* ThemeSettingsScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,6 +565,7 @@
 			children = (
 				0FE515622CFF9E3600CA9601 /* MediaScreen.swift */,
 				0FE515602CFF9E2900CA9601 /* MediaViewModel.swift */,
+				0FDE16D02D1DEBE900C1580E /* WeddingMedia */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -703,6 +726,7 @@
 				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
 				0FE515582CFF9D4200CA9601 /* LoginViewModel.swift in Sources */,
 				0FE5154B2CFF9CA200CA9601 /* GuestsViewModel.swift in Sources */,
+				0FDE16D22D1DEBFF00C1580E /* WeddingMediaScreen.swift in Sources */,
 				0F24D6172CC2A6CD00A833E1 /* String+.swift in Sources */,
 				0F24D6022CC1BE7100A833E1 /* BlockingErrorScreen.swift in Sources */,
 				0F24D6082CC2986C00A833E1 /* UserApi.swift in Sources */,
@@ -723,6 +747,7 @@
 				0FDE16632D05F9F100C1580E /* ChangePasswordViewModel.swift in Sources */,
 				0FE515632CFF9E3600CA9601 /* MediaScreen.swift in Sources */,
 				0FDE16612D05F9E700C1580E /* ChangePasswordScreen.swift in Sources */,
+				0FDE16CB2D1DD8FF00C1580E /* Wedding.swift in Sources */,
 				0FE5154D2CFF9CB000CA9601 /* GuestsScreen.swift in Sources */,
 				0FDE166A2D0600AB00C1580E /* ResetPasswordScreen.swift in Sources */,
 				0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */,
@@ -737,6 +762,7 @@
 				0F24D6212CC2AAA500A833E1 /* NavBarView.swift in Sources */,
 				0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */,
 				0FE515612CFF9E2900CA9601 /* MediaViewModel.swift in Sources */,
+				0FDE16CD2D1DE43B00C1580E /* WeddingApi.swift in Sources */,
 				0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */,
 				0FE5155E2CFF9D8600CA9601 /* RegisterViewModel.swift in Sources */,
 				0F24D5D52CC1B47000A833E1 /* OnboardingScreen.swift in Sources */,
@@ -775,6 +801,7 @@
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
 				0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */,
+				0FDE16CF2D1DE70700C1580E /* WeddingService.swift in Sources */,
 				0FDE16872D0867CC00C1580E /* Table.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
 				0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */,
@@ -783,6 +810,7 @@
 				0FDE16682D05FB5600C1580E /* DeleteAccountViewModel.swift in Sources */,
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,
 				0F24D6042CC2978600A833E1 /* JSONParsers.swift in Sources */,
+				0FDE16D42D1DEC0B00C1580E /* WeddingMediaViewModel.swift in Sources */,
 				0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
