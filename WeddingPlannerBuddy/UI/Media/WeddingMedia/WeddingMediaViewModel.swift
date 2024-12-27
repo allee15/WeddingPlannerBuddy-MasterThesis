@@ -12,10 +12,12 @@ import UIKit
 enum AddImageCompletion {
     case added
     case failed
+    case showRateModal
 }
 
 class WeddingMediaViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
+    private let userDefaultsService = UserDefaultsService.shared
     @Published var wedding: Wedding?
     
     let eventSubject = PassthroughSubject<AddImageCompletion, Never>()
@@ -40,6 +42,10 @@ class WeddingMediaViewModel: BaseViewModel {
 //                }
                 if result {
                     self.eventSubject.send(.added)
+                    if !userDefaultsService.getShowRateModalStatus() {
+                        self.eventSubject.send(.showRateModal)
+                        userDefaultsService.setShowRateModal(hasShownRateModal: true)
+                    }
                 } else {
                     self.eventSubject.send(.failed)
                 }

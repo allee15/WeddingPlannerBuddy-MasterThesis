@@ -12,6 +12,7 @@ enum UserDefaultsKeys {
     static let appTheme = "appTheme"
     static let notificationsSubscribed = "notificationsSubscribed"
     static let token = Key<String>(value: "token")
+    static let hasShownRateModal = "hasShownRateModal"
 }
 
 public struct Key<T> {
@@ -33,6 +34,14 @@ class UserDefaultsService {
     
     func getOnboardingStatus() -> Bool {
         defaults.bool(forKey: UserDefaultsKeys.hasOnboardingCompleted)
+    }
+    
+    func setShowRateModal(hasShownRateModal: Bool) {
+        defaults.set(hasShownRateModal, forKey: UserDefaultsKeys.hasShownRateModal)
+    }
+    
+    func getShowRateModalStatus() -> Bool {
+        defaults.bool(forKey: UserDefaultsKeys.hasShownRateModal)
     }
     
     func setValue<T>(key: Key<T>, value: Optional<T>) {
