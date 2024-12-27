@@ -47,6 +47,30 @@ let userMocked = User(id: "1",
                       ])
 
 let weddingsMocked: [Wedding] = [
-    Wedding(id: "1", name: "Olaf si Elsa", date: "13.06.2025", location: "Promenada Mall"),
-    Wedding(id: "2", name: "Ana si Sven", date: "07.11.2025", location: "Gara de Nord")
+    Wedding(id: "1", name: "Olaf si Elsa", date: "13.06.2025", location: "Promenada Mall", images: [
+        "https://recorder.ro/wp-content/uploads/2024/12/Asset-1@3x-100-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/Experiment-recorder-tiktok-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/Thumb-fara-scris-680x445.png",
+        "https://recorder.ro/wp-content/uploads/2024/11/thumb22-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/GEORGE-BECALI-680x445.jpeg",
+        "https://recorder.ro/wp-content/uploads/2024/12/CIOLACU-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/MARIO-IORGULESCU-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/NICUSOR-DAN-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/HORATIU-POTRA-1-680x445.jpeg",
+        "https://recorder.ro/wp-content/uploads/2024/12/SCHENGEN-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/COALITIE-680x445.jpeg",
+        "https://recorder.ro/wp-content/uploads/2024/12/GABRIEL-VLASE-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/HORATIU-POTRA-680x445.jpeg",
+        "https://recorder.ro/wp-content/uploads/2024/12/ALEGERI-ANULATE-680x445.png",
+        "https://recorder.ro/wp-content/uploads/2024/12/GEORGESCU-LEGIONARI-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/PUTIN-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/12/simion-680x445.jpeg",
+        "https://recorder.ro/wp-content/uploads/2024/11/STAMPILA-VOT-680x445.jpeg",
+        "https://recorder.ro/wp-content/themes/recorder/src/images/recorder_newsletter_thumb.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/11/Palatul-Parlamentului-Recorder-680x445.png",
+        "https://recorder.ro/wp-content/uploads/2024/11/MAin-Votantii-lui-CG-680x445.png",
+        "https://recorder.ro/wp-content/uploads/2024/11/ID214216_INQUAM_Photos_Ovidiu-Dumitru_Matiu-680x445.jpg",
+        "https://recorder.ro/wp-content/uploads/2024/11/USR-DREPT-Geoana-680x445.png"
+    ]),
+    Wedding(id: "2", name: "Ana si Sven", date: "07.11.2025", location: "Gara de Nord", images: [])
 ]

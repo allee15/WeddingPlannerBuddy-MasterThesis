@@ -12,4 +12,5 @@ struct Wedding {
     let name: String
     let date: String
     let location: String
+    let images: [String]
 }

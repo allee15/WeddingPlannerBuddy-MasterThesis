@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class WeddingService {
     static let shared = WeddingService()
@@ -15,6 +16,11 @@ class WeddingService {
     
     func getWeddings(userId: String) -> AnyPublisher<[Wedding], Error> {
         return weddingApi.getWeddings(userId: userId)
+            .eraseToAnyPublisher()
+    }
+    
+    func addImage(image: UIImage?) -> AnyPublisher<Bool, Error> {
+        return weddingApi.addImage(image: image)
             .eraseToAnyPublisher()
     }
 }

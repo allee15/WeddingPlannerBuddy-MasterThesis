@@ -7,11 +7,18 @@
 
 import Foundation
 import Combine
+import UIKit
 
 class WeddingApi {
     func getWeddings(userId: String) -> AnyPublisher<[Wedding], Error> {
         Future { promise in
             promise(.success(weddingsMocked))
+        }.eraseToAnyPublisher()
+    }
+    
+    func addImage(image: UIImage?) -> AnyPublisher<Bool, Error> {
+        Future { promise in
+            promise(.success(true))
         }.eraseToAnyPublisher()
     }
 }

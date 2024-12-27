@@ -95,6 +95,7 @@
 		0FDE16CF2D1DE70700C1580E /* WeddingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16CE2D1DE70700C1580E /* WeddingService.swift */; };
 		0FDE16D22D1DEBFF00C1580E /* WeddingMediaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */; };
 		0FDE16D42D1DEC0B00C1580E /* WeddingMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */; };
+		0FDE16D82D1F53E100C1580E /* IN_VIITOR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D72D1F53E100C1580E /* IN_VIITOR.swift */; };
 		0FE515372CF76E1200CA9601 /* ThemeSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */; };
 		0FE515382CF76E1200CA9601 /* ThemeSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */; };
 		0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515402CFF9BE800CA9601 /* HomeScreen.swift */; };
@@ -200,6 +201,7 @@
 		0FDE16CE2D1DE70700C1580E /* WeddingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingService.swift; sourceTree = "<group>"; };
 		0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingMediaScreen.swift; sourceTree = "<group>"; };
 		0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingMediaViewModel.swift; sourceTree = "<group>"; };
+		0FDE16D72D1F53E100C1580E /* IN_VIITOR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IN_VIITOR.swift; sourceTree = "<group>"; };
 		0FE515342CF76E1200CA9601 /* ThemeSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsScreen.swift; sourceTree = "<group>"; };
 		0FE515352CF76E1200CA9601 /* ThemeSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettingsViewModel.swift; sourceTree = "<group>"; };
 		0FE515402CFF9BE800CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */,
 				0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */,
 				0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */,
+				0FDE16D72D1F53E100C1580E /* IN_VIITOR.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				0FDE16682D05FB5600C1580E /* DeleteAccountViewModel.swift in Sources */,
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,
 				0F24D6042CC2978600A833E1 /* JSONParsers.swift in Sources */,
+				0FDE16D82D1F53E100C1580E /* IN_VIITOR.swift in Sources */,
 				0FDE16D42D1DEC0B00C1580E /* WeddingMediaViewModel.swift in Sources */,
 				0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */,
 			);

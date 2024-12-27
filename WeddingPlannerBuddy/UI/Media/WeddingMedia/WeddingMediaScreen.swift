@@ -6,21 +6,158 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct WeddingMediaScreen: View {
     @EnvironmentObject private var navigation: Navigation
+    private let mainNavigation = EnvironmentObjects.navigation
     @StateObject var viewModel: WeddingMediaViewModel
+    @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary
+    @State private var addPhoto: Bool = false
+    
+    @State private var showNavBar: Bool = true
+    @State private var showBottomBar: Bool = true
+    @State private var scrollOffset: CGFloat = 0.0
+    @State private var previousScrollOffset: CGFloat = 0.0
+    @State private var totalViewHeight: CGFloat = 0.0
+    let viewportHeight = UIScreen.main.bounds.height
+    
+    let columns = [
+        GridItem(.flexible(minimum: (UIScreen.main.bounds.width - 38) / 3,
+                           maximum: UIScreen.main.bounds.width / 3)),
+        GridItem(.flexible(minimum: (UIScreen.main.bounds.width - 38) / 3,
+                           maximum: UIScreen.main.bounds.width / 3)),
+        GridItem(.flexible(minimum: (UIScreen.main.bounds.width - 38) / 3,
+                           maximum: UIScreen.main.bounds.width / 3))
+    ]
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Your weddings") {
-                navigation.pop(animated: true)
+            if showNavBar {
+                LeftNavBarView(title: "Your weddings") {
+                    navigation.pop(animated: true)
+                }
             }
             
-            Text("Wedding media screen")
-            Spacer()
+            if let wedding = viewModel.wedding {
+                ScrollView(showsIndicators: false) {
+                    GeometryReader { proxy in
+                        Color.clear
+                            .onAppear {
+                                scrollOffset = proxy.frame(in: .global).minY
+                                previousScrollOffset = scrollOffset
+                            }
+                            .onChange(of: proxy.frame(in: .global).minY) { _, value in
+                                let scrollDifference = value - previousScrollOffset
+                                scrollOffset = value
+                                
+                                if (abs(value) + viewportHeight) >= totalViewHeight {
+                                    // is at the bottom
+                                    if !showNavBar && !showBottomBar {
+                                        showNavBar = true
+                                        showBottomBar = true
+                                    }
+                                } else if value > 0 {
+                                    // scroll to top
+                                    withAnimation {
+                                        showNavBar = true
+                                        showBottomBar = true
+                                    }
+                                } else if abs(scrollDifference) > 10 {
+                                    if scrollOffset < previousScrollOffset {
+                                        // scroll to bottom
+                                        if showNavBar && showBottomBar {
+                                            withAnimation {
+                                                showNavBar = false
+                                                showBottomBar = false
+                                            }
+                                        }
+                                    } else {
+                                        // scroll to top
+                                        withAnimation {
+                                            showNavBar = true
+                                            showBottomBar = true
+                                        }
+                                    }
+                                }
+                                previousScrollOffset = scrollOffset
+                            }
+                    }.frame(height: 0)
+                    
+                    VStack(spacing: 0) {
+                        if !wedding.images.isEmpty {
+                            LazyVGrid(columns: columns, spacing: 4) {
+                                ForEach(wedding.images, id: \.self) { image in
+                                    Button {
+                                        mainNavigation?.push(ZoomImageScreen(imageToZoom: image).asDestination(),
+                                                             animated: true)
+                                    } label: {
+                                        KFImage(URL(string: image))
+                                            .resizable()
+                                            .placeholder {
+                                                Image(.imgPlaceholder)
+                                                    .resizable()
+                                                    .aspectRatio(1, contentMode: .fit)
+                                                    .frame(width: (UIScreen.main.bounds.width - 38) / 3)
+                                            }
+                                            .centerCropped()
+                                            .aspectRatio(1, contentMode: .fit)
+                                            .frame(width: (UIScreen.main.bounds.width - 38) / 3)
+                                            .cornerRadius(4)
+                                            .padding(.horizontal, 4)
+                                    }
+                                }
+                            }
+                        } else {
+                            HStack {
+                                Text("No images added yet. Time for you to add the first image!")
+                                    .foregroundStyle(Color.mainBlack)
+                                    .font(.poppinsRegular(size: 16))
+                                Spacer()
+                            }.padding(.horizontal, 16)
+                                .padding(.top, 24)
+                            Spacer()
+                        }
+                    }.padding(.top, 24)
+                        .padding(.horizontal, 16)
+                }.safeAreaInset(edge: .bottom) {
+                    if showBottomBar {
+                        MainButtonView(text: "Add image") {
+                            self.addPhoto = true
+                        }.padding(.horizontal, 16)
+                            .padding(.bottom, 24)
+                            .sheet(isPresented: $addPhoto) {
+                                ImagePickerView(sourceType: self.$imageSource) { image in
+                                    viewModel.addImage(image: image)
+                                }
+                                .ignoresSafeArea()
+                            }
+                    }
+                }
+            } else {
+                HStack {
+                    Text("An error has been encountered. Please refresh the page.")
+                        .foregroundStyle(Color.mainBlack)
+                        .font(.poppinsRegular(size: 16))
+                    Spacer()
+                }.padding(.horizontal, 16)
+                    .padding(.top, 24)
+                Spacer()
+            }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .onReceive(viewModel.eventSubject) { event in
+                switch event {
+                case .added:
+                    self.addPhoto = false
+                    let toast = Toast(text: "Image added successful!", textColor: Color.lightGreen)
+                    ToastManager.instance.show(toast)
+                    
+                case .failed:
+                    let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                    ToastManager.instance.show(toast)
+                }
+            }
     }
 }

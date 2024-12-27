@@ -20,6 +20,16 @@ struct ZoomImageScreen: View {
                     mainNavigation?.pop(animated: true)
                 }
                 Spacer()
+                
+                if let imageToZoom = imageToZoom {
+                    Button(action: {
+                        saveImageToGallery(imageURL: imageToZoom)
+                    }) {
+                        Image(systemName: "square.and.arrow.down")
+                            .foregroundColor(.white)
+                            .frame(width: 32, height: 32)
+                    }
+                }
             }.padding([.top, .horizontal], 16)
             
             GeometryReader { geometry in
@@ -45,5 +55,19 @@ struct ZoomImageScreen: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .clipped()
         }.frame(width: geometry.size.width, height: geometry.size.height)
+    }
+    
+    private func saveImageToGallery(imageURL: String) {
+        guard let url = URL(string: imageURL) else { return }
+        
+        KingfisherManager.shared.retrieveImage(with: url) { result in
+            switch result {
+            case .success(let value):
+                UIImageWriteToSavedPhotosAlbum(value.image, nil, nil, nil) 
+                print("Imagine salvată cu succes!")
+            case .failure(let error):
+                print("Eroare la descărcarea imaginii: \(error.localizedDescription)")
+            }
+        }
     }
 }
