@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import StoreKit
 
 struct WeddingMediaScreen: View {
     @EnvironmentObject private var navigation: Navigation
@@ -153,6 +154,10 @@ struct WeddingMediaScreen: View {
                     self.addPhoto = false
                     let toast = Toast(text: "Image added successful!", textColor: Color.lightGreen)
                     ToastManager.instance.show(toast)
+                    
+                case .showRateModal:
+                    if let windowScene = UIApplication.shared.windows.first?.windowScene { SKStoreReviewController.requestReview(in: windowScene)
+                    }
                     
                 case .failed:
                     let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
