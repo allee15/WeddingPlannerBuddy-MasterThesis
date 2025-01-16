@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0CBA722D395B8E0018FD86 /* HomeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0CBA712D395B8E0018FD86 /* HomeCard.swift */; };
 		0F24D5942CC0F85500A833E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F24D5932CC0F85500A833E1 /* LaunchScreen.storyboard */; };
 		0F24D5962CC0F89A00A833E1 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5952CC0F89A00A833E1 /* RootView.swift */; };
 		0F24D59A2CC0F8D600A833E1 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F24D5992CC0F8D600A833E1 /* TabBarItem.swift */; };
@@ -123,6 +124,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F0CBA712D395B8E0018FD86 /* HomeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCard.swift; sourceTree = "<group>"; };
 		0F24D5932CC0F85500A833E1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F24D5952CC0F89A00A833E1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0F24D5992CC0F8D600A833E1 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				0FDE168F2D0B137F00C1580E /* WeddingGuest.swift */,
 				0FDE16912D0B153D00C1580E /* Guest.swift */,
 				0FDE16CA2D1DD8FF00C1580E /* Wedding.swift */,
+				0F0CBA712D395B8E0018FD86 /* HomeCard.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				0F24D6172CC2A6CD00A833E1 /* String+.swift in Sources */,
 				0F24D6022CC1BE7100A833E1 /* BlockingErrorScreen.swift in Sources */,
 				0F24D6082CC2986C00A833E1 /* UserApi.swift in Sources */,
+				0F0CBA722D395B8E0018FD86 /* HomeCard.swift in Sources */,
 				0F327EDE2CDE48CB00EDF536 /* ApiEnvironment.swift in Sources */,
 				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
