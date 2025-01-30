@@ -16,4 +16,17 @@ extension String {
     func replaceSpacesWithUnderscores() -> String {
         return self.replacingOccurrences(of: " ", with: "_")
     }
+    
+    func remakeWeather() -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "d MMMM yyyy"
+        
+        if let date = inputFormatter.date(from: self) {
+            return outputFormatter.string(from: date)
+        }
+        return ""
+    }
 }

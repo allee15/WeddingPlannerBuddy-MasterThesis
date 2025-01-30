@@ -20,18 +20,20 @@ struct TablesPlanScreen: View {
                 viewModel.addRectangle()
             }
             
-            TablePlanView(tables: $viewModel.tables) { table in
-                let modal = ModalChooseOptionView(title: "Table's participants",
-                                                  description: viewModel.getTableNames(table: table),
-                                                  topButtonText: "Add participant",
-                                                  bottomButtonText: "Close") {
-                    showBottomSheet = true
-                } onBottomButtonTapped: {
-                    navigation.dismissModal(animated: true, completion: nil)
+            ZoomableScrollView {
+                TablePlanView(tables: $viewModel.tables) { table in
+                    let modal = ModalChooseOptionView(title: "Table's participants",
+                                                      description: viewModel.getTableNames(table: table),
+                                                      topButtonText: "Add participant",
+                                                      bottomButtonText: "Close") {
+                        showBottomSheet = true
+                    } onBottomButtonTapped: {
+                        navigation.dismissModal(animated: true, completion: nil)
+                    }
+                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                }.sheet(isPresented: $showBottomSheet) {
+                    AddParticipantScreen(showBottomSheet: $showBottomSheet)
                 }
-                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-            }.sheet(isPresented: $showBottomSheet) {
-                AddParticipantScreen(showBottomSheet: $showBottomSheet)
             }
             
             MainButtonView(text: "Add new table") {
