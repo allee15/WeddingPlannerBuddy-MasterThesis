@@ -21,4 +21,10 @@ class WeddingApi {
             promise(.success(true))
         }.eraseToAnyPublisher()
     }
+    
+    func getWeddingDetails() -> AnyPublisher<WeddingDetails, Error> {
+        Future { promise in
+            promise(.success(weddingDetailsMocked))
+        }.eraseToAnyPublisher()
+    }
 }
