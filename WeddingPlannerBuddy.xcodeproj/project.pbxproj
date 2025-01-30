@@ -64,6 +64,11 @@
 		0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF62CE3DA0F00EDF536 /* DividerView.swift */; };
 		0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */; };
 		0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */; };
+		0F40D6AD2D48D3370020D433 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6AC2D48D3370020D433 /* Date+.swift */; };
+		0F40D6AF2D48D5F80020D433 /* WeatherApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6AE2D48D5F80020D433 /* WeatherApi.swift */; };
+		0F40D6B12D48D60E0020D433 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6B02D48D60E0020D433 /* WeatherService.swift */; };
+		0F40D6B32D48D8E60020D433 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6B22D48D8E60020D433 /* Weather.swift */; };
+		0F40D6B92D4915070020D433 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6B82D4915070020D433 /* LocationManager.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
 		0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */; };
@@ -171,6 +176,11 @@
 		0F327EF62CE3DA0F00EDF536 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		0F327EF82CE3DD9500EDF536 /* ZoomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomImageView.swift; sourceTree = "<group>"; };
 		0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomableScrollView.swift; sourceTree = "<group>"; };
+		0F40D6AC2D48D3370020D433 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		0F40D6AE2D48D5F80020D433 /* WeatherApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApi.swift; sourceTree = "<group>"; };
+		0F40D6B02D48D60E0020D433 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		0F40D6B22D48D8E60020D433 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		0F40D6B82D4915070020D433 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -295,6 +305,7 @@
 				0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */,
 				0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */,
 				0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */,
+				0F40D6AC2D48D3370020D433 /* Date+.swift */,
 				0FDE16D72D1F53E100C1580E /* IN_VIITOR.swift */,
 			);
 			path = Util;
@@ -329,6 +340,7 @@
 				0FDE16912D0B153D00C1580E /* Guest.swift */,
 				0FDE16CA2D1DD8FF00C1580E /* Wedding.swift */,
 				0F0CBA712D395B8E0018FD86 /* HomeCard.swift */,
+				0F40D6B22D48D8E60020D433 /* Weather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -342,6 +354,8 @@
 				0FDE16B92D1B338000C1580E /* GuestsService.swift */,
 				0FDE16BF2D1B34A500C1580E /* TablesService.swift */,
 				0FDE16CE2D1DE70700C1580E /* WeddingService.swift */,
+				0F40D6B02D48D60E0020D433 /* WeatherService.swift */,
+				0F40D6B82D4915070020D433 /* LocationManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -356,6 +370,7 @@
 				0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */,
 				0FDE16BD2D1B349B00C1580E /* TablesApi.swift */,
 				0FDE16CC2D1DE43B00C1580E /* WeddingApi.swift */,
+				0F40D6AE2D48D5F80020D433 /* WeatherApi.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -740,9 +755,11 @@
 				0F327EDE2CDE48CB00EDF536 /* ApiEnvironment.swift in Sources */,
 				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
+				0F40D6AD2D48D3370020D433 /* Date+.swift in Sources */,
 				0FE515692D0070E700CA9601 /* MainButtonView.swift in Sources */,
 				0FDE16AC2D1AE9D800C1580E /* GuestsListScreen.swift in Sources */,
 				0FDE167F2D072D7700C1580E /* ResetPasswordEmailScreen.swift in Sources */,
+				0F40D6B92D4915070020D433 /* LocationManager.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0FDE16662D05FB3200C1580E /* DeleteAccountScreen.swift in Sources */,
 				0FDE16B62D1B10ED00C1580E /* GuestsListViewModel.swift in Sources */,
@@ -769,6 +786,7 @@
 				0F24D6212CC2AAA500A833E1 /* NavBarView.swift in Sources */,
 				0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */,
 				0FE515612CFF9E2900CA9601 /* MediaViewModel.swift in Sources */,
+				0F40D6B12D48D60E0020D433 /* WeatherService.swift in Sources */,
 				0FDE16CD2D1DE43B00C1580E /* WeddingApi.swift in Sources */,
 				0F327EFB2CE3DDC500EDF536 /* ZoomableScrollView.swift in Sources */,
 				0FE5155E2CFF9D8600CA9601 /* RegisterViewModel.swift in Sources */,
@@ -786,6 +804,7 @@
 				0FDE16BE2D1B349B00C1580E /* TablesApi.swift in Sources */,
 				0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */,
 				0FDE16B12D1AEADA00C1580E /* OtherWeddingsViewModel.swift in Sources */,
+				0F40D6B32D48D8E60020D433 /* Weather.swift in Sources */,
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
 				0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */,
@@ -812,6 +831,7 @@
 				0FDE16872D0867CC00C1580E /* Table.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
 				0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */,
+				0F40D6AF2D48D5F80020D433 /* WeatherApi.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
 				0F24D59C2CC0F91600A833E1 /* TabBarScreen.swift in Sources */,
 				0FDE16682D05FB5600C1580E /* DeleteAccountViewModel.swift in Sources */,
