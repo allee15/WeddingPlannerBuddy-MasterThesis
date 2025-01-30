@@ -23,4 +23,9 @@ class WeddingService {
         return weddingApi.addImage(image: image)
             .eraseToAnyPublisher()
     }
+    
+    func getWeddingDetails() -> AnyPublisher<WeddingDetails, Error> {
+        return weddingApi.getWeddingDetails()
+            .eraseToAnyPublisher()
+    }
 }
