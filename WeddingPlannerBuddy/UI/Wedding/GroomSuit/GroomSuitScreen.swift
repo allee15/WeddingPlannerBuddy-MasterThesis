@@ -9,7 +9,7 @@ import SwiftUI
 
 struct GroomSuitScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = GroomSuitViewModel()
+    @StateObject var viewModel: GroomSuitViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,12 +17,10 @@ struct GroomSuitScreen: View {
                 navigation.pop(animated: true)
             }
             
+            Text(viewModel.groomSuit.description)
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
     }
 }
 
-#Preview {
-    GroomSuitScreen()
-}

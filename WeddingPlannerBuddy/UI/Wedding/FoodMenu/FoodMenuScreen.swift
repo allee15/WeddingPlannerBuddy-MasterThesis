@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FoodMenuScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = FoodMenuViewModel()
+    @StateObject var viewModel: FoodMenuViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,12 +17,9 @@ struct FoodMenuScreen: View {
                 navigation.pop(animated: true)
             }
             
+            Text(viewModel.foodMenu.antreu[0])
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
     }
-}
-
-#Preview {
-    FoodMenuScreen()
 }

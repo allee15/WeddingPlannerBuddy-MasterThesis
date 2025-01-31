@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PartyLocationScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = PartyLocationViewModel()
+    @StateObject var viewModel: PartyLocationViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,12 +17,10 @@ struct PartyLocationScreen: View {
                 navigation.pop(animated: true)
             }
             
+            Text(viewModel.partyLocation.decorationsOrganizerDetails)
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
     }
 }
 
-#Preview {
-    PartyLocationScreen()
-}
