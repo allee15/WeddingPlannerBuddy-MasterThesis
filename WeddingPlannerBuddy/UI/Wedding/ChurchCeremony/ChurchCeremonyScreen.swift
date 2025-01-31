@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChurchCeremonyScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = ChurchCeremonyViewModel()
+    @StateObject var viewModel: ChurchCeremonyViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,12 +17,10 @@ struct ChurchCeremonyScreen: View {
                 navigation.pop(animated: true)
             }
             
+            Text(viewModel.churchCeremony.churchAddress)
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
     }
 }
 
-#Preview {
-    ChurchCeremonyScreen()
-}

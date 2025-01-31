@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BarMenuScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = BarMenuViewModel()
+    @StateObject var viewModel: BarMenuViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,12 +17,10 @@ struct BarMenuScreen: View {
                 navigation.pop(animated: true)
             }
             
+            Text(viewModel.barMenu.nonalcoholic[0])
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
     }
 }
 
-#Preview {
-    BarMenuScreen()
-}

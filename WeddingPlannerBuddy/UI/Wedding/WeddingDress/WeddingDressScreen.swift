@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WeddingDressScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = WeddingDressViewModel()
+    @StateObject var viewModel: WeddingDressViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,12 +17,11 @@ struct WeddingDressScreen: View {
                 navigation.pop(animated: true)
             }
             
+            Text(viewModel.weddingDress.description)
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
     }
 }
 
-#Preview {
-    WeddingDressScreen()
-}
+

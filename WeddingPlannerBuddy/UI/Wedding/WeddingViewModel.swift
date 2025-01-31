@@ -14,14 +14,21 @@ enum WeddingDetailsState {
     case value(WeddingDetails)
 }
 
+enum WeddingEvent {
+    case showRatingModal
+}
+
 class WeddingViewModel: BaseViewModel {
     private var userService = UserService.shared
     private var guestsService = GuestsService.shared
     private let weddingService = WeddingService.shared
+    private let userDefaultsService = UserDefaultsService.shared
     
     @Published var user: User?
     @Published var isLoading: Bool = false
     @Published var weddingDetailsState: WeddingDetailsState = .loading
+    
+    let eventSubject = PassthroughSubject<WeddingEvent, Never>()
     
     override init() {
         super.init()
@@ -63,6 +70,10 @@ class WeddingViewModel: BaseViewModel {
                 if result {
                     userService.userReactiveData.reload()
                     self.getWeddingDetails()
+                    if !userDefaultsService.getShowRateModalStatus() {
+                        self.eventSubject.send(.showRatingModal)
+                        userDefaultsService.setShowRateModal(hasShownRateModal: true)
+                    }
                 }
             }.store(in: &bag)
     }

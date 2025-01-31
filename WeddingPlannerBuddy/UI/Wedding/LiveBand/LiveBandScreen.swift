@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LiveBandScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject private var viewModel = LiveBandViewModel()
+    @StateObject var viewModel: LiveBandViewModel
     
     var body: some View {
         VStack(spacing: 0) {
@@ -17,12 +17,9 @@ struct LiveBandScreen: View {
                 navigation.pop(animated: true)
             }
             
+            Text(viewModel.liveBand.details)
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
     }
-}
-
-#Preview {
-    WeddingDressScreen()
 }
