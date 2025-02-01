@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import userRoutes from './routes/user';
+import { createDatabaseConnection } from './configs/db';
 
 const app = express()
 dotenv.config({ path: ".env"})
@@ -14,6 +15,8 @@ app.set("trust proxy", true)
 
 app.use(userRoutes);
 
-app.listen(8000, () => {
-    console.log("Server started at port 8000")
+createDatabaseConnection().then(() => {
+    app.listen(8000, () => {
+        console.log("Server started at port 8000")
+    })
 })
