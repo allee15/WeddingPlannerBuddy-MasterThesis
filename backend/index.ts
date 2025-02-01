@@ -7,7 +7,7 @@ import userRoutes from './routes/user';
 import { createDatabaseConnection } from './configs/db';
 
 const app = express()
-dotenv.config({ path: ".env"})
+dotenv.config({ path: "./.env"})
 
 app.use(cors())
 app.use(bodyParser.json())
