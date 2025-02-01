@@ -12,7 +12,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.set("trust proxy", true)
 
-app.use("/api", userRoutes);
+app.use(userRoutes);
 
 app.listen(8000, () => {
     console.log("Server started at port 8000")
