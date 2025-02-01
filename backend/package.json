@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:compile": "tsc",
-    "build:transpile": "npx babel index.ts --out-dir build",
+    "build:transpile": "npx babel ./index.ts --out-dir build",
     "build": "concurrently npm:build:*",
     "dev:types": "npx ts-node-dev index.ts",
     "dev": "concurrently npm:dev:*",
