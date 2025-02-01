@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { User } from "../models/User";
 
-export const addUser = (req: Request, res: Response, next: NextFunction) => {
+export const addUser = async (req: Request, res: Response, next: NextFunction) => {
     // logic for adding user
     // User.create({
     //     userUID: req.body.userUID
@@ -10,5 +10,5 @@ export const addUser = (req: Request, res: Response, next: NextFunction) => {
     // }).catch(err => {
     //     res.status(404).send(err);
     // })
-    res.send('User Created')
+    res.send(await User.find({}))
 }
