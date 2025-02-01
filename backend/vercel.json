@@ -1,5 +1,8 @@
 {
     "version": 2,
+    "builds": [
+        { "src": "index.ts", "use": "npm run build" }
+    ],
     "routes": [
         {
             "src": "/api/(.*)", "dest": "./index.ts"
