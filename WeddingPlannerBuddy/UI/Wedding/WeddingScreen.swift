@@ -31,6 +31,10 @@ struct WeddingScreen: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
                         if user.hasActiveWedding {
+                            WidgetView(title: "Playlist", icon: .icItemresultArrow) {
+                                mainNavigation?.push(PlaylistScreen().asDestination(), animated: true)
+                            }
+                            
                             switch viewModel.weddingDetailsState {
                             case .loading:
                                 HStack {
