@@ -17,7 +17,12 @@ struct FoodMenuScreen: View {
                 navigation.pop(animated: true)
             }
             
-            Text(viewModel.foodMenu.antreu[0])
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(viewModel.foodMenu.antreu[0])
+                }.padding(.top, 24)
+                    .padding(.horizontal, 16)
+            }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])

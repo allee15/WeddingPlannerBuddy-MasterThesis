@@ -47,7 +47,10 @@ struct GuestsScreen: View {
                             }
                             
                             WidgetView(title: "Check guests list", icon: .icGuests) {
-                                let vm = GuestsListViewModel(guestsList: user.guests)
+                                let vm = GuestsListViewModel(guestsList: user.guests,
+                                                             weddingDate: viewModel.weddingDate,
+                                                             weddingChurchLocation: viewModel.weddingChurchLocation,
+                                                             weddingPartyLocation: viewModel.weddingPartyLocation)
                                 navigation.push(GuestsListScreen(viewModel: vm).asDestination(), animated: true)
                             }
                         } else {

@@ -9,6 +9,7 @@ import Foundation
 
 struct WeddingDetails {
     let id: Int
+    let date: String
     let weddingDress: WeddingDress
     let bouquet: Bouquet
     let groomSuit: GroomSuit
@@ -106,6 +107,7 @@ struct LiveBand {
 
 let weddingDetailsMocked = WeddingDetails(
     id: 1,
+    date: "12 may 2025",
     weddingDress: weddingdressMocked,
     bouquet: bouquetMocked,
     groomSuit: groomSuitMocked,

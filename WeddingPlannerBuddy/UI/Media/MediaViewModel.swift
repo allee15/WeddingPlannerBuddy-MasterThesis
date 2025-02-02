@@ -18,7 +18,7 @@ class MediaViewModel: BaseViewModel {
     private var weddingService = WeddingService.shared
     private var userService = UserService.shared
     
-    @Published var weddingsState = WeddigsState.value(weddingsMocked) //TODO: fix
+    @Published var weddingsState = WeddigsState.value(weddingsMocked) 
     @Published var user: User?
     
     override init() {
