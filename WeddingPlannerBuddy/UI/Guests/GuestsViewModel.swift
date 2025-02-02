@@ -12,12 +12,18 @@ import Combine
 class GuestsViewModel: BaseViewModel {
     private var userService = UserService.shared
     private var guestsService = GuestsService.shared
+    private let weddingService = WeddingService.shared
+    
     @Published var user: User?
     @Published var isLoading: Bool = false
+    @Published var weddingDate: String = ""
+    @Published var weddingChurchLocation: String = ""
+    @Published var weddingPartyLocation: String = ""
     
     override init() {
         super.init()
         self.getUserInfo()
+        self.getWeddingDetails()
     }
     
     private func getUserInfo() {
@@ -60,15 +66,15 @@ class GuestsViewModel: BaseViewModel {
     func sendWeddingInvitation() {
         let subject = "Our wedding"
         let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        //TODO: add date and location from wedding object!!!!
         let body = """
         Dear our beloved friend,
         
         Along with our parents, we are delighted to invite you to the celebration of our love.
         
         Here you have more information about the big day.
-        Date:
-        Location:
+        Date: \(self.weddingDate)
+        Church location: \(self.weddingChurchLocation)
+        Party location: \(self.weddingPartyLocation)
         
         If you want to keep this information stored in one place, you can download the app "Wedding Planner Buddy".
         
@@ -83,5 +89,17 @@ class GuestsViewModel: BaseViewModel {
         } else {
             print("Unable to open email client.")
         }
+    }
+    
+    private func getWeddingDetails() {
+        self.weddingService.getWeddingDetails()
+            .sink { _ in
+                
+            } receiveValue: { [weak self] weddingDetails in
+                guard let self else {return}
+                self.weddingDate = weddingDetails.date
+                self.weddingPartyLocation = weddingDetails.partyLocation.partyAddress
+                self.weddingChurchLocation = weddingDetails.churchCeremony.churchAddress
+            }.store(in: &bag)
     }
 }

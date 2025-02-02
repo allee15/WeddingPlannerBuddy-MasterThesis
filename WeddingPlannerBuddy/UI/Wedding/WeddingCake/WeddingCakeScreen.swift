@@ -17,7 +17,12 @@ struct WeddingCakeScreen: View {
                 navigation.pop(animated: true)
             }
             
-            Text(viewModel.weddingCake.description)
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(viewModel.weddingCake.description)
+                }.padding(.top, 24)
+                    .padding(.horizontal, 16)
+            }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])

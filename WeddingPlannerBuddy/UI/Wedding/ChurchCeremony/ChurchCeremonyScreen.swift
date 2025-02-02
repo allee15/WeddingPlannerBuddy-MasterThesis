@@ -17,7 +17,12 @@ struct ChurchCeremonyScreen: View {
                 navigation.pop(animated: true)
             }
             
-            Text(viewModel.churchCeremony.churchAddress)
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text(viewModel.churchCeremony.churchAddress)
+                }.padding(.top, 24)
+                    .padding(.horizontal, 16)
+            }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])

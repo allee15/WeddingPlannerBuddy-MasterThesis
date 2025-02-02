@@ -11,23 +11,29 @@ import UIKit
 
 class GuestsListViewModel: BaseViewModel {
     @Published var guestsList: [Guest] = []
+    @Published var weddingDate: String
+    @Published var weddingChurchLocation: String
+    @Published var weddingPartyLocation: String
     
-    init(guestsList: [Guest]) {
+    init(guestsList: [Guest], weddingDate: String, weddingChurchLocation: String, weddingPartyLocation: String) {
         self.guestsList = guestsList
+        self.weddingDate = weddingDate
+        self.weddingChurchLocation = weddingChurchLocation
+        self.weddingPartyLocation = weddingPartyLocation
     }
     
     func openEmail(to recipient: Guest) {
         let subject = "Our wedding"
         let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-        //TODO: add date and location from wedding object!!!!
         let body = """
         Dear \(recipient.name),
         
         Along with our parents, we are delighted to invite you to the celebration of our love.
         
         Here you have more information about the big day.
-        Date:
-        Location:
+        Date: \(self.weddingDate)
+        Church location: \(self.weddingChurchLocation)
+        Party location: \(self.weddingPartyLocation)
         
         If you want to keep this information stored in one place, you can download the app "Wedding Planner Buddy".
         
