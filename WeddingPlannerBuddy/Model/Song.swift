@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MediaPlayer
 
 struct Song: Identifiable, Hashable {
     var id = UUID()
