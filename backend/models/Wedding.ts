@@ -15,12 +15,11 @@ const WeddingSchema = new Schema({
         type: Schema.Types.String,
         required: true
     },
-    images: {
-        type: [String],
-        default: []
-    }, 
+    images: [{
+        type: Schema.Types.String
+    }], 
     date: {
-        type: String,
+        type: Schema.Types.String,
         required: true
     }
 })

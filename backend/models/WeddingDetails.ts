@@ -8,17 +8,17 @@ const WeddingDressSchema = new Schema({
         required: true
     },
     link: {
-        type: String
+        type: Schema.Types.String
     },
     price: {
         type: Schema.Types.Int32,
         default: 0
     },
     photo: {
-        type: String
+        type: Schema.Types.String
     },
     description: {
-        type: String
+        type: Schema.Types.String
     }
 });
 
@@ -28,17 +28,17 @@ const BouquetSchema = new Schema({
         required: true
     },
     link: {
-        type: String
+        type: Schema.Types.String
     },
     price: {
         type: Schema.Types.Int32,
         default: 0
     },
     photo: {
-        type: String
+        type: Schema.Types.String
     },
     description: {
-        type: String
+        type: Schema.Types.String
     }
 });
 
@@ -48,17 +48,17 @@ const GroomSuitSchema = new Schema({
         required: true
     },
     link: {
-        type: String
+        type: Schema.Types.String
     },
     price: {
         type: Schema.Types.Int32,
         default: 0
     },
     photo: {
-        type: String
+        type: Schema.Types.String
     },
     description: {
-        type: String
+        type: Schema.Types.String
     }
 });
 
@@ -68,16 +68,16 @@ const ChurchCeremonySchema = new Schema({
         required: true
     },
     churchAddress: {
-        type: String
+        type: Schema.Types.String
     },
     date: {
-        type: String
+        type: Schema.Types.String
     },
     hour: {
-        type: String
+        type: Schema.Types.String
     },
     preotName: {
-        type: String
+        type: Schema.Types.String
     },
     price: {
         type: Schema.Types.Int32
@@ -90,16 +90,16 @@ const PartyLocationSchema = new Schema({
         required: true
     },
     partyAddress: {
-        type: String
+        type: Schema.Types.String
     },
     date: {
-        type: String
+        type: Schema.Types.String
     },
     hour: {
-        type: String
+        type: Schema.Types.String
     },
     decorationsOrganizerDetails: {
-        type: String
+        type: Schema.Types.String
     },
     price: {
         type: Schema.Types.Int32
@@ -112,13 +112,13 @@ const CivilMarriageSchema = new Schema({
         required: true
     },
     address: {
-        type: String
+        type: Schema.Types.String
     },
     date: {
-        type: String
+        type: Schema.Types.String
     },
     hour: {
-        type: String
+        type: Schema.Types.String
     }
 });
 
@@ -127,18 +127,18 @@ const FoodMenuSchema = new Schema({
         type: Schema.Types.String,
         required: true
     },
-    antreu: {
-        type: [String]
-    },
-    firstCourse: {
-        type: [String]
-    },
-    mainCourse: {
-        type: [String]
-    },
-    secondMainCourse: {
-        type: [String]
-    },
+    antreu: [{
+        type: Schema.Types.String
+    }],
+    firstCourse: [{
+        type: Schema.Types.String
+    }],
+    mainCourse: [{
+        type: Schema.Types.String
+    }],
+    secondMainCourse: [{
+        type: Schema.Types.String
+    }],
     price: {
         type: Schema.Types.Int32
     }
@@ -149,18 +149,18 @@ const BarMenuSchema = new Schema({
         type: Schema.Types.String,
         required: true
     },
-    alcoholic: {
-        type: [String]
-    },
-    nonalcoholic: {
-        type: [String]
-    },
-    coffee: {
-        type: [String]
-    },
-    juice: {
-        type: [String]
-    },
+    alcoholic: [{
+        type: Schema.Types.String
+    }],
+    nonalcoholic: [{
+        type: Schema.Types.String
+    }],
+    coffee: [{
+        type: Schema.Types.String
+    }],
+    juice: [{
+        type: Schema.Types.String
+    }],
     price: {
         type: Schema.Types.Int32
     }
@@ -172,13 +172,13 @@ const WeddingCakeSchema = new Schema({
         required: true
     },
     name: {
-        type: String
+        type: Schema.Types.String
     },
     photo: {
-        type: String
+        type: Schema.Types.String
     },
     description: {
-        type: String
+        type: Schema.Types.String
     },
     price: {
         type: Schema.Types.Int32
@@ -191,16 +191,16 @@ const LiveBandSchema = new Schema({
         required: true
     },
     name: {
-        type: String
+        type: Schema.Types.String
     },
     price: {
         type: Schema.Types.Int32
     },
     hour: {
-        type: String
+        type: Schema.Types.String
     },
     details: {
-        type: String
+        type: Schema.Types.String
     },
     
 });
@@ -211,7 +211,7 @@ const WeddingDetailsSchema = new Schema({
         required: true
     },
     date: {
-        type: String,
+        type: Schema.Types.String,
         required: true
     },
     weddingDress: {

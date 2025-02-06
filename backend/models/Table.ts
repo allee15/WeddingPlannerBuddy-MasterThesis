@@ -21,11 +21,10 @@ const TableSchema = new Schema({
         type: Schema.Types.String,
         required: true
     },
-    participants: {
-        type: [Guest],
-        required: true,
-        default: []
-    },
+    participants: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Guest'
+    }],
     isObject: {
         type: Schema.Types.Boolean,
         required: true, 
