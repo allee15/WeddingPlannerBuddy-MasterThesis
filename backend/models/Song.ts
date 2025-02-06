@@ -8,11 +8,11 @@ const SongSchema = new Schema({
         required: true
     },
     title: {
-        type: String,
+        type: Schema.Types.String,
         required: true
     },
     artist: {
-        type: String,
+        type: Schema.Types.String,
         required: true
     },
     url: {

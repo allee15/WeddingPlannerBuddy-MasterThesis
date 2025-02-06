@@ -16,7 +16,7 @@ const WeddingGuestSchema = new Schema({
         required: true
     },
     date: {
-        type: String,
+        type: Schema.Types.String,
         required: true
     }
 })
