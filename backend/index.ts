@@ -5,9 +5,15 @@ import cors from 'cors'
 
 import userRoutes from './routes/user';
 import { createDatabaseConnection } from './configs/db';
+import * as admin from "firebase-admin";
 
 const app = express()
 dotenv.config({ path: "./.env"})
+
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+  databaseURL: "https://weddingplannerbuddy.firebaseio.com"
+});
 
 app.use(cors())
 app.use(bodyParser.json())
