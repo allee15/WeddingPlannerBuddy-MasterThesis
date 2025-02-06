@@ -8,7 +8,7 @@
 import Foundation
 
 enum DefaultAPIEnvironment {
-    static private let stage = "http://localhost:5001"
+    static private let stage = "https://wedding-planner-buddy-master-thesis.vercel.app/"
     
     static var basePath: URL {
         let selectedEnvironment: String = {
