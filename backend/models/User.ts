@@ -25,21 +25,18 @@ const UserSchema = new Schema({
         required: true,
         default: false
     },
-    tablesAtWedding: {
-        type: [Table],
-        required: true,
-        default: []
-    },
-    otherWeddings: {
-        type: [WeddingGuest],
-        required: true,
-        default: []
-    },
-    guests: {
-        type: [Guest],
-        required: true,
-        default: []
-    }
+    tablesAtWedding: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Table'
+    }],
+    otherWeddings: [{
+        type: Schema.Types.ObjectId,
+        ref: 'WeddingGuest'
+    }],
+    guests: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Guest'
+    }]
 })
 
 export const User = mongoose.model("user", UserSchema)
