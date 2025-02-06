@@ -13,11 +13,11 @@ class UserApi {
     func getUser() -> AnyPublisher<User, Error> {
         Future { promise in
             
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)/api/user")
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/user/")
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
-            urlRequest.httpMethod = "GET"
+            urlRequest.httpMethod = "POST"
             
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
