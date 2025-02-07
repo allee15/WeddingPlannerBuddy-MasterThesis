@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
-import * as admin from "firebase-admin";
 
 export const getUser = async (req: Request, res: Response): Promise<any> => {
     const token = req.header("authorization")?.split(" ")[1];
@@ -27,7 +26,7 @@ export const registerUser = async (req: Request, res: Response): Promise<any> =>
     const {email, token} = req.body;
     try {
         const user = await User.create({ email: email, userUID: token });
-        return res.status(201).json(true);
+        return res.status(201).json({success: true });
     } catch (error) {
         console.log("Error in registerUser controller", error);
         return res.status(500).json({ error: "Internal Server Error" })

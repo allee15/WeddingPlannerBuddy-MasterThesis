@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import userRoutes from './routes/user';
+import weddingRoutes from './routes/wedding';
 import { createDatabaseConnection } from './configs/db';
 import * as admin from "firebase-admin";
 
@@ -22,6 +23,7 @@ app.use(bodyParser.json())
 app.set("trust proxy", true)
 
 app.use(userRoutes);
+app.use(weddingRoutes);
 
 createDatabaseConnection().then(() => {
     app.listen(8000, () => {

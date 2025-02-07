@@ -14,6 +14,11 @@ class WeddingService {
     private let weddingApi = WeddingApi()
     var bag = Set<AnyCancellable>()
     
+    func startWedding(userId: String) -> AnyPublisher<Bool, Error> {
+        return weddingApi.startWedding(userId: userId)
+            .eraseToAnyPublisher()
+    }
+    
     func getWeddings(userId: String) -> AnyPublisher<[Wedding], Error> {
         return weddingApi.getWeddings(userId: userId)
             .eraseToAnyPublisher()

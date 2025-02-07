@@ -80,5 +80,16 @@ struct GuestsScreen: View {
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .onReceive(viewModel.eventSubject) { event in
+                switch event {
+                case .errorCreatingWedding:
+                    let modal = ModalChooseOptionView(title: "Error",
+                                          description: "An error has occured. Please try again.",
+                                                      topButtonText: "Try again") {
+                        navigation.dismissModal(animated: true, completion: nil)
+                    }
+                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                }
+            }
     }
 }

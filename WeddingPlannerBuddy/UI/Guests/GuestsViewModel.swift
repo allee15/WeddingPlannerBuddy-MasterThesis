@@ -9,9 +9,12 @@ import Foundation
 import UIKit
 import Combine
 
+enum GuestsEvent {
+    case errorCreatingWedding
+}
+
 class GuestsViewModel: BaseViewModel {
     private var userService = UserService.shared
-    private var guestsService = GuestsService.shared
     private let weddingService = WeddingService.shared
     
     @Published var user: User?
@@ -19,6 +22,8 @@ class GuestsViewModel: BaseViewModel {
     @Published var weddingDate: String = ""
     @Published var weddingChurchLocation: String = ""
     @Published var weddingPartyLocation: String = ""
+    
+    let eventSubject = PassthroughSubject<GuestsEvent, Never>()
     
     override init() {
         super.init()
@@ -51,14 +56,23 @@ class GuestsViewModel: BaseViewModel {
     }
     
     func startWedding() {
-        guestsService.startWedding()
+        guard let user = user else {return}
+        weddingService.startWedding(userId: user.id)
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .failure(_):
+                    self.eventSubject.send(.errorCreatingWedding)
+                case .finished:
+                    break
+                }
             } receiveValue: { [weak self] result in
                 guard let self else {return}
                 if result {
                     userService.userReactiveData.reload()
+                } else {
+                    self.eventSubject.send(.errorCreatingWedding)
                 }
             }.store(in: &bag)
     }

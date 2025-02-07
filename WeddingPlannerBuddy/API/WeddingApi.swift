@@ -8,8 +8,44 @@
 import Foundation
 import Combine
 import UIKit
+import SwiftyJSON
 
 class WeddingApi {
+    func startWedding(userId: String) -> AnyPublisher<Bool, Error> {
+        Future { promise in
+            
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/start-wedding")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.httpMethod = "POST"
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            let body: [String: Any] = [
+                "userUID": userId
+            ]
+            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        if json["success"].boolValue {
+                            promise(.success(true))
+                        } else {
+                            promise(.success(false))
+                        }
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
+        }.eraseToAnyPublisher()
+    }
+    
     func getWeddings(userId: String) -> AnyPublisher<[Wedding], Error> {
         Future { promise in
             promise(.success(weddingsMocked))
