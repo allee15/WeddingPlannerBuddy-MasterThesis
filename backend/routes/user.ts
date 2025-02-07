@@ -3,6 +3,6 @@ import * as UserController from '../controllers/userController';
 
 const router = Express.Router();
 
-router.post("/api/user", UserController.getUser);
+router.get("/api/user", UserController.getUser);
 
 export default router;
