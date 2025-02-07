@@ -84,6 +84,7 @@ class UserService {
         return self.firebaseService.register(email: email, password: password)
             .flatMap { token in
                 self.authToken = token
+                let _ = self.userApi.sendUser(email: email, token: token)
                 return self.getUser()
             }
             .handleEvents(receiveOutput: { [weak self] user in

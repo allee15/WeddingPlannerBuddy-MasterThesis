@@ -19,5 +19,5 @@ const GuestSchema = new Schema({
     }
 })
 
-export const Guest = mongoose.model("guest", GuestSchema)
+export const Guest = mongoose.model("Guest", GuestSchema)
 

@@ -10,10 +10,6 @@ const UserSchema = new Schema({
         type: Schema.Types.String,
         required: true
     },
-    token: {
-        type: Schema.Types.String,
-        required: true
-    },
     email: {
         type: Schema.Types.String,
         required: true,
