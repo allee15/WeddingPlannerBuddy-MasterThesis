@@ -67,8 +67,10 @@ class UserApi {
                     do {
                         let json = try JSON(data: data!)
                         let firstJson = json.array?.first
-                        let user = JSONParsers.parseJsonUser(json: firstJson!)
-                        promise(.success(user))
+                        if let firstJson = firstJson {
+                            let user = JSONParsers.parseJsonUser(json: firstJson)
+                            promise(.success(user))
+                        }
                     } catch {
                         promise(.failure(error))
                     }
