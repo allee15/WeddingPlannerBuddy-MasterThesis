@@ -4,13 +4,12 @@ import * as admin from "firebase-admin";
 
 export const getUser = async (req: Request, res: Response): Promise<any> => {
     const token = req.header("authorization")?.split(" ")[1];
-    console.log("Token", token);
+    
     if (!token) {
       return res.status(401).send("Unauthorized");
     }
     try {
-        const decodedToken = await admin.auth().verifyIdToken(token);
-        const user = await User.find({ userUID: decodedToken.uid }).select("userUID");
+        const user = await User.find({ userUID: token });//.populate("tablesAtWedding").populate("otherWeddings").populate("guests");
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -22,4 +21,15 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
         console.log("Error in getUser controller", error);
         return res.status(500).json({ error: "Internal Server Error" })
     }
-  };
+};
+
+export const registerUser = async (req: Request, res: Response): Promise<any> => {
+    const {email, token} = req.body;
+    try {
+        const user = await User.create({ email: email, userUID: token });
+        return res.status(201).json(true);
+    } catch (error) {
+        console.log("Error in registerUser controller", error);
+        return res.status(500).json({ error: "Internal Server Error" })
+    }
+};

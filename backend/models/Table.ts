@@ -1,25 +1,24 @@
 import mongoose from "mongoose";
-import { Guest } from "./Guest";
 
 const Schema = mongoose.Schema;
 
-const CGPointSchema = new Schema({
-    x: { type: Number, required: true },
-    y: { type: Number, required: true }
-});
-
-const TableSchema = new Schema({
+const tableSchema = new Schema({
     tableUID: {
         type: Schema.Types.String,
         required: true
     },
     position: {
-        type: CGPointSchema,
-        required: true
+        type: {
+            x: { type: Number, required: true },
+            y: { type: Number, required: true }  
+        },
+        required: true,
+        default: { x: 0, y: 0 }
     },
     label: {
         type: Schema.Types.String,
-        required: true
+        required: true,
+        default: ""
     },
     participants: [{
         type: Schema.Types.ObjectId,
@@ -32,4 +31,4 @@ const TableSchema = new Schema({
     }
 })
 
-export const Table = mongoose.model("table", TableSchema)
+export const Table = mongoose.model("Table", tableSchema)

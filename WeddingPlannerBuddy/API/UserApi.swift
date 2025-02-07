@@ -10,6 +10,42 @@ import Combine
 import SwiftyJSON
 
 class UserApi {
+    func sendUser(email: String, token: String) -> AnyPublisher<Bool, Error> {
+        Future { promise in
+            
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/user/register-user")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.httpMethod = "POST"
+            
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            let body: [String: Any] = [
+                "email": email,
+                "token": token
+            ]
+            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        if json["success"].boolValue {
+                            promise(.success(true))
+                        } else {
+                            promise(.success(false))
+                        }
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
+        }.eraseToAnyPublisher()
+    }
+    
     func getUser() -> AnyPublisher<User, Error> {
         Future { promise in
             

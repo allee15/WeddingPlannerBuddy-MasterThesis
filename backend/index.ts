@@ -7,11 +7,13 @@ import userRoutes from './routes/user';
 import { createDatabaseConnection } from './configs/db';
 import * as admin from "firebase-admin";
 
+const firebaseCertificate = require("./weddingplannerbuddy-firebase-adminsdk-bajjl-5027c2ca42.json");
+
 const app = express()
 dotenv.config({ path: "./.env"})
 
 admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+  credential: admin.credential.cert(firebaseCertificate),
   databaseURL: "https://weddingplannerbuddy.firebaseio.com"
 });
 
