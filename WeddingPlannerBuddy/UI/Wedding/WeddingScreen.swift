@@ -132,6 +132,13 @@ struct WeddingScreen: View {
                 case .showRatingModal:
                     if let windowScene = UIApplication.shared.windows.first?.windowScene { SKStoreReviewController.requestReview(in: windowScene)
                     }
+                case .errorCreatingWedding:
+                    let modal = ModalChooseOptionView(title: "Error",
+                                          description: "An error has occured. Please try again.",
+                                                      topButtonText: "Try again") {
+                        navigation.dismissModal(animated: true, completion: nil)
+                    }
+                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 }
             }
     }

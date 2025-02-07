@@ -212,7 +212,7 @@ const WeddingDetailsSchema = new Schema({
     },
     date: {
         type: Schema.Types.String,
-        required: true
+        default: ""
     },
     weddingDress: {
         type: WeddingDressSchema

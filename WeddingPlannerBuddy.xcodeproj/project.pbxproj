@@ -118,8 +118,6 @@
 		0FDE16B12D1AEADA00C1580E /* OtherWeddingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B02D1AEADA00C1580E /* OtherWeddingsViewModel.swift */; };
 		0FDE16B62D1B10ED00C1580E /* GuestsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B52D1B10ED00C1580E /* GuestsListViewModel.swift */; };
 		0FDE16B82D1B13D000C1580E /* ChooseFolderBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B72D1B13D000C1580E /* ChooseFolderBottomSheetView.swift */; };
-		0FDE16BA2D1B338000C1580E /* GuestsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16B92D1B338000C1580E /* GuestsService.swift */; };
-		0FDE16BC2D1B33B900C1580E /* GuestsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */; };
 		0FDE16BE2D1B349B00C1580E /* TablesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BD2D1B349B00C1580E /* TablesApi.swift */; };
 		0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16BF2D1B34A500C1580E /* TablesService.swift */; };
 		0FDE16CB2D1DD8FF00C1580E /* Wedding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16CA2D1DD8FF00C1580E /* Wedding.swift */; };
@@ -280,8 +278,6 @@
 		0FDE16B02D1AEADA00C1580E /* OtherWeddingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherWeddingsViewModel.swift; sourceTree = "<group>"; };
 		0FDE16B52D1B10ED00C1580E /* GuestsListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsListViewModel.swift; sourceTree = "<group>"; };
 		0FDE16B72D1B13D000C1580E /* ChooseFolderBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseFolderBottomSheetView.swift; sourceTree = "<group>"; };
-		0FDE16B92D1B338000C1580E /* GuestsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsService.swift; sourceTree = "<group>"; };
-		0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestsApi.swift; sourceTree = "<group>"; };
 		0FDE16BD2D1B349B00C1580E /* TablesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesApi.swift; sourceTree = "<group>"; };
 		0FDE16BF2D1B34A500C1580E /* TablesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablesService.swift; sourceTree = "<group>"; };
 		0FDE16CA2D1DD8FF00C1580E /* Wedding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wedding.swift; sourceTree = "<group>"; };
@@ -451,7 +447,6 @@
 				0F24D5DD2CC1B5A200A833E1 /* UserDefaultsService.swift */,
 				0F24D6092CC298D700A833E1 /* UserService.swift */,
 				0FE5156F2D0320EB00CA9601 /* FirebaseService.swift */,
-				0FDE16B92D1B338000C1580E /* GuestsService.swift */,
 				0FDE16BF2D1B34A500C1580E /* TablesService.swift */,
 				0FDE16CE2D1DE70700C1580E /* WeddingService.swift */,
 				0F40D6B02D48D60E0020D433 /* WeatherService.swift */,
@@ -467,7 +462,6 @@
 				0F327EDD2CDE48CB00EDF536 /* ApiEnvironment.swift */,
 				0F24D6032CC2978600A833E1 /* JSONParsers.swift */,
 				0F24D6072CC2986C00A833E1 /* UserApi.swift */,
-				0FDE16BB2D1B33B900C1580E /* GuestsApi.swift */,
 				0FDE16BD2D1B349B00C1580E /* TablesApi.swift */,
 				0FDE16CC2D1DE43B00C1580E /* WeddingApi.swift */,
 				0F40D6AE2D48D5F80020D433 /* WeatherApi.swift */,
@@ -1019,7 +1013,6 @@
 				0FDE16B62D1B10ED00C1580E /* GuestsListViewModel.swift in Sources */,
 				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
 				0FDE16852D08478F00C1580E /* TablesPlanScreen.swift in Sources */,
-				0FDE16BA2D1B338000C1580E /* GuestsService.swift in Sources */,
 				0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */,
 				0F572F6C2D4C2614003FD5E9 /* WeddingCakeViewModel.swift in Sources */,
 				0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */,
@@ -1059,7 +1052,6 @@
 				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
 				0F572F482D4C25F8003FD5E9 /* GroomSuitScreen.swift in Sources */,
 				0FDE168D2D09D51300C1580E /* AddParticipantViewModel.swift in Sources */,
-				0FDE16BC2D1B33B900C1580E /* GuestsApi.swift in Sources */,
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
 				0FE515482CFF9C7B00CA9601 /* WeddingViewModel.swift in Sources */,
 				0F572F4D2D4C25F9003FD5E9 /* ChurchCeremonyScreen.swift in Sources */,

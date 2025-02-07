@@ -16,11 +16,11 @@ enum WeddingDetailsState {
 
 enum WeddingEvent {
     case showRatingModal
+    case errorCreatingWedding
 }
 
 class WeddingViewModel: BaseViewModel {
     private var userService = UserService.shared
-    private var guestsService = GuestsService.shared
     private let weddingService = WeddingService.shared
     private let userDefaultsService = UserDefaultsService.shared
     
@@ -61,10 +61,17 @@ class WeddingViewModel: BaseViewModel {
     }
     
     func startWedding() {
-        guestsService.startWedding()
+        guard let user = user else {return}
+        weddingService.startWedding(userId: user.id)
             .receive(on: DispatchQueue.main)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                guard let self else { return }
+                switch completion {
+                case .failure(_):
+                    self.eventSubject.send(.errorCreatingWedding)
+                case .finished:
+                    break
+                }
             } receiveValue: { [weak self] result in
                 guard let self else {return}
                 if result {
@@ -74,6 +81,8 @@ class WeddingViewModel: BaseViewModel {
                         self.eventSubject.send(.showRatingModal)
                         userDefaultsService.setShowRateModal(hasShownRateModal: true)
                     }
+                } else {
+                    self.eventSubject.send(.errorCreatingWedding)
                 }
             }.store(in: &bag)
     }
