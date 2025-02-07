@@ -3,7 +3,8 @@ import { User } from "../models/User";
 import * as admin from "firebase-admin";
 
 export const getUser = async (req: Request, res: Response): Promise<any> => {
-    const token = (req.headers["Authorization"] as string)?.split(" ")[1];
+    const token = req.header("authorization")?.split(" ")[1];
+    console.log("Token", token);
     if (!token) {
       return res.status(401).send("Unauthorized");
     }
