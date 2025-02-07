@@ -10,7 +10,7 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
     }
     try {
         const decodedToken = await admin.auth().verifyIdToken(token);
-        const user = await User.findById(decodedToken.uid).select("userUID");
+        const user = await User.find({ userUID: decodedToken.uid }).select("userUID");
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
