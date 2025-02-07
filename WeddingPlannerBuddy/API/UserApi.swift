@@ -17,12 +17,10 @@ class UserApi {
             
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
-            urlRequest.httpMethod = "POST"
+            urlRequest.httpMethod = "GET"
             
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                let body: [String: Any] = ["token": token]
-                urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
             
