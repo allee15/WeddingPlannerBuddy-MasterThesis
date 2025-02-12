@@ -33,7 +33,6 @@ class WeddingViewModel: BaseViewModel {
     override init() {
         super.init()
         self.getUserInfo()
-        self.getWeddingDetails()
     }
     
     private func getUserInfo() {
@@ -55,6 +54,9 @@ class WeddingViewModel: BaseViewModel {
                         self.user = nil
                     case .loggedIn(let user):
                         self.user = user
+                        if user.hasActiveWedding {
+                            self.getWeddingDetails(userId: user.id)
+                        }
                     }
                 }
             }).store(in: &bag)
@@ -76,7 +78,7 @@ class WeddingViewModel: BaseViewModel {
                 guard let self else {return}
                 if result {
                     userService.userReactiveData.reload()
-                    self.getWeddingDetails()
+                    self.getWeddingDetails(userId: user.id)
                     if !userDefaultsService.getShowRateModalStatus() {
                         self.eventSubject.send(.showRatingModal)
                         userDefaultsService.setShowRateModal(hasShownRateModal: true)
@@ -87,9 +89,10 @@ class WeddingViewModel: BaseViewModel {
             }.store(in: &bag)
     }
     
-    func getWeddingDetails() {
+    func getWeddingDetails(userId: String) {
         self.weddingDetailsState = .loading
-        self.weddingService.getWeddingDetails()
+        self.weddingService.getWeddingDetails(userId: userId)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
                 case .failure(_):

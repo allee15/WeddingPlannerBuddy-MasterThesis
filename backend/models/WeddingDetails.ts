@@ -8,19 +8,24 @@ const WeddingDressSchema = new Schema({
         required: true
     },
     link: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     price: {
         type: Schema.Types.Int32,
         default: 0
     },
     photo: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     description: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }
 });
+
+export const WeddingDress = mongoose.model("weddingDress", WeddingDressSchema)
 
 const BouquetSchema = new Schema({
     bouquetUUID: {
@@ -28,19 +33,24 @@ const BouquetSchema = new Schema({
         required: true
     },
     link: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     price: {
         type: Schema.Types.Int32,
         default: 0
     },
     photo: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     description: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }
 });
+
+export const Bouquet = mongoose.model("bouquet", BouquetSchema)
 
 const GroomSuitSchema = new Schema({
     groomSuitUUID: {
@@ -48,19 +58,24 @@ const GroomSuitSchema = new Schema({
         required: true
     },
     link: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     price: {
         type: Schema.Types.Int32,
         default: 0
     },
     photo: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     description: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }
 });
+
+export const GroomSuit = mongoose.model("groomSuit", GroomSuitSchema)
 
 const ChurchCeremonySchema = new Schema({
     churchCeremonyUUID: {
@@ -68,21 +83,28 @@ const ChurchCeremonySchema = new Schema({
         required: true
     },
     churchAddress: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     date: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     hour: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     preotName: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     price: {
-        type: Schema.Types.Int32
+        type: Schema.Types.Int32,
+        default: 0
     }
 });
+
+export const ChurchCeremony = mongoose.model("churchCeremony", ChurchCeremonySchema)
 
 const PartyLocationSchema = new Schema({
     partyLocationUUID: {
@@ -90,21 +112,28 @@ const PartyLocationSchema = new Schema({
         required: true
     },
     partyAddress: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     date: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     hour: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     decorationsOrganizerDetails: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     price: {
-        type: Schema.Types.Int32
+        type: Schema.Types.Int32,
+        default: 0
     }
 });
+
+export const PartyLocation = mongoose.model("partyLocation", PartyLocationSchema)
 
 const CivilMarriageSchema = new Schema({
     civilMarriageUUID: {
@@ -112,15 +141,20 @@ const CivilMarriageSchema = new Schema({
         required: true
     },
     address: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     date: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     hour: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }
 });
+
+export const CivilMarriage = mongoose.model("civilMarriage", CivilMarriageSchema)
 
 const FoodMenuSchema = new Schema({
     foodMenuUUID: {
@@ -128,21 +162,28 @@ const FoodMenuSchema = new Schema({
         required: true
     },
     antreu: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     firstCourse: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     mainCourse: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     secondMainCourse: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     price: {
-        type: Schema.Types.Int32
+        type: Schema.Types.Int32,
+        default: 0
     }
 });
+
+export const FoodMenu = mongoose.model("foodMenu", FoodMenuSchema)
 
 const BarMenuSchema = new Schema({
     barMenuUUID: {
@@ -150,21 +191,28 @@ const BarMenuSchema = new Schema({
         required: true
     },
     alcoholic: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     nonalcoholic: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     coffee: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     juice: [{
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     }],
     price: {
-        type: Schema.Types.Int32
+        type: Schema.Types.Int32,
+        default: 0
     }
 });
+
+export const BarMenu = mongoose.model("barMenu", BarMenuSchema)
 
 const WeddingCakeSchema = new Schema({
     weddingCakeUUID: {
@@ -172,18 +220,24 @@ const WeddingCakeSchema = new Schema({
         required: true
     },
     name: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     photo: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     description: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     price: {
-        type: Schema.Types.Int32
+        type: Schema.Types.Int32,
+        default: 0
     }
 });
+
+export const WeddingCake = mongoose.model("weddingCake", WeddingCakeSchema)
 
 const LiveBandSchema = new Schema({
     liveBandUUID: {
@@ -191,19 +245,25 @@ const LiveBandSchema = new Schema({
         required: true
     },
     name: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     price: {
-        type: Schema.Types.Int32
+        type: Schema.Types.Int32,
+        default: 0
     },
     hour: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     details: {
-        type: Schema.Types.String
+        type: Schema.Types.String,
+        default: ""
     },
     
 });
+
+export const LiveBand = mongoose.model("liveBand", LiveBandSchema)
 
 const WeddingDetailsSchema = new Schema({
     weddingDetailsUUID: {
@@ -215,34 +275,44 @@ const WeddingDetailsSchema = new Schema({
         default: ""
     },
     weddingDress: {
-        type: WeddingDressSchema
+        type: Schema.Types.ObjectId,
+        ref: 'weddingDress'
     },
     bouquet: {
-        type: BouquetSchema
+        type: Schema.Types.ObjectId,
+        ref: 'bouquet'
     },
     groomSuit: {
-        type: GroomSuitSchema
+        type: Schema.Types.ObjectId,
+        ref: 'groomSuit'
     },
     churchCeremony: {
-        type: ChurchCeremonySchema
+        type: Schema.Types.ObjectId,
+        ref: 'churchCeremony'
     },
     partyLocation: {
-        type: PartyLocationSchema
+        type: Schema.Types.ObjectId,
+        ref: 'partyLocation'
     },
     civilMarriage: {
-        type: CivilMarriageSchema
+        type: Schema.Types.ObjectId,
+        ref: 'civilMarriage'
     },
     foodMenu: {
-        type: FoodMenuSchema
+        type: Schema.Types.ObjectId,
+        ref: 'foodMenu'
     },
     barMenu: {
-        type: BarMenuSchema
+        type: Schema.Types.ObjectId,
+        ref: 'barMenu'
     },
     weddingCake: {
-        type: WeddingCakeSchema
+        type: Schema.Types.ObjectId,
+        ref: 'weddingCake'
     },
     liveBand: {
-        type: LiveBandSchema
+        type: Schema.Types.ObjectId,
+        ref: 'liveBand'
     }
 })
 
