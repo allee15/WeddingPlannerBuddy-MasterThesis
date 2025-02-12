@@ -29,8 +29,8 @@ class WeddingService {
             .eraseToAnyPublisher()
     }
     
-    func getWeddingDetails() -> AnyPublisher<WeddingDetails, Error> {
-        return weddingApi.getWeddingDetails()
+    func getWeddingDetails(userId: String) -> AnyPublisher<WeddingDetails, Error> {
+        return weddingApi.getWeddingDetails(userId: userId)
             .eraseToAnyPublisher()
     }
     

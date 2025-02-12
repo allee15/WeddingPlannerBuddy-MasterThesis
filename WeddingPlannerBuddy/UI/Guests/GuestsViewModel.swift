@@ -106,7 +106,8 @@ class GuestsViewModel: BaseViewModel {
     }
     
     private func getWeddingDetails() {
-        self.weddingService.getWeddingDetails()
+        guard let user = user else {return}
+        self.weddingService.getWeddingDetails(userId: user.id)
             .sink { _ in
                 
             } receiveValue: { [weak self] weddingDetails in

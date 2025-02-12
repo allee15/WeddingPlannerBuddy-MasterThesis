@@ -53,7 +53,7 @@ struct WeddingScreen: View {
                                 }.padding(.horizontal, 16)
                                 
                                 MainButtonView(text: "Try again") {
-                                    viewModel.getWeddingDetails()
+                                    viewModel.getWeddingDetails(userId: user.id)
                                 }.padding(.horizontal, 16)
                                 
                             case .value(let weddingDetails):
