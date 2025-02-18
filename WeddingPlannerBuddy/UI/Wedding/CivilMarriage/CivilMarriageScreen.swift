@@ -17,11 +17,29 @@ struct CivilMarriageScreen: View {
                 navigation.pop(animated: true)
             }
            
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.civilMarriage.address)
-                }.padding(.top, 24)
-                    .padding(.horizontal, 16)
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    LoaderView()
+                    Spacer()
+                }.padding(.horizontal, 16)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(viewModel.civilMarriage.id)
+                        Button {
+                            let new = CivilMarriage(id: viewModel.civilMarriage.id,
+                                                    address: "cefsgdersfgfersfd",
+                                                    date: "12.23",
+                                                    hour: "12:45")
+                            viewModel.editCivilMarriage(new)
+                        } label: {
+                            Text("Edit")
+                        }
+                        Text(viewModel.civilMarriage.address)
+                    }.padding(.top, 24)
+                        .padding(.horizontal, 16)
+                }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

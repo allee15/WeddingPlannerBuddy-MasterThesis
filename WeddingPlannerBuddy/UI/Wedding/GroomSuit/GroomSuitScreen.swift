@@ -17,11 +17,30 @@ struct GroomSuitScreen: View {
                 navigation.pop(animated: true)
             }
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.groomSuit.description)
-                }.padding(.top, 24)
-                    .padding(.horizontal, 16)
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    LoaderView()
+                    Spacer()
+                }.padding(.horizontal, 16)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(viewModel.groomSuit.id)
+                        Button {
+                            let new = GroomSuit(id: viewModel.groomSuit.id,
+                                                link: "",
+                                                price: 34,
+                                                photo: "",
+                                                description: "fergsrtfedghevtfsd")
+                            viewModel.editGroomSuit(new)
+                        } label: {
+                            Text("Edit")
+                        }
+                        Text(viewModel.groomSuit.description)
+                    }.padding(.top, 24)
+                        .padding(.horizontal, 16)
+                }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

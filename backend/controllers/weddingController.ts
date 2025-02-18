@@ -98,7 +98,7 @@ export const updateWeddingDress = async (req: Request, res: Response): Promise<a
         weddingDress.description = description;
 
         await weddingDress.save();
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ weddingDress });
     } catch (error) {
         console.log("Error in updateWeddingDress controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -122,7 +122,7 @@ export const updateBouquet = async (req: Request, res: Response): Promise<any> =
         bouquet.description = description;
         await bouquet.save();
 
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ bouquet });
     } catch (error) {
         console.log("Error in updateBouquet controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -146,7 +146,7 @@ export const updateGroomSuit = async (req: Request, res: Response): Promise<any>
         groomSuit.description = description;
         await groomSuit.save();
 
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ groomSuit });
     } catch (error) {
         console.log("Error in updateGroomSuit controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -171,7 +171,7 @@ export const updateChurchCeremony = async (req: Request, res: Response): Promise
         churchCeremony.price = price;
         await churchCeremony.save();
         
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ churchCeremony });
     } catch (error) {
         console.log("Error in updateChurchCeremony controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -196,7 +196,7 @@ export const updatePartyLocation = async (req: Request, res: Response): Promise<
         partyLocation.price = price;
         await partyLocation.save();
 
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ partyLocation });
     } catch (error) {
         console.log("Error in updatePartyLocation controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -219,7 +219,7 @@ export const updateCivilMarriage = async (req: Request, res: Response): Promise<
         civilMarriage.hour = hour;
         await civilMarriage.save();
         
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ civilMarriage });
     } catch(error) {
         console.log("Error in updateCivilMarriage controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -244,7 +244,7 @@ export const updateFoodMenu = async (req: Request, res: Response): Promise<any> 
         foodMenu.price = price;
         await foodMenu.save();
 
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ foodMenu });
     } catch (error) {
         console.log("Error in updateFoodMenu controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -269,7 +269,7 @@ export const updateBarMenu = async (req: Request, res: Response): Promise<any> =
         barMenu.price = price;
         await barMenu.save();
 
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ barMenu });
     } catch (error) {
         console.log("Error in updateBarMenu controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -293,7 +293,7 @@ export const updateWeddingCake = async (req: Request, res: Response): Promise<an
         weddingCake.price = price;
         await weddingCake.save();
        
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ weddingCake });
     } catch (error) {
         console.log("Error in updateWeddingCake controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
@@ -317,7 +317,7 @@ export const updateLiveBand = async (req: Request, res: Response): Promise<any> 
         liveBand.details = details;
         await liveBand.save();
        
-        return res.status(200).json({ success: true });
+        return res.status(200).json({ liveBand });
     } catch (error) {
         console.log("Error in updateLiveBand controller", error);
         return res.status(500).json({ error: "Internal Server Error" });

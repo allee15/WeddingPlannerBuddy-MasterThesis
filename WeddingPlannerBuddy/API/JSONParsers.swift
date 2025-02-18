@@ -63,31 +63,31 @@ class JSONParsers {
     }
     
     static func parseJsonWeddingDress(json: JSON) -> WeddingDress {
-        return WeddingDress(id: json["_id"].stringValue,
+        return WeddingDress(id: json["weddingDressUUID"].stringValue,
                             link: json["link"].stringValue,
                             price: json["price"].intValue,
-                            photo: json["imageUrl"].stringValue,
+                            photo: json["photo"].stringValue,
                             description: json["description"].stringValue)
     }
     
     static func parseJsonBouquet(json: JSON) -> Bouquet {
-        return Bouquet(id: json["_id"].stringValue,
+        return Bouquet(id: json["bouquetUUID"].stringValue,
                        link: json["link"].stringValue,
                        price: json["price"].intValue,
-                       photo: json["imageUrl"].stringValue,
+                       photo: json["photo"].stringValue,
                        description: json["description"].stringValue)
     }
     
     static func parseJsonGroomSuit(json: JSON) -> GroomSuit {
-        return GroomSuit(id: json["_id"].stringValue,
+        return GroomSuit(id: json["groomSuitUUID"].stringValue,
                          link: json["link"].stringValue,
                          price: json["price"].intValue,
-                         photo: json["imageUrl"].stringValue,
+                         photo: json["photo"].stringValue,
                          description: json["description"].stringValue)
     }
     
     static func parseJsonChurchCeremony(json: JSON) -> ChurchCeremony {
-        return ChurchCeremony(id: json["_id"].stringValue,
+        return ChurchCeremony(id: json["churchCeremonyUUID"].stringValue,
                               churchAddress: json["churchAddress"].stringValue,
                               date: json["date"].stringValue,
                               hour: json["hour"].stringValue,
@@ -96,7 +96,7 @@ class JSONParsers {
     }
     
     static func parseJsonPartyLocation(json: JSON) -> PartyLocation {
-        return PartyLocation(id: json["_id"].stringValue,
+        return PartyLocation(id: json["partyLocationUUID"].stringValue,
                              partyAddress: json["partyAddress"].stringValue,
                              date: json["date"].stringValue,
                              hour: json["hour"].stringValue,
@@ -105,14 +105,14 @@ class JSONParsers {
     }
     
     static func parseJsonCivilMarriage(json: JSON) -> CivilMarriage {
-        return CivilMarriage(id: json["_id"].stringValue,
+        return CivilMarriage(id: json["civilMarriageUUID"].stringValue,
                              address: json["address"].stringValue,
                              date: json["date"].stringValue,
                              hour: json["hour"].stringValue)
     }
     
     static func parseJsonFoodMenu(json: JSON) -> FoodMenu {
-        return FoodMenu(id: json["_id"].stringValue,
+        return FoodMenu(id: json["foodMenuUUID"].stringValue,
                         antreu: json["antreu"].arrayValue.map({ subJson in
             return subJson[""].stringValue
         }),
@@ -129,7 +129,7 @@ class JSONParsers {
     }
     
     static func parseJsonBarMenu(json: JSON) -> BarMenu {
-        return BarMenu(id: json["_id"].stringValue,
+        return BarMenu(id: json["barMenuUUID"].stringValue,
                        alcoholic: json["alcoholic"].arrayValue.map({ subJson in
             return subJson[""].stringValue
         }),
@@ -146,15 +146,15 @@ class JSONParsers {
     }
     
     static func parseJsonWeddingCake(json: JSON) -> WeddingCake {
-        return WeddingCake(id: json["_id"].stringValue,
+        return WeddingCake(id: json["weddingCakeUUID"].stringValue,
                            name: json["name"].stringValue,
-                           photo: json["imageUrl"].stringValue,
+                           photo: json["photo"].stringValue,
                            description: json["description"].stringValue,
                            price: json["price"].intValue)
     }
     
     static func parseJsonLiveBand(json: JSON) -> LiveBand {
-        return LiveBand(id: json["_id"].stringValue,
+        return LiveBand(id: json["liveBandUUID"].stringValue,
                         name: json["name"].stringValue,
                         price: json["price"].intValue,
                         hour: json["hour"].stringValue,
