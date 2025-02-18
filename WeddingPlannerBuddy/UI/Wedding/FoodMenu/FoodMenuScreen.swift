@@ -17,11 +17,31 @@ struct FoodMenuScreen: View {
                 navigation.pop(animated: true)
             }
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.foodMenu.antreu[0])
-                }.padding(.top, 24)
-                    .padding(.horizontal, 16)
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    LoaderView()
+                    Spacer()
+                }.padding(.horizontal, 16)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(viewModel.foodMenu.id)
+                        Button {
+                            let new = FoodMenu(id: viewModel.foodMenu.id,
+                                               antreu: ["Antreu 1"],
+                                               firstCourse: ["fwfswr"],
+                                               mainCourse: ["ferwsdfs"],
+                                               secondMainCourse: ["dfssdf"],
+                                               price: 34)
+                            viewModel.editFoodMenu(new)
+                        } label: {
+                            Text("Edit")
+                        }
+                        Text(viewModel.foodMenu.antreu[0])
+                    }.padding(.top, 24)
+                        .padding(.horizontal, 16)
+                }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

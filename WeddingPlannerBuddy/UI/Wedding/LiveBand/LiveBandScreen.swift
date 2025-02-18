@@ -17,11 +17,30 @@ struct LiveBandScreen: View {
                 navigation.pop(animated: true)
             }
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.liveBand.details)
-                }.padding(.top, 24)
-                    .padding(.horizontal, 16)
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    LoaderView()
+                    Spacer()
+                }.padding(.horizontal, 16)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(viewModel.liveBand.id)
+                        Button {
+                            let new = LiveBand(id: viewModel.liveBand.id,
+                                               name: "cerfsdfg",
+                                               price: 34,
+                                               hour: "34:45",
+                                               details: "ferwsdfcdersdf")
+                            viewModel.editLiveBand(new)
+                        } label: {
+                            Text("Edit")
+                        }
+                        Text(viewModel.liveBand.details)
+                    }.padding(.top, 24)
+                        .padding(.horizontal, 16)
+                }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

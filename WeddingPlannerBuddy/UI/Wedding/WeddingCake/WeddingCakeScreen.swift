@@ -17,11 +17,30 @@ struct WeddingCakeScreen: View {
                 navigation.pop(animated: true)
             }
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.weddingCake.description)
-                }.padding(.top, 24)
-                    .padding(.horizontal, 16)
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    LoaderView()
+                    Spacer()
+                }.padding(.horizontal, 16)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(viewModel.weddingCake.id)
+                        Button {
+                            let new = WeddingCake(id: viewModel.weddingCake.id,
+                                                  name: "vredfsf",
+                                                  photo: "",
+                                                  description: "fesdfewsdc",
+                                                  price: 45)
+                            viewModel.editWeddingCake(new)
+                        } label: {
+                            Text("Edit")
+                        }
+                        Text(viewModel.weddingCake.description)
+                    }.padding(.top, 24)
+                        .padding(.horizontal, 16)
+                }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

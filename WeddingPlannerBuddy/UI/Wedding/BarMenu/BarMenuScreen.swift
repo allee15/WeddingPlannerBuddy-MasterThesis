@@ -17,11 +17,31 @@ struct BarMenuScreen: View {
                 navigation.pop(animated: true)
             }
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text(viewModel.barMenu.nonalcoholic[0])
-                }.padding(.top, 24)
-                    .padding(.horizontal, 16)
+            if viewModel.isLoading {
+                HStack {
+                    Spacer()
+                    LoaderView()
+                    Spacer()
+                }.padding(.horizontal, 16)
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text(viewModel.barMenu.id)
+                        Button {
+                            let new = BarMenu(id: viewModel.barMenu.id,
+                                              alcoholic: ["ewdsfer"],
+                                              nonalcoholic: ["fsdersdfc"],
+                                              coffee: ["fersdf"],
+                                              juice: ["fersdf"],
+                                              price: 34)
+                            viewModel.editBarMenu(new)
+                        } label: {
+                            Text("Edit")
+                        }
+                        Text(viewModel.barMenu.nonalcoholic[0])
+                    }.padding(.top, 24)
+                        .padding(.horizontal, 16)
+                }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
