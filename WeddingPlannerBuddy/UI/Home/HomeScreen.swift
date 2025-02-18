@@ -159,14 +159,14 @@ struct HomeScreen: View {
                             
                             if weather.predictions.count == 1 {
                                 WeatherCardView(prediction: weather.predictions[0]) {
-                                    //TODO open wedding tab with the date and location selected
+                                    viewModel.startWedding()
                                 }.padding(.horizontal, 16)
                             } else {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 12) {
                                         ForEach(weather.predictions, id: \.id) { prediction in
                                             WeatherCardView(prediction: prediction) {
-                                                //TODO open wedding tab with the date and location selected
+                                                viewModel.startWedding()
                                             }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
                                         }
                                     }.padding(.horizontal, 16)
@@ -207,14 +207,14 @@ struct HomeScreen: View {
                         
                         if weather.predictions.count == 1 {
                             WeatherCardView(prediction: weather.predictions[0]) {
-                                //TODO open wedding tab with the date and location selected
+                                viewModel.startWedding()
                             }.padding(.horizontal, 16)
                         } else {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 12) {
                                     ForEach(weather.predictions, id: \.id) { prediction in
                                         WeatherCardView(prediction: prediction) {
-                                            //TODO open wedding tab with the date and location selected
+                                            viewModel.startWedding()
                                         }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
                                     }
                                 }.padding(.horizontal, 16)
