@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const GuestSchema = new Schema({
+    guestUUID: {
+        type: Schema.Types.String,
+        required: true
+    },
     tableUID: {
         type: Schema.Types.String,
         required: true

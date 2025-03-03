@@ -32,6 +32,10 @@ const UserSchema = new Schema({
     guests: [{
         type: Schema.Types.ObjectId,
         ref: 'Guest'
+    }],
+    weddings: [{
+        type: Schema.Types.ObjectId,
+        ref: 'wedding'
     }]
 })
 

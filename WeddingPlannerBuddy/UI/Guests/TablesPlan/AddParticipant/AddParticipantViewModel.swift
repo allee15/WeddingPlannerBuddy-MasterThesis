@@ -20,11 +20,19 @@ enum ProfileField {
 
 class AddParticipantViewModel: BaseViewModel {
     private var tablesService = TablesService.shared
+    private var userService = UserService.shared
     
     @Published var name: String = ""
     @Published var email: String = ""
+    var userId: String
+    var tableId: String
     
     let eventSubject = PassthroughSubject<AddParticipantEvent, Never>()
+    
+    init(userId: String, tableId: String) {
+        self.userId = userId
+        self.tableId = tableId
+    }
     
     func hasChanges() -> Bool {
         return !name.isEmpty && !email.isEmpty && email.isValidEmail()
@@ -32,7 +40,7 @@ class AddParticipantViewModel: BaseViewModel {
     
     func addParticipant() {
         let guest = Guest(id: UUID().uuidString, name: name, email: email)
-        tablesService.addParticipant(participant: guest)
+        tablesService.addParticipant(participant: guest, userId: userId, tableUUID: tableId)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
@@ -42,6 +50,7 @@ class AddParticipantViewModel: BaseViewModel {
             } receiveValue: { [weak self] result in
                 guard let self else {return}
                 if result {
+                    userService.userReactiveData.reload()
                     eventSubject.send(.completed)
                 } else {
                     eventSubject.send(.error)

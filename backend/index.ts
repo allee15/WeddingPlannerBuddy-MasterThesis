@@ -5,6 +5,7 @@ import cors from 'cors'
 
 import userRoutes from './routes/user';
 import weddingRoutes from './routes/wedding';
+import tableRoutes from './routes/table';
 import { createDatabaseConnection } from './configs/db';
 import * as admin from "firebase-admin";
 
@@ -24,6 +25,7 @@ app.set("trust proxy", true)
 
 app.use(userRoutes);
 app.use(weddingRoutes);
+app.use(tableRoutes);
 
 createDatabaseConnection().then(() => {
     app.listen(8000, () => {

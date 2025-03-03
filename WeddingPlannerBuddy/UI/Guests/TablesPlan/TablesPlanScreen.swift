@@ -11,6 +11,7 @@ struct TablesPlanScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: TablesPlanViewModel
     @State var showBottomSheet: Bool = false
+    @State var tableId: String = ""
     
     var body: some View {
         VStack(spacing: 0) {
@@ -26,13 +27,15 @@ struct TablesPlanScreen: View {
                                                       description: viewModel.getTableNames(table: table),
                                                       topButtonText: "Add participant",
                                                       bottomButtonText: "Close") {
+                        tableId = table.id
                         showBottomSheet = true
                     } onBottomButtonTapped: {
                         navigation.dismissModal(animated: true, completion: nil)
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 }.sheet(isPresented: $showBottomSheet) {
-                    AddParticipantScreen(showBottomSheet: $showBottomSheet)
+                    let vm = AddParticipantViewModel(userId: viewModel.userId, tableId: tableId)
+                    AddParticipantScreen(viewModel: vm, showBottomSheet: $showBottomSheet)
                 }
             }
             

@@ -8,7 +8,11 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
       return res.status(401).send("Unauthorized");
     }
     try {
-        const user = await User.find({ userUID: token });//.populate("tablesAtWedding").populate("otherWeddings").populate("guests");
+        const user = await User.find({ userUID: token })
+        .populate("tablesAtWedding")
+       // .populate("otherWeddings")
+        .populate("guests");
+       // .populate("weddings");
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });
@@ -25,7 +29,13 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
 export const registerUser = async (req: Request, res: Response): Promise<any> => {
     const {email, token} = req.body;
     try {
-        const user = await User.create({ email: email, userUID: token });
+        const user = await User.create({ 
+            email: email, 
+            userUID: token, 
+            tablesAtWedding: [], 
+            guests: [],
+            otherWeddings: [],
+            weddings: [] });
         return res.status(201).json({success: true });
     } catch (error) {
         console.log("Error in registerUser controller", error);

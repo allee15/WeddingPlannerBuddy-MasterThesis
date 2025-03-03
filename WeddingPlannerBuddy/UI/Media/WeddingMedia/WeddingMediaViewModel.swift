@@ -16,6 +16,7 @@ enum AddImageCompletion {
 }
 
 class WeddingMediaViewModel: BaseViewModel {
+    private let userService = UserService.shared
     private let weddingService = WeddingService.shared
     private let userDefaultsService = UserDefaultsService.shared
     @Published var wedding: Wedding?
@@ -27,25 +28,24 @@ class WeddingMediaViewModel: BaseViewModel {
     }
     
     func addImage(image: UIImage?) {
-        weddingService.addImage(image: image)
+        guard let image = image, let wedding = wedding else {return}
+        
+        weddingService.addImage(wedding: wedding, image: image)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
                 if case .failure(_) = completion {
-//                    self.wedding?.images.removeAll { $0.id == newTable.id }
                     self.eventSubject.send(.failed)
                 }
             } receiveValue: { [weak self] result in
                 guard let self else {return}
-//                if let index = self.wedding?.images.firstIndex(where: { $0.id == newTable.label }) {
-//                    self.tables[index] = result
-//                }
                 if result {
                     self.eventSubject.send(.added)
                     if !userDefaultsService.getShowRateModalStatus() {
                         self.eventSubject.send(.showRateModal)
                         userDefaultsService.setShowRateModal(hasShownRateModal: true)
                     }
+                    userService.userReactiveData.reload()
                 } else {
                     self.eventSubject.send(.failed)
                 }

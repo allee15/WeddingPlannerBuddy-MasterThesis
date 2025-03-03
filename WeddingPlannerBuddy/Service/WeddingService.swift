@@ -19,13 +19,8 @@ class WeddingService {
             .eraseToAnyPublisher()
     }
     
-    func getWeddings(userId: String) -> AnyPublisher<[Wedding], Error> {
-        return weddingApi.getWeddings(userId: userId)
-            .eraseToAnyPublisher()
-    }
-    
-    func addImage(image: UIImage?) -> AnyPublisher<Bool, Error> {
-        return weddingApi.addImage(image: image)
+    func addImage(wedding: Wedding, image: UIImage) -> AnyPublisher<Bool, Error> {
+        return weddingApi.addImage(wedding: wedding, image: image)
             .eraseToAnyPublisher()
     }
     
