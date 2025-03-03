@@ -10,7 +10,7 @@ import SwiftUI
 struct AddParticipantScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @FocusState var focusedField: ProfileField?
-    @StateObject private var viewModel = AddParticipantViewModel()
+    @StateObject var viewModel: AddParticipantViewModel
     @Binding var showBottomSheet: Bool
     
     var body: some View {

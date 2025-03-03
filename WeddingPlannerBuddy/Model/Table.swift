@@ -8,7 +8,7 @@
 import Foundation
 
 struct Table: Identifiable {
-    let id = UUID()
+    var id: String
     var position: CGPoint
     var label: String
     var participants: [Guest]

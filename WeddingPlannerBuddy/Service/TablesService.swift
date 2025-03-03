@@ -13,17 +13,18 @@ class TablesService {
     private let tablesApi = TablesApi()
     var bag = Set<AnyCancellable>()
     
-    func addTable(table: Table) -> AnyPublisher<Bool, Error> {
-        return tablesApi.addTable(table: table)
+    func addTable(table: Table, userId: String) -> AnyPublisher<Bool, Error> {
+        return tablesApi.addTable(table: table, userId: userId)
             .eraseToAnyPublisher()
     }
     
-    func addRectangle(table: Table) -> AnyPublisher<Bool, Error> {
-        return tablesApi.addRectangle(table: table)
+    func addRectangle(table: Table, userId: String) -> AnyPublisher<Bool, Error> {
+        return tablesApi.addRectangle(table: table, userId: userId)
             .eraseToAnyPublisher()
     }
     
-    func addParticipant(participant: Guest) -> AnyPublisher<Bool, Error> {
-        return tablesApi.addParticipant(participant: participant)
+    func addParticipant(participant: Guest, userId: String, tableUUID: String) -> AnyPublisher<Bool, Error> {
+        return tablesApi.addParticipant(participant: participant, userId: userId, tableId: tableUUID)
+            .eraseToAnyPublisher()
     }
 }

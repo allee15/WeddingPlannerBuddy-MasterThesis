@@ -17,11 +17,14 @@ enum TablesCompletion {
 
 class TablesPlanViewModel: BaseViewModel {
     private var tablesService = TablesService.shared
+    private var userService = UserService.shared
     @Published var tables: [Table]
+    var userId: String
     
     let eventSubject = PassthroughSubject<TablesCompletion, Never>()
     
-    init(tables: [Table]) {
+    init(userId: String, tables: [Table]) {
+        self.userId = userId
         self.tables = tables
     }
     
@@ -36,12 +39,13 @@ class TablesPlanViewModel: BaseViewModel {
     }
     
     func addTable() {
-        let newTable = Table(position: CGPoint(x: Double.random(in: 0.1...0.9), y: Double.random(in: 0.1...0.8)),
+        let newTable = Table(id: "\(UUID())",
+                             position: CGPoint(x: Double.random(in: 0.1...0.9), y: Double.random(in: 0.1...0.8)),
                              label: "Table \(getTableNumber() + 1)",
                              participants: [])
         tables.append(newTable)
         
-        tablesService.addTable(table: newTable)
+        tablesService.addTable(table: newTable, userId: userId)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
@@ -51,11 +55,12 @@ class TablesPlanViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] result in
                 guard let self else {return}
-//                if let index = self.tables.firstIndex(where: { $0.label == newTable.label }) {
-//                    self.tables[index] = result
-//                }
                 if result {
+                    if let index = self.tables.firstIndex(where: { $0.label == newTable.label }) {
+                        self.tables[index] = newTable
+                    }
                     self.eventSubject.send(.tableAdded)
+                    userService.userReactiveData.reload()
                 } else {
                     self.eventSubject.send(.failed)
                 }
@@ -63,13 +68,14 @@ class TablesPlanViewModel: BaseViewModel {
     }
     
     func addRectangle() {
-        let newTable = Table(position: CGPoint(x: Double.random(in: 0.1...0.9), y: Double.random(in: 0.1...0.8)),
+        let newTable = Table(id: "\(UUID())",
+                             position: CGPoint(x: Double.random(in: 0.1...0.9), y: Double.random(in: 0.1...0.8)),
                              label: "Object",
                              participants: [],
                              isObject: true)
         tables.append(newTable)
         
-        tablesService.addTable(table: newTable)
+        tablesService.addRectangle(table: newTable, userId: userId)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
@@ -79,11 +85,12 @@ class TablesPlanViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] result in
                 guard let self else {return}
-//                if let index = self.tables.firstIndex(where: { $0.label == newTable.label }) {
-//                    self.tables[index] = result
-//                }
                 if result {
+                    if let index = self.tables.firstIndex(where: { $0.label == newTable.label }) {
+                        self.tables[index] = newTable
+                    }
                     self.eventSubject.send(.rectangleAdded)
+                    userService.userReactiveData.reload()
                 } else {
                     self.eventSubject.send(.failed)
                 }

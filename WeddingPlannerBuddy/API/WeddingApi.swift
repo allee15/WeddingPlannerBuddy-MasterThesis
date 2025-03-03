@@ -50,15 +50,62 @@ class WeddingApi {
         }.eraseToAnyPublisher()
     }
     
-    func getWeddings(userId: String) -> AnyPublisher<[Wedding], Error> {
+    func addImage(wedding: Wedding, image: UIImage) -> AnyPublisher<Bool, Error> {
         Future { promise in
-            promise(.success(weddingsMocked))
-        }.eraseToAnyPublisher()
-    }
-    
-    func addImage(image: UIImage?) -> AnyPublisher<Bool, Error> {
-        Future { promise in
-            promise(.success(true))
+            
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/add-image")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.httpMethod = "POST"
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            let boundary = "Boundary-\(UUID().uuidString)"
+            urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+            
+            var body = Data()
+            
+            if let weddingData = try? JSONEncoder().encode(wedding) {
+                let weddingJSON = String(data: weddingData, encoding: .utf8) ?? ""
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"wedding\"\r\n".data(using: .utf8)!)
+                body.append("Content-Type: application/json\r\n\r\n".data(using: .utf8)!)
+                body.append("\(weddingJSON)\r\n".data(using: .utf8)!)
+            }
+            
+            let imageData = image.jpegData(compressionQuality: 0.8)!
+            let fileName = "wedding_image.jpg"
+            
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
+            body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+            body.append(imageData)
+            body.append("\r\n".data(using: .utf8)!)
+            
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            
+            urlRequest.httpBody = body
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        if json["success"].boolValue {
+                            promise(.success(true))
+                        } else {
+                            promise(.success(false))
+                        }
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
         }.eraseToAnyPublisher()
     }
     

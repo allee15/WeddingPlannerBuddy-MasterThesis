@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Wedding {
+struct Wedding: Codable {
     let id: String
     let name: String
     let date: String

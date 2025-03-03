@@ -21,6 +21,9 @@ class JSONParsers {
         }) ?? [],
                     guests: json["guests"].array?.map({ subJson in
             parseJsonGuest(json: subJson)
+        }) ?? [],
+                    weddings: json["weddings"].array?.map({ subJson in
+            parseJsonWedding(json: subJson)
         }) ?? [])
     }
     
@@ -38,13 +41,22 @@ class JSONParsers {
     }
     
     static func parseJsonTables(json: JSON) -> Table {
-        return Table(position: CGPoint(x: json["x"].intValue,
-                                       y: json["y"].intValue),
+        return Table(id: json["tableUID"].stringValue,
+                     position: CGPoint(x: json["position"]["x"].intValue,
+                                       y: json["position"]["y"].intValue),
                      label: json["label"].stringValue,
                      participants: json["participants"].arrayValue.map({ subJson in
             parseJsonGuest(json: subJson)
         }),
                      isObject: json["isObject"].boolValue)
+    }
+    
+    static func parseJsonWedding(json: JSON) -> Wedding {
+        return Wedding(id: json["weddingUUID"].stringValue,
+                       name: json["name"].stringValue,
+                       date: json["date"].stringValue,
+                       location: json["location"].stringValue,
+                       images: json["images"].array?.compactMap({ $0.stringValue }) ?? [])
     }
     
     static func parseJsonWeddingDetails(json: JSON) -> WeddingDetails {

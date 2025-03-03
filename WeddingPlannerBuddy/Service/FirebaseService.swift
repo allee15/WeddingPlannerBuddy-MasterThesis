@@ -34,16 +34,17 @@ class FirebaseService {
                     promise(.failure(FirebaseError.login))
                     return
                 }
-                result.user.getIDToken { token, error in
-                    if let error {
-                        promise(.failure(error))
-                    }
-                    guard let token else {
-                        promise(.failure(FirebaseError.login))
-                        return
-                    }
-                    promise(.success(token))
-                }
+                promise(.success(result.user.uid))
+//                result.user.getIDToken { token, error in
+//                    if let error {
+//                        promise(.failure(error))
+//                    }
+//                    guard let token else {
+//                        promise(.failure(FirebaseError.login))
+//                        return
+//                    }
+//                    promise(.success(token))
+//                }
             }
         }
         .eraseToAnyPublisher()
@@ -59,17 +60,18 @@ class FirebaseService {
                         promise(.failure(FirebaseError.login))
                         return
                     }
-                    result.user.getIDToken { token, error in
-                        if let error {
-                            promise(.failure(error))
-                        } else {
-                            guard let token else {
-                                promise(.failure(FirebaseError.login))
-                                return
-                            }
-                            promise(.success(token))
-                        }
-                    }
+                    promise(.success(result.user.uid))
+//                    result.user.getIDToken { token, error in
+//                        if let error {
+//                            promise(.failure(error))
+//                        } else {
+//                            guard let token else {
+//                                promise(.failure(FirebaseError.login))
+//                                return
+//                            }
+//                            promise(.success(token))
+//                        }
+//                    }
                 }
             }
         }

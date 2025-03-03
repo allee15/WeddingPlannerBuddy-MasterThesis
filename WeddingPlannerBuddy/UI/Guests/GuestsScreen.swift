@@ -42,7 +42,7 @@ struct GuestsScreen: View {
                             }.padding(.horizontal, 16)
                             
                             WidgetView(title: "Check tables plan", icon: .icTables) {
-                                let vm = TablesPlanViewModel(tables: user.tablesAtWedding)
+                                let vm = TablesPlanViewModel(userId: user.id, tables: user.tablesAtWedding)
                                 mainNavigation?.push(TablesPlanScreen(viewModel: vm).asDestination(), animated: true)
                             }
                             

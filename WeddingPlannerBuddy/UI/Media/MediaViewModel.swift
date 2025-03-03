@@ -18,13 +18,12 @@ class MediaViewModel: BaseViewModel {
     private var weddingService = WeddingService.shared
     private var userService = UserService.shared
     
-    @Published var weddingsState = WeddigsState.value(weddingsMocked) 
+    @Published var weddingsState = WeddigsState.loading
     @Published var user: User?
     
     override init() {
         super.init()
         self.getUserInfo()
-        self.getWeddings()
     }
     
     private func getUserInfo() {
@@ -35,7 +34,8 @@ class MediaViewModel: BaseViewModel {
             }, receiveValue: { [weak self] userState in
                 guard let self = self else { return }
                 switch userState {
-                case .failure(_):
+                case .failure(let error):
+                    weddingsState = .failure(error)
                     break
                 case .loading:
                     break
@@ -43,29 +43,12 @@ class MediaViewModel: BaseViewModel {
                     switch userState {
                     case .anonymous:
                         self.user = nil
+                        self.weddingsState = .value([])
                     case .loggedIn(let user):
                         self.user = user
+                        self.weddingsState = .value(user.weddings)
                     }
                 }
             }).store(in: &bag)
-    }
-    
-    func getWeddings() {
-        guard let user = user else {return}
-        weddingsState = .loading
-        weddingService.getWeddings(userId: user.id)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                guard let self else {return}
-                switch completion {
-                case .failure(let error):
-                    self.weddingsState = .failure(error)
-                case .finished:
-                    break
-                }
-            } receiveValue: { [weak self] weddings in
-                guard let self else {return}
-                self.weddingsState = .value(weddings)
-            }.store(in: &bag)
     }
 }
