@@ -24,4 +24,4 @@ const WeddingSchema = new Schema({
     }
 })
 
-export const Wedding = mongoose.model("wedding", WeddingSchema)
+export const Wedding = mongoose.model("Wedding", WeddingSchema)
