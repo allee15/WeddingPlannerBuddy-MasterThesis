@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
+import { Wedding } from "../models/Wedding";
+import { WeddingGuest } from "../models/WeddingGuest";
 
 export const getUser = async (req: Request, res: Response): Promise<any> => {
     const token = req.header("authorization")?.split(" ")[1];
@@ -8,11 +10,13 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
       return res.status(401).send("Unauthorized");
     }
     try {
+        Wedding.exists({});
+        WeddingGuest.exists({});
         const user = await User.find({ userUID: token })
         .populate("tablesAtWedding")
-       // .populate("otherWeddings")
-        .populate("guests");
-       // .populate("weddings");
+        .populate("otherWeddings")
+        .populate("guests")
+        .populate("weddings");
 
         if (!user) {
             return res.status(404).json({ error: "User not found" });

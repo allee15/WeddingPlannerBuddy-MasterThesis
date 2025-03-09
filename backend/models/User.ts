@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Table } from "./Table";
 import { Guest } from "./Guest";
 import { WeddingGuest } from "./WeddingGuest";
-
+import { Wedding } from "./Wedding";
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -35,8 +35,8 @@ const UserSchema = new Schema({
     }],
     weddings: [{
         type: Schema.Types.ObjectId,
-        ref: 'wedding'
+        ref: 'Wedding'
     }]
 })
 
-export const User = mongoose.model("user", UserSchema)
+export const User = mongoose.model("User", UserSchema)
