@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: fixme
 struct BarMenuScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: BarMenuViewModel

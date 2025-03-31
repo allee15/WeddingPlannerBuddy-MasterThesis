@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: fixme
 struct RegisterScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject private var viewModel = RegisterViewModel()

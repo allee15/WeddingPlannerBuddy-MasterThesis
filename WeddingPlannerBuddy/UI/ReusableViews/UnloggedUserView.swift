@@ -8,26 +8,30 @@
 import SwiftUI
 
 struct UnloggedUserView: View {
-    @EnvironmentObject private var navigation: Navigation
     private let mainNavigation = EnvironmentObjects.navigation
     
     var body: some View {
-        VStack(spacing: 48) {
+        VStack(spacing: 20) {
             Spacer()
-            Text("Please login to enjoy the full experience of ArtistsLand app!")
+            Text("You're not logged in.")
                 .foregroundColor(.black)
-                .font(.poppinsRegular(size: 16))
+                .font(.quicksandSemiBold(size: 20))
                 .multilineTextAlignment(.center)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 16)
+            
+            Text("Sign in to access your wedding plans\nand details.")
+                .foregroundColor(.black)
+                .font(.quicksandRegular(size: 16))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 16)
             
             Spacer()
-            
-            ClearButton(text: "Enter in your account") {
-                mainNavigation?.push(HomeScreen().asDestination(), animated: true)
-            }.padding(.bottom, 20)
-                .padding(.horizontal, 20)
-            
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.mainWhite)
+            .safeAreaInset(edge: .bottom) {
+                MainButtonView(text: "Login") {
+                    mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                }.padding([.bottom, .horizontal], 16)
+            }
     }
 }

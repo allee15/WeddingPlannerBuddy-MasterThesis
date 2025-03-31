@@ -20,7 +20,7 @@ struct CloseButton: View {
                 .resizable()
                 .renderingMode(.template)
                 .foregroundStyle(Color.mainBlack)
-                .frame(width: 32, height: 32)
+                .frame(width: 24, height: 24)
         }
     }
 }

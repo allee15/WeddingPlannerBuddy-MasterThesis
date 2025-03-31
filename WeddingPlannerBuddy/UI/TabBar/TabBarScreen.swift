@@ -12,7 +12,6 @@ enum TabBarNavigation {
     case wedding
     case guests
     case media
-    case profile
 }
 
 class TabBarCoordinator: ObservableObject {
@@ -31,7 +30,6 @@ struct TabBarScreen: View {
     @StateObject private var weddingNavigation = Navigation(root: WeddingScreen().asDestination())
     @StateObject private var guestsNavigation = Navigation(root: GuestsScreen().asDestination())
     @StateObject private var mediaNavigation = Navigation(root: MediaScreen().asDestination())
-    @StateObject private var profileNavigation = Navigation(root: ProfileScreen().asDestination())
    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -47,8 +45,6 @@ struct TabBarScreen: View {
                             NavigationHostView(navigation: guestsNavigation)
                         case .media:
                             NavigationHostView(navigation: mediaNavigation)
-                        case .profile:
-                            NavigationHostView(navigation: profileNavigation)
                         }
                     }.frame(width: proxy.size.width, height: proxy.size.height)
                 }.onReceive(viewModel.$selectedTabItem) { newValue in
@@ -56,7 +52,6 @@ struct TabBarScreen: View {
                     weddingNavigation.popToRoot(animated: false)
                     guestsNavigation.popToRoot(animated: false)
                     mediaNavigation.popToRoot(animated: false)
-                    profileNavigation.popToRoot(animated: false)
                     self.viewModel.oldSelectedTab = newValue
                 }.onReceive(tabBarCoordinator.$tabBarNavigation, perform: { value in
                     if let value {
@@ -81,11 +76,6 @@ struct TabBarScreen: View {
                                 viewModel.selectedTabItem = .media
                             }
                             mediaNavigation.popToRoot(animated: true)
-                        case .profile:
-                            if viewModel.selectedTabItem != .profile {
-                                viewModel.selectedTabItem = .profile
-                            }
-                            profileNavigation.popToRoot(animated: true)
                         }
                     }
                 })
@@ -102,6 +92,6 @@ struct TabBarScreen: View {
             .background(Color.mainWhite)
             .ignoresSafeArea(.container)
             .ignoresSafeArea(.keyboard)
-            .shadow(color: Color.mainBlack.opacity(0.2), radius: 1, x: 0, y: 0)
+            .shadow(color: Color.mainBlack.opacity(0.2), radius: 1, x: 0, y: -1)
     }
 }

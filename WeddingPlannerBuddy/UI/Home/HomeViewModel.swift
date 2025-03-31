@@ -41,25 +41,28 @@ class HomeViewModel: BaseViewModel {
     @Published var user: User?
     
     let eventSubject = PassthroughSubject<StartWeddingEvent, Never>()
-    let weddingCard: HomeCard = HomeCard(title: "Start your wedding plans!",
-                                         description: "We provide a wide range of tools to help you plan your dream wedding",
-                                         image: .icTerms)
-    let tablesCard: HomeCard = HomeCard(title: "Create the party's schema",
-                                         description: "Find the best seat for every person that will attend your wedding",
-                                         image: .icTerms)
-    let mediaCard: HomeCard = HomeCard(title: "Keep all memories in one place",
-                                       description: "You and your guests can add photos made during the wedding in the same place",
-                                       image: .icTerms)
+    let weddingCard: HomeCard = HomeCard(title: "Plan Your Big Day",
+                                         description: "Keep track of all your wedding details in one place.",
+                                         image: .imgHomecard1,
+                                         buttonText: "View Details")
+    let tablesCard: HomeCard = HomeCard(title: "Manage Your Guest List",
+                                         description: "Organize seating, track RSVPs, and create the perfect arrangement.",
+                                         image: .imgHomecard2,
+                                        buttonText: "View Guests")
+    let mediaCard: HomeCard = HomeCard(title: "Capture the Memories",
+                                       description: "Upload and browse wedding photos from your special day and others you attend.",
+                                       image: .imgHomecard3,
+                                       buttonText: "View Media")
     
     override init() {
         super.init()
         self.getUserInfo()
         locationManager.checkLocationAuthorization()
-        
-        locationManager.$lastKnownLocation.sink { [weak self] location in
-            guard let self else {return}
-            self.getInitialWeather()
-        }.store(in: &bag)
+        self.getInitialWeather()
+//        locationManager.$lastKnownLocation.sink { [weak self] location in
+//            guard let self else {return}
+//            self.getInitialWeather()
+//        }.store(in: &bag)
     }
     
     private func getUserInfo() {

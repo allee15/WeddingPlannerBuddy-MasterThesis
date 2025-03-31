@@ -24,7 +24,7 @@ struct BackButton: View {
                 .resizable()
                 .renderingMode(.template)
                 .foregroundStyle(imageColor)
-                .frame(width: 32, height: 32)
+                .frame(width: 24, height: 24)
         }
     }
 }

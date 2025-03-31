@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeScreen: View {
-    @EnvironmentObject private var navigation: Navigation
+    private let mainNavigation = EnvironmentObjects.navigation
     @StateObject private var viewModel = HomeViewModel()
     
     @State var showDatePicker: Bool = false
@@ -17,37 +17,52 @@ struct HomeScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Home", hasBackButton: false) { }
+            FullNavBarView(title: "Home",
+                           hasBackButton: false,
+                           rightButtonIcon: .icMenu) {
+                
+            } rightButtonAction: {
+                mainNavigation?.push(ProfileScreen().asDestination(), animated: true)
+            }
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("Pick the perfect wedding day! 🌤️💍")
+                            .font(.quicksandBold(size: 18))
+                            .foregroundStyle(Color.mainBlack)
+                            .multilineTextAlignment(.leading)
+                        
+                        Text("Select a fixed date or a time range, and we’ll provide weather predictions to help you plan with confidence.")
+                            .font(.quicksandMedium(size: 16))
+                            .foregroundStyle(Color.mainBlack)
+                            .multilineTextAlignment(.leading)
+                    }.padding(.horizontal, 16)
+                    
+                    HStack(spacing: 13) {
+                        PeriodOfTimeFilterButtonView(text: "Anytime",
+                                                     dateType: .anytime,
+                                                     selectedDateType: viewModel.selectedDateType) {
+                            viewModel.selectedDateType = .anytime
+                        }
+                        
+                        PeriodOfTimeFilterButtonView(text: "One day",
+                                                    dateType: .singleDate,
+                                                    selectedDateType: viewModel.selectedDateType) {
+                            viewModel.selectedDateType = .singleDate
+                        }
+                        
+                        PeriodOfTimeFilterButtonView(text: "A period",
+                                                    dateType: .periodOfTime,
+                                                    selectedDateType: viewModel.selectedDateType) {
+                            viewModel.selectedDateType = .periodOfTime
+                        }
+                        
+                        Spacer()
+                    }.padding(.horizontal, 16)
                     
                     switch viewModel.weatherState {
                     case .notStarted:
-                        HStack {
-                            Text("Select a day or a period of time in order to get weather recommendations for your current location. Note that you can get recommendations for other locations when your start planning your wedding!")
-                                .foregroundStyle(Color.mainBlack)
-                                .font(.poppinsRegular(size: 16))
-                                .multilineTextAlignment(.leading)
-                            
-                            Spacer()
-                        }.padding(.horizontal, 16)
-                        
-                        HStack(spacing: 8) {
-                            PeriodOfTimeFilterButtonView(text: "One day",
-                                                        dateType: .singleDate,
-                                                        selectedDateType: viewModel.selectedDateType) {
-                                viewModel.selectedDateType = .singleDate
-                            }
-                            
-                            PeriodOfTimeFilterButtonView(text: "Period of time",
-                                                        dateType: .periodOfTime,
-                                                        selectedDateType: viewModel.selectedDateType) {
-                                viewModel.selectedDateType = .periodOfTime
-                            }
-                            
-                            Spacer()
-                        }.padding(.horizontal, 16)
                         
                         if viewModel.selectedDateType == .singleDate {
                             VStack(spacing: 0) {
@@ -56,17 +71,17 @@ struct HomeScreen: View {
                                     date: $viewModel.currentDate,
                                     singleDateSelected: viewModel.currentDate) {
                                         showDatePicker = true
-                                    }.background(Color(hex: "#F7F7F8"))
+                                    }.background(Color.nudePrimary.opacity(0.5))
                                     .cornerRadius(8, corners: [.topLeft, .topRight])
                                     .padding(.top, 16)
                                 
-                                DividerView()
+                                DividerView(color: Color.nudePrimary)
                                 
                                 DatePicker("", selection: $viewModel.currentDate,
                                            in: (Date())..., displayedComponents: .date)
                                     .datePickerStyle(WheelDatePickerStyle())
-                                    .accentColor(Color.mainPink)
-                                    .background(Color(hex: "#F7F7F8"))
+                                    .accentColor(Color.greenSecondary)
+                                    .background(Color.nudePrimary.opacity(0.35))
                                     .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
                             }.padding(.horizontal, 16)
                             
@@ -75,11 +90,10 @@ struct HomeScreen: View {
                             }.padding(.horizontal, 16)
                         }
                         
-                        
                         if viewModel.selectedDateType == .periodOfTime {
                             VStack(spacing: 0) {
                                 DateView(
-                                    placeHolder: "Start date",
+                                    placeHolder: "From date",
                                     date: $viewModel.startDate,
                                     selectedStartDate: viewModel.startDate) {
                                         withAnimation {
@@ -87,23 +101,23 @@ struct HomeScreen: View {
                                             showEndDate = false
                                         }
                                     }
-                                    .background(Color(hex: "#F7F7F8"))
+                                    .background(Color.nudePrimary.opacity(0.5))
                                     .cornerRadius(8, corners: [.topLeft, .topRight])
                                 
                                 if showStartDate == true {
-                                    DividerView()
+                                    DividerView(color: Color.nudePrimary)
                                     
                                     DatePicker("", selection: $viewModel.startDate, in: (Date())..., displayedComponents: .date)
                                         .datePickerStyle(WheelDatePickerStyle())
-                                        .accentColor(Color.mainPink)
-                                        .background(Color(hex: "#F7F7F8"))
+                                        .accentColor(Color.greenSecondary)
+                                        .background(Color.nudePrimary.opacity(0.35))
                                         .transition(.opacity)
                                 }
                                 
-                                DividerView()
+                                DividerView(color: Color.nudePrimary)
                                 
                                 DateView(
-                                    placeHolder: "End date",
+                                    placeHolder: "To date",
                                     date: $viewModel.endDate,
                                     selectedEndDate: viewModel.endDate) {
                                         withAnimation {
@@ -111,24 +125,20 @@ struct HomeScreen: View {
                                             showStartDate = false
                                         }
                                     }
-                                    .background(Color(hex: "#F7F7F8"))
+                                    .background(Color.nudePrimary.opacity(0.5))
                                     .cornerRadius(8, corners: showStartDate == true ? [.bottomLeft, .bottomRight] : [])
                                 
                                 if showEndDate == true {
-                                    DividerView()
+                                    DividerView(color: Color.nudePrimary)
                                     
                                     DatePicker("", selection: $viewModel.endDate, in: viewModel.startDate..., displayedComponents: .date)
                                         .datePickerStyle(WheelDatePickerStyle())
-                                        .accentColor(Color.mainPink)
-                                        .background(Color(hex: "#F7F7F8"))
+                                        .accentColor(Color.greenSecondary)
+                                        .background(Color.nudePrimary.opacity(0.35))
                                         .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
                                         .transition(.opacity)
                                 }
-                            }
-                            .background(Color(hex: "#F7F7F8"))
-                            .cornerRadius(8, corners: .allCorners)
-                            .padding(.top, 16)
-                            .padding(.horizontal, 16)
+                            }.padding(.horizontal, 16)
                             
                             MainButtonView(text: "Get recommendations") {
                                 viewModel.getRecommendations()
@@ -141,22 +151,14 @@ struct HomeScreen: View {
                         case .loading:
                             HStack {
                                 Spacer()
-                                LoaderView()
+                                LoaderView(height: 40, width: 40)
                                 Spacer()
                             }.padding(.horizontal, 16)
                             
                         case .failure:
                             EmptyView()
-                        case .value(let weather):
-                            HStack {
-                                Text("Here is a list of predictions for the next days:")
-                                    .foregroundStyle(Color.mainBlack)
-                                    .font(.poppinsRegular(size: 16))
-                                    .multilineTextAlignment(.leading)
-                                
-                                Spacer()
-                            }.padding(.horizontal, 16)
                             
+                        case .value(let weather):
                             if weather.predictions.count == 1 {
                                 WeatherCardView(prediction: weather.predictions[0]) {
                                     viewModel.startWedding()
@@ -177,15 +179,15 @@ struct HomeScreen: View {
                     case .loading:
                         HStack {
                             Spacer()
-                            LoaderView()
+                            LoaderView(height: 40, width: 40)
                             Spacer()
                         }.padding(.horizontal, 16)
                         
                     case .failure:
                         HStack {
                             Text("An error has occured, please try again.")
+                                .font(.quicksandMedium(size: 16))
                                 .foregroundStyle(Color.mainBlack)
-                                .font(.poppinsRegular(size: 16))
                                 .multilineTextAlignment(.leading)
                             
                             Spacer()
@@ -196,15 +198,6 @@ struct HomeScreen: View {
                         }.padding(.horizontal, 16)
                         
                     case .value(let weather):
-                        HStack {
-                            Text("Here is a list of predictions for the period that you've selected:")
-                                .foregroundStyle(Color.mainBlack)
-                                .font(.poppinsRegular(size: 16))
-                                .multilineTextAlignment(.leading)
-                            
-                            Spacer()
-                        }.padding(.horizontal, 16)
-                        
                         if weather.predictions.count == 1 {
                             WeatherCardView(prediction: weather.predictions[0]) {
                                 viewModel.startWedding()
@@ -237,7 +230,7 @@ struct HomeScreen: View {
                     HomeCardView(card: viewModel.mediaCard) {
                         TabBarCoordinator.instance.tabBarNavigation = .media
                     }
-                }.padding(.top, 20)
+                }.padding(.vertical, 20)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -250,48 +243,38 @@ fileprivate struct HomeCardView: View {
     let action: () -> ()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 8) {
             Text(card.title)
-                .font(.poppinsSemiBold(size: 18))
+                .font(.quicksandSemiBold(size: 18))
                 .foregroundStyle(Color.mainBlack)
                 .multilineTextAlignment(.leading)
-                .underline()
+                .padding([.top, .horizontal], 16)
             
             Text(card.description)
-                .font(.poppinsRegular(size: 16))
+                .font(.quicksandRegular(size: 14))
                 .foregroundStyle(Color.mainBlack)
                 .multilineTextAlignment(.leading)
+                .padding(.horizontal, 16)
             
-            Image(card.image)
-                .resizable()
-                .frame(maxWidth: .infinity)
-                .frame(height: 64)
-            
-            Button {
-                action()
-            } label: {
-                HStack(spacing: 8) {
-                    Text("Check it out")
-                        .font(.poppinsRegular(size: 16))
-                        .foregroundStyle(Color.mainBlack)
-                    
-                    Image(.icItemresultArrow)
-                        .resizable()
-                        .renderingMode(.template)
-                        .frame(width: 16, height: 16)
-                        .foregroundStyle(Color.mainBlack)
-                }
+            ZStack(alignment: .bottom) {
+                Image(card.image)
+                    .resizable()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 126)
+                
+                HStack {
+                    InvisibleButtonView(text: card.buttonText) {
+                        action()
+                    }.opacity(0)
+                    Spacer()
+                    InvisibleButtonView(text: card.buttonText) {
+                        action()
+                    }
+                }.padding([.horizontal, .bottom], 16)
             }
-        }.padding(.all, 20)
-            .borderWithShadow(borderColor: Color.mainBlack,
-                              width: 2,
-                              cornerRadius: 8,
-                              fillColor: Color.clear,
-                              shadowColor: Color.mainBlack.opacity(0.3),
-                              shadowRadius: 8,
-                              x: -3,
-                              y: 0)
-            .padding(.horizontal, 16)
+        }
+        .background(Color.greenSecondary.opacity(0.5))
+        .padding(.horizontal, 16)
     }
 }
 
@@ -306,14 +289,14 @@ fileprivate struct PeriodOfTimeFilterButtonView: View {
             onButtonTappedHandler()
         } label: {
             Text(text)
-                .font(.poppinsRegular(size: 16))
+                .font(.quicksandMedium(size: 16))
                 .foregroundStyle(Color.mainBlack)
-                .padding(.vertical, 10)
+                .padding(.vertical, 8)
                 .padding(.horizontal, 12)
-                .background(Color.gray.opacity(0.7))
+                .background(Color.nudePrimary.opacity(0.5))
                 .cornerRadius(8, corners: .allCorners)
-                .border(dateType == selectedDateType ? Color.mainPink : Color.gray.opacity(0.7),
-                        width: 1,
+                .border(dateType == selectedDateType ? Color.greenPrimary : Color.clear,
+                        width: 2,
                         cornerRadius: 8)
         }
     }
@@ -333,26 +316,26 @@ fileprivate struct DateView: View {
         } label: {
             HStack(spacing: 0) {
                 Text(placeHolder)
-                    .font(.poppinsRegular(size: 16))
+                    .font(.quicksandMedium(size: 16))
                     .foregroundStyle(Color.mainBlack)
                 
                 Spacer()
                 
-                if let selectedStartDate {
+                if selectedStartDate != nil {
                     Text(date.dateSheetToString())
-                        .font(.poppinsBold(size: 14))
-                        .foregroundStyle(Color.mainPink)
-                } else if let singleDateSelected {
+                        .font(.quicksandBold(size: 14))
+                        .foregroundStyle(Color.greenSecondary)
+                } else if singleDateSelected != nil {
                     Text(date.dateSheetToString())
-                        .font(.poppinsBold(size: 14))
-                        .foregroundStyle(Color.mainPink)
-                } else if let selectedEndDate {
+                        .font(.quicksandBold(size: 14))
+                        .foregroundStyle(Color.greenSecondary)
+                } else if selectedEndDate != nil {
                     Text(date.dateSheetToString())
-                        .font(.poppinsBold(size: 14))
-                        .foregroundStyle(Color.mainPink)
+                        .font(.quicksandBold(size: 14))
+                        .foregroundStyle(Color.greenSecondary)
                 }
             }.frame(maxWidth: .infinity)
-                .padding(.vertical, 16)
+                .padding(.vertical, 12)
                 .padding(.horizontal, 16)
         }
     }
@@ -365,35 +348,40 @@ fileprivate struct WeatherCardView: View {
     var body: some View {
         VStack(spacing: 0) {
             Text(prediction.date.remakeWeather())
-                .font(.poppinsRegular(size: 16))
+                .font(.quicksandSemiBold(size: 14))
                 .foregroundStyle(Color.mainBlack)
                 .multilineTextAlignment(.center)
-                .padding(.bottom, 16)
+                .padding(.bottom, 8)
             
             Text("\(String(format: "%.1f", prediction.minTemperature))°C - \(String(format: "%.1f", prediction.maxTemperature))°C")
-                .font(.poppinsSemiBold(size: 20))
+                .font(.quicksandRegular(size: 18))
                 .foregroundStyle(Color.mainBlack)
                 .padding(.bottom, 4)
             
-            Text("Precipitation probability: \(prediction.precipitationProbability)%")
-                .font(.poppinsRegular(size: 12))
-                .foregroundStyle(Color.mainBlack)
-                .multilineTextAlignment(.center)
-                .padding(.bottom, 12)
+            HStack(spacing: 4) {
+                Text("\(prediction.precipitationProbability)%")
+                    .font(.quicksandLight(size: 12))
+                    .foregroundStyle(Color.mainBlack)
+                    .multilineTextAlignment(.center)
+                    
+                Image(.icRain)
+                    .resizable()
+                    .frame(width: 6, height: 10)
+                    .foregroundStyle(Color.mainBlack)
+            }.padding(.bottom, 12)
             
             Image(systemName: weatherIcon(for: prediction.condition))
                 .resizable()
                 .scaledToFit()
-                .frame(width: 44, height: 44)
-                .foregroundStyle(Color.mainPink)
+                .frame(width: 60, height: 60)
+                .foregroundStyle(Color.mainBlack)
+                .padding(.bottom, 12)
             
-            MainButtonView(text: "Select") {
+            SecondaryButtonView(text: "Select") {
                 action()
-            }.padding(.top, 16)
-        }.padding(.all, 20)
-            .background(Color.gray.opacity(0.2))
-            .border(Color.gray.opacity(0.5), width: 1, cornerRadius: 8)
-            .padding(.bottom, 4)
+            }.padding(.top, 8)
+        }.padding(.all, 12)
+            .background(Color.nudePrimary.opacity(0.5))
     }
     
     func weatherIcon(for condition: String) -> String {
@@ -412,7 +400,6 @@ fileprivate struct WeatherCardView: View {
             
         default: 
             return "questionmark.circle"
-            
         }
     }
 }

@@ -20,15 +20,15 @@ class OnboardingViewModel: BaseViewModel {
     let eventSubject = PassthroughSubject<OnboardingState, Never>()
     
     let onboardingPages: [OnboardingData] = [
-        OnboardingData(image: .icHome,
-                       title: "Ultimate Planner Buddy",
-                       description: "Plan your dream wedding such as task lists, reminders, and more. Get suggestions based on weather conditions and your preferences!"),
-        OnboardingData(image: .icHome,
-                       title: "Organize your guests",
-                       description: "Create plans for each table, invite your guests to see it and be prepared for the big day!"),
-        OnboardingData(image: .icHome,
-                       title: "All photos in one place",
-                       description: "You and each guest can upload in app photos made at the wedding so that no photo will be lost!")
+        OnboardingData(image: .imgOnboarding1,
+                       title: "Wedding\nPlanner",
+                       description: "Plan your perfect day with ease!  Organize every detail and enjoy a stress-free process. Let us guide you towards a flawless experience!"),
+        OnboardingData(image: .imgOnboarding2,
+                       title: "Your story\nbegins here",
+                       description: "Every detail of your journey matters. Share your story with us, and let's make it unforgettable, together."),
+        OnboardingData(image: .imgOnboarding3,
+                       title: "All you need\nin one place",
+                       description: "Everything you need, right at your fingertips. Simplify your planning and stay organized, all in one place.")
     ]
     
     override init() {
@@ -38,7 +38,6 @@ class OnboardingViewModel: BaseViewModel {
     func nextPage() {
         if pageIndex == onboardingPages.count - 1 {
             self.userDefaultsService.setOnboarding(onboardingIsOver: true)
-            self.eventSubject.send(.completed)
         } else if pageIndex < onboardingPages.count - 1 {
             pageIndex += 1
         }
@@ -46,5 +45,11 @@ class OnboardingViewModel: BaseViewModel {
     
     func goToLogin() {
         self.userDefaultsService.setOnboarding(onboardingIsOver: true)
+        self.eventSubject.send(.completed)
+    }
+    
+    func goToTabBar() {
+        self.userDefaultsService.setOnboarding(onboardingIsOver: true)
+        self.eventSubject.send(.goToTabBar)
     }
 }

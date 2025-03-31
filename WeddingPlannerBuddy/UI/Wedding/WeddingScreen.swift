@@ -7,7 +7,7 @@
 
 import SwiftUI
 import StoreKit
-
+//TODO: fixme
 struct WeddingScreen: View {
     @EnvironmentObject private var navigation: Navigation
     private let mainNavigation = EnvironmentObjects.navigation
@@ -15,7 +15,7 @@ struct WeddingScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Guests list", hasBackButton: false) { }
+            LeftNavBarView(title: "Wedding list", hasBackButton: false) { }
             
             if viewModel.isLoading {
                 VStack {
@@ -115,14 +115,7 @@ struct WeddingScreen: View {
                     }
                 }
             } else {
-                HStack {
-                    Text("You have to log in in order to access the content of this tab.")
-                        .foregroundStyle(Color.mainBlack)
-                        .font(.poppinsRegular(size: 16))
-                    Spacer()
-                }.padding(.horizontal, 16)
-                    .padding(.top, 24)
-                Spacer()
+                UnloggedUserView()
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -9,8 +9,6 @@ import Foundation
 
 enum UserDefaultsKeys {
     static let hasOnboardingCompleted = "onboardingIsOver"
-    static let appTheme = "appTheme"
-    static let notificationsSubscribed = "notificationsSubscribed"
     static let token = Key<String>(value: "token")
     static let hasShownRateModal = "hasShownRateModal"
 }

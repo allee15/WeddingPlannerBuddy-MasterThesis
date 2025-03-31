@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: fixme
 struct GuestsListScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: GuestsListViewModel
@@ -59,7 +59,7 @@ fileprivate struct GuestLineView: View {
                     .foregroundStyle(Color.mainBlack)
                     .multilineTextAlignment(.leading)
                 
-                DividerView()
+                DividerView(color: Color.nudePrimary)
             }.padding(.horizontal, 16)
         }
     }

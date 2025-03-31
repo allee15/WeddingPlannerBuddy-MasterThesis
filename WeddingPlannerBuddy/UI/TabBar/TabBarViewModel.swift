@@ -22,8 +22,7 @@ class TabBarViewModel: ObservableObject {
             homeTabBarItem,
             weddingTabBarItem,
             guestsTabBarItem,
-            mediaTabBarItem,
-            profileNewsTabBarItem
+            mediaTabBarItem
         ]
     }
 }

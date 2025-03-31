@@ -12,94 +12,126 @@ struct OnboardingScreen: View {
     @EnvironmentObject private var navigation: Navigation
     
     var body: some View {
-        VStack(spacing: 16) {
-            TabView(selection: $viewModel.pageIndex) {
-                ForEach(0..<3) { index in
-                    OnboardingPageView(page: viewModel.onboardingPages[index])
-                }
-            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            
-            HStack {
-                Button {
-                    viewModel.goToLogin()
-                } label: {
-                    Text("SKIP")
-                        .font(.poppinsSemiBold(size: 14))
-                        .foregroundColor(Color.mainBlack)
-                        .lineLimit(1)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.all, 16)
-                }
-                
-                Spacer()
-                
-                NavSliderView(currentStep: viewModel.pageIndex) {
-                    viewModel.nextPage()
-                }
-                
-                Spacer()
-                
-                Button {
-                    viewModel.nextPage()
-                } label: {
-                    Text("NEXT")
-                        .font(.poppinsSemiBold(size: 14))
-                        .foregroundColor(Color.mainWhite)
-                        .lineLimit(1)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .padding(.all, 16)
-                        .background(Color.mainBlack)
-                        .cornerRadius(4, corners: .allCorners)
-                }
-            }.padding(.horizontal, 20)
-            
-            Spacer()
-        }.padding(.bottom, 32)
-            .background(Color.mainPink.opacity(0.3))
-            .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onReceive(viewModel.eventSubject) { event in
-                switch event {
-                case .completed:
-                    navigation.push(LoginScreen().asDestination(), animated: true)
-                case .goToTabBar:
-                    navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
-                    
+        ZStack {
+            if viewModel.pageIndex < 2 {
+                VStack {
+                    HStack {
+                        CloseButton()
+                        Spacer()
+                    }
+                    .padding(.horizontal, 16)
+                    Spacer()
                 }
             }
+            
+            TabView(selection: $viewModel.pageIndex) {
+                ForEach(0..<3) { index in
+                    OnboardingPageView(page: viewModel.onboardingPages[index],
+                                       index: index)
+                }
+            }
+            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            .ignoresSafeArea(.container, edges: [.bottom])
+            
+            VStack {
+                Spacer()
+                HStack {
+                    if viewModel.pageIndex == 2 {
+                        Button {
+                            viewModel.goToTabBar()
+                        } label: {
+                            Text("Skip")
+                                .font(.quicksandSemiBold(size: 16))
+                                .foregroundColor(Color.mainBlack)
+                                .lineLimit(1)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 12)
+                                .background(Color.greenSecondary)
+                                .padding(.bottom, 8)
+                        }
+                    }
+                    
+                    Spacer()
+                    
+                    NavSliderView(currentStep: viewModel.pageIndex) {
+                        viewModel.nextPage()
+                    }
+                    .padding(.bottom, 8)
+                    
+                    Spacer()
+                    
+                    if viewModel.pageIndex == 2 {
+                        Button {
+                            viewModel.goToLogin()
+                        } label: {
+                            Text("Login")
+                                .font(.quicksandSemiBold(size: 16))
+                                .foregroundColor(Color.mainBlack)
+                                .lineLimit(1)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .padding(.vertical, 8)
+                                .padding(.horizontal, 12)
+                                .background(Color.greenSecondary)
+                                .padding(.bottom, 8)
+                        }
+                    }
+                }
+                .padding(.horizontal, 40)
+            }
+        }
+        .background(Color.mainWhite)
+        .ignoresSafeArea(.container, edges: [.horizontal])
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .onReceive(viewModel.eventSubject) { event in
+            switch event {
+            case .completed:
+                navigation.push(LoginScreen().asDestination(), animated: true)
+            case .goToTabBar:
+                navigation.replaceNavigationStack([TabBarScreen().asDestination()], animated: true)
+                
+            }
+        }
     }
 }
 
 fileprivate struct OnboardingPageView: View {
     let page: OnboardingData
+    let index: Int
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .center, spacing: 20) {
-                HStack {
-                    Spacer()
-                    Image(page.image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: UIScreen.main.bounds.height / 2 )
-                        .cornerRadius(8, corners: .allCorners)
-                    Spacer()
+        VStack {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .center, spacing: 40) {
+                    Text(page.title)
+                        .font(.quicksandBold(size: 40))
+                        .foregroundStyle(Color.mainBlack)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 16)
+                    
+                    Text(page.description)
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.horizontal, 16)
                 }
+                .padding(.top, 24)
+            }
+            
+            ZStack(alignment: .bottom) {
+                Color.nudeSecondary
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: UIScreen.main.bounds.height / 3)
                 
-                Text(page.title)
-                    .font(.poppinsBold(size: 28))
-                    .foregroundStyle(Color.mainPink)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                Text(page.description)
-                    .font(.poppinsRegular(size: 14))
-                    .foregroundStyle(Color.mainPink)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
-                
-                Spacer()
-            }.padding(.horizontal, 20)
+                Image(page.image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: UIScreen.main.bounds.height / 2)
+                    .padding(.horizontal, 16)
+            }
+            .ignoresSafeArea(.container, edges: [.bottom])
         }
     }
 }
@@ -109,13 +141,13 @@ fileprivate struct NavSliderView: View {
     let buttonAction: () -> ()
     
     var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: 12) {
             ForEach(0..<3) { step in
                 Button {
                     buttonAction()
                 } label: {
                     Circle()
-                        .fill(step == currentStep ? Color.mainPink : Color.gray)
+                        .fill(step == currentStep ? Color.mainWhite : Color(hex: "#FFFCFC").opacity(0.6))
                         .frame(height: 12)
                         .aspectRatio(1, contentMode: .fit)
                 }

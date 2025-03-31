@@ -12,10 +12,10 @@ struct FloatingField: View {
     var placeHolder: String
     var secureField: Bool = false
     var keyboardType: UIKeyboardType = .default
-    var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.white, .black.opacity(0.5), .black)
+    var colors: (bgColor: Color, borderColor: Color, placeholderForeground: Color) = (.nudePrimary.opacity(0.35), .nudePrimary, .mainBlack)
     var icon: ImageResource?
     var leftIcon: ImageResource?
-    var leftIconHeight: CGFloat? = 28
+    var leftIconHeight: CGFloat? = 20
     var errorMessage: String? = nil
     var isDisabled: Bool = false
     
@@ -32,19 +32,19 @@ struct FloatingField: View {
                             .renderingMode(.template)
                             .scaledToFit()
                             .frame(height: leftIconHeight)
-                            .foregroundColor(.black)
+                            .foregroundColor(.mainBlack)
                             .padding(.trailing, 4)
                     }
                     
                     if $text.wrappedValue.isEmpty {
                         Text(placeHolder)
-                            .foregroundColor(isDisabled ? colors.placeholderForeground.opacity(0.5) : colors.placeholderForeground)
-                            .font(.poppinsRegular(size: 14))
+                            .foregroundColor(isDisabled ? colors.placeholderForeground.opacity(0.5) : colors.placeholderForeground.opacity(0.7))
+                            .font(.quicksandRegular(size: 14))
                             .multilineTextAlignment(.leading)
                     } else {
                         Text(placeHolder)
-                            .foregroundColor(colors.placeholderForeground)
-                            .font(.poppinsRegular(size: 14))
+                            .foregroundColor(colors.placeholderForeground.opacity(0.7))
+                            .font(.quicksandRegular(size: 14))
                             .scaleEffect(0.75, anchor: .leading)
                             .offset(y: -12)
                             .multilineTextAlignment(.leading)
@@ -79,8 +79,8 @@ struct FloatingField: View {
                                 .keyboardType(keyboardType)
                                 .autocapitalization(.none)
                             }
-                        }.foregroundColor(isDisabled ? colors.placeholderForeground.opacity(0.5) : .black)
-                        .font(.poppinsRegular(size: 14))
+                        }.foregroundColor(isDisabled ? colors.placeholderForeground.opacity(0.5) : .mainBlack)
+                            .font(.quicksandRegular(size: 14))
                         .padding(.leading, 16)
                         .offset(y: $text.wrappedValue.isEmpty ? 0 : 4 )
                     }
@@ -93,11 +93,11 @@ struct FloatingField: View {
                         Button {
                             secure.toggle()
                         } label: {
-                            Image(systemName: self.secure ? "eye" : "eye.slash")
+                            Image(self.secure ? .icHidePassword : .icShowPassword)
                                 .resizable()
                                 .renderingMode(.template)
-                                .foregroundColor(.black)
-                                .frame(width: 24, height: 16)
+                                .foregroundColor(.mainBlack)
+                                .frame(width: 20, height: 20)
                                 .padding(.trailing, 16)
                         }
                     } else if let icon = icon {
@@ -115,9 +115,9 @@ struct FloatingField: View {
                 }
             }
             .frame(height: 54)
-            .background(!isEditing ? colors.bgColor : isDisabled ? colors.bgColor.opacity(0.5) : .white)
+            .background(!isEditing ? colors.bgColor : isDisabled ? colors.bgColor.opacity(0.5) : colors.bgColor)
             .cornerRadius(4, corners: .allCorners)
-            .border((errorMessage ?? "").isEmpty ? (!isEditing ? colors.borderColor :  isDisabled ? colors.borderColor.opacity(0.5) : .black) : Color.lightRed,
+            .border((errorMessage ?? "").isEmpty ? (!isEditing ? colors.borderColor :  isDisabled ? colors.borderColor.opacity(0.5) : colors.borderColor) : Color.darkRed,
                     width: 1,
                     cornerRadius: 4)
             .onTapGesture {
@@ -133,8 +133,8 @@ struct FloatingField: View {
             if let errorMessage = errorMessage {
                 HStack {
                     Text(errorMessage)
-                        .font(.poppinsRegular(size: 12))
-                        .foregroundColor(Color.lightRed)
+                        .font(.quicksandRegular(size: 12))
+                        .foregroundColor(Color.darkRed)
                     Spacer()
                 }
                 .padding(.top, 4)

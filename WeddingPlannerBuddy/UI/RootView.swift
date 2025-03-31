@@ -23,12 +23,10 @@ class RootViewModel: BaseViewModel {
     private var binded = false
     
     @Published var showBlockingError: Bool = false
-    @Published var isLoadingBinding: Bool = false
     var lastUserState: UserState = .anonymous
     
     override init() {
         super.init()
-        applyTheme()
         setupErrorHandling()
     }
     
@@ -43,20 +41,17 @@ class RootViewModel: BaseViewModel {
             .sink(receiveCompletion: { [weak self] completion in
                 if case .failure = completion {
                     self?.showBlockingError = true
-                    self?.isLoadingBinding = false
                     self?.binded = false
                 }
             }, receiveValue: { [weak self] userState in
                 guard let self = self else { return }
                 switch userState {
                 case .failure(_):
-                    self.isLoadingBinding = false
                     self.showBlockingError = true
                     self.binded = false
                 case .loading:
-                    self.isLoadingBinding = true
+                    break
                 case .ready(let userState):
-                    self.isLoadingBinding = false
                     self.showBlockingError = false
                     switch userState {
                     case .anonymous:
@@ -87,26 +82,8 @@ class RootViewModel: BaseViewModel {
     
     func retryBinding() {
         showBlockingError = false
-        isLoadingBinding = true
         
         bind()
-    }
-    
-    func applyTheme() {
-        let key: Key<String> = Key(value: UserDefaultsKeys.appTheme)
-        if let themeString = userDefaultsService.getValue(key: key),
-           let theme = SchemeType(rawValue: themeString) {
-            switch theme {
-            case .light:
-                applyUserInterfaceStyle(.light)
-            case .dark:
-                applyUserInterfaceStyle(.dark)
-            case .system:
-                applyUserInterfaceStyle(.unspecified)
-            }
-        } else {
-            applyUserInterfaceStyle(.unspecified)
-        }
     }
     
     private func applyUserInterfaceStyle(_ style: UIUserInterfaceStyle) {
@@ -165,7 +142,7 @@ struct RootView: View {
             .overlay {
                 VStack {
                     if viewModel.showBlockingError {
-                        BlockingErrorScreen(isLoading: viewModel.isLoadingBinding) {
+                        BlockingErrorScreen() {
                             viewModel.retryBinding()
                         }
                     }

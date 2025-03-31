@@ -9,13 +9,22 @@ import Foundation
 import SwiftUI
 
 extension Color {
-    static let mainWhite = Color(.mainWhiteCustom)
-    static let mainBlack = Color(.mainBlackCustom)
+    static let nudePrimary = Color(hex: "#C2A797")
+    static let nudeSecondary = Color(hex: "#AB9A7E")
+    static let nudeGreen = Color(hex: "#8E8E6B")
+    static let greenPrimary = Color(hex: "#6D835F")
+    static let greenSecondary = Color(hex: "#45775B")
+    static let greenTertiary = Color(hex: "#046B5E")
+    
+    static let mainBlack = Color(hex: "#23201E")
+    static let mainWhite = Color(hex: "#FFFFFF")
+    
+    static let lightGreen = Color(hex: "#DCF7EF")
+    static let lightRed = Color(hex: "#EFD0D0")
+    static let darkRed = Color(hex: "#B21010")
     
     static let mainPink = Color(hex: "#d75c77")
     
-    static let lightGreen = Color(hex: "#1B998B")
-    static let lightRed = Color(hex: "#D8263E")
     static let bottomSheetLine = Color(hex: "#D5D6D8")
 }
 

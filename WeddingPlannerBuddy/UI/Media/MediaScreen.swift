@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: fixme
 struct MediaScreen: View {
     @EnvironmentObject private var navigation: Navigation
     private let mainNavigation = EnvironmentObjects.navigation
@@ -57,14 +57,7 @@ struct MediaScreen: View {
                     }
                 }
             } else {
-                HStack {
-                    Text("You have to log in in order to access the content of this tab.")
-                        .foregroundStyle(Color.mainBlack)
-                        .font(.poppinsRegular(size: 16))
-                    Spacer()
-                }.padding(.horizontal, 16)
-                    .padding(.top, 24)
-                Spacer()
+                UnloggedUserView()
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

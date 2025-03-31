@@ -8,14 +8,11 @@
 import SwiftUI
 
 struct DividerView: View {
+    let color: Color
     var body: some View {
         Rectangle()
-            .foregroundStyle(Color.mainPink)
+            .foregroundStyle(color)
             .frame(height: 1)
             .frame(maxWidth: .infinity)
     }
-}
-
-#Preview {
-    DividerView()
 }

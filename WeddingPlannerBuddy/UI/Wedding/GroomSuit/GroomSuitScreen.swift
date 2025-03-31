@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: fixme
 struct GroomSuitScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: GroomSuitViewModel

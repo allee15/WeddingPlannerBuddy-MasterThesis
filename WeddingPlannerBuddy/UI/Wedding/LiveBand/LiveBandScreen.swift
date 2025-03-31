@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: fixme
 struct LiveBandScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: LiveBandViewModel
