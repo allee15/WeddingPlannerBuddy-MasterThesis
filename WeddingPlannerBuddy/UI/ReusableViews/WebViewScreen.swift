@@ -11,6 +11,7 @@ import UIKit
 import WebKit
 
 struct WebViewScreen: View {
+    @EnvironmentObject private var navigation: Navigation
     
     let title: String
     let url: URL
@@ -18,8 +19,9 @@ struct WebViewScreen: View {
     
     var body: some View {
         VStack(alignment: .center, spacing: 0) {
-            NavBarView()
-                .padding(.bottom, 16)
+            LeftNavBarView(title: title, backAction: {
+                navigation.pop(animated: true)
+            })
 
             WebView(url: url,
                     loadingHandler: { isLoading in

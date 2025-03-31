@@ -13,7 +13,6 @@ enum TabBarItemType: Equatable {
     case wedding
     case guests
     case media
-    case profile
 }
 
 struct TabBarItem {
@@ -46,12 +45,6 @@ let mediaTabBarItem = TabBarItem(
     imageName: .icMedia
 )
 
-let profileNewsTabBarItem = TabBarItem(
-    type: .profile,
-    title: "Profile",
-    imageName: .icProfile
-)
-
 struct TabBarItemView: View {
     let tabBarItem: TabBarItem
     let isSelected: Bool
@@ -65,13 +58,13 @@ struct TabBarItemView: View {
                 Image(tabBarItem.imageName)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(isSelected ? Color.mainPink : Color.mainBlack)
+                    .foregroundStyle(isSelected ? .greenSecondary : Color.mainBlack.opacity(0.8))
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 24, height: 24)
                 
                 Text(tabBarItem.title)
-                    .font(.poppinsRegular(size: 12))
-                    .foregroundColor(isSelected ? .mainPink : Color.mainBlack)
+                    .font(.quicksandMedium(size: 12))
+                    .foregroundColor(isSelected ? .greenSecondary : Color.mainBlack.opacity(0.8))
             }
         }
     }
@@ -97,11 +90,6 @@ struct TabBarView: View {
             .padding(.bottom, SafeAreaInsets.bottom)
             .padding(.horizontal, 16)
             .padding(.top, 8)
-            .cornerRadius(8, corners: [.topLeft, .topRight])
-            .background(
-                Color.mainWhite
-                    .cornerRadius(8, corners: [.topLeft, .topRight])
-            )
-            
+            .background(Color.mainWhite)
     }
 }

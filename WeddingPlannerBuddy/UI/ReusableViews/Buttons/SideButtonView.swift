@@ -18,7 +18,7 @@ struct SideButtonView: View {
             Image(icon)
                 .resizable()
                 .renderingMode(.template)
-                .frame(width: 32, height: 32)
+                .frame(width: 24, height: 24)
                 .foregroundStyle(Color.mainBlack)
         }
     }

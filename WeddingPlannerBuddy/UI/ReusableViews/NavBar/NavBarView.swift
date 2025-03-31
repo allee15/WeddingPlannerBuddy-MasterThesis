@@ -18,6 +18,6 @@ struct NavBarView: View {
                 BackButton()
             }
             Spacer()
-        }.padding(.horizontal, 12)
+        }.padding(.horizontal, 16)
     }
 }

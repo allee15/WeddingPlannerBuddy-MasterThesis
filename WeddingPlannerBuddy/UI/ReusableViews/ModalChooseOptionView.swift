@@ -19,22 +19,29 @@ struct ModalChooseOptionView: View {
         ZStack {
             Color.black.opacity(0.4)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
             VStack(spacing: 0) {
+                Image(.icInfo)
+                    .resizable()
+                    .frame(width: 36, height: 36)
+                    .padding(.bottom, 8)
                 
                 Text(title)
                     .font(.poppinsBold(size: 24))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, 12)
+                    .padding(.bottom, 24)
                 
                 Text(description)
                     .font(.poppinsRegular(size: 16))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
-                    .padding(.bottom, 24)
+                    .padding(.bottom, 28)
                 
                 VStack(spacing: 12) {
-                    MainButtonView(text: topButtonText) {
+                    MainButtonView(text: topButtonText,
+                                   bgColor: Color.greenPrimary.opacity(0.6),
+                                   textColor: Color.mainBlack) {
                         onTopButtonTapped()
                     }
                     
@@ -45,9 +52,9 @@ struct ModalChooseOptionView: View {
                         }
                     }
                 }
-            }.padding(.horizontal, 24)
-                .padding(.vertical, 36)
-                .background(Color.white.cornerRadius(8))
+            }.padding(.horizontal, 20)
+                .padding(.vertical, 24)
+                .background(Color.mainWhite.cornerRadius(8))
                 .padding(.horizontal, 24)
         }.ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity)

@@ -13,4 +13,5 @@ struct HomeCard {
     let title: String
     let description: String
     let image: ImageResource
+    let buttonText: String
 }

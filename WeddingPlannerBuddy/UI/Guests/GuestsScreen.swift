@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//TODO: fixme
 struct GuestsScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject private var viewModel = GuestsViewModel()
@@ -68,14 +68,7 @@ struct GuestsScreen: View {
                     }.padding(.top, 24)
                 }
             } else {
-                HStack {
-                    Text("You have to log in in order to access the content of this tab.")
-                        .foregroundStyle(Color.mainBlack)
-                        .font(.poppinsRegular(size: 16))
-                    Spacer()
-                }.padding(.horizontal, 16)
-                    .padding(.top, 24)
-                Spacer()
+                UnloggedUserView()
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

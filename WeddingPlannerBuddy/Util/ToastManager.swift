@@ -34,7 +34,9 @@ struct Toast: Equatable {
     private let id = UUID().uuidString
     
     let text: String
-    var textColor: Color = .black
+    var textColor: Color = Color.greenTertiary
+    var bg: Color = Color.lightGreen
+    var icon: ImageResource = .icToastGreen
     var timeInterval: TimeInterval = 2
     
     static func ==(lhs: Toast, rhs: Toast) -> Bool {
@@ -47,15 +49,20 @@ struct ToastView: View {
     let toast: Toast
     
     var body: some View {
-        Text(toast.text)
-            .font(.poppinsSemiBold(size: 12))
-            .foregroundColor(toast.textColor)
-            .padding(.horizontal, 20)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(toast.textColor.opacity(0.1).background(Color.white))
-            .cornerRadius(8)
-            .padding(.horizontal, 20)
-            .multilineTextAlignment(.center)
+        HStack(alignment: .top, spacing: 20) {
+            Image(toast.icon)
+                .resizable()
+                .frame(width: 24, height: 30)
+            
+            Text(toast.text)
+                .font(.quicksandSemiBold(size: 14))
+                .foregroundColor(toast.textColor)
+                .multilineTextAlignment(.leading)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.all, 16)
+        .background(toast.bg)
+        .cornerRadius(4)
+        .padding(.horizontal, 20)
     }
 }
