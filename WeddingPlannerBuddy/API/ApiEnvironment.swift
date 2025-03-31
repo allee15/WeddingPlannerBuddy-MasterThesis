@@ -17,3 +17,4 @@ enum DefaultAPIEnvironment {
         return URL(string: selectedEnvironment)!
     }
 }
+
