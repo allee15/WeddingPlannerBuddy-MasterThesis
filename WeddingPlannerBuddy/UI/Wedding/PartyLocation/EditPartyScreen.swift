@@ -1,5 +1,5 @@
 //
-//  EditChurchScreen.swift
+//  EditPartyScreen.swift
 //  WeddingPlannerBuddy
 //
 //  Created by Alexia Aldea on 03.04.2025.
@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-struct EditChurchScreen: View {
+struct EditPartyScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject var viewModel: EditChurchViewModel
+    @StateObject var viewModel: EditPartyViewModel
     @State private var addPhoto: Bool = false
     @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Edit church marriage") {
+            LeftNavBarView(title: "Edit after-party") {
                 navigation.pop(animated: true)
             }
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 12) {
-                    FloatingField(text: $viewModel.newPreotName,
-                                  placeHolder: "Priest name")
+                    FloatingField(text: $viewModel.newDescription,
+                                  placeHolder: "Description")
                     
                     FloatingField(text: $viewModel.newAddress,
                                   placeHolder: "Address")
@@ -39,9 +39,9 @@ struct EditChurchScreen: View {
 //                            }.background(Color.nudePrimary.opacity(0.5))
 //                            .cornerRadius(8, corners: [.topLeft, .topRight])
 //                            .padding(.top, 16)
-//                        
+//
 //                        DividerView(color: Color.nudePrimary)
-//                        
+//
 //                        DatePicker("", selection: $viewModel.newDate,
 //                                   in: (Date())..., displayedComponents: .date)
 //                            .datePickerStyle(WheelDatePickerStyle())
@@ -59,9 +59,9 @@ struct EditChurchScreen: View {
 //                            }.background(Color.nudePrimary.opacity(0.5))
 //                            .cornerRadius(8, corners: [.topLeft, .topRight])
 //                            .padding(.top, 16)
-//                        
+//
 //                        DividerView(color: Color.nudePrimary)
-//                        
+//
 //                        DatePicker("", selection: $viewModel.newHour,
 //                                   in: (Date())..., displayedComponents: .date)
 //                            .datePickerStyle(WheelDatePickerStyle())
@@ -79,7 +79,7 @@ struct EditChurchScreen: View {
         .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
         .safeAreaInset(edge: .bottom, content: {
             MainButtonView(text: "Edit details") {
-                viewModel.editChurch()
+                viewModel.editParty()
             }.padding(.horizontal, 16)
                 .padding(.bottom, 8)
         })

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct AddParticipantScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @FocusState var focusedField: ProfileField?
@@ -28,17 +28,19 @@ struct AddParticipantScreen: View {
                     .onSubmit {
                         focusedField = .email
                     }
+                    .padding(.horizontal, 16)
                     
                     FloatingField(text: $viewModel.email,
                                   placeHolder: "Email address",
                                   leftIcon: .icFieldEmail)
                     .submitLabel(.return)
                     .focused($focusedField, equals: .email)
+                    .padding(.horizontal, 16)
                     
                     Image(.imgAddGuest)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
-                } 
+                }.padding(.top, 20)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -46,7 +48,8 @@ struct AddParticipantScreen: View {
                 MainButtonView(text: "Add guest",
                               isDisabled: !viewModel.hasChanges()) {
                     viewModel.addParticipant()
-                }.padding([.horizontal, .bottom], 16)
+                }.padding(.horizontal, 16)
+                    .padding(.bottom, 8)
             })
             .onTapGesture {
                 hideKeyboard()

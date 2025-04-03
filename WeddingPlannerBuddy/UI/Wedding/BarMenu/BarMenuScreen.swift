@@ -17,12 +17,11 @@ struct BarMenuScreen: View {
                 navigation.pop(animated: true)
             }
             
-            if viewModel.isLoading {
-                HStack {
-                    Spacer()
-                    LoaderView()
-                    Spacer()
-                }.padding(.horizontal, 16)
+            if viewModel.barMenu.id.isEmpty {
+                Spacer()
+                EmptyStateView(title: "No details Yet",
+                               subtitle: "Start adding important information to make your big day unforgettable! 🎉")
+                Spacer()
             } else {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
@@ -46,6 +45,14 @@ struct BarMenuScreen: View {
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .safeAreaInset(edge: .bottom) {
+                if viewModel.barMenu.id.isEmpty {
+                    MainButtonView(text: "Start") {
+//                        let vm = EditLegalViewModel(civilMarriage: viewModel.civilMarriage)
+//                        navigation.push(EditLegalScreen(viewModel: vm).asDestination(), animated: true)
+                    }
+                }
+            }
     }
 }
 

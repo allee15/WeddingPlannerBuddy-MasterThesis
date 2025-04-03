@@ -10,7 +10,6 @@ import SwiftUI
 struct TablesPlanScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: TablesPlanViewModel
-    @State var showBottomSheet: Bool = false
     @State var tableId: String = ""
     
     var body: some View {
@@ -30,14 +29,13 @@ struct TablesPlanScreen: View {
                                                       topButtonText: "Add participant",
                                                       bottomButtonText: "Close") {
                         tableId = table.id
-                        showBottomSheet = true
+                        navigation.dismissModal(animated: true, completion: nil)
+                        let vm = AddParticipantViewModel(userId: viewModel.userId, tableId: tableId)
+                        navigation.push(AddParticipantScreen(viewModel: vm).asDestination(), animated: true)
                     } onBottomButtonTapped: {
                         navigation.dismissModal(animated: true, completion: nil)
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                }.sheet(isPresented: $showBottomSheet) {
-                    let vm = AddParticipantViewModel(userId: viewModel.userId, tableId: tableId)
-                    AddParticipantScreen(viewModel: vm, showBottomSheet: $showBottomSheet)
                 }
             }
         }.background(Color.mainWhite)

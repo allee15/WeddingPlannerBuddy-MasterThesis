@@ -1,5 +1,5 @@
 //
-//  EditChurchScreen.swift
+//  EditLivebandScreen.swift
 //  WeddingPlannerBuddy
 //
 //  Created by Alexia Aldea on 03.04.2025.
@@ -7,49 +7,27 @@
 
 import SwiftUI
 
-struct EditChurchScreen: View {
+struct EditLivebandScreen: View {
     @EnvironmentObject private var navigation: Navigation
-    @StateObject var viewModel: EditChurchViewModel
-    @State private var addPhoto: Bool = false
-    @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary
+    @StateObject var viewModel: EditLivebandViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Edit church marriage") {
+            LeftNavBarView(title: "Edit live band") {
                 navigation.pop(animated: true)
             }
             
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 12) {
-                    FloatingField(text: $viewModel.newPreotName,
-                                  placeHolder: "Priest name")
+                    FloatingField(text: $viewModel.newName,
+                                  placeHolder: "Name")
                     
-                    FloatingField(text: $viewModel.newAddress,
-                                  placeHolder: "Address")
+                    FloatingField(text: $viewModel.newDescription,
+                                  placeHolder: "Details")
                     
                     FloatingField(text: $viewModel.newPrice,
                                   placeHolder: "Price")
                     //TODO: fixme
-//                    VStack(spacing: 0) {
-//                        DateView(
-//                            placeHolder: "Select date",
-//                            date: $viewModel.newDate,
-//                            singleDateSelected: viewModel.newDate) {
-//                                showDatePicker = true
-//                            }.background(Color.nudePrimary.opacity(0.5))
-//                            .cornerRadius(8, corners: [.topLeft, .topRight])
-//                            .padding(.top, 16)
-//                        
-//                        DividerView(color: Color.nudePrimary)
-//                        
-//                        DatePicker("", selection: $viewModel.newDate,
-//                                   in: (Date())..., displayedComponents: .date)
-//                            .datePickerStyle(WheelDatePickerStyle())
-//                            .accentColor(Color.greenSecondary)
-//                            .background(Color.nudePrimary.opacity(0.35))
-//                            .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
-//                    }
-                    
 //                    VStack(spacing: 0) {
 //                        DateView(
 //                            placeHolder: "Select hour",
@@ -59,9 +37,9 @@ struct EditChurchScreen: View {
 //                            }.background(Color.nudePrimary.opacity(0.5))
 //                            .cornerRadius(8, corners: [.topLeft, .topRight])
 //                            .padding(.top, 16)
-//                        
+//
 //                        DividerView(color: Color.nudePrimary)
-//                        
+//
 //                        DatePicker("", selection: $viewModel.newHour,
 //                                   in: (Date())..., displayedComponents: .date)
 //                            .datePickerStyle(WheelDatePickerStyle())
@@ -79,7 +57,7 @@ struct EditChurchScreen: View {
         .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
         .safeAreaInset(edge: .bottom, content: {
             MainButtonView(text: "Edit details") {
-                viewModel.editChurch()
+                viewModel.editBand()
             }.padding(.horizontal, 16)
                 .padding(.bottom, 8)
         })

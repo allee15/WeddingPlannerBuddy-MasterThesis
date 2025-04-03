@@ -35,7 +35,7 @@ class EditGroomViewModel: BaseViewModel {
     }
     
     func editGroom() {
-        let suit = GroomSuit(id: groomSuit.id,
+        let suit = GroomSuit(id: groomSuit.id.isEmpty ? UUID().uuidString : groomSuit.id,
                              link: newLink.isEmpty ? groomSuit.link : newLink,
                              price: newPrice.isEmpty ? groomSuit.price : Int(newPrice) ?? groomSuit.price,
                              photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? groomSuit.photo,

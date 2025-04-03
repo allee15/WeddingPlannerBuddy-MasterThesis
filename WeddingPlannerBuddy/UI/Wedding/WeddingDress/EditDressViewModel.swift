@@ -35,7 +35,7 @@ class EditDressViewModel: BaseViewModel {
     }
     
     func editDress() {
-        let dress = WeddingDress(id: weddingDress.id,
+        let dress = WeddingDress(id: weddingDress.id.isEmpty ? UUID().uuidString : weddingDress.id,
                                  link: newLink.isEmpty ? weddingDress.link : newLink,
                                  price: newPrice.isEmpty ? weddingDress.price : Int(newLink) ?? weddingDress.price,
                                  photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? weddingDress.photo,

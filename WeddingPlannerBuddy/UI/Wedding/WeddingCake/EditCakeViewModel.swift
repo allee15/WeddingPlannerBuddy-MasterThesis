@@ -35,7 +35,7 @@ class EditCakeViewModel: BaseViewModel {
     }
     
     func editCake() {
-        let cake = WeddingCake(id: weddingCake.id,
+        let cake = WeddingCake(id: weddingCake.id.isEmpty ? UUID().uuidString : weddingCake.id,
                                name: newName.isEmpty ? weddingCake.name : newName,
                                photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? weddingCake.photo,
                                description: newDescription.isEmpty ? weddingCake.description : newDescription,
