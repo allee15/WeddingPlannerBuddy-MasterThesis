@@ -49,7 +49,7 @@ struct ToastView: View {
     let toast: Toast
     
     var body: some View {
-        HStack(alignment: .top, spacing: 20) {
+        HStack(spacing: 20) {
             Image(toast.icon)
                 .resizable()
                 .frame(width: 24, height: 30)
@@ -58,6 +58,7 @@ struct ToastView: View {
                 .font(.quicksandSemiBold(size: 14))
                 .foregroundColor(toast.textColor)
                 .multilineTextAlignment(.leading)
+            Spacer()
         }
         .frame(maxWidth: .infinity)
         .padding(.all, 16)

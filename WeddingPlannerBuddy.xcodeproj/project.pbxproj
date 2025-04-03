@@ -103,6 +103,18 @@
 		0F792FC62D9AF28200052790 /* LogoutScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FC52D9AF28200052790 /* LogoutScreen.swift */; };
 		0F792FC82D9AF28C00052790 /* LogoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FC72D9AF28C00052790 /* LogoutViewModel.swift */; };
 		0F792FCA2D9AF63700052790 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FC92D9AF63700052790 /* EmptyStateView.swift */; };
+		0F792FDA2D9E67C400052790 /* EditDressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FD92D9E67C400052790 /* EditDressScreen.swift */; };
+		0F792FDC2D9E692300052790 /* EditDressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FDB2D9E692300052790 /* EditDressViewModel.swift */; };
+		0F792FDE2D9E6E3D00052790 /* EditBouquetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FDD2D9E6E3D00052790 /* EditBouquetViewModel.swift */; };
+		0F792FE02D9E6EAF00052790 /* EditBouquetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FDF2D9E6EAF00052790 /* EditBouquetScreen.swift */; };
+		0F792FE22D9E70EE00052790 /* EditGroomScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FE12D9E70EE00052790 /* EditGroomScreen.swift */; };
+		0F792FE42D9E712800052790 /* EditGroomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FE32D9E712800052790 /* EditGroomViewModel.swift */; };
+		0F792FE62D9E720200052790 /* EditChurchScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FE52D9E720200052790 /* EditChurchScreen.swift */; };
+		0F792FE82D9E721600052790 /* EditChurchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FE72D9E721600052790 /* EditChurchViewModel.swift */; };
+		0F792FEA2D9E736300052790 /* EditCakeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FE92D9E736300052790 /* EditCakeScreen.swift */; };
+		0F792FEC2D9E73AC00052790 /* EditCakeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FEB2D9E73AC00052790 /* EditCakeViewModel.swift */; };
+		0F792FEE2D9E997E00052790 /* ChooseWeddingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FED2D9E997E00052790 /* ChooseWeddingScreen.swift */; };
+		0F792FF02D9E99B000052790 /* ChooseWeddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FEF2D9E99B000052790 /* ChooseWeddingViewModel.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
 		0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */; };
@@ -269,6 +281,18 @@
 		0F792FC52D9AF28200052790 /* LogoutScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutScreen.swift; sourceTree = "<group>"; };
 		0F792FC72D9AF28C00052790 /* LogoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutViewModel.swift; sourceTree = "<group>"; };
 		0F792FC92D9AF63700052790 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		0F792FD92D9E67C400052790 /* EditDressScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDressScreen.swift; sourceTree = "<group>"; };
+		0F792FDB2D9E692300052790 /* EditDressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDressViewModel.swift; sourceTree = "<group>"; };
+		0F792FDD2D9E6E3D00052790 /* EditBouquetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBouquetViewModel.swift; sourceTree = "<group>"; };
+		0F792FDF2D9E6EAF00052790 /* EditBouquetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBouquetScreen.swift; sourceTree = "<group>"; };
+		0F792FE12D9E70EE00052790 /* EditGroomScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroomScreen.swift; sourceTree = "<group>"; };
+		0F792FE32D9E712800052790 /* EditGroomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroomViewModel.swift; sourceTree = "<group>"; };
+		0F792FE52D9E720200052790 /* EditChurchScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChurchScreen.swift; sourceTree = "<group>"; };
+		0F792FE72D9E721600052790 /* EditChurchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditChurchViewModel.swift; sourceTree = "<group>"; };
+		0F792FE92D9E736300052790 /* EditCakeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCakeScreen.swift; sourceTree = "<group>"; };
+		0F792FEB2D9E73AC00052790 /* EditCakeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCakeViewModel.swift; sourceTree = "<group>"; };
+		0F792FED2D9E997E00052790 /* ChooseWeddingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseWeddingScreen.swift; sourceTree = "<group>"; };
+		0F792FEF2D9E99B000052790 /* ChooseWeddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseWeddingViewModel.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -544,6 +568,8 @@
 			children = (
 				0F572F342D4C24AF003FD5E9 /* WeddingDressScreen.swift */,
 				0F572F362D4C24BB003FD5E9 /* WeddingDressViewModel.swift */,
+				0F792FD92D9E67C400052790 /* EditDressScreen.swift */,
+				0F792FDB2D9E692300052790 /* EditDressViewModel.swift */,
 			);
 			path = WeddingDress;
 			sourceTree = "<group>";
@@ -553,6 +579,8 @@
 			children = (
 				0F572F392D4C2591003FD5E9 /* BrideBouquetScreen.swift */,
 				0F572F3A2D4C2591003FD5E9 /* BrideBouquetViewModel.swift */,
+				0F792FDF2D9E6EAF00052790 /* EditBouquetScreen.swift */,
+				0F792FDD2D9E6E3D00052790 /* EditBouquetViewModel.swift */,
 			);
 			path = BrideBouquet;
 			sourceTree = "<group>";
@@ -562,6 +590,8 @@
 			children = (
 				0F572F452D4C25F8003FD5E9 /* GroomSuitScreen.swift */,
 				0F572F462D4C25F8003FD5E9 /* GroomSuitViewModel.swift */,
+				0F792FE12D9E70EE00052790 /* EditGroomScreen.swift */,
+				0F792FE32D9E712800052790 /* EditGroomViewModel.swift */,
 			);
 			path = GroomSuit;
 			sourceTree = "<group>";
@@ -571,6 +601,8 @@
 			children = (
 				0F572F4A2D4C25F9003FD5E9 /* ChurchCeremonyScreen.swift */,
 				0F572F4B2D4C25F9003FD5E9 /* ChurchCeremonyViewModel.swift */,
+				0F792FE52D9E720200052790 /* EditChurchScreen.swift */,
+				0F792FE72D9E721600052790 /* EditChurchViewModel.swift */,
 			);
 			path = ChurchCeremony;
 			sourceTree = "<group>";
@@ -616,6 +648,8 @@
 			children = (
 				0F572F682D4C2614003FD5E9 /* WeddingCakeScreen.swift */,
 				0F572F692D4C2614003FD5E9 /* WeddingCakeViewModel.swift */,
+				0F792FE92D9E736300052790 /* EditCakeScreen.swift */,
+				0F792FEB2D9E73AC00052790 /* EditCakeViewModel.swift */,
 			);
 			path = WeddingCake;
 			sourceTree = "<group>";
@@ -709,6 +743,8 @@
 			children = (
 				0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */,
 				0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */,
+				0F792FED2D9E997E00052790 /* ChooseWeddingScreen.swift */,
+				0F792FEF2D9E99B000052790 /* ChooseWeddingViewModel.swift */,
 			);
 			path = WeddingMedia;
 			sourceTree = "<group>";
@@ -1006,7 +1042,9 @@
 				0F572F492D4C25F8003FD5E9 /* GroomSuitViewModel.swift in Sources */,
 				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
 				0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */,
+				0F792FE42D9E712800052790 /* EditGroomViewModel.swift in Sources */,
 				0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */,
+				0F792FDC2D9E692300052790 /* EditDressViewModel.swift in Sources */,
 				0FE515552CFF9D2A00CA9601 /* LoginScreen.swift in Sources */,
 				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
 				0F572F352D4C24AF003FD5E9 /* WeddingDressScreen.swift in Sources */,
@@ -1023,6 +1061,7 @@
 				0F327EDE2CDE48CB00EDF536 /* ApiEnvironment.swift in Sources */,
 				0F572F3C2D4C2591003FD5E9 /* BrideBouquetScreen.swift in Sources */,
 				0F792FC82D9AF28C00052790 /* LogoutViewModel.swift in Sources */,
+				0F792FEC2D9E73AC00052790 /* EditCakeViewModel.swift in Sources */,
 				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
 				0F40D6AD2D48D3370020D433 /* Date+.swift in Sources */,
@@ -1035,7 +1074,9 @@
 				0FDE16B62D1B10ED00C1580E /* GuestsListViewModel.swift in Sources */,
 				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
 				0FDE16852D08478F00C1580E /* TablesPlanScreen.swift in Sources */,
+				0F792FE02D9E6EAF00052790 /* EditBouquetScreen.swift in Sources */,
 				0F327EF72CE3DA0F00EDF536 /* DividerView.swift in Sources */,
+				0F792FE22D9E70EE00052790 /* EditGroomScreen.swift in Sources */,
 				0F572F6C2D4C2614003FD5E9 /* WeddingCakeViewModel.swift in Sources */,
 				0F24D5AE2CC1A71C00A833E1 /* Font.swift in Sources */,
 				0FDE16632D05F9F100C1580E /* ChangePasswordViewModel.swift in Sources */,
@@ -1056,6 +1097,7 @@
 				0F24D61D2CC2A8AB00A833E1 /* ModalChooseOptionView.swift in Sources */,
 				0F24D6212CC2AAA500A833E1 /* NavBarView.swift in Sources */,
 				0F327EF92CE3DD9500EDF536 /* ZoomImageView.swift in Sources */,
+				0F792FDA2D9E67C400052790 /* EditDressScreen.swift in Sources */,
 				0FE515612CFF9E2900CA9601 /* MediaViewModel.swift in Sources */,
 				0F40D6B12D48D60E0020D433 /* WeatherService.swift in Sources */,
 				0F572F532D4C25FA003FD5E9 /* PartyLocationViewModel.swift in Sources */,
@@ -1073,6 +1115,7 @@
 				0F24D60E2CC29A2D00A833E1 /* FloatingField.swift in Sources */,
 				0F24D5DA2CC1B4F900A833E1 /* OnboardingData.swift in Sources */,
 				0F792FBF2D9AC40700052790 /* WidgetView.swift in Sources */,
+				0F792FEE2D9E997E00052790 /* ChooseWeddingScreen.swift in Sources */,
 				0F572F482D4C25F8003FD5E9 /* GroomSuitScreen.swift in Sources */,
 				0FDE168D2D09D51300C1580E /* AddParticipantViewModel.swift in Sources */,
 				0F24D5E42CC1B7E400A833E1 /* BackButton.swift in Sources */,
@@ -1090,8 +1133,10 @@
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
 				0FDE16AF2D1AEAC100C1580E /* OtherWeddingsScreen.swift in Sources */,
 				0F572F3D2D4C2591003FD5E9 /* BrideBouquetViewModel.swift in Sources */,
+				0F792FEA2D9E736300052790 /* EditCakeScreen.swift in Sources */,
 				0FDE16B82D1B13D000C1580E /* ChooseFolderBottomSheetView.swift in Sources */,
 				0F792FCA2D9AF63700052790 /* EmptyStateView.swift in Sources */,
+				0F792FDE2D9E6E3D00052790 /* EditBouquetViewModel.swift in Sources */,
 				0F24D60A2CC298D700A833E1 /* UserService.swift in Sources */,
 				0F24D5D72CC1B4B900A833E1 /* OnboardingViewModel.swift in Sources */,
 				0F572F622D4C2612003FD5E9 /* FoodMenuViewModel.swift in Sources */,
@@ -1108,6 +1153,7 @@
 				0FDE16812D072D9100C1580E /* ResetPasswordEmailViewModel.swift in Sources */,
 				0F24D60C2CC299E500A833E1 /* LoaderView.swift in Sources */,
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
+				0F792FE82D9E721600052790 /* EditChurchViewModel.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
 				0F572F702D4C2616003FD5E9 /* LiveBandScreen.swift in Sources */,
 				0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */,
@@ -1117,6 +1163,7 @@
 				0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */,
 				0F40D6AF2D48D5F80020D433 /* WeatherApi.swift in Sources */,
 				0F572F672D4C2613003FD5E9 /* BarMenuViewModel.swift in Sources */,
+				0F792FE62D9E720200052790 /* EditChurchScreen.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
 				0F24D59C2CC0F91600A833E1 /* TabBarScreen.swift in Sources */,
 				0F572F322D4C22D4003FD5E9 /* WeddingDetails.swift in Sources */,
@@ -1124,6 +1171,7 @@
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,
 				0F24D6042CC2978600A833E1 /* JSONParsers.swift in Sources */,
 				0FDE16D82D1F53E100C1580E /* PlaylistViewModel.swift in Sources */,
+				0F792FF02D9E99B000052790 /* ChooseWeddingViewModel.swift in Sources */,
 				0FDE16D42D1DEC0B00C1580E /* WeddingMediaViewModel.swift in Sources */,
 				0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */,
 				0F572F4E2D4C25F9003FD5E9 /* ChurchCeremonyViewModel.swift in Sources */,

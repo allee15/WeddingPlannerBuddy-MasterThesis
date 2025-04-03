@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct GuestsListScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: GuestsListViewModel
@@ -17,27 +17,22 @@ struct GuestsListScreen: View {
                 navigation.pop(animated: true)
             }
             
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: 20) {
-                    if !viewModel.guestsList.isEmpty {
+            if !viewModel.guestsList.isEmpty {
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 12) {
                         ForEach(Array(viewModel.guestsList.enumerated()), id: \.element.id) { index, guest in
                             GuestLineView(guest: guest, counter: index + 1) {
                                 viewModel.openEmail(to: guest)
                             }
                         }
-                    } else {
-                        HStack {
-                            Text("You do not have any guests coming at your wedding for the moment.")
-                                .foregroundStyle(Color.mainBlack)
-                                .font(.poppinsRegular(size: 16))
-                                .padding(.horizontal, 16)
-                            
-                            Spacer()
-                        }
-                        Spacer()
-                    }
-                }.padding(.top, 32)
-            }
+                    }.padding(.top, 20)
+                }
+            } else {
+               Spacer()
+               EmptyStateView(title: "No guests yet! 🎉",
+                              subtitle: "Start building your guest list by inviting friends and family to celebrate together. Once you've added them, head over to the Tables Plan page to assign each guest to a seat and create the perfect arrangement! 💌✨")
+               Spacer()
+           }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
@@ -54,13 +49,22 @@ fileprivate struct GuestLineView: View {
             action()
         } label: {
             VStack(alignment: .leading, spacing: 8) {
-                Text("\(counter). \(guest.name), email: \(guest.email)")
-                    .font(.poppinsRegular(size: 16))
+                Text("\(counter). \(guest.name)")
+                    .font(.quicksandSemiBold(size: 18))
                     .foregroundStyle(Color.mainBlack)
                     .multilineTextAlignment(.leading)
                 
-                DividerView(color: Color.nudePrimary)
-            }.padding(.horizontal, 16)
+                Text(guest.email)
+                    .font(.quicksandMedium(size: 16))
+                    .foregroundStyle(Color.mainBlack)
+                    .multilineTextAlignment(.leading)
+                    .padding(.leading, 8)
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 16)
+            .background(Color.nudePrimary.opacity(0.4))
+            .cornerRadius(4, corners: .allCorners)
+            .padding(.horizontal, 16)
         }
     }
 }

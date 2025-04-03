@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct ResetPasswordScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject private var viewModel = ResetPasswordViewModel()
@@ -19,15 +19,16 @@ struct ResetPasswordScreen: View {
             }
             
             ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 8) {
+                VStack(alignment: .leading, spacing: 12) {
                     
                     Text("In order to procces your request, please enter your email.")
                         .foregroundStyle(Color.mainBlack)
-                        .font(.poppinsRegular(size: 14))
+                        .font(.quicksandSemiBold(size: 16))
                     
                     FloatingField(text: $viewModel.email,
-                                  placeHolder: "Your email",
+                                  placeHolder: "Email address",
                                   keyboardType: .emailAddress,
+                                  leftIcon: .icFieldEmail,
                                   errorMessage: viewModel.errorMessageEmail)
                     .submitLabel(.done)
                     .focused($focusedField, equals: .currentPassword)
@@ -39,10 +40,8 @@ struct ResetPasswordScreen: View {
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .bottom, content: {
-                VStack(spacing: 8) {
-                    MainButtonView(text: "Reset password") {
-                        viewModel.resetPassword()
-                    }
+                MainButtonView(text: "Reset password") {
+                    viewModel.resetPassword()
                 }.padding(.horizontal, 16)
                     .padding(.bottom, 12)
             })
@@ -59,7 +58,10 @@ struct ResetPasswordScreen: View {
                     navigation.push(ResetPasswordEmailScreen(viewModel: vm).asDestination(), animated: true)
                 case .error:
                     navigation.pop(animated: true)
-                    let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                    let toast = Toast(text: "An error has occured. Please try again!",
+                                      textColor: Color.darkRed,
+                                      bg: Color.lightRed,
+                                      icon: .icToastRed)
                     ToastManager.instance.show(toast)
                 }
             }

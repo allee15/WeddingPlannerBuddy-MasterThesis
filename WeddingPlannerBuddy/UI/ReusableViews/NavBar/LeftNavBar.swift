@@ -74,3 +74,53 @@ struct FullNavBarView: View {
             .zIndex(1)
     }
 }
+
+struct NavBarMultipleRightButtonsView: View {
+    let title: String
+    var firstRightButtonIcon: ImageResource = .icAdd
+    var secondRightButtonIcon: ImageResource = .icAddGuests
+    let backAction: () -> ()
+    let firstRightButtonAction: () -> ()
+    let secondRightButtonAction: () -> ()
+    
+    var body: some View {
+        HStack {
+            BackButton {
+                backAction()
+            }
+            
+            Spacer()
+            
+            TitleNavBarView(title: title)
+            
+            Spacer()
+            
+            HStack(spacing: 8) {
+                Button {
+                    firstRightButtonAction()
+                } label: {
+                    Image(firstRightButtonIcon)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.mainBlack)
+                        .frame(width: 24, height: 24)
+                }
+                
+                Button {
+                    secondRightButtonAction()
+                } label: {
+                    Image(secondRightButtonIcon)
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.mainBlack)
+                        .frame(width: 24, height: 24)
+                }
+            }
+        }.padding([.horizontal, .bottom], 16)
+            .frame(maxWidth: .infinity)
+            .frame(height: 46)
+            .background(Color.mainWhite)
+            .shadow(color: Color.mainBlack.opacity(0.2), radius: 1, x: 0, y: 0)
+            .zIndex(1)
+    }
+}

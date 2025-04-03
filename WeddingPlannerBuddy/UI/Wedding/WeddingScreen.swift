@@ -108,9 +108,13 @@ struct WeddingScreen: View {
                                 }
                             }
                         } else {
-                            MainButtonView(text: "Start wedding") {
+                            Spacer()
+                            EmptyStateView(title: "Let’s get this wedding started! 🎉",
+                                           subtitle: "Add your wedding details and start planning the best day ever.")
+                            Spacer()
+                            MainButtonView(text: "Start planning") {
                                 viewModel.startWedding()
-                            }.padding(.horizontal, 16)
+                            }.padding([.horizontal, .bottom], 16)
                         }
                     }
                 }

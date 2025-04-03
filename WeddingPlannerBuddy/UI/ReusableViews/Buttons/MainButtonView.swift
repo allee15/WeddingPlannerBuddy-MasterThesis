@@ -22,7 +22,7 @@ struct MainButtonView: View {
                 Spacer()
                 
                 Text(text)
-                    .font(.quicksandMedium(size: 16))
+                    .font(.quicksandMedium(size: 18))
                     .foregroundColor(textColor)
                     .lineLimit(1)
                     .fixedSize(horizontal: false, vertical: true)

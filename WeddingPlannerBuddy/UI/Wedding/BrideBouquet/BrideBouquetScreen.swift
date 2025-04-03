@@ -6,41 +6,49 @@
 //
 
 import SwiftUI
-//TODO: fixme
+import Kingfisher
+
 struct BrideBouquetScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: BrideBouquetViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Bride's bouquet") {
+            FullNavBarView(title: "Bouquet",
+                           rightButtonIcon: .icSettings) {
                 navigation.pop(animated: true)
+            } rightButtonAction: {
+                let vm = EditBouquetViewModel(brideBouquet: viewModel.brideBouquet)
+                navigation.push(EditBouquetScreen(viewModel: vm).asDestination(), animated: true)
             }
             
-            if viewModel.isLoading {
-                HStack {
-                    Spacer()
-                    LoaderView()
-                    Spacer()
-                }.padding(.horizontal, 16)
-            } else {
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(viewModel.brideBouquet.id)
-                        Button {
-                            let new = Bouquet(id: viewModel.brideBouquet.id,
-                                              link: "",
-                                              price: 23,
-                                              photo: "",
-                                              description: "wfferfgsersfgdds")
-                            viewModel.editBouquet(new)
-                        } label: {
-                            Text("Edit")
-                        }
-                        Text(viewModel.brideBouquet.description)
-                    }.padding(.top, 24)
-                        .padding(.horizontal, 16)
-                }  
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Description: \(viewModel.brideBouquet.description)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text("Price: \(viewModel.brideBouquet.price)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text(.init("Link: \(viewModel.brideBouquet.link)"))
+                        .underline()
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                        .tint(Color.mainBlack)
+                    
+                    ZStack(alignment: .center) {
+                        Color.nudePrimary.opacity(0.4)
+                        KFImage(URL(string: viewModel.brideBouquet.photo))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: UIScreen.main.bounds.height / 3)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 24)
+                    }
+                }.padding(.top, 20)
+                    .padding(.horizontal, 16)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

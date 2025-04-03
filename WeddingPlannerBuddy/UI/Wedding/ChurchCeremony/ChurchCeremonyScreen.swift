@@ -6,42 +6,62 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct ChurchCeremonyScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: ChurchCeremonyViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Church ceremony") {
+            FullNavBarView(title: "Church marriage",
+                           rightButtonIcon: .icSettings) {
                 navigation.pop(animated: true)
+            } rightButtonAction: {
+                let vm = EditChurchViewModel(churchCeremony: viewModel.churchCeremony)
+                navigation.push(EditChurchScreen(viewModel: vm).asDestination(), animated: true)
             }
             
-            if viewModel.isLoading {
-                HStack {
-                    Spacer()
-                    LoaderView()
-                    Spacer()
-                }.padding(.horizontal, 16)
-            } else {
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(viewModel.churchCeremony.id)
-                        Button {
-                            let new = ChurchCeremony(id: viewModel.churchCeremony.id,
-                                                     churchAddress: "dsfergswsges",
-                                                     date: "12.03",
-                                                     hour: "34:45",
-                                                     preotName: "sdf",
-                                                     price: 23)
-                            viewModel.editChurchCeremony(new)
-                        } label: {
-                            Text("Edit")
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Priest: \(viewModel.churchCeremony.preotName)")
+                                .font(.quicksandSemiBold(size: 18))
+                                .foregroundStyle(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                            
+                            Text("📍 \(viewModel.churchCeremony.churchAddress)")
+                                .font(.quicksandRegular(size: 14))
+                                .foregroundStyle(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                                .padding(.leading, 8)
+                            
+                            Text("📅 \(viewModel.churchCeremony.date)")
+                                .font(.quicksandRegular(size: 14))
+                                .foregroundStyle(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                                .padding(.leading, 8)
+                            
+                            Text("⏰ \(viewModel.churchCeremony.hour)")
+                                .font(.quicksandRegular(size: 14))
+                                .foregroundStyle(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                                .padding(.leading, 8)
+                            
+                            Text("💰 \(viewModel.churchCeremony.price)")
+                                .font(.quicksandRegular(size: 14))
+                                .foregroundStyle(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                                .padding(.leading, 8)
                         }
-                        Text(viewModel.churchCeremony.churchAddress)
-                    }.padding(.top, 24)
-                        .padding(.horizontal, 16)
-                }
+                        Spacer()
+                    }
+                    .padding(.all, 12)
+                    .background(Color.nudePrimary.opacity(0.4))
+                    .cornerRadius(4, corners: .allCorners)
+                    .padding(.horizontal, 16)
+                }.padding(.top, 20)
+                    .padding(.horizontal, 16)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

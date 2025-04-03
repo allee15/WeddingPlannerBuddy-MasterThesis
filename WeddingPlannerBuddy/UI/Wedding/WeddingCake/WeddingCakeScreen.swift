@@ -6,41 +6,47 @@
 //
 
 import SwiftUI
-//TODO: fixme
+import Kingfisher
+
 struct WeddingCakeScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: WeddingCakeViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Wedding cake") {
+            FullNavBarView(title: "Cake",
+                           rightButtonIcon: .icSettings) {
                 navigation.pop(animated: true)
+            } rightButtonAction: {
+                let vm = EditCakeViewModel(weddingCake: viewModel.weddingCake)
+                navigation.push(EditCakeScreen(viewModel: vm).asDestination(), animated: true)
             }
             
-            if viewModel.isLoading {
-                HStack {
-                    Spacer()
-                    LoaderView()
-                    Spacer()
-                }.padding(.horizontal, 16)
-            } else {
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(viewModel.weddingCake.id)
-                        Button {
-                            let new = WeddingCake(id: viewModel.weddingCake.id,
-                                                  name: "vredfsf",
-                                                  photo: "",
-                                                  description: "fesdfewsdc",
-                                                  price: 45)
-                            viewModel.editWeddingCake(new)
-                        } label: {
-                            Text("Edit")
-                        }
-                        Text(viewModel.weddingCake.description)
-                    }.padding(.top, 24)
-                        .padding(.horizontal, 16)
-                }
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Name: \(viewModel.weddingCake.name)")
+                        .font(.quicksandSemiBold(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text("Description: \(viewModel.weddingCake.description)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text("Price: \(viewModel.weddingCake.price)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    ZStack(alignment: .center) {
+                        Color.nudePrimary.opacity(0.4)
+                        KFImage(URL(string: viewModel.weddingCake.photo))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: UIScreen.main.bounds.height / 3)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 24)
+                    }
+                }.padding(.top, 20)
+                    .padding(.horizontal, 16)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

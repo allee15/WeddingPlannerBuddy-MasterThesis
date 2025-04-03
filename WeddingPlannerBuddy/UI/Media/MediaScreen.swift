@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct MediaScreen: View {
     @EnvironmentObject private var navigation: Navigation
     private let mainNavigation = EnvironmentObjects.navigation
@@ -29,31 +29,40 @@ struct MediaScreen: View {
                         Spacer()
                     }
                 case .failure(_):
-                    HStack {
-                        Text("You have to log in in order to access the content of this tab.")
-                            .foregroundStyle(Color.mainBlack)
-                            .font(.poppinsRegular(size: 16))
-                        Spacer()
-                    }.padding(.horizontal, 16)
-                        .padding(.top, 24)
+                    Spacer()
+                    EmptyStateView(title: "An error has occured.",
+                                   subtitle: "There has been an error while fetching data. Please try again later.")
                     Spacer()
                 case .value(let weddings):
-                    ScrollView(showsIndicators: false) {
-                        Text("Select a wedding for which you want to add memories from your gallery.")
-                            .multilineTextAlignment(.leading)
-                            .foregroundStyle(Color.mainBlack)
-                            .font(.poppinsSemiBold(size: 16))
-                            .padding(.horizontal, 16)
-                            .padding(.top, 24)
-                        
-                        VStack(alignment: .leading, spacing: 20) {
-                            ForEach(weddings, id: \.id) { wedding in
-                                WidgetView(title: wedding.name, icon: .icWedding) {
-                                    let vm = WeddingMediaViewModel(wedding: wedding)
-                                    mainNavigation?.push(WeddingMediaScreen(viewModel: vm).asDestination(), animated: true)
-                                }
-                            }
-                        }
+                    if weddings.isEmpty {
+                        Spacer()
+                        EmptyStateView(title: "📸 No memories here... yet!",
+                                       subtitle: "When a wedding is added, you’ll see all the details here.")
+                        Spacer()
+                    } else {
+                        VStack(alignment: .leading) {
+                            Text("Capture the magic!")
+                                .foregroundStyle(Color.mainBlack)
+                                .font(.quicksandBold(size: 18))
+                                .multilineTextAlignment(.leading)
+                                .padding(.bottom, 12)
+                                .padding(.horizontal, 16)
+                            
+                            Text("Every love story deserves to be told. Choose your wedding and start adding unforgettable memories! 💍💖")
+                                .foregroundStyle(Color.mainBlack)
+                                .font(.quicksandMedium(size: 16))
+                                .multilineTextAlignment(.leading)
+                                .padding(.bottom, 36)
+                                .padding(.horizontal, 16)
+                            
+                            Image(.imgMedia)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: UIScreen.main.bounds.width,
+                                       height: UIScreen.main.bounds.width)
+                            
+                            Spacer()
+                        }.padding(.top, 20)
                     }
                 }
             } else {
@@ -62,6 +71,13 @@ struct MediaScreen: View {
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .safeAreaInset(edge: .bottom) {
+                MainButtonView(text: "Select wedding") {
+                    let vm = ChooseWeddingViewModel(weddings: viewModel.weddings)
+                    mainNavigation?.push(ChooseWeddingScreen(viewModel: vm).asDestination(), animated: true)
+                }.padding(.horizontal, 16)
+                    .padding(.bottom, 12)
+            }
     }
 }
 

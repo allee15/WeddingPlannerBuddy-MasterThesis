@@ -11,47 +11,39 @@ struct AddParticipantScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @FocusState var focusedField: ProfileField?
     @StateObject var viewModel: AddParticipantViewModel
-    @Binding var showBottomSheet: Bool
     
     var body: some View {
         VStack(spacing: 0) {
+            LeftNavBarView(title: "Add guest") {
+                navigation.pop(animated: true)
+            }
+            
             ScrollView(showsIndicators: false) {
-                VStack(spacing: 32) {
-                    VStack(spacing: 40) {
-                        BottomSheetLineView()
-                        
-                        HStack {
-                            Text("Add participant")
-                                .font(.poppinsBold(size: 28))
-                                .foregroundStyle(Color.mainBlack)
-                                .padding(.horizontal, 20)
-                            Spacer()
-                        }
-                        
-                    }.padding(.top, 12)
+                VStack(alignment: .leading, spacing: 20) {
+                    FloatingField(text: $viewModel.name,
+                                  placeHolder: "Name",
+                                  leftIcon: .icFieldName)
+                    .submitLabel(.next)
+                    .focused($focusedField, equals: .name)
+                    .onSubmit {
+                        focusedField = .email
+                    }
                     
-                    VStack(alignment: .leading, spacing: 8) {
-                        FloatingField(text: $viewModel.name,
-                                      placeHolder: "Participant's name")
-                        .submitLabel(.next)
-                        .focused($focusedField, equals: .name)
-                        .onSubmit {
-                            focusedField = .email
-                        }
-                        
-                        FloatingField(text: $viewModel.email,
-                                      placeHolder: "Participant's email")
-                        .submitLabel(.return)
-                        .focused($focusedField, equals: .email)
-                        
-                        Spacer(minLength: 80)
-                    }.padding(.horizontal, 20)
+                    FloatingField(text: $viewModel.email,
+                                  placeHolder: "Email address",
+                                  leftIcon: .icFieldEmail)
+                    .submitLabel(.return)
+                    .focused($focusedField, equals: .email)
+                    
+                    Image(.imgAddGuest)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
                 } 
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .safeAreaInset(edge: .bottom, content: {
-                MainButtonView(text: "Save",
+                MainButtonView(text: "Add guest",
                               isDisabled: !viewModel.hasChanges()) {
                     viewModel.addParticipant()
                 }.padding([.horizontal, .bottom], 16)
@@ -62,13 +54,16 @@ struct AddParticipantScreen: View {
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .completed:
-                    self.showBottomSheet = false
-                    let toast = Toast(text: "Partipicant added successful!", textColor: Color.lightGreen)
+                    navigation.pop(animated: true)
+                    let toast = Toast(text: "Partipicant added successful!")
                     ToastManager.instance.show(toast)
                     
                 case .error:
-                    self.showBottomSheet = false
-                    let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                    navigation.pop(animated: true)
+                    let toast = Toast(text: "An error has occured. Please try again!",
+                                      textColor: Color.darkRed,
+                                      bg: Color.lightRed,
+                                      icon: .icToastRed)
                     ToastManager.instance.show(toast)
                 }
             }
