@@ -35,7 +35,7 @@ class EditBouquetViewModel: BaseViewModel {
     }
     
     func editBouquet() {
-        let bouquet = Bouquet(id: brideBouquet.id,
+        let bouquet = Bouquet(id: brideBouquet.id.isEmpty ? UUID().uuidString : brideBouquet.id,
                               link: newLink.isEmpty ? brideBouquet.link : newLink,
                               price: newPrice.isEmpty ? brideBouquet.price : Int(newPrice) ?? brideBouquet.price,
                               photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? brideBouquet.photo,

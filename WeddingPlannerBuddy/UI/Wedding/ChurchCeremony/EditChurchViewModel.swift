@@ -31,7 +31,7 @@ class EditChurchViewModel: BaseViewModel {
     }
     
     func editChurch() {
-        let church = ChurchCeremony(id: churchCeremony.id,
+        let church = ChurchCeremony(id: churchCeremony.id.isEmpty ? UUID().uuidString : churchCeremony.id,
                                     churchAddress: newAddress.isEmpty ? churchCeremony.churchAddress : newAddress,
                                     date: newDate == nil ? churchCeremony.date : newDate!.description,
                                     hour: newHour == nil ? churchCeremony.hour : newHour!.description,

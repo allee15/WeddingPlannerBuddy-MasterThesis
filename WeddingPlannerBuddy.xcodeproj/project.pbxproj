@@ -115,6 +115,12 @@
 		0F792FEC2D9E73AC00052790 /* EditCakeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FEB2D9E73AC00052790 /* EditCakeViewModel.swift */; };
 		0F792FEE2D9E997E00052790 /* ChooseWeddingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FED2D9E997E00052790 /* ChooseWeddingScreen.swift */; };
 		0F792FF02D9E99B000052790 /* ChooseWeddingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FEF2D9E99B000052790 /* ChooseWeddingViewModel.swift */; };
+		0F792FF22D9EBD9900052790 /* EditPartyScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FF12D9EBD9900052790 /* EditPartyScreen.swift */; };
+		0F792FF42D9EBDDD00052790 /* EditPartyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FF32D9EBDDD00052790 /* EditPartyViewModel.swift */; };
+		0F792FF62D9EBFD000052790 /* EditLegalScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FF52D9EBFD000052790 /* EditLegalScreen.swift */; };
+		0F792FF82D9EBFDE00052790 /* EditLegalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FF72D9EBFDE00052790 /* EditLegalViewModel.swift */; };
+		0F792FFA2D9EC20900052790 /* EditLivebandScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FF92D9EC20900052790 /* EditLivebandScreen.swift */; };
+		0F792FFC2D9EC29F00052790 /* EditLivebandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FFB2D9EC29F00052790 /* EditLivebandViewModel.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
 		0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */; };
@@ -293,6 +299,12 @@
 		0F792FEB2D9E73AC00052790 /* EditCakeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCakeViewModel.swift; sourceTree = "<group>"; };
 		0F792FED2D9E997E00052790 /* ChooseWeddingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseWeddingScreen.swift; sourceTree = "<group>"; };
 		0F792FEF2D9E99B000052790 /* ChooseWeddingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseWeddingViewModel.swift; sourceTree = "<group>"; };
+		0F792FF12D9EBD9900052790 /* EditPartyScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPartyScreen.swift; sourceTree = "<group>"; };
+		0F792FF32D9EBDDD00052790 /* EditPartyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPartyViewModel.swift; sourceTree = "<group>"; };
+		0F792FF52D9EBFD000052790 /* EditLegalScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLegalScreen.swift; sourceTree = "<group>"; };
+		0F792FF72D9EBFDE00052790 /* EditLegalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLegalViewModel.swift; sourceTree = "<group>"; };
+		0F792FF92D9EC20900052790 /* EditLivebandScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLivebandScreen.swift; sourceTree = "<group>"; };
+		0F792FFB2D9EC29F00052790 /* EditLivebandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLivebandViewModel.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -612,6 +624,8 @@
 			children = (
 				0F572F4F2D4C25FA003FD5E9 /* PartyLocationScreen.swift */,
 				0F572F502D4C25FA003FD5E9 /* PartyLocationViewModel.swift */,
+				0F792FF12D9EBD9900052790 /* EditPartyScreen.swift */,
+				0F792FF32D9EBDDD00052790 /* EditPartyViewModel.swift */,
 			);
 			path = PartyLocation;
 			sourceTree = "<group>";
@@ -621,6 +635,8 @@
 			children = (
 				0F572F592D4C2611003FD5E9 /* CivilMarriageScreen.swift */,
 				0F572F5A2D4C2611003FD5E9 /* CivilMarriageViewModel.swift */,
+				0F792FF52D9EBFD000052790 /* EditLegalScreen.swift */,
+				0F792FF72D9EBFDE00052790 /* EditLegalViewModel.swift */,
 			);
 			path = CivilMarriage;
 			sourceTree = "<group>";
@@ -659,6 +675,8 @@
 			children = (
 				0F572F6D2D4C2616003FD5E9 /* LiveBandScreen.swift */,
 				0F572F6E2D4C2616003FD5E9 /* LiveBandViewModel.swift */,
+				0F792FF92D9EC20900052790 /* EditLivebandScreen.swift */,
+				0F792FFB2D9EC29F00052790 /* EditLivebandViewModel.swift */,
 			);
 			path = LiveBand;
 			sourceTree = "<group>";
@@ -1048,6 +1066,7 @@
 				0FE515552CFF9D2A00CA9601 /* LoginScreen.swift in Sources */,
 				0F24D5D22CC1ABD400A833E1 /* ToastManager.swift in Sources */,
 				0F572F352D4C24AF003FD5E9 /* WeddingDressScreen.swift in Sources */,
+				0F792FF22D9EBD9900052790 /* EditPartyScreen.swift in Sources */,
 				0FE515582CFF9D4200CA9601 /* LoginViewModel.swift in Sources */,
 				0F572F612D4C2612003FD5E9 /* FoodMenuScreen.swift in Sources */,
 				0F572F5D2D4C2611003FD5E9 /* CivilMarriageViewModel.swift in Sources */,
@@ -1065,12 +1084,14 @@
 				0FE515502CFF9CDF00CA9601 /* ProfileViewModel.swift in Sources */,
 				0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */,
 				0F40D6AD2D48D3370020D433 /* Date+.swift in Sources */,
+				0F792FFC2D9EC29F00052790 /* EditLivebandViewModel.swift in Sources */,
 				0FE515692D0070E700CA9601 /* MainButtonView.swift in Sources */,
 				0FDE16AC2D1AE9D800C1580E /* GuestsListScreen.swift in Sources */,
 				0FDE167F2D072D7700C1580E /* ResetPasswordEmailScreen.swift in Sources */,
 				0F40D6B92D4915070020D433 /* LocationManager.swift in Sources */,
 				0F24D6002CC1BE4C00A833E1 /* ErrorInterceptor.swift in Sources */,
 				0FDE16662D05FB3200C1580E /* DeleteAccountScreen.swift in Sources */,
+				0F792FFA2D9EC20900052790 /* EditLivebandScreen.swift in Sources */,
 				0FDE16B62D1B10ED00C1580E /* GuestsListViewModel.swift in Sources */,
 				0FE5155C2CFF9D6200CA9601 /* RegisterScreen.swift in Sources */,
 				0FDE16852D08478F00C1580E /* TablesPlanScreen.swift in Sources */,
@@ -1093,6 +1114,7 @@
 				0FE515522CFF9CF100CA9601 /* ProfileScreen.swift in Sources */,
 				0F24D5DE2CC1B5A200A833E1 /* UserDefaultsService.swift in Sources */,
 				0FE515702D0320EB00CA9601 /* FirebaseService.swift in Sources */,
+				0F792FF42D9EBDDD00052790 /* EditPartyViewModel.swift in Sources */,
 				0F24D59A2CC0F8D600A833E1 /* TabBarItem.swift in Sources */,
 				0F24D61D2CC2A8AB00A833E1 /* ModalChooseOptionView.swift in Sources */,
 				0F24D6212CC2AAA500A833E1 /* NavBarView.swift in Sources */,
@@ -1122,6 +1144,7 @@
 				0FE515482CFF9C7B00CA9601 /* WeddingViewModel.swift in Sources */,
 				0F572F4D2D4C25F9003FD5E9 /* ChurchCeremonyScreen.swift in Sources */,
 				0FDE16BE2D1B349B00C1580E /* TablesApi.swift in Sources */,
+				0F792FF62D9EBFD000052790 /* EditLegalScreen.swift in Sources */,
 				0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */,
 				0FDE16B12D1AEADA00C1580E /* OtherWeddingsViewModel.swift in Sources */,
 				0F40D6B32D48D8E60020D433 /* Weather.swift in Sources */,
@@ -1162,6 +1185,7 @@
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
 				0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */,
 				0F40D6AF2D48D5F80020D433 /* WeatherApi.swift in Sources */,
+				0F792FF82D9EBFDE00052790 /* EditLegalViewModel.swift in Sources */,
 				0F572F672D4C2613003FD5E9 /* BarMenuViewModel.swift in Sources */,
 				0F792FE62D9E720200052790 /* EditChurchScreen.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
