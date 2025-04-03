@@ -20,6 +20,7 @@ class MediaViewModel: BaseViewModel {
     
     @Published var weddingsState = WeddigsState.loading
     @Published var user: User?
+    @Published var weddings: [Wedding] = []
     
     override init() {
         super.init()
@@ -46,6 +47,7 @@ class MediaViewModel: BaseViewModel {
                         self.weddingsState = .value([])
                     case .loggedIn(let user):
                         self.user = user
+                        self.weddings = user.weddings
                         self.weddingsState = .value(user.weddings)
                     }
                 }

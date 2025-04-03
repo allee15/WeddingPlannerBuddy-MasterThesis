@@ -19,7 +19,7 @@ class WeddingMediaViewModel: BaseViewModel {
     private let userService = UserService.shared
     private let weddingService = WeddingService.shared
     private let userDefaultsService = UserDefaultsService.shared
-    @Published var wedding: Wedding?
+    @Published var wedding: Wedding
     
     let eventSubject = PassthroughSubject<AddImageCompletion, Never>()
     
@@ -28,7 +28,7 @@ class WeddingMediaViewModel: BaseViewModel {
     }
     
     func addImage(image: UIImage?) {
-        guard let image = image, let wedding = wedding else {return}
+        guard let image = image else {return}
         
         weddingService.addImage(wedding: wedding, image: image)
             .receive(on: DispatchQueue.main)

@@ -6,41 +6,49 @@
 //
 
 import SwiftUI
-//TODO: fixme
+import Kingfisher
+
 struct WeddingDressScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: WeddingDressViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Wedding dress") {
+            FullNavBarView(title: "Dress",
+                           rightButtonIcon: .icSettings) {
                 navigation.pop(animated: true)
+            } rightButtonAction: {
+                let vm = EditDressViewModel(weddingDress: viewModel.weddingDress)
+                navigation.push(EditDressScreen(viewModel: vm).asDestination(), animated: true)
             }
             
-            if viewModel.isLoading {
-                HStack {
-                    Spacer()
-                    LoaderView()
-                    Spacer()
-                }.padding(.horizontal, 16)
-            } else {
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(viewModel.weddingDress.id)
-                        Button {
-                            let new = WeddingDress(id: viewModel.weddingDress.id,
-                                                   link: "",
-                                                   price: 23,
-                                                   photo: "",
-                                                   description: "sdfergs")
-                            viewModel.editWeddingDress(new)
-                        } label: {
-                            Text("Edit")
-                        }
-                        Text(viewModel.weddingDress.description)
-                    }.padding(.top, 24)
-                        .padding(.horizontal, 16)
-                }
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Description: \(viewModel.weddingDress.description)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text("Price: \(viewModel.weddingDress.price)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text(.init("Link: \(viewModel.weddingDress.link)"))
+                        .underline()
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                        .tint(Color.mainBlack)
+                    
+                    ZStack(alignment: .center) {
+                        Color.nudePrimary.opacity(0.4)
+                        KFImage(URL(string: viewModel.weddingDress.photo))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: UIScreen.main.bounds.height / 3)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 24)
+                    }
+                }.padding(.top, 20)
+                    .padding(.horizontal, 16)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

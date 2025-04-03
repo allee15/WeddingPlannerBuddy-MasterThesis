@@ -6,41 +6,49 @@
 //
 
 import SwiftUI
-//TODO: fixme
+import Kingfisher
+
 struct GroomSuitScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: GroomSuitViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Groom's suit") {
+            FullNavBarView(title: "Groom suit",
+                           rightButtonIcon: .icSettings) {
                 navigation.pop(animated: true)
+            } rightButtonAction: {
+                let vm = EditGroomViewModel(groomSuit: viewModel.groomSuit)
+                navigation.push(EditGroomScreen(viewModel: vm).asDestination(), animated: true)
             }
             
-            if viewModel.isLoading {
-                HStack {
-                    Spacer()
-                    LoaderView()
-                    Spacer()
-                }.padding(.horizontal, 16)
-            } else {
-                ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(viewModel.groomSuit.id)
-                        Button {
-                            let new = GroomSuit(id: viewModel.groomSuit.id,
-                                                link: "",
-                                                price: 34,
-                                                photo: "",
-                                                description: "fergsrtfedghevtfsd")
-                            viewModel.editGroomSuit(new)
-                        } label: {
-                            Text("Edit")
-                        }
-                        Text(viewModel.groomSuit.description)
-                    }.padding(.top, 24)
-                        .padding(.horizontal, 16)
-                }
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("Description: \(viewModel.groomSuit.description)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text("Price: \(viewModel.groomSuit.price)")
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                    
+                    Text(.init("Link: \(viewModel.groomSuit.link)"))
+                        .underline()
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                        .tint(Color.mainBlack)
+                    
+                    ZStack(alignment: .center) {
+                        Color.nudePrimary.opacity(0.4)
+                        KFImage(URL(string: viewModel.groomSuit.photo))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: UIScreen.main.bounds.height / 3)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 24)
+                    }
+                }.padding(.top, 20)
+                    .padding(.horizontal, 16)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

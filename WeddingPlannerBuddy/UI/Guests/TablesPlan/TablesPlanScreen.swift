@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct TablesPlanScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: TablesPlanViewModel
@@ -15,10 +15,12 @@ struct TablesPlanScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            FullNavBarView(title: "Tables plan") {
+            NavBarMultipleRightButtonsView(title: "Tables plan") {
                 navigation.pop(animated: true)
-            } rightButtonAction: {
+            } firstRightButtonAction: {
                 viewModel.addRectangle()
+            } secondRightButtonAction: {
+                viewModel.addTable()
             }
             
             ZoomableScrollView {
@@ -38,26 +40,24 @@ struct TablesPlanScreen: View {
                     AddParticipantScreen(viewModel: vm, showBottomSheet: $showBottomSheet)
                 }
             }
-            
-            MainButtonView(text: "Add new table") {
-                viewModel.addTable()
-            }.padding(.horizontal, 16)
-                .padding(.bottom, 24)
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .tableAdded:
-                    let toast = Toast(text: "Table added successful!", textColor: Color.lightGreen)
+                    let toast = Toast(text: "Table added successful!")
                     ToastManager.instance.show(toast)
                     
                 case .rectangleAdded:
-                    let toast = Toast(text: "Object added successful!", textColor: Color.lightGreen)
+                    let toast = Toast(text: "Object added successful!")
                     ToastManager.instance.show(toast)
                     
                 case .failed:
-                    let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                    let toast = Toast(text: "An error has occured. Please try again!",
+                                      textColor: Color.darkRed,
+                                      bg: Color.lightRed,
+                                      icon: .icToastRed)
                     ToastManager.instance.show(toast)
                 }
             }
@@ -95,12 +95,13 @@ struct DraggableTable: View {
         ZStack {
             if table.isObject {
                 Rectangle()
-                    .fill(Color.mainPink)
-                    .frame(width: 52, height: 38)
+                    .fill(Color.greenSecondary)
+                    .frame(width: 80, height: 35)
+                    
             } else {
                 Circle()
-                    .fill(Color.mainPink)
-                    .frame(width: 52, height: 52)
+                    .fill(Color.nudeSecondary)
+                    .frame(width: 56, height: 56)
             }
             
             Button {
@@ -109,8 +110,8 @@ struct DraggableTable: View {
                 }
             } label: {
                 Text(table.label)
-                    .font(.poppinsRegular(size: 14))
-                    .foregroundColor(Color.white)
+                    .font(.quicksandMedium(size: 16))
+                    .foregroundColor(Color.mainWhite)
                     .multilineTextAlignment(.center)
             }
         }

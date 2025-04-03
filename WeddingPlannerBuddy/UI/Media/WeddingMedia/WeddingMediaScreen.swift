@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 import StoreKit
-//TODO: fixme
+
 struct WeddingMediaScreen: View {
     @EnvironmentObject private var navigation: Navigation
     private let mainNavigation = EnvironmentObjects.navigation
@@ -35,115 +35,100 @@ struct WeddingMediaScreen: View {
     var body: some View {
         VStack(spacing: 0) {
             if showNavBar {
-                LeftNavBarView(title: "Your weddings") {
+                LeftNavBarView(title: viewModel.wedding.name) {
                     navigation.pop(animated: true)
                 }
             }
             
-            if let wedding = viewModel.wedding {
-                ScrollView(showsIndicators: false) {
-                    GeometryReader { proxy in
-                        Color.clear
-                            .onAppear {
-                                scrollOffset = proxy.frame(in: .global).minY
-                                previousScrollOffset = scrollOffset
-                            }
-                            .onChange(of: proxy.frame(in: .global).minY) { _, value in
-                                let scrollDifference = value - previousScrollOffset
-                                scrollOffset = value
-                                
-                                if (abs(value) + viewportHeight) >= totalViewHeight {
-                                    // is at the bottom
-                                    if !showNavBar && !showBottomBar {
-                                        showNavBar = true
-                                        showBottomBar = true
+            ScrollView(showsIndicators: false) {
+                GeometryReader { proxy in
+                    Color.clear
+                        .onAppear {
+                            scrollOffset = proxy.frame(in: .global).minY
+                            previousScrollOffset = scrollOffset
+                        }
+                        .onChange(of: proxy.frame(in: .global).minY) { _, value in
+                            let scrollDifference = value - previousScrollOffset
+                            scrollOffset = value
+                            
+                            if (abs(value) + viewportHeight) >= totalViewHeight {
+                                // is at the bottom
+                                if !showNavBar && !showBottomBar {
+                                    showNavBar = true
+                                    showBottomBar = true
+                                }
+                            } else if value > 0 {
+                                // scroll to top
+                                withAnimation {
+                                    showNavBar = true
+                                    showBottomBar = true
+                                }
+                            } else if abs(scrollDifference) > 10 {
+                                if scrollOffset < previousScrollOffset {
+                                    // scroll to bottom
+                                    if showNavBar && showBottomBar {
+                                        withAnimation {
+                                            showNavBar = false
+                                            showBottomBar = false
+                                        }
                                     }
-                                } else if value > 0 {
+                                } else {
                                     // scroll to top
                                     withAnimation {
                                         showNavBar = true
                                         showBottomBar = true
                                     }
-                                } else if abs(scrollDifference) > 10 {
-                                    if scrollOffset < previousScrollOffset {
-                                        // scroll to bottom
-                                        if showNavBar && showBottomBar {
-                                            withAnimation {
-                                                showNavBar = false
-                                                showBottomBar = false
-                                            }
-                                        }
-                                    } else {
-                                        // scroll to top
-                                        withAnimation {
-                                            showNavBar = true
-                                            showBottomBar = true
-                                        }
-                                    }
-                                }
-                                previousScrollOffset = scrollOffset
-                            }
-                    }.frame(height: 0)
-                    
-                    VStack(spacing: 0) {
-                        if !wedding.images.isEmpty {
-                            LazyVGrid(columns: columns, spacing: 4) {
-                                ForEach(wedding.images, id: \.self) { image in
-                                    Button {
-                                        mainNavigation?.push(ZoomImageScreen(imageToZoom: image).asDestination(),
-                                                             animated: true)
-                                    } label: {
-                                        KFImage(URL(string: image))
-                                            .resizable()
-                                            .placeholder {
-                                                Image(.imgPlaceholder)
-                                                    .resizable()
-                                                    .aspectRatio(1, contentMode: .fit)
-                                                    .frame(width: (UIScreen.main.bounds.width - 38) / 3)
-                                            }
-                                            .centerCropped()
-                                            .aspectRatio(1, contentMode: .fit)
-                                            .frame(width: (UIScreen.main.bounds.width - 38) / 3)
-                                            .cornerRadius(4)
-                                            .padding(.horizontal, 4)
-                                    }
                                 }
                             }
-                        } else {
-                            HStack {
-                                Text("No images added yet. Time for you to add the first image!")
-                                    .foregroundStyle(Color.mainBlack)
-                                    .font(.poppinsRegular(size: 16))
-                                Spacer()
-                            }.padding(.horizontal, 16)
-                                .padding(.top, 24)
-                            Spacer()
+                            previousScrollOffset = scrollOffset
                         }
-                    }.padding(.top, 24)
-                        .padding(.horizontal, 16)
-                }.safeAreaInset(edge: .bottom) {
-                    if showBottomBar {
-                        MainButtonView(text: "Add image") {
-                            self.addPhoto = true
-                        }.padding(.horizontal, 16)
-                            .padding(.bottom, 24)
-                            .sheet(isPresented: $addPhoto) {
-                                ImagePickerView(sourceType: self.$imageSource) { image in
-                                    viewModel.addImage(image: image)
+                }.frame(height: 0)
+                
+                VStack(spacing: 0) {
+                    if !viewModel.wedding.images.isEmpty {
+                        LazyVGrid(columns: columns, spacing: 4) {
+                            ForEach(viewModel.wedding.images, id: \.self) { image in
+                                Button {
+                                    mainNavigation?.push(ZoomImageScreen(imageToZoom: image).asDestination(),
+                                                         animated: true)
+                                } label: {
+                                    KFImage(URL(string: image))
+                                        .resizable()
+                                        .placeholder {
+                                            Image(.imgPlaceholder)
+                                                .resizable()
+                                                .aspectRatio(1, contentMode: .fit)
+                                                .frame(width: (UIScreen.main.bounds.width - 38) / 3)
+                                        }
+                                        .centerCropped()
+                                        .aspectRatio(1, contentMode: .fit)
+                                        .frame(width: (UIScreen.main.bounds.width - 38) / 3)
+                                        .cornerRadius(4)
+                                        .padding(.horizontal, 4)
                                 }
-                                .ignoresSafeArea()
                             }
+                        }
+                    } else {
+                        Spacer()
+                        EmptyStateView(title: "📸 No memories here... yet!",
+                                       subtitle: "Select your wedding and start adding beautiful moments to your gallery. 💍✨")
+                        Spacer()
                     }
+                }.padding(.top, 24)
+                    .padding(.horizontal, 16)
+            }.safeAreaInset(edge: .bottom) {
+                if showBottomBar {
+                    MainButtonView(text: "Add image") {
+                        self.addPhoto = true
+                    }.padding(.horizontal, 16)
+                        .padding(.bottom, 24)
+                        .sheet(isPresented: $addPhoto) {
+                            ImagePickerView(sourceType: self.$imageSource) { image in
+                                viewModel.addImage(image: image)
+                            }
+                            .ignoresSafeArea()
+                        }
                 }
-            } else {
-                HStack {
-                    Text("An error has been encountered. Please refresh the page.")
-                        .foregroundStyle(Color.mainBlack)
-                        .font(.poppinsRegular(size: 16))
-                    Spacer()
-                }.padding(.horizontal, 16)
-                    .padding(.top, 24)
-                Spacer()
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

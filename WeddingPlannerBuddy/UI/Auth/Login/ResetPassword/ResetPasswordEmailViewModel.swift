@@ -24,7 +24,6 @@ class ResetPasswordEmailViewModel: BaseViewModel {
     
     func startTimer() {
         UserDefaults.standard.set(startTime, forKey: timerKey)
-        
         self.timeRemaining = initialTime
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
             if self.timeRemaining > 0 {

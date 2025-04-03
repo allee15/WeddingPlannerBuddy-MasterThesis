@@ -6,26 +6,30 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct RegisterScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject private var viewModel = RegisterViewModel()
     @FocusState var focusedField: LoginField?
     
     var body: some View {
-        VStack(spacing: 36) {
-            NavBarView()
+        VStack(alignment: .leading, spacing: 0) {
+            LeftNavBarView(title: "Register") {
+                navigation.pop(animated: true)
+            }
             
             Text("Wedding Planner Buddy")
                 .foregroundStyle(Color.mainBlack)
                 .font(.poppinsBold(size: 28))
                 .padding(.horizontal, 16)
+                .padding(.vertical, 20)
             
             Text("Let's create your account. Fill in the fields below to let the big day's planning begin.")
                 .foregroundStyle(Color.mainBlack)
                 .font(.poppinsRegular(size: 14))
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, 16)
+                .padding(.bottom, 20)
             
             VStack(spacing: 20) {
                 FloatingField(text: $viewModel.email,
@@ -50,22 +54,32 @@ struct RegisterScreen: View {
                 .focused($focusedField, equals: .password)
                 
                 VStack(spacing: 4) {
-                    HStack(alignment: .top) {
-                        Toggle(isOn: $viewModel.termsAccepted) {
-                            Group {
-                                Text("I read and agree to ")
-                                    .foregroundColor(.mainBlack)
-                                + Text("The Terms and Conditions")
-                                    .foregroundColor(Color.mainPink)
-                            }.font(.poppinsRegular(size: 14))
-                                .onTapGesture {
-                                    let webview = WebViewScreen(
-                                        title: "Terms and Conditions",
-                                        url: URL(string: "https://www.termsfeed.com/live/45bb0a23-92d0-4964-9cd4-d0b3c6a32bc1")!
-                                    ).asDestination()
-                                    navigation.push(webview, animated: true)
-                                }
-                        }.toggleStyle(CheckboxToggleStyle())
+                    HStack(alignment: .top, spacing: 8) {
+                        Button {
+                            viewModel.termsAccepted.toggle()
+                        } label: {
+                            Image(viewModel.termsAccepted ? .icAcceptedTerms : .icUnacceptedTerms)
+                                .resizable()
+                                .renderingMode(.template)
+                                .foregroundStyle(Color.mainBlack)
+                                .frame(width: 20, height: 20)
+                        }
+                        
+                        Group {
+                            Text("I have read and agreed to ")
+                                .foregroundColor(.mainBlack)
+                            + Text("The Terms and Conditions")
+                                .underline()
+                                .foregroundColor(Color.greenSecondary)
+                        }.font(.quicksandMedium(size: 14))
+                            .onTapGesture {
+                                let webview = WebViewScreen(
+                                    title: "Terms and Conditions",
+                                    url: URL(string: "https://www.termsfeed.com/live/45bb0a23-92d0-4964-9cd4-d0b3c6a32bc1")!
+                                ).asDestination()
+                                navigation.push(webview, animated: true)
+                            }
+                        
                         Spacer()
                     }
                     
@@ -79,16 +93,18 @@ struct RegisterScreen: View {
                         .padding(.top, 4)
                     }
                 }.padding(.horizontal, 16)
-                
-                MainButtonView(text: "Create account") {
-                    viewModel.allFieldsAreValid()
-                }.padding(.horizontal, 16)
             }
             
             Spacer()
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.horizontal, .bottom])
+            .safeAreaInset(edge: .bottom, content: {
+                MainButtonView(text: "Create account") {
+                    viewModel.allFieldsAreValid()
+                }.padding(.horizontal, 16)
+                    .padding(.bottom, 8)
+            })
             .onChange(of: viewModel.email) { _, _ in
                 viewModel.emailError = nil
             }
