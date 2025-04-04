@@ -41,11 +41,17 @@ class EditGroomViewModel: BaseViewModel {
                              photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? groomSuit.photo,
                              description: newDescription.isEmpty ? groomSuit.description : newDescription)
         self.weddingService.editGroomSuit(groomSuit: suit)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.eventSubject.send(.error)
+                default:
+                    break
+                }
             } receiveValue: { [weak self] groomSuit in
                 guard let self else {return}
                 self.groomSuit = groomSuit
+                self.eventSubject.send(.completed)
             }.store(in: &bag)
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct EditLivebandScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: EditLivebandViewModel
+    @State private var showHourPicker: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -27,26 +28,33 @@ struct EditLivebandScreen: View {
                     
                     FloatingField(text: $viewModel.newPrice,
                                   placeHolder: "Price")
-                    //TODO: fixme
-//                    VStack(spacing: 0) {
-//                        DateView(
-//                            placeHolder: "Select hour",
-//                            date: $viewModel.newHour,
-//                            singleDateSelected: viewModel.newHour) {
-//                                showDatePicker = true
-//                            }.background(Color.nudePrimary.opacity(0.5))
-//                            .cornerRadius(8, corners: [.topLeft, .topRight])
-//                            .padding(.top, 16)
-//
-//                        DividerView(color: Color.nudePrimary)
-//
-//                        DatePicker("", selection: $viewModel.newHour,
-//                                   in: (Date())..., displayedComponents: .date)
-//                            .datePickerStyle(WheelDatePickerStyle())
-//                            .accentColor(Color.greenSecondary)
-//                            .background(Color.nudePrimary.opacity(0.35))
-//                            .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
-//                    }
+                    
+                    VStack(spacing: 0) {
+                        DateView(
+                            placeHolder: "Select hour",
+                            date: $viewModel.newHour,
+                            singleDateSelected: viewModel.newHour,
+                            showHour: true) {
+                                if !showHourPicker {
+                                    showHourPicker = true
+                                } else {
+                                    showHourPicker = false
+                                }
+                            }.background(Color.nudePrimary.opacity(0.5))
+                            .cornerRadius(8, corners: [.topLeft, .topRight])
+                            .padding(.top, 16)
+
+                        DividerView(color: Color.nudePrimary)
+
+                        if showHourPicker {
+                            DatePicker("", selection: $viewModel.newHour,
+                                       in: (Date())..., displayedComponents: .hourAndMinute)
+                            .datePickerStyle(WheelDatePickerStyle())
+                            .accentColor(Color.greenSecondary)
+                            .background(Color.nudePrimary.opacity(0.35))
+                            .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
+                        }
+                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 20)

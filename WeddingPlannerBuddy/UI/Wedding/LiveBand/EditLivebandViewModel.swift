@@ -21,8 +21,7 @@ class EditLivebandViewModel: BaseViewModel {
     @Published var newName: String = ""
     @Published var newPrice: String = ""
     @Published var newDescription: String = ""
-    @Published var newHour: Date? = nil
-    @Published var newDate: Date? = nil
+    @Published var newHour = Date()
     
     let eventSubject = PassthroughSubject<EditLiveBandState, Never>()
     
@@ -34,14 +33,20 @@ class EditLivebandViewModel: BaseViewModel {
         let band = LiveBand(id: liveBand.id.isEmpty ? UUID().uuidString : liveBand.id,
                             name: newName.isEmpty ? liveBand.name : newName,
                             price: newPrice.isEmpty ? liveBand.price : Int(newPrice) ?? liveBand.price,
-                            hour: newHour == nil ? liveBand.hour : newHour!.description,
+                            hour: newHour == Date() ? liveBand.hour : newHour.description,
                             details: newDescription.isEmpty ? liveBand.details : newDescription)
         self.weddingService.editLiveBand(liveBand: band)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.eventSubject.send(.error)
+                default:
+                    break
+                }
             } receiveValue: { [weak self] liveBand in
                 guard let self else {return}
                 self.liveBand = liveBand
+                self.eventSubject.send(.completed)
             }.store(in: &bag)
     }
 }

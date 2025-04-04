@@ -22,9 +22,6 @@ extension Color {
     static let lightGreen = Color(hex: "#DCF7EF")
     static let lightRed = Color(hex: "#EFD0D0")
     static let darkRed = Color(hex: "#B21010")
-    
-    static let mainPink = Color(hex: "#d75c77")
-    
     static let bottomSheetLine = Color(hex: "#D5D6D8")
 }
 

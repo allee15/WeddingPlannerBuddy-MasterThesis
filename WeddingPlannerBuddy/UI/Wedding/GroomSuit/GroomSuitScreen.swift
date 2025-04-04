@@ -65,7 +65,7 @@ struct GroomSuitScreen: View {
                     MainButtonView(text: "Start") {
                         let vm = EditGroomViewModel(groomSuit: viewModel.groomSuit)
                         navigation.push(EditGroomScreen(viewModel: vm).asDestination(), animated: true)
-                    }
+                    }.padding(.horizontal, 16)
                 }
             }
     }

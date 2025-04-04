@@ -86,7 +86,7 @@ struct LoginScreen: View {
                 case .login:
                     break
                     
-                case .failure(let error):
+                case .failure(_):
                     let modal = ModalChooseOptionView(title: "Error",
                                                       description: "An error has occured. Please try again.",
                                                       topButtonText: "Try again") {

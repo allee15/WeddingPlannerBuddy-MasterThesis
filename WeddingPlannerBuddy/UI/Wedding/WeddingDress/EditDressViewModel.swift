@@ -41,8 +41,13 @@ class EditDressViewModel: BaseViewModel {
                                  photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? weddingDress.photo,
                                  description: newDescription.isEmpty ? weddingDress.description : newDescription)
         self.weddingService.editWeddingDress(weddingDress: dress)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.eventSubject.send(.error)
+                default:
+                    break
+                }
             } receiveValue: { [weak self] weddingDress in
                 guard let self else {return}
                 self.weddingDress = weddingDress

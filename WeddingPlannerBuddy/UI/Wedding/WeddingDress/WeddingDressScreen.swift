@@ -65,7 +65,7 @@ struct WeddingDressScreen: View {
                     MainButtonView(text: "Start") {
                         let vm = EditDressViewModel(weddingDress: viewModel.weddingDress)
                         navigation.push(EditDressScreen(viewModel: vm).asDestination(), animated: true)
-                    }
+                    }.padding(.horizontal, 16)
                 }
             }
     }

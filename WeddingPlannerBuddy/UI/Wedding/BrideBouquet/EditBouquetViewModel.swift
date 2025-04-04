@@ -41,11 +41,17 @@ class EditBouquetViewModel: BaseViewModel {
                               photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? brideBouquet.photo,
                               description: newDescription.isEmpty ? brideBouquet.description : newDescription)
         self.weddingService.editBouquet(brideBouquet: bouquet)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.eventSubject.send(.error)
+                default:
+                    break
+                }
             } receiveValue: { [weak self] brideBouquet in
                 guard let self else {return}
                 self.brideBouquet = brideBouquet
+                self.eventSubject.send(.completed)
             }.store(in: &bag)
     }
 }

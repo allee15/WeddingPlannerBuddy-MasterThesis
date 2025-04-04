@@ -77,7 +77,7 @@ struct PartyLocationScreen: View {
                     MainButtonView(text: "Start") {
                         let vm = EditPartyViewModel(partyLocation: viewModel.partyLocation)
                         navigation.push(EditPartyScreen(viewModel: vm).asDestination(), animated: true)
-                    }
+                    }.padding(.horizontal, 16)
                 }
             }
     }

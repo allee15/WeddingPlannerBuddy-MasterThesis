@@ -36,18 +36,4 @@ extension Font {
     static func quicksandMedium(size: CGFloat) -> Font {
         return Font.custom(QuicksandFontNames.medium.rawValue, size: size)
     }
-    
-    //TODO: fixme
-    
-    static func poppinsBold(size: CGFloat) -> Font {
-        return Font.custom(QuicksandFontNames.bold.rawValue, size: size)
-    }
-    
-    static func poppinsRegular(size: CGFloat) -> Font {
-        return Font.custom(QuicksandFontNames.regular.rawValue, size: size)
-    }
-        
-    static func poppinsSemiBold(size: CGFloat) -> Font {
-        return Font.custom(QuicksandFontNames.semiBold.rawValue, size: size)
-    }
 }

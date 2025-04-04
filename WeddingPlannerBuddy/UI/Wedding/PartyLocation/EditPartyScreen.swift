@@ -12,6 +12,8 @@ struct EditPartyScreen: View {
     @StateObject var viewModel: EditPartyViewModel
     @State private var addPhoto: Bool = false
     @State private var imageSource: UIImagePickerController.SourceType = .photoLibrary
+    @State var showDatePicker: Bool = false
+    @State var showHourPicker: Bool = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -29,46 +31,58 @@ struct EditPartyScreen: View {
                     
                     FloatingField(text: $viewModel.newPrice,
                                   placeHolder: "Price")
-                    //TODO: fixme
-//                    VStack(spacing: 0) {
-//                        DateView(
-//                            placeHolder: "Select date",
-//                            date: $viewModel.newDate,
-//                            singleDateSelected: viewModel.newDate) {
-//                                showDatePicker = true
-//                            }.background(Color.nudePrimary.opacity(0.5))
-//                            .cornerRadius(8, corners: [.topLeft, .topRight])
-//                            .padding(.top, 16)
-//
-//                        DividerView(color: Color.nudePrimary)
-//
-//                        DatePicker("", selection: $viewModel.newDate,
-//                                   in: (Date())..., displayedComponents: .date)
-//                            .datePickerStyle(WheelDatePickerStyle())
-//                            .accentColor(Color.greenSecondary)
-//                            .background(Color.nudePrimary.opacity(0.35))
-//                            .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
-//                    }
                     
-//                    VStack(spacing: 0) {
-//                        DateView(
-//                            placeHolder: "Select hour",
-//                            date: $viewModel.newHour,
-//                            singleDateSelected: viewModel.newHour) {
-//                                showDatePicker = true
-//                            }.background(Color.nudePrimary.opacity(0.5))
-//                            .cornerRadius(8, corners: [.topLeft, .topRight])
-//                            .padding(.top, 16)
-//
-//                        DividerView(color: Color.nudePrimary)
-//
-//                        DatePicker("", selection: $viewModel.newHour,
-//                                   in: (Date())..., displayedComponents: .date)
-//                            .datePickerStyle(WheelDatePickerStyle())
-//                            .accentColor(Color.greenSecondary)
-//                            .background(Color.nudePrimary.opacity(0.35))
-//                            .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
-//                    }
+                    VStack(spacing: 0) {
+                        VStack(spacing: 0) {
+                            DateView(
+                                placeHolder: "Select date",
+                                date: $viewModel.newDate,
+                                singleDateSelected: viewModel.newDate) {
+                                    if !showDatePicker {
+                                        showDatePicker = true
+                                    } else {
+                                        showDatePicker = false
+                                    }
+                                }.background(Color.nudePrimary.opacity(0.5))
+                                .cornerRadius(8, corners: [.topLeft, .topRight])
+
+                            DividerView(color: Color.nudePrimary)
+
+                            if showDatePicker {
+                                DatePicker("", selection: $viewModel.newDate,
+                                           in: (Date())..., displayedComponents: .date)
+                                .datePickerStyle(WheelDatePickerStyle())
+                                .accentColor(Color.greenSecondary)
+                                .background(Color.nudePrimary.opacity(0.35))
+                                .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
+                            }
+                        }
+                        
+                        VStack(spacing: 0) {
+                            DateView(
+                                placeHolder: "Select hour",
+                                date: $viewModel.newHour,
+                                singleDateSelected: viewModel.newHour,
+                                showHour: true) {
+                                    if !showHourPicker {
+                                        showHourPicker = true
+                                    } else {
+                                        showHourPicker = false
+                                    }
+                                }.background(Color.nudePrimary.opacity(0.5))
+                            
+                            DividerView(color: Color.nudePrimary)
+                            
+                            if showHourPicker {
+                                DatePicker("", selection: $viewModel.newHour,
+                                           in: (Date())..., displayedComponents: .hourAndMinute)
+                                .datePickerStyle(WheelDatePickerStyle())
+                                .accentColor(Color.greenSecondary)
+                                .background(Color.nudePrimary.opacity(0.35))
+                                .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
+                            }
+                        }
+                    }
                 }
                 .padding(.horizontal, 16)
                 .padding(.top, 20)

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -66,9 +66,6 @@
 		0F40D6B12D48D60E0020D433 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6B02D48D60E0020D433 /* WeatherService.swift */; };
 		0F40D6B32D48D8E60020D433 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6B22D48D8E60020D433 /* Weather.swift */; };
 		0F40D6B92D4915070020D433 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F40D6B82D4915070020D433 /* LocationManager.swift */; };
-		0F572F182D4BBF84003FD5E9 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F572F172D4BBF84003FD5E9 /* WidgetKit.framework */; };
-		0F572F1A2D4BBF84003FD5E9 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F572F192D4BBF84003FD5E9 /* SwiftUI.framework */; };
-		0F572F2B2D4BBF86003FD5E9 /* WeddingPlannerBuddyWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 0F572F162D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0F572F322D4C22D4003FD5E9 /* WeddingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F312D4C22D3003FD5E9 /* WeddingDetails.swift */; };
 		0F572F352D4C24AF003FD5E9 /* WeddingDressScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F342D4C24AF003FD5E9 /* WeddingDressScreen.swift */; };
 		0F572F372D4C24BB003FD5E9 /* WeddingDressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F362D4C24BB003FD5E9 /* WeddingDressViewModel.swift */; };
@@ -121,6 +118,9 @@
 		0F792FF82D9EBFDE00052790 /* EditLegalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FF72D9EBFDE00052790 /* EditLegalViewModel.swift */; };
 		0F792FFA2D9EC20900052790 /* EditLivebandScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FF92D9EC20900052790 /* EditLivebandScreen.swift */; };
 		0F792FFC2D9EC29F00052790 /* EditLivebandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F792FFB2D9EC29F00052790 /* EditLivebandViewModel.swift */; };
+		0F79300C2D9FEF5100052790 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79300B2D9FEF5100052790 /* DateView.swift */; };
+		0F79300E2DA0147000052790 /* EditDateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79300D2DA0147000052790 /* EditDateScreen.swift */; };
+		0F7930102DA04AA100052790 /* EditDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79300F2DA04AA000052790 /* EditDateViewModel.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
 		0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */; };
@@ -176,16 +176,6 @@
 		9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A697C2CC0420500B19BF1 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		0F572F292D4BBF86003FD5E9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9B1A69622CC041A900B19BF1 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0F572F152D4BBF84003FD5E9;
-			remoteInfo = WeddingPlannerBuddyWidgetExtension;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		0F572F2C2D4BBF86003FD5E9 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -193,7 +183,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				0F572F2B2D4BBF86003FD5E9 /* WeddingPlannerBuddyWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -250,7 +239,6 @@
 		0F40D6B02D48D60E0020D433 /* WeatherService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		0F40D6B22D48D8E60020D433 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		0F40D6B82D4915070020D433 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		0F572F162D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WeddingPlannerBuddyWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F572F172D4BBF84003FD5E9 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		0F572F192D4BBF84003FD5E9 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		0F572F312D4C22D3003FD5E9 /* WeddingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingDetails.swift; sourceTree = "<group>"; };
@@ -305,6 +293,9 @@
 		0F792FF72D9EBFDE00052790 /* EditLegalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLegalViewModel.swift; sourceTree = "<group>"; };
 		0F792FF92D9EC20900052790 /* EditLivebandScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLivebandScreen.swift; sourceTree = "<group>"; };
 		0F792FFB2D9EC29F00052790 /* EditLivebandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLivebandViewModel.swift; sourceTree = "<group>"; };
+		0F79300B2D9FEF5100052790 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
+		0F79300D2DA0147000052790 /* EditDateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateScreen.swift; sourceTree = "<group>"; };
+		0F79300F2DA04AA000052790 /* EditDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateViewModel.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -361,30 +352,7 @@
 		9B1A697C2CC0420500B19BF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		0F572F2F2D4BBF86003FD5E9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 0F572F152D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		0F572F1B2D4BBF84003FD5E9 /* WeddingPlannerBuddyWidget */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (0F572F2F2D4BBF86003FD5E9 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = WeddingPlannerBuddyWidget; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
-		0F572F132D4BBF84003FD5E9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				0F572F1A2D4BBF84003FD5E9 /* SwiftUI.framework in Frameworks */,
-				0F572F182D4BBF84003FD5E9 /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9B1A69672CC041AA00B19BF1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -534,6 +502,7 @@
 				0FDE16B72D1B13D000C1580E /* ChooseFolderBottomSheetView.swift */,
 				0F792FBE2D9AC40700052790 /* WidgetView.swift */,
 				0F792FC92D9AF63700052790 /* EmptyStateView.swift */,
+				0F79300B2D9FEF5100052790 /* DateView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -782,6 +751,8 @@
 			children = (
 				0FE515452CFF9C5A00CA9601 /* WeddingScreen.swift */,
 				0FE515472CFF9C7B00CA9601 /* WeddingViewModel.swift */,
+				0F79300D2DA0147000052790 /* EditDateScreen.swift */,
+				0F79300F2DA04AA000052790 /* EditDateViewModel.swift */,
 				0F572F802D50003E003FD5E9 /* PlaylistScreen.swift */,
 				0FDE16D72D1F53E100C1580E /* PlaylistViewModel.swift */,
 				0F572F332D4C249A003FD5E9 /* WeddingDress */,
@@ -872,7 +843,6 @@
 			isa = PBXGroup;
 			children = (
 				9B1A696C2CC041AA00B19BF1 /* WeddingPlannerBuddy */,
-				0F572F1B2D4BBF84003FD5E9 /* WeddingPlannerBuddyWidget */,
 				0FE5156A2D02DFEF00CA9601 /* Frameworks */,
 				9B1A696B2CC041AA00B19BF1 /* Products */,
 			);
@@ -882,7 +852,6 @@
 			isa = PBXGroup;
 			children = (
 				9B1A696A2CC041AA00B19BF1 /* WeddingPlannerBuddy.app */,
-				0F572F162D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -918,28 +887,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0F572F152D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0F572F302D4BBF86003FD5E9 /* Build configuration list for PBXNativeTarget "WeddingPlannerBuddyWidgetExtension" */;
-			buildPhases = (
-				0F572F122D4BBF84003FD5E9 /* Sources */,
-				0F572F132D4BBF84003FD5E9 /* Frameworks */,
-				0F572F142D4BBF84003FD5E9 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				0F572F1B2D4BBF84003FD5E9 /* WeddingPlannerBuddyWidget */,
-			);
-			name = WeddingPlannerBuddyWidgetExtension;
-			packageProductDependencies = (
-			);
-			productName = WeddingPlannerBuddyWidgetExtension;
-			productReference = 0F572F162D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		9B1A69692CC041AA00B19BF1 /* WeddingPlannerBuddy */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9B1A69782CC041AC00B19BF1 /* Build configuration list for PBXNativeTarget "WeddingPlannerBuddy" */;
@@ -952,7 +899,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				0F572F2A2D4BBF86003FD5E9 /* PBXTargetDependency */,
 			);
 			name = WeddingPlannerBuddy;
 			packageProductDependencies = (
@@ -982,9 +928,6 @@
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
-					0F572F152D4BBF84003FD5E9 = {
-						CreatedOnToolsVersion = 16.1;
-					};
 					9B1A69692CC041AA00B19BF1 = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -1012,19 +955,11 @@
 			projectRoot = "";
 			targets = (
 				9B1A69692CC041AA00B19BF1 /* WeddingPlannerBuddy */,
-				0F572F152D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		0F572F142D4BBF84003FD5E9 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9B1A69682CC041AA00B19BF1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1044,13 +979,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0F572F122D4BBF84003FD5E9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9B1A69662CC041AA00B19BF1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1155,6 +1083,7 @@
 				0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
 				0FDE16AF2D1AEAC100C1580E /* OtherWeddingsScreen.swift in Sources */,
+				0F7930102DA04AA100052790 /* EditDateViewModel.swift in Sources */,
 				0F572F3D2D4C2591003FD5E9 /* BrideBouquetViewModel.swift in Sources */,
 				0F792FEA2D9E736300052790 /* EditCakeScreen.swift in Sources */,
 				0FDE16B82D1B13D000C1580E /* ChooseFolderBottomSheetView.swift in Sources */,
@@ -1176,10 +1105,12 @@
 				0FDE16812D072D9100C1580E /* ResetPasswordEmailViewModel.swift in Sources */,
 				0F24D60C2CC299E500A833E1 /* LoaderView.swift in Sources */,
 				0F24D5AB2CC0F9D700A833E1 /* View+.swift in Sources */,
+				0F79300E2DA0147000052790 /* EditDateScreen.swift in Sources */,
 				0F792FE82D9E721600052790 /* EditChurchViewModel.swift in Sources */,
 				0F24D59E2CC0F92B00A833E1 /* TabBarViewModel.swift in Sources */,
 				0F572F702D4C2616003FD5E9 /* LiveBandScreen.swift in Sources */,
 				0FDE166C2D0600E400C1580E /* ResetPasswordViewModel.swift in Sources */,
+				0F79300C2D9FEF5100052790 /* DateView.swift in Sources */,
 				0FDE16CF2D1DE70700C1580E /* WeddingService.swift in Sources */,
 				0FDE16872D0867CC00C1580E /* Table.swift in Sources */,
 				0F24D5A92CC0F9C500A833E1 /* SafeAreaInsets.swift in Sources */,
@@ -1204,71 +1135,7 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		0F572F2A2D4BBF86003FD5E9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0F572F152D4BBF84003FD5E9 /* WeddingPlannerBuddyWidgetExtension */;
-			targetProxy = 0F572F292D4BBF86003FD5E9 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		0F572F2D2D4BBF86003FD5E9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 23N7CD7DZ5;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeddingPlannerBuddyWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WeddingPlannerBuddyWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.AlexiaAldea.WeddingPlannerBuddy.WeddingPlannerBuddyWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		0F572F2E2D4BBF86003FD5E9 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 23N7CD7DZ5;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeddingPlannerBuddyWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = WeddingPlannerBuddyWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.AlexiaAldea.WeddingPlannerBuddy.WeddingPlannerBuddyWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 		9B1A69762CC041AC00B19BF1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1461,15 +1328,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0F572F302D4BBF86003FD5E9 /* Build configuration list for PBXNativeTarget "WeddingPlannerBuddyWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				0F572F2D2D4BBF86003FD5E9 /* Debug */,
-				0F572F2E2D4BBF86003FD5E9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		9B1A69652CC041A900B19BF1 /* Build configuration list for PBXProject "WeddingPlannerBuddy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

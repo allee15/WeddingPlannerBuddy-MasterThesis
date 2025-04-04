@@ -10,6 +10,7 @@ import Foundation
 struct WeddingDetails {
     let id: String
     let date: String
+    let price: Int
     let weddingDress: WeddingDress
     let bouquet: Bouquet
     let groomSuit: GroomSuit

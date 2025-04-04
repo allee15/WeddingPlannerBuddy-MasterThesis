@@ -62,6 +62,7 @@ class JSONParsers {
     static func parseJsonWeddingDetails(json: JSON) -> WeddingDetails {
         return WeddingDetails(id: json["weddingDetailsUUID"].stringValue,
                               date: json["date"].stringValue,
+                              price: 3566, //TODO: checkme
                               weddingDress: parseJsonWeddingDress(json: json["weddingDress"]),
                               bouquet: parseJsonBouquet(json: json["bouquet"]),
                               groomSuit: parseJsonGroomSuit(json: json["groomSuit"]),
