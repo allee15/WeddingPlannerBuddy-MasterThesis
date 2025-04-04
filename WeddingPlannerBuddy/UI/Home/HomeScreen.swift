@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeScreen: View {
+    @EnvironmentObject private var navigation: Navigation
     private let mainNavigation = EnvironmentObjects.navigation
     @StateObject private var viewModel = HomeViewModel()
     
@@ -161,14 +162,36 @@ struct HomeScreen: View {
                         case .value(let weather):
                             if weather.predictions.count == 1 {
                                 WeatherCardView(prediction: weather.predictions[0]) {
-                                    viewModel.startWedding()
+                                    if let user = viewModel.user {
+                                        viewModel.startWedding()
+                                    } else {
+                                        let modal = ModalChooseOptionView(title: "Error",
+                                                                          description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
+                                            navigation.dismissModal(animated: true, completion: nil)
+                                            mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                                        } onBottomButtonTapped: {
+                                            navigation.dismissModal(animated: true, completion: nil)
+                                        }
+                                        navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                                    }
                                 }.padding(.horizontal, 16)
                             } else {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack(spacing: 12) {
                                         ForEach(weather.predictions, id: \.id) { prediction in
                                             WeatherCardView(prediction: prediction) {
-                                                viewModel.startWedding()
+                                                if let user = viewModel.user {
+                                                    viewModel.startWedding()
+                                                } else {
+                                                    let modal = ModalChooseOptionView(title: "Error",
+                                                                                      description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
+                                                        navigation.dismissModal(animated: true, completion: nil)
+                                                        mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                                                    } onBottomButtonTapped: {
+                                                        navigation.dismissModal(animated: true, completion: nil)
+                                                    }
+                                                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                                                }
                                             }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
                                         }
                                     }.padding(.horizontal, 16)
@@ -184,14 +207,10 @@ struct HomeScreen: View {
                         }.padding(.horizontal, 16)
                         
                     case .failure:
-                        HStack {
-                            Text("An error has occured, please try again.")
-                                .font(.quicksandMedium(size: 16))
-                                .foregroundStyle(Color.mainBlack)
-                                .multilineTextAlignment(.leading)
-                            
-                            Spacer()
-                        }.padding(.horizontal, 16)
+                        Spacer()
+                        EmptyStateView(title: "An error has occured.",
+                                       subtitle: "There has been an error while fetching data. Please try again later.")
+                        Spacer()
                         
                         MainButtonView(text: "Try again") {
                             viewModel.resetAll()
@@ -200,14 +219,36 @@ struct HomeScreen: View {
                     case .value(let weather):
                         if weather.predictions.count == 1 {
                             WeatherCardView(prediction: weather.predictions[0]) {
-                                viewModel.startWedding()
+                                if let user = viewModel.user {
+                                    viewModel.startWedding()
+                                } else {
+                                    let modal = ModalChooseOptionView(title: "Error",
+                                                                      description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
+                                        navigation.dismissModal(animated: true, completion: nil)
+                                        mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                                    } onBottomButtonTapped: {
+                                        navigation.dismissModal(animated: true, completion: nil)
+                                    }
+                                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                                }
                             }.padding(.horizontal, 16)
                         } else {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 12) {
                                     ForEach(weather.predictions, id: \.id) { prediction in
                                         WeatherCardView(prediction: prediction) {
-                                            viewModel.startWedding()
+                                            if let user = viewModel.user {
+                                                viewModel.startWedding()
+                                            } else {
+                                                let modal = ModalChooseOptionView(title: "Error",
+                                                                                  description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
+                                                    navigation.dismissModal(animated: true, completion: nil)
+                                                    mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                                                } onBottomButtonTapped: {
+                                                    navigation.dismissModal(animated: true, completion: nil)
+                                                }
+                                                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                                            }
                                         }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
                                     }
                                 }.padding(.horizontal, 16)
@@ -298,45 +339,6 @@ fileprivate struct PeriodOfTimeFilterButtonView: View {
                 .border(dateType == selectedDateType ? Color.greenPrimary : Color.clear,
                         width: 2,
                         cornerRadius: 8)
-        }
-    }
-}
-
-fileprivate struct DateView: View {
-    let placeHolder: String
-    @Binding var date: Date
-    var selectedStartDate: Date?
-    var selectedEndDate: Date?
-    var singleDateSelected: Date?
-    let onButtonTappedHandler: () -> ()
-    
-    var body: some View {
-        Button {
-            onButtonTappedHandler()
-        } label: {
-            HStack(spacing: 0) {
-                Text(placeHolder)
-                    .font(.quicksandMedium(size: 16))
-                    .foregroundStyle(Color.mainBlack)
-                
-                Spacer()
-                
-                if selectedStartDate != nil {
-                    Text(date.dateSheetToString())
-                        .font(.quicksandBold(size: 14))
-                        .foregroundStyle(Color.greenSecondary)
-                } else if singleDateSelected != nil {
-                    Text(date.dateSheetToString())
-                        .font(.quicksandBold(size: 14))
-                        .foregroundStyle(Color.greenSecondary)
-                } else if selectedEndDate != nil {
-                    Text(date.dateSheetToString())
-                        .font(.quicksandBold(size: 14))
-                        .foregroundStyle(Color.greenSecondary)
-                }
-            }.frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .padding(.horizontal, 16)
         }
     }
 }

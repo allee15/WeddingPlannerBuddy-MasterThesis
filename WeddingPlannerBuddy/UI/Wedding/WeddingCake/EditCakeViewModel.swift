@@ -41,11 +41,17 @@ class EditCakeViewModel: BaseViewModel {
                                description: newDescription.isEmpty ? weddingCake.description : newDescription,
                                price: newPrice.isEmpty ? weddingCake.price : Int(newPrice) ?? weddingCake.price)
         self.weddingService.editWeddingCake(weddingCake: cake)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.eventSubject.send(.error)
+                default:
+                    break
+                }
             } receiveValue: { [weak self] weddingCake in
                 guard let self else {return}
                 self.weddingCake = weddingCake
+                self.eventSubject.send(.completed)
             }.store(in: &bag)
     }
 }

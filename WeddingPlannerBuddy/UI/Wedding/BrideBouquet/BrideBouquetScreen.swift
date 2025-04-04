@@ -65,7 +65,7 @@ struct BrideBouquetScreen: View {
                     MainButtonView(text: "Start") {
                         let vm = EditBouquetViewModel(brideBouquet: viewModel.brideBouquet)
                         navigation.push(EditBouquetScreen(viewModel: vm).asDestination(), animated: true)
-                    }
+                    }.padding(.horizontal, 16)
                 }
             }
     }

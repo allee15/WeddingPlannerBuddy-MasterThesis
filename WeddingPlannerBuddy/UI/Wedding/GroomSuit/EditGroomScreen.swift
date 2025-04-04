@@ -61,7 +61,8 @@ struct EditGroomScreen: View {
         .safeAreaInset(edge: .bottom, content: {
             MainButtonView(text: "Edit details") {
                 viewModel.editGroom()
-            }
+            }.padding(.horizontal, 16)
+                .padding(.bottom, 8)
         })
         .onReceive(viewModel.eventSubject) { event in
             switch event {

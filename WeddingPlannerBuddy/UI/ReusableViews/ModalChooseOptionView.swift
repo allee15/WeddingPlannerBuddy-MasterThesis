@@ -27,13 +27,13 @@ struct ModalChooseOptionView: View {
                     .padding(.bottom, 8)
                 
                 Text(title)
-                    .font(.poppinsBold(size: 24))
+                    .font(.quicksandSemiBold(size: 24))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 24)
                 
                 Text(description)
-                    .font(.poppinsRegular(size: 16))
+                    .font(.quicksandRegular(size: 16))
                     .foregroundColor(.black)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 28)

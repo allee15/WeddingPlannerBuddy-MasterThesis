@@ -20,13 +20,13 @@ struct RegisterScreen: View {
             
             Text("Wedding Planner Buddy")
                 .foregroundStyle(Color.mainBlack)
-                .font(.poppinsBold(size: 28))
+                .font(.quicksandSemiBold(size: 28))
                 .padding(.horizontal, 16)
                 .padding(.vertical, 20)
             
             Text("Let's create your account. Fill in the fields below to let the big day's planning begin.")
                 .foregroundStyle(Color.mainBlack)
-                .font(.poppinsRegular(size: 14))
+                .font(.quicksandRegular(size: 14))
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, 16)
                 .padding(.bottom, 20)
@@ -86,7 +86,7 @@ struct RegisterScreen: View {
                     if let error = viewModel.termsError {
                         HStack {
                             Text(error)
-                                .font(.poppinsRegular(size: 12))
+                                .font(.quicksandRegular(size: 12))
                                 .foregroundColor(Color.lightRed)
                             Spacer()
                         }
@@ -128,19 +128,6 @@ struct RegisterScreen: View {
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 }
             }
-    }
-}
-
-fileprivate struct CheckboxToggleStyle: ToggleStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        HStack {
-            Image(configuration.isOn ? "Type=On" : "Type=Off")
-                .resizable()
-                .frame(width: 28, height: 28)
-                .foregroundColor(Color.mainPink)
-                .onTapGesture { configuration.isOn.toggle() }
-            configuration.label
-        }
     }
 }
 

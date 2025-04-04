@@ -35,7 +35,7 @@ class WeddingViewModel: BaseViewModel {
         self.getUserInfo()
     }
     
-    private func getUserInfo() {
+    func getUserInfo() {
         userService.userReactiveData.getStateSubject()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { _ in
@@ -89,7 +89,7 @@ class WeddingViewModel: BaseViewModel {
             }.store(in: &bag)
     }
     
-    func getWeddingDetails(userId: String) {
+    private func getWeddingDetails(userId: String) {
         self.weddingDetailsState = .loading
         self.weddingService.getWeddingDetails(userId: userId)
             .receive(on: DispatchQueue.main)

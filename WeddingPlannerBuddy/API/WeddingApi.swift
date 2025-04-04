@@ -11,6 +11,47 @@ import UIKit
 import SwiftyJSON
 
 class WeddingApi {
+    func editDate(date: String, weddingId: Int) -> AnyPublisher<Bool, Error> {
+        //TODO: add edit date method on backend
+        Future { promise in
+            
+            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/edit-wedding-date")
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            
+            urlRequest.httpMethod = "POST"
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
+            
+            let body: [String: Any] = [
+                "date": date,
+                "weddingId": weddingId
+            ]
+            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                if let error = error {
+                    promise(.failure(error))
+                } else {
+                    do {
+                        let json = try JSON(data: data!)
+                        if json["success"].boolValue {
+                            promise(.success(true))
+                        } else {
+                            promise(.success(false))
+                        }
+                    } catch {
+                        promise(.failure(error))
+                    }
+                }
+            }
+            dataTask.resume()
+        }.eraseToAnyPublisher()
+    }
+    
     func startWedding(userId: String) -> AnyPublisher<Bool, Error> {
         Future { promise in
             

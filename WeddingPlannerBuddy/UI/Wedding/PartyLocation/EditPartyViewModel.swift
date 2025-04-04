@@ -21,8 +21,8 @@ class EditPartyViewModel: BaseViewModel {
     @Published var newAddress: String = ""
     @Published var newPrice: String = ""
     @Published var newDescription: String = ""
-    @Published var newHour: Date? = nil
-    @Published var newDate: Date? = nil
+    @Published var newHour = Date()
+    @Published var newDate = Date()
     
     let eventSubject = PassthroughSubject<EditPartyState, Never>()
     
@@ -33,16 +33,22 @@ class EditPartyViewModel: BaseViewModel {
     func editParty() {
         let party = PartyLocation(id: partyLocation.id.isEmpty ? UUID().uuidString : partyLocation.id,
                                   partyAddress: newAddress.isEmpty ? partyLocation.partyAddress : newAddress,
-                                    date: newDate == nil ? partyLocation.date : newDate!.description,
-                                    hour: newHour == nil ? partyLocation.hour : newHour!.description,
+                                    date: newDate == Date() ? partyLocation.date : newDate.description,
+                                    hour: newHour == Date() ? partyLocation.hour : newHour.description,
                                     decorationsOrganizerDetails: newDescription.isEmpty ? partyLocation.decorationsOrganizerDetails : newDescription,
                                     price: newPrice.isEmpty ? partyLocation.price : Int(newPrice) ?? partyLocation.price)
         self.weddingService.editPartyLocation(partyLocation: party)
-            .sink { _ in
-                
+            .sink { [weak self] completion in
+                switch completion {
+                case .failure(let error):
+                    self?.eventSubject.send(.error)
+                default:
+                    break
+                }
             } receiveValue: { [weak self] partyLocation in
                 guard let self else {return}
                 self.partyLocation = partyLocation
+                self.eventSubject.send(.completed)
             }.store(in: &bag)
     }
 }
