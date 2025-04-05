@@ -78,6 +78,7 @@ struct ChurchCeremonyScreen: View {
                         let vm = EditChurchViewModel(churchCeremony: viewModel.churchCeremony)
                         navigation.push(EditChurchScreen(viewModel: vm).asDestination(), animated: true)
                     }.padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                 }
             }
     }

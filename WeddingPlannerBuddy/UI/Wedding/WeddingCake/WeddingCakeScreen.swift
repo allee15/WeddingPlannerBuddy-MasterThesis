@@ -63,7 +63,8 @@ struct WeddingCakeScreen: View {
                     MainButtonView(text: "Start") {
                         let vm = EditCakeViewModel(weddingCake: viewModel.weddingCake)
                         navigation.push(EditCakeScreen(viewModel: vm).asDestination(), animated: true)
-                    } .padding(.horizontal, 16)
+                    }.padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                 }
             }
     }

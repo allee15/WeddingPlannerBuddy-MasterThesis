@@ -83,7 +83,7 @@ struct GuestsScreen: View {
             }
             .safeAreaInset(edge: .bottom) {
                 if let user = viewModel.user {
-                    if user.hasActiveWedding {
+                    if !user.hasActiveWedding {
                         MainButtonView(text: "Start planning") {
                             viewModel.startWedding()
                         }.padding(.horizontal, 16)

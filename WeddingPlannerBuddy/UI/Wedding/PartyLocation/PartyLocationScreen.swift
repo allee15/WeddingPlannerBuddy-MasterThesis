@@ -78,6 +78,7 @@ struct PartyLocationScreen: View {
                         let vm = EditPartyViewModel(partyLocation: viewModel.partyLocation)
                         navigation.push(EditPartyScreen(viewModel: vm).asDestination(), animated: true)
                     }.padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                 }
             }
     }

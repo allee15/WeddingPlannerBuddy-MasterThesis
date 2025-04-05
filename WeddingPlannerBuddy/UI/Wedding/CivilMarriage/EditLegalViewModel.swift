@@ -8,6 +8,11 @@
 import Foundation
 import Combine
 
+enum EditLegalState {
+    case completed
+    case error
+}
+
 class EditLegalViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
@@ -16,7 +21,7 @@ class EditLegalViewModel: BaseViewModel {
     @Published var newHour = Date()
     @Published var newDate = Date()
     
-    let eventSubject = PassthroughSubject<EditPartyState, Never>()
+    let eventSubject = PassthroughSubject<EditLegalState, Never>()
     
     init(civilMarriage: CivilMarriage) {
         self.civilMarriage = civilMarriage

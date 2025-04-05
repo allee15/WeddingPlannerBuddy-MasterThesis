@@ -72,6 +72,7 @@ struct CivilMarriageScreen: View {
                         let vm = EditLegalViewModel(civilMarriage: viewModel.civilMarriage)
                         navigation.push(EditLegalScreen(viewModel: vm).asDestination(), animated: true)
                     }.padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                 }
             }
     }
