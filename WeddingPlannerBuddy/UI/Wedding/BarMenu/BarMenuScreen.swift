@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct BarMenuScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: BarMenuViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Bar menu") {
+            FullNavBarView(title: "Bar menu",
+                           rightButtonIcon: .icSettings) {
                 navigation.pop(animated: true)
+            } rightButtonAction: {
+                let vm = EditBarMenuViewModel(barMenu: viewModel.barMenu)
+                navigation.push(EditBarMenuScreen(viewModel: vm).asDestination(), animated: true)
             }
             
             if viewModel.barMenu.id.isEmpty {
@@ -25,20 +29,20 @@ struct BarMenuScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text(viewModel.barMenu.id)
-                        Button {
-                            let new = BarMenu(id: viewModel.barMenu.id,
-                                              alcoholic: ["ewdsfer"],
-                                              nonalcoholic: ["fsdersdfc"],
-                                              coffee: ["fersdf"],
-                                              juice: ["fersdf"],
-                                              price: 34)
-                            viewModel.editBarMenu(new)
-                        } label: {
-                            Text("Edit")
+                        HStack {
+                            Text("Price: \(viewModel.barMenu.price)")
+                                .font(.quicksandMedium(size: 16))
+                                .foregroundStyle(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                            
+                            Spacer()
                         }
-                        Text(viewModel.barMenu.nonalcoholic[0])
-                    }.padding(.top, 24)
+                        
+                        FoodTypeView(title: "Alcoholic drinks", food: viewModel.barMenu.alcoholic)
+                        FoodTypeView(title: "Non-alcoholic drinks", food: viewModel.barMenu.nonalcoholic)
+                        FoodTypeView(title: "Coffee", food: viewModel.barMenu.coffee)
+                        FoodTypeView(title: "Juice", food: viewModel.barMenu.juice)
+                    }.padding(.top, 20)
                         .padding(.horizontal, 16)
                 }
             }
@@ -48,9 +52,10 @@ struct BarMenuScreen: View {
             .safeAreaInset(edge: .bottom) {
                 if viewModel.barMenu.id.isEmpty {
                     MainButtonView(text: "Start") {
-//                        let vm = EditLegalViewModel(civilMarriage: viewModel.civilMarriage)
-//                        navigation.push(EditLegalScreen(viewModel: vm).asDestination(), animated: true)
-                    }
+                        let vm = EditBarMenuViewModel(barMenu: viewModel.barMenu)
+                        navigation.push(EditBarMenuScreen(viewModel: vm).asDestination(), animated: true)
+                    }.padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                 }
             }
     }

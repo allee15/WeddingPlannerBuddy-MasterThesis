@@ -121,6 +121,11 @@
 		0F79300C2D9FEF5100052790 /* DateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79300B2D9FEF5100052790 /* DateView.swift */; };
 		0F79300E2DA0147000052790 /* EditDateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79300D2DA0147000052790 /* EditDateScreen.swift */; };
 		0F7930102DA04AA100052790 /* EditDateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F79300F2DA04AA000052790 /* EditDateViewModel.swift */; };
+		0F7930122DA14C7800052790 /* EditFoodMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7930112DA14C7800052790 /* EditFoodMenuScreen.swift */; };
+		0F7930142DA14C8500052790 /* EditFoodMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7930132DA14C8500052790 /* EditFoodMenuViewModel.swift */; };
+		0F7930162DA14FEB00052790 /* FoodTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7930152DA14FEB00052790 /* FoodTypeView.swift */; };
+		0F7930182DA1512100052790 /* EditBarMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7930172DA1512100052790 /* EditBarMenuScreen.swift */; };
+		0F79301A2DA1513700052790 /* EditBarMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7930192DA1513700052790 /* EditBarMenuViewModel.swift */; };
 		0FD38F182CDBAF4F00338FAC /* BottomSheetLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */; };
 		0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F192CDBAFB500338FAC /* ClearButton.swift */; };
 		0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */; };
@@ -296,6 +301,11 @@
 		0F79300B2D9FEF5100052790 /* DateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateView.swift; sourceTree = "<group>"; };
 		0F79300D2DA0147000052790 /* EditDateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateScreen.swift; sourceTree = "<group>"; };
 		0F79300F2DA04AA000052790 /* EditDateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDateViewModel.swift; sourceTree = "<group>"; };
+		0F7930112DA14C7800052790 /* EditFoodMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodMenuScreen.swift; sourceTree = "<group>"; };
+		0F7930132DA14C8500052790 /* EditFoodMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFoodMenuViewModel.swift; sourceTree = "<group>"; };
+		0F7930152DA14FEB00052790 /* FoodTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTypeView.swift; sourceTree = "<group>"; };
+		0F7930172DA1512100052790 /* EditBarMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBarMenuScreen.swift; sourceTree = "<group>"; };
+		0F7930192DA1513700052790 /* EditBarMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBarMenuViewModel.swift; sourceTree = "<group>"; };
 		0FD38F172CDBAF4F00338FAC /* BottomSheetLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetLineView.swift; sourceTree = "<group>"; };
 		0FD38F192CDBAFB500338FAC /* ClearButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClearButton.swift; sourceTree = "<group>"; };
 		0FD38F1B2CDBAFF000338FAC /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -503,6 +513,7 @@
 				0F792FBE2D9AC40700052790 /* WidgetView.swift */,
 				0F792FC92D9AF63700052790 /* EmptyStateView.swift */,
 				0F79300B2D9FEF5100052790 /* DateView.swift */,
+				0F7930152DA14FEB00052790 /* FoodTypeView.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -615,6 +626,8 @@
 			children = (
 				0F572F5E2D4C2612003FD5E9 /* FoodMenuScreen.swift */,
 				0F572F5F2D4C2612003FD5E9 /* FoodMenuViewModel.swift */,
+				0F7930112DA14C7800052790 /* EditFoodMenuScreen.swift */,
+				0F7930132DA14C8500052790 /* EditFoodMenuViewModel.swift */,
 			);
 			path = FoodMenu;
 			sourceTree = "<group>";
@@ -624,6 +637,8 @@
 			children = (
 				0F572F632D4C2613003FD5E9 /* BarMenuScreen.swift */,
 				0F572F642D4C2613003FD5E9 /* BarMenuViewModel.swift */,
+				0F7930172DA1512100052790 /* EditBarMenuScreen.swift */,
+				0F7930192DA1513700052790 /* EditBarMenuViewModel.swift */,
 			);
 			path = BarMenu;
 			sourceTree = "<group>";
@@ -983,10 +998,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F7930142DA14C8500052790 /* EditFoodMenuViewModel.swift in Sources */,
 				0F24D5962CC0F89A00A833E1 /* RootView.swift in Sources */,
 				0F792FC12D9ADC4400052790 /* SecondaryButtonView.swift in Sources */,
 				0F572F492D4C25F8003FD5E9 /* GroomSuitViewModel.swift in Sources */,
 				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
+				0F7930182DA1512100052790 /* EditBarMenuScreen.swift in Sources */,
 				0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */,
 				0F792FE42D9E712800052790 /* EditGroomViewModel.swift in Sources */,
 				0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */,
@@ -1006,6 +1023,7 @@
 				0F572F5C2D4C2611003FD5E9 /* CivilMarriageScreen.swift in Sources */,
 				0F0CBA722D395B8E0018FD86 /* HomeCard.swift in Sources */,
 				0F327EDE2CDE48CB00EDF536 /* ApiEnvironment.swift in Sources */,
+				0F7930162DA14FEB00052790 /* FoodTypeView.swift in Sources */,
 				0F572F3C2D4C2591003FD5E9 /* BrideBouquetScreen.swift in Sources */,
 				0F792FC82D9AF28C00052790 /* LogoutViewModel.swift in Sources */,
 				0F792FEC2D9E73AC00052790 /* EditCakeViewModel.swift in Sources */,
@@ -1081,6 +1099,7 @@
 				0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */,
 				0F572F812D50003E003FD5E9 /* PlaylistScreen.swift in Sources */,
 				0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */,
+				0F7930122DA14C7800052790 /* EditFoodMenuScreen.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
 				0FDE16AF2D1AEAC100C1580E /* OtherWeddingsScreen.swift in Sources */,
 				0F7930102DA04AA100052790 /* EditDateViewModel.swift in Sources */,
@@ -1092,6 +1111,7 @@
 				0F24D60A2CC298D700A833E1 /* UserService.swift in Sources */,
 				0F24D5D72CC1B4B900A833E1 /* OnboardingViewModel.swift in Sources */,
 				0F572F622D4C2612003FD5E9 /* FoodMenuViewModel.swift in Sources */,
+				0F79301A2DA1513700052790 /* EditBarMenuViewModel.swift in Sources */,
 				0F24D5F72CC1BC6200A833E1 /* TitleNavBarView.swift in Sources */,
 				0F572F712D4C2616003FD5E9 /* LiveBandViewModel.swift in Sources */,
 				0F24D5E22CC1B74C00A833E1 /* CloseButton.swift in Sources */,

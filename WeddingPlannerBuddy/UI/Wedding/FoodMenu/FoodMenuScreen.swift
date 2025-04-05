@@ -6,15 +6,19 @@
 //
 
 import SwiftUI
-//TODO: fixme
+
 struct FoodMenuScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: FoodMenuViewModel
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Food menu") {
+            FullNavBarView(title: "Food menu",
+                           rightButtonIcon: .icSettings) {
                 navigation.pop(animated: true)
+            } rightButtonAction: {
+                let vm = EditFoodMenuViewModel(foodMenu: viewModel.foodMenu)
+                navigation.push(EditFoodMenuScreen(viewModel: vm).asDestination(), animated: true)
             }
             
             if viewModel.foodMenu.id.isEmpty {
@@ -25,20 +29,20 @@ struct FoodMenuScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text(viewModel.foodMenu.id)
-                        Button {
-                            let new = FoodMenu(id: viewModel.foodMenu.id,
-                                               antreu: ["Antreu 1"],
-                                               firstCourse: ["fwfswr"],
-                                               mainCourse: ["ferwsdfs"],
-                                               secondMainCourse: ["dfssdf"],
-                                               price: 34)
-                            viewModel.editFoodMenu(new)
-                        } label: {
-                            Text("Edit")
+                        HStack {
+                            Text("Price: \(viewModel.foodMenu.price)")
+                                .font(.quicksandMedium(size: 16))
+                                .foregroundStyle(Color.mainBlack)
+                                .multilineTextAlignment(.leading)
+                            
+                            Spacer()
                         }
-                        Text(viewModel.foodMenu.antreu[0])
-                    }.padding(.top, 24)
+                        
+                        FoodTypeView(title: "Entryway", food: viewModel.foodMenu.antreu)
+                        FoodTypeView(title: "First course", food: viewModel.foodMenu.firstCourse)
+                        FoodTypeView(title: "Main course", food: viewModel.foodMenu.mainCourse)
+                        FoodTypeView(title: "Second course", food: viewModel.foodMenu.secondMainCourse)
+                    }.padding(.top, 20)
                         .padding(.horizontal, 16)
                 }
             }
@@ -48,9 +52,10 @@ struct FoodMenuScreen: View {
             .safeAreaInset(edge: .bottom) {
                 if viewModel.foodMenu.id.isEmpty {
                     MainButtonView(text: "Start") {
-//                        let vm = EditLegalViewModel(civilMarriage: viewModel.civilMarriage)
-//                        navigation.push(EditLegalScreen(viewModel: vm).asDestination(), animated: true)
-                    }
+                        let vm = EditFoodMenuViewModel(foodMenu: viewModel.foodMenu)
+                        navigation.push(EditFoodMenuScreen(viewModel: vm).asDestination(), animated: true)
+                    }.padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                 }
             }
     }

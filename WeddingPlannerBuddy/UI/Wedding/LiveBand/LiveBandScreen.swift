@@ -72,6 +72,7 @@ struct LiveBandScreen: View {
                         let vm = EditLivebandViewModel(liveBand: viewModel.liveBand)
                         navigation.push(EditLivebandScreen(viewModel: vm).asDestination(), animated: true)
                     }.padding(.horizontal, 16)
+                        .padding(.bottom, 8)
                 }
             }
     }
