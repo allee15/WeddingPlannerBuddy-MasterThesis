@@ -16,19 +16,31 @@ enum EditDateState {
 class EditDateViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
-    @Published var weddingId: Int
+    @Published var weddingId: String
     @Published var date: String
     @Published var newDate = Date()
     
     let eventSubject = PassthroughSubject<EditDateState, Never>()
     
-    init(date: String, weddingId: Int) {
+    init(date: String, weddingId: String) {
         self.date = date
         self.weddingId = weddingId
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        if let parsedDate = formatter.date(from: date) {
+            self.newDate = parsedDate
+        }
     }
     
     func editDate() {
-        self.weddingService.editDate(date: date, weddingId: weddingId)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        
+        let formattedDate = formatter.string(from: newDate)
+        
+        self.weddingService.editDate(date: formattedDate, weddingId: weddingId)
+            .receive(on: DispatchQueue.main)
             .sink { _ in
                 
             } receiveValue: { [weak self] result in

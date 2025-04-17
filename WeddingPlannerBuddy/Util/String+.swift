@@ -19,7 +19,7 @@ extension String {
     
     func remakeWeather() -> String {
         let inputFormatter = DateFormatter()
-        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.dateFormat = "dd-MM-yyyy"
         
         let outputFormatter = DateFormatter()
         outputFormatter.dateFormat = "d MMMM yyyy"

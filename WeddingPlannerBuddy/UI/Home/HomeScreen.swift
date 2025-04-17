@@ -163,7 +163,7 @@ struct HomeScreen: View {
                             if weather.predictions.count == 1 {
                                 WeatherCardView(prediction: weather.predictions[0]) {
                                     if let user = viewModel.user {
-                                        viewModel.startWedding()
+                                        viewModel.startWedding(date: weather.predictions[0].date)
                                     } else {
                                         let modal = ModalChooseOptionView(title: "Error",
                                                                           description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -181,7 +181,7 @@ struct HomeScreen: View {
                                         ForEach(weather.predictions, id: \.id) { prediction in
                                             WeatherCardView(prediction: prediction) {
                                                 if let user = viewModel.user {
-                                                    viewModel.startWedding()
+                                                    viewModel.startWedding(date: prediction.date)
                                                 } else {
                                                     let modal = ModalChooseOptionView(title: "Error",
                                                                                       description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -220,7 +220,7 @@ struct HomeScreen: View {
                         if weather.predictions.count == 1 {
                             WeatherCardView(prediction: weather.predictions[0]) {
                                 if let user = viewModel.user {
-                                    viewModel.startWedding()
+                                    viewModel.startWedding(date: weather.predictions[0].date)
                                 } else {
                                     let modal = ModalChooseOptionView(title: "Error",
                                                                       description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -238,7 +238,7 @@ struct HomeScreen: View {
                                     ForEach(weather.predictions, id: \.id) { prediction in
                                         WeatherCardView(prediction: prediction) {
                                             if let user = viewModel.user {
-                                                viewModel.startWedding()
+                                                viewModel.startWedding(date: prediction.date)
                                             } else {
                                                 let modal = ModalChooseOptionView(title: "Error",
                                                                                   description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -276,6 +276,23 @@ struct HomeScreen: View {
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .onReceive(viewModel.eventSubject) { event in
+                switch event {
+                case .showRatingModal:
+                    TabBarCoordinator.instance.tabBarNavigation = .wedding
+                    
+                case .error:
+                    let toast = Toast(text: "An error has occured. Please try again!",
+                                      textColor: Color.darkRed,
+                                      bg: Color.lightRed,
+                                      icon: .icToastRed)
+                    ToastManager.instance.show(toast)
+                case .completed:
+                    TabBarCoordinator.instance.tabBarNavigation = .wedding
+                    let toast = Toast(text: "Date added successful!")
+                    ToastManager.instance.show(toast)
+                }
+            }
     }
 }
 

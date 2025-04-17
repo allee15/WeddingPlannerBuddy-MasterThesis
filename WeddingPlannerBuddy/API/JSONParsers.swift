@@ -42,7 +42,7 @@ class JSONParsers {
     
     static func parseJsonTables(json: JSON) -> Table {
         return Table(id: json["tableUID"].stringValue,
-                     position: CGPoint(x: json["position"]["x"].intValue,
+                     position: CGPoint(x: json["position"]["x"].intValue, //TODO: fix us
                                        y: json["position"]["y"].intValue),
                      label: json["label"].stringValue,
                      participants: json["participants"].arrayValue.map({ subJson in
@@ -62,7 +62,7 @@ class JSONParsers {
     static func parseJsonWeddingDetails(json: JSON) -> WeddingDetails {
         return WeddingDetails(id: json["weddingDetailsUUID"].stringValue,
                               date: json["date"].stringValue,
-                              price: 3566, //TODO: checkme
+                              price: getPrice(json: json),
                               weddingDress: parseJsonWeddingDress(json: json["weddingDress"]),
                               bouquet: parseJsonBouquet(json: json["bouquet"]),
                               groomSuit: parseJsonGroomSuit(json: json["groomSuit"]),
@@ -73,6 +73,10 @@ class JSONParsers {
                               barMenu: parseJsonBarMenu(json: json["barMenu"]),
                               weddingCake: parseJsonWeddingCake(json: json["weddingCake"]),
                               liveBand: parseJsonLiveBand(json: json["liveBand"]))
+    }
+    
+    static func getPrice(json: JSON) -> Int {
+        return json["weddingDress"]["price"].intValue + json["bouquet"]["price"].intValue + json["groomSuit"]["price"].intValue + json["churchCeremony"]["price"].intValue + json["partyLocation"]["price"].intValue + json["foodMenu"]["price"].intValue + json["barMenu"]["price"].intValue + json["weddingCake"]["price"].intValue + json["liveBand"]["price"].intValue
     }
     
     static func parseJsonWeddingDress(json: JSON) -> WeddingDress {

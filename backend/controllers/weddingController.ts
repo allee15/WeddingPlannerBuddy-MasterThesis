@@ -1,10 +1,11 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
 import {BarMenu, Bouquet, ChurchCeremony, CivilMarriage, FoodMenu, GroomSuit, LiveBand, PartyLocation, WeddingCake, WeddingDetails, WeddingDress} from "../models/WeddingDetails";
+import { Wedding } from "../models/Wedding";
 
 export const startWedding = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { userUID } = req.body;
+        const { userUID, date } = req.body;
         const user = await User.findOne({ userUID: userUID });
 
         if (!user) {
@@ -27,7 +28,7 @@ export const startWedding = async (req: Request, res: Response): Promise<any> =>
 
         const weddingDetails = await WeddingDetails.create({
             weddingDetailsUUID: user._id,
-            date: "", 
+            date: date, 
             weddingDress: weddingDress._id,
             bouquet: bouquet._id,
             groomSuit: groomSuit._id,
@@ -66,7 +67,9 @@ export const getWeddingDetails = async (req: Request, res: Response): Promise<an
             .populate("bouquet")
             .populate("groomSuit")
             .populate("churchCeremony")
+            .populate("partyLocation")
             .populate("barMenu")
+            .populate("foodMenu")
             .populate("weddingCake")
             .populate("liveBand");
 
@@ -77,6 +80,25 @@ export const getWeddingDetails = async (req: Request, res: Response): Promise<an
         return res.status(200).json({ weddingDetails });
     } catch (error) {
         console.log("Error in getWeddingDetails controller", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+export const updateWeddingDate = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { date, weddingId } = req.body;
+        const wedding = await WeddingDetails.findOne({ weddingDetailsUUID: weddingId });
+
+        if (!wedding) {
+            return res.status(404).json({ error: "Wedding not found" });
+        }
+
+        wedding.date = date;
+        await wedding.save();
+
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        console.log("Error in updateWeddingDate controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };

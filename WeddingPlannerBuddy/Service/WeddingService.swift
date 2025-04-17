@@ -14,13 +14,13 @@ class WeddingService {
     private let weddingApi = WeddingApi()
     var bag = Set<AnyCancellable>()
     
-    func editDate(date: String, weddingId: Int) -> AnyPublisher<Bool, Error> {
+    func editDate(date: String, weddingId: String) -> AnyPublisher<Bool, Error> {
         return weddingApi.editDate(date: date, weddingId: weddingId)
             .eraseToAnyPublisher()
     }
     
-    func startWedding(userId: String) -> AnyPublisher<Bool, Error> {
-        return weddingApi.startWedding(userId: userId)
+    func startWedding(userId: String, date: String) -> AnyPublisher<Bool, Error> {
+        return weddingApi.startWedding(userId: userId, date: date)
             .eraseToAnyPublisher()
     }
     

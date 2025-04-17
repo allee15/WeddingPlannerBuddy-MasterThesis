@@ -67,7 +67,7 @@ struct WeddingScreen: View {
                                         WeddingDateAndMoneyView(date: weddingDetails.date,
                                                                 money: String(weddingDetails.price)) {
                                             let vm = EditDateViewModel(date: weddingDetails.date,
-                                                                       weddingId: weddingDetails.price)
+                                                                       weddingId: weddingDetails.id)
                                             mainNavigation?.push(EditDateScreen(viewModel: vm).asDestination(), animated: true)
                                         } playlistAction: {
                                             mainNavigation?.push(PlaylistScreen().asDestination(), animated: true)
@@ -93,7 +93,7 @@ struct WeddingScreen: View {
                                             }
                                             
                                             WeddingCardView(name: "Legal marriage",
-                                                            price: "") {
+                                                            price: "NO PRICE") {
                                                 let vm = CivilMarriageViewModel(civilMarriage: weddingDetails.civilMarriage)
                                                 mainNavigation?.push(CivilMarriageScreen(viewModel: vm).asDestination(), animated: true)
                                             }
@@ -192,7 +192,7 @@ fileprivate struct WeddingDateAndMoneyView: View {
                             .foregroundStyle(Color.mainBlack)
                             .frame(width: 20, height: 20)
                         
-                        Text(!date.isEmpty ? date : "No date")
+                        Text(!date.isEmpty ? date.remakeWeather() : "No date")
                             .underline()
                             .foregroundStyle(Color.mainBlack)
                             .font(.quicksandSemiBold(size: 18))
@@ -257,16 +257,18 @@ fileprivate struct WeddingCardView: View {
                         .font(.quicksandMedium(size: 16))
                         .multilineTextAlignment(.center)
                     
-                    HStack(spacing: 4) {
-                        Image(.icMoney)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.mainBlack)
-                            .frame(width: 20, height: 20)
-                        
-                        Text("\(price) RON")
-                            .foregroundStyle(Color.mainBlack)
-                            .font(.quicksandRegular(size: 12))
+                    if price != "NO PRICE" {
+                        HStack(spacing: 4) {
+                            Image(.icMoney)
+                                .resizable()
+                                .renderingMode(.template)
+                                .foregroundStyle(Color.mainBlack)
+                                .frame(width: 20, height: 20)
+                            
+                            Text("\(price) RON")
+                                .foregroundStyle(Color.mainBlack)
+                                .font(.quicksandRegular(size: 12))
+                        }
                     }
                     
                     Spacer()
