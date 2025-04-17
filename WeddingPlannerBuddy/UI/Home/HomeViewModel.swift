@@ -23,6 +23,8 @@ enum WeatherState {
 
 enum StartWeddingEvent {
     case showRatingModal
+    case completed
+    case error
 }
 
 class HomeViewModel: BaseViewModel {
@@ -39,6 +41,7 @@ class HomeViewModel: BaseViewModel {
     @Published var weatherState: WeatherState = .notStarted
     @Published var initialWeatherState: WeatherState = .notStarted
     @Published var user: User?
+    @Published var weddingId: String?
     
     let eventSubject = PassthroughSubject<StartWeddingEvent, Never>()
     let weddingCard: HomeCard = HomeCard(title: "Plan Your Big Day",
@@ -83,9 +86,21 @@ class HomeViewModel: BaseViewModel {
                         self.user = nil
                     case .loggedIn(let user):
                         self.user = user
+                        getWeddingDetails(userId: user.id)
                     }
                 }
             }).store(in: &bag)
+    }
+    
+    private func getWeddingDetails(userId: String) {
+        self.weddingService.getWeddingDetails(userId: userId)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+                
+            } receiveValue: { [weak self] weddingDetails in
+                guard let self else {return}
+                self.weddingId = weddingDetails.id
+            }.store(in: &bag)
     }
     
     private func getInitialWeather() {
@@ -129,12 +144,24 @@ class HomeViewModel: BaseViewModel {
         }.store(in: &bag)
     }
     
-    func startWedding() {
+    func startWedding(date: String) {
         guard let user = user else {return}
         if user.hasActiveWedding {
-            //TODO: send date to API
+            weddingService.editDate(date: date, weddingId: weddingId ?? "")
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                    
+                } receiveValue: { [weak self] result in
+                    guard let self else {return}
+                    if result {
+                        self.eventSubject.send(.completed)
+                    } else {
+                        self.eventSubject.send(.error)
+                    }
+                }.store(in: &bag)
+
         } else {
-            weddingService.startWedding(userId: user.id) //TODO: trimite data
+            weddingService.startWedding(userId: user.id, date: date)
                 .receive(on: DispatchQueue.main)
                 .sink { _ in
                 } receiveValue: { [weak self] result in
@@ -145,10 +172,11 @@ class HomeViewModel: BaseViewModel {
                             self.eventSubject.send(.showRatingModal)
                             userDefaultsService.setShowRateModal(hasShownRateModal: true)
                         }
+                    } else {
+                        self.eventSubject.send(.error)
                     }
                 }.store(in: &bag)
         }
-        TabBarCoordinator.instance.tabBarNavigation = .wedding
     }
     
     func resetAll() {

@@ -15,5 +15,5 @@ router.post("/api/wedding/update-food-menu/:id", WeddingController.updateFoodMen
 router.post("/api/wedding/update-bar-menu/:id", WeddingController.updateBarMenu);
 router.post("/api/wedding/update-wedding-cake/:id", WeddingController.updateWeddingCake);
 router.post("/api/wedding/update-live-band/:id", WeddingController.updateLiveBand);
-
+router.post("/api/wedding/edit-wedding-date", WeddingController.updateWeddingDate);
 export default router;

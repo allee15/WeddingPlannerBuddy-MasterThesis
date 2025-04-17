@@ -11,8 +11,7 @@ import UIKit
 import SwiftyJSON
 
 class WeddingApi {
-    func editDate(date: String, weddingId: Int) -> AnyPublisher<Bool, Error> {
-        //TODO: add edit date method on backend
+    func editDate(date: String, weddingId: String) -> AnyPublisher<Bool, Error> {
         Future { promise in
             
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/edit-wedding-date")
@@ -52,7 +51,7 @@ class WeddingApi {
         }.eraseToAnyPublisher()
     }
     
-    func startWedding(userId: String) -> AnyPublisher<Bool, Error> {
+    func startWedding(userId: String, date: String? = nil) -> AnyPublisher<Bool, Error> {
         Future { promise in
             
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/start-wedding")
@@ -67,8 +66,10 @@ class WeddingApi {
             }
             
             let body: [String: Any] = [
-                "userUID": userId
+                "userUID": userId,
+                "date": date ?? ""
             ]
+            
             urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in

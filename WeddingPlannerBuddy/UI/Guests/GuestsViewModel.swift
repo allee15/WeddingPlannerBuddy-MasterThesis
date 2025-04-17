@@ -58,7 +58,7 @@ class GuestsViewModel: BaseViewModel {
     
     func startWedding() {
         guard let user = user else {return}
-        weddingService.startWedding(userId: user.id)
+        weddingService.startWedding(userId: user.id, date: "")
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 guard let self else { return }
