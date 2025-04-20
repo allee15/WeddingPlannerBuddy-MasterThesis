@@ -30,7 +30,7 @@ struct BarMenuScreen: View {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
-                            Text("Price: \(viewModel.barMenu.price)")
+                            Text("Price: \(viewModel.barMenu.price) RON")
                                 .font(.quicksandMedium(size: 16))
                                 .foregroundStyle(Color.mainBlack)
                                 .multilineTextAlignment(.leading)

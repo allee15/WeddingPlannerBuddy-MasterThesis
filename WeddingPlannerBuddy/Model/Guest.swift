@@ -11,4 +11,5 @@ struct Guest: Codable {
     let id: String
     let name: String
     let email: String
+    let tableUID: String
 }

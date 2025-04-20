@@ -34,6 +34,8 @@ struct FoodTypeView: View {
                        Text(item)
                            .foregroundStyle(Color.mainBlack)
                            .font(.quicksandMedium(size: 16))
+                       
+                       Spacer()
                    }
                }
            }.padding(.all, 12)

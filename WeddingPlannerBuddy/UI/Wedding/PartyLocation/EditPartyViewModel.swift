@@ -38,9 +38,10 @@ class EditPartyViewModel: BaseViewModel {
                                     decorationsOrganizerDetails: newDescription.isEmpty ? partyLocation.decorationsOrganizerDetails : newDescription,
                                     price: newPrice.isEmpty ? partyLocation.price : Int(newPrice) ?? partyLocation.price)
         self.weddingService.editPartyLocation(partyLocation: party)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure(_):
                     self?.eventSubject.send(.error)
                 default:
                     break
@@ -48,7 +49,12 @@ class EditPartyViewModel: BaseViewModel {
             } receiveValue: { [weak self] partyLocation in
                 guard let self else {return}
                 self.partyLocation = partyLocation
+                reloadWedding()
                 self.eventSubject.send(.completed)
             }.store(in: &bag)
+    }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
     }
 }

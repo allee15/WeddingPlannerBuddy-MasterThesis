@@ -38,9 +38,10 @@ class EditChurchViewModel: BaseViewModel {
                                     preotName: newPreotName.isEmpty ? churchCeremony.preotName : newPreotName,
                                     price: newPrice.isEmpty ? churchCeremony.price : Int(newPrice) ?? churchCeremony.price)
         self.weddingService.editChurchCeremony(churchCeremony: church)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure(_):
                     self?.eventSubject.send(.error)
                 default:
                     break
@@ -48,7 +49,12 @@ class EditChurchViewModel: BaseViewModel {
             } receiveValue: { [weak self] churchCeremony in
                 guard let self else {return}
                 self.churchCeremony = churchCeremony
+                reloadWedding()
                 self.eventSubject.send(.completed)
             }.store(in: &bag)
+    }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
     }
 }

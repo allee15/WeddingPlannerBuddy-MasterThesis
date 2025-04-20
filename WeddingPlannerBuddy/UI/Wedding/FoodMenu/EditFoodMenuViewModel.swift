@@ -67,9 +67,10 @@ class EditFoodMenuViewModel: BaseViewModel {
                             secondMainCourse: newSecondMainCourseArray,
                             price: newPrice.isEmpty ? foodMenu.price : Int(newPrice) ?? foodMenu.price)
         self.weddingService.editFoodMenu(foodMenu: menu)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure(_):
                     self?.eventSubject.send(.error)
                 default:
                     break
@@ -77,7 +78,12 @@ class EditFoodMenuViewModel: BaseViewModel {
             } receiveValue: { [weak self] menu in
                 guard let self else {return}
                 self.foodMenu = menu
+                reloadWedding()
                 self.eventSubject.send(.completed)
             }.store(in: &bag)
+    }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
     }
 }

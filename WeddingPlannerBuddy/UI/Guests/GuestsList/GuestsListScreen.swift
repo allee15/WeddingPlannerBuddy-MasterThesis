@@ -13,7 +13,7 @@ struct GuestsListScreen: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            LeftNavBarView(title: "Weddings you'll attend") {
+            LeftNavBarView(title: "Guests list") {
                 navigation.pop(animated: true)
             }
             
@@ -48,17 +48,20 @@ fileprivate struct GuestLineView: View {
         Button {
             action()
         } label: {
-            VStack(alignment: .leading, spacing: 8) {
-                Text("\(counter). \(guest.name)")
-                    .font(.quicksandSemiBold(size: 18))
-                    .foregroundStyle(Color.mainBlack)
-                    .multilineTextAlignment(.leading)
-                
-                Text(guest.email)
-                    .font(.quicksandMedium(size: 16))
-                    .foregroundStyle(Color.mainBlack)
-                    .multilineTextAlignment(.leading)
-                    .padding(.leading, 8)
+            HStack {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("\(counter). \(guest.name)")
+                        .font(.quicksandSemiBold(size: 18))
+                        .foregroundStyle(Color.mainBlack)
+                        .multilineTextAlignment(.leading)
+                    
+                    Text(guest.email)
+                        .font(.quicksandMedium(size: 16))
+                        .foregroundStyle(Color.mainBlack)
+                        .multilineTextAlignment(.leading)
+                        .padding(.leading, 8)
+                }
+                Spacer()
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 16)

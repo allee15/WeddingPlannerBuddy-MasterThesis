@@ -81,14 +81,22 @@ class GuestsViewModel: BaseViewModel {
     
     private func getWeddingDetails() {
         guard let user = user else {return}
-        self.weddingService.getWeddingDetails(userId: user.id)
+        self.weddingService.weddingReactiveData.getStateSubject()
             .sink { _ in
                 
             } receiveValue: { [weak self] weddingDetails in
                 guard let self else {return}
-                self.weddingDate = weddingDetails.date
-                self.weddingPartyLocation = weddingDetails.partyLocation.partyAddress
-                self.weddingChurchLocation = weddingDetails.churchCeremony.churchAddress
+                
+                switch weddingDetails {
+                case .failure(_):
+                    break
+                case .loading:
+                    break
+                case .ready(let details):
+                    self.weddingDate = details.date
+                    self.weddingPartyLocation = details.partyLocation.partyAddress
+                    self.weddingChurchLocation = details.churchCeremony.churchAddress
+                }
             }.store(in: &bag)
     }
 }

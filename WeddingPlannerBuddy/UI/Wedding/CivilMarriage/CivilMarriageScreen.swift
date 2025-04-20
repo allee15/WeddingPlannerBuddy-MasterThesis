@@ -36,19 +36,19 @@ struct CivilMarriageScreen: View {
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                 
-                                Text("📍 \(viewModel.civilMarriage.address)")
+                                Text("📍 \(viewModel.civilMarriage.address.isEmpty ? "Not specified" : viewModel.civilMarriage.address)")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("📅 \(viewModel.civilMarriage.date)")
+                                Text("📅 \(viewModel.civilMarriage.date.isEmpty ? "Not specified" : viewModel.civilMarriage.date.toPrettyDateString())")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("⏰ \(viewModel.civilMarriage.hour)")
+                                Text("⏰ \(viewModel.civilMarriage.hour.isEmpty ? "Not specified" : viewModel.civilMarriage.hour.toPrettyTimeString())")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)

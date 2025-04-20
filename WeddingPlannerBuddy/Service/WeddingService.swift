@@ -14,6 +14,25 @@ class WeddingService {
     private let weddingApi = WeddingApi()
     var bag = Set<AnyCancellable>()
     
+    public lazy var weddingReactiveData = ReactiveData<WeddingDetails> { [weak self] in
+        guard let self else { return nil }
+
+        return Deferred {
+            Future<WeddingDetails, Error> { promise in
+                self.weddingApi.getWeddingDetails(userId: UserService.shared.authToken ?? "")
+                    .sink(receiveCompletion: { completion in
+                        if case .failure(let error) = completion {
+                            promise(.failure(error))
+                        }
+                    }, receiveValue: { weddingDetails in
+                        promise(.success(weddingDetails))
+                    })
+                    .store(in: &self.bag)
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+    
     func editDate(date: String, weddingId: String) -> AnyPublisher<Bool, Error> {
         return weddingApi.editDate(date: date, weddingId: weddingId)
             .eraseToAnyPublisher()
@@ -29,23 +48,18 @@ class WeddingService {
             .eraseToAnyPublisher()
     }
     
-    func getWeddingDetails(userId: String) -> AnyPublisher<WeddingDetails, Error> {
-        return weddingApi.getWeddingDetails(userId: userId)
+    func editWeddingDress(weddingDress: WeddingDress, image: UIImage?) -> AnyPublisher<WeddingDress, Error> {
+        return weddingApi.editWeddingDress(weddingDress: weddingDress, image: image)
             .eraseToAnyPublisher()
     }
     
-    func editWeddingDress(weddingDress: WeddingDress) -> AnyPublisher<WeddingDress, Error> {
-        return weddingApi.editWeddingDress(weddingDress: weddingDress)
+    func editBouquet(brideBouquet: Bouquet, image: UIImage?) -> AnyPublisher<Bouquet, Error> {
+        return weddingApi.editBouquet(brideBouquet: brideBouquet, image: image)
             .eraseToAnyPublisher()
     }
     
-    func editBouquet(brideBouquet: Bouquet) -> AnyPublisher<Bouquet, Error> {
-        return weddingApi.editBouquet(brideBouquet: brideBouquet)
-            .eraseToAnyPublisher()
-    }
-    
-    func editGroomSuit(groomSuit: GroomSuit) -> AnyPublisher<GroomSuit, Error> {
-        return weddingApi.editGroomSuit(groomSuit: groomSuit)
+    func editGroomSuit(groomSuit: GroomSuit, image: UIImage?) -> AnyPublisher<GroomSuit, Error> {
+        return weddingApi.editGroomSuit(groomSuit: groomSuit, image: image)
             .eraseToAnyPublisher()
     }
     
@@ -74,8 +88,8 @@ class WeddingService {
             .eraseToAnyPublisher()
     }
     
-    func editWeddingCake(weddingCake: WeddingCake) -> AnyPublisher<WeddingCake, Error> {
-        return weddingApi.editWeddingCake(weddingCake: weddingCake)
+    func editWeddingCake(weddingCake: WeddingCake, image: UIImage?) -> AnyPublisher<WeddingCake, Error> {
+        return weddingApi.editWeddingCake(weddingCake: weddingCake, image: image)
             .eraseToAnyPublisher()
     }
     

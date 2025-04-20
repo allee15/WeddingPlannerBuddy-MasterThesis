@@ -87,8 +87,6 @@
 		0F572F6C2D4C2614003FD5E9 /* WeddingCakeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F692D4C2614003FD5E9 /* WeddingCakeViewModel.swift */; };
 		0F572F702D4C2616003FD5E9 /* LiveBandScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F6D2D4C2616003FD5E9 /* LiveBandScreen.swift */; };
 		0F572F712D4C2616003FD5E9 /* LiveBandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F6E2D4C2616003FD5E9 /* LiveBandViewModel.swift */; };
-		0F572F812D50003E003FD5E9 /* PlaylistScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F802D50003E003FD5E9 /* PlaylistScreen.swift */; };
-		0F572F832D50081B003FD5E9 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F572F822D50081B003FD5E9 /* Song.swift */; };
 		0F792FAB2D9A8E8F00052790 /* Quicksand-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F792FA72D9A8E8F00052790 /* Quicksand-Light.ttf */; };
 		0F792FAC2D9A8E8F00052790 /* Quicksand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F792FA92D9A8E8F00052790 /* Quicksand-Regular.ttf */; };
 		0F792FAD2D9A8E8F00052790 /* Quicksand-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0F792FA62D9A8E8F00052790 /* Quicksand-Bold.ttf */; };
@@ -156,7 +154,6 @@
 		0FDE16CF2D1DE70700C1580E /* WeddingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16CE2D1DE70700C1580E /* WeddingService.swift */; };
 		0FDE16D22D1DEBFF00C1580E /* WeddingMediaScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */; };
 		0FDE16D42D1DEC0B00C1580E /* WeddingMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */; };
-		0FDE16D82D1F53E100C1580E /* PlaylistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDE16D72D1F53E100C1580E /* PlaylistViewModel.swift */; };
 		0FE515412CFF9BE800CA9601 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515402CFF9BE800CA9601 /* HomeScreen.swift */; };
 		0FE515432CFF9C1E00CA9601 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515422CFF9C1C00CA9601 /* HomeViewModel.swift */; };
 		0FE515462CFF9C5A00CA9601 /* WeddingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE515452CFF9C5A00CA9601 /* WeddingScreen.swift */; };
@@ -267,8 +264,6 @@
 		0F572F692D4C2614003FD5E9 /* WeddingCakeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingCakeViewModel.swift; sourceTree = "<group>"; };
 		0F572F6D2D4C2616003FD5E9 /* LiveBandScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBandScreen.swift; sourceTree = "<group>"; };
 		0F572F6E2D4C2616003FD5E9 /* LiveBandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBandViewModel.swift; sourceTree = "<group>"; };
-		0F572F802D50003E003FD5E9 /* PlaylistScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistScreen.swift; sourceTree = "<group>"; };
-		0F572F822D50081B003FD5E9 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		0F792FA62D9A8E8F00052790 /* Quicksand-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Bold.ttf"; sourceTree = "<group>"; };
 		0F792FA72D9A8E8F00052790 /* Quicksand-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Light.ttf"; sourceTree = "<group>"; };
 		0F792FA82D9A8E8F00052790 /* Quicksand-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Quicksand-Medium.ttf"; sourceTree = "<group>"; };
@@ -336,7 +331,6 @@
 		0FDE16CE2D1DE70700C1580E /* WeddingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingService.swift; sourceTree = "<group>"; };
 		0FDE16D12D1DEBFE00C1580E /* WeddingMediaScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingMediaScreen.swift; sourceTree = "<group>"; };
 		0FDE16D32D1DEC0B00C1580E /* WeddingMediaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingMediaViewModel.swift; sourceTree = "<group>"; };
-		0FDE16D72D1F53E100C1580E /* PlaylistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewModel.swift; sourceTree = "<group>"; };
 		0FE515402CFF9BE800CA9601 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		0FE515422CFF9C1C00CA9601 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0FE515452CFF9C5A00CA9601 /* WeddingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeddingScreen.swift; sourceTree = "<group>"; };
@@ -462,7 +456,6 @@
 				0F0CBA712D395B8E0018FD86 /* HomeCard.swift */,
 				0F40D6B22D48D8E60020D433 /* Weather.swift */,
 				0F572F312D4C22D3003FD5E9 /* WeddingDetails.swift */,
-				0F572F822D50081B003FD5E9 /* Song.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -768,8 +761,6 @@
 				0FE515472CFF9C7B00CA9601 /* WeddingViewModel.swift */,
 				0F79300D2DA0147000052790 /* EditDateScreen.swift */,
 				0F79300F2DA04AA000052790 /* EditDateViewModel.swift */,
-				0F572F802D50003E003FD5E9 /* PlaylistScreen.swift */,
-				0FDE16D72D1F53E100C1580E /* PlaylistViewModel.swift */,
 				0F572F332D4C249A003FD5E9 /* WeddingDress */,
 				0F572F3B2D4C2591003FD5E9 /* BrideBouquet */,
 				0F572F472D4C25F8003FD5E9 /* GroomSuit */,
@@ -1056,7 +1047,6 @@
 				0F24D5F92CC1BC9D00A833E1 /* SideButtonView.swift in Sources */,
 				0F572F522D4C25FA003FD5E9 /* PartyLocationScreen.swift in Sources */,
 				0FDE16922D0B153D00C1580E /* Guest.swift in Sources */,
-				0F572F832D50081B003FD5E9 /* Song.swift in Sources */,
 				0FE515522CFF9CF100CA9601 /* ProfileScreen.swift in Sources */,
 				0F24D5DE2CC1B5A200A833E1 /* UserDefaultsService.swift in Sources */,
 				0FE515702D0320EB00CA9601 /* FirebaseService.swift in Sources */,
@@ -1097,7 +1087,6 @@
 				9B1A696E2CC041AA00B19BF1 /* AppDelegate.swift in Sources */,
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
 				0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */,
-				0F572F812D50003E003FD5E9 /* PlaylistScreen.swift in Sources */,
 				0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */,
 				0F7930122DA14C7800052790 /* EditFoodMenuScreen.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
@@ -1145,7 +1134,6 @@
 				0FDE16682D05FB5600C1580E /* DeleteAccountViewModel.swift in Sources */,
 				0F24D61F2CC2AA8000A833E1 /* WebViewScreen.swift in Sources */,
 				0F24D6042CC2978600A833E1 /* JSONParsers.swift in Sources */,
-				0FDE16D82D1F53E100C1580E /* PlaylistViewModel.swift in Sources */,
 				0F792FF02D9E99B000052790 /* ChooseWeddingViewModel.swift in Sources */,
 				0FDE16D42D1DEC0B00C1580E /* WeddingMediaViewModel.swift in Sources */,
 				0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */,

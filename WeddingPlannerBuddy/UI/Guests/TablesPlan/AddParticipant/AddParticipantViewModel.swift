@@ -39,7 +39,7 @@ class AddParticipantViewModel: BaseViewModel {
     }
     
     func addParticipant() {
-        let guest = Guest(id: UUID().uuidString, name: name, email: email)
+        let guest = Guest(id: UUID().uuidString, name: name, email: email, tableUID: tableId)
         tablesService.addParticipant(participant: guest, userId: userId, tableUUID: tableId)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in

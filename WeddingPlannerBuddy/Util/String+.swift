@@ -29,4 +29,29 @@ extension String {
         }
         return ""
     }
+    
+    func toPrettyDateString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        
+        guard let date = formatter.date(from: self) else {
+            return self
+        }
+        
+        formatter.dateFormat = "d MMMM yyyy"
+        return formatter.string(from: date)
+    }
+    
+    
+    func toPrettyTimeString() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        
+        guard let date = formatter.date(from: self) else {
+            return self
+        }
+        
+        formatter.dateFormat = "HH:mm"
+        return formatter.string(from: date)
+    }
 }

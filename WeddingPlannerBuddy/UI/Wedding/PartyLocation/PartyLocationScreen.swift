@@ -31,30 +31,30 @@ struct PartyLocationScreen: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("\(viewModel.partyLocation.decorationsOrganizerDetails)")
+                                Text("\(viewModel.partyLocation.decorationsOrganizerDetails.isEmpty ? "No name" : viewModel.partyLocation.decorationsOrganizerDetails)")
                                     .font(.quicksandSemiBold(size: 18))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                 
-                                Text("📍 \(viewModel.partyLocation.partyAddress)")
+                                Text("📍 \(viewModel.partyLocation.partyAddress.isEmpty ? "Not specified" : viewModel.partyLocation.partyAddress)")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("📅 \(viewModel.partyLocation.date)")
+                                Text("📅 \(viewModel.partyLocation.date.isEmpty ? "Not specified" : viewModel.partyLocation.date.toPrettyDateString())")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("⏰ \(viewModel.partyLocation.hour)")
+                                Text("⏰ \(viewModel.partyLocation.hour.isEmpty ? "Not specified" : viewModel.partyLocation.hour.toPrettyTimeString())")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("💰 \(viewModel.partyLocation.price)")
+                                Text("💰 \(viewModel.partyLocation.price) RON")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)

@@ -46,10 +46,15 @@ class EditDateViewModel: BaseViewModel {
             } receiveValue: { [weak self] result in
                 guard let self else {return}
                 if result {
+                    reloadWedding()
                     self.eventSubject.send(.completed)
                 } else {
                     self.eventSubject.send(.error)
                 }
             }.store(in: &bag)
+    }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
     }
 }

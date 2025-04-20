@@ -31,30 +31,30 @@ struct ChurchCeremonyScreen: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Priest: \(viewModel.churchCeremony.preotName)")
+                                Text("Priest: \(viewModel.churchCeremony.preotName.isEmpty ? "Not specified" : viewModel.churchCeremony.preotName)")
                                     .font(.quicksandSemiBold(size: 18))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                 
-                                Text("📍 \(viewModel.churchCeremony.churchAddress)")
+                                Text("📍 \(viewModel.churchCeremony.churchAddress.isEmpty ? "Not specified" : viewModel.churchCeremony.churchAddress)")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("📅 \(viewModel.churchCeremony.date)")
+                                Text("📅 \(viewModel.churchCeremony.date.isEmpty ? "Not specified" : viewModel.churchCeremony.date.toPrettyDateString())")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("⏰ \(viewModel.churchCeremony.hour)")
+                                Text("⏰ \(viewModel.churchCeremony.hour.isEmpty ? "Not specified" : viewModel.churchCeremony.hour.toPrettyTimeString())")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("💰 \(viewModel.churchCeremony.price)")
+                                Text("💰 \(viewModel.churchCeremony.price) RON")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)

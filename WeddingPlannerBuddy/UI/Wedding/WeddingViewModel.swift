@@ -91,7 +91,7 @@ class WeddingViewModel: BaseViewModel {
     
     private func getWeddingDetails(userId: String) {
         self.weddingDetailsState = .loading
-        self.weddingService.getWeddingDetails(userId: userId)
+        self.weddingService.weddingReactiveData.getStateSubject()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
@@ -102,7 +102,14 @@ class WeddingViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] weddingDetails in
                 guard let self else {return}
-                self.weddingDetailsState = .value(weddingDetails)
+                switch weddingDetails {
+                case .failure(_):
+                    self.weddingDetailsState = .failure
+                case .loading:
+                    self.weddingDetailsState = .loading
+                case .ready(let details):
+                    self.weddingDetailsState = .value(details)
+                }
             }.store(in: &bag)
     }
 }
