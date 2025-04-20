@@ -51,4 +51,8 @@ class WeddingMediaViewModel: BaseViewModel {
                 }
             }.store(in: &bag)
     }
+    
+    func reloadUSer() {
+        userService.userReactiveData.reload()
+    }
 }

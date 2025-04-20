@@ -28,6 +28,10 @@ class TablesPlanViewModel: BaseViewModel {
         self.tables = tables
     }
     
+    func reloadUser() {
+        self.userService.userReactiveData.reload()
+    }
+    
     private func getTableNumber() -> Int {
         var counter: Int = 0
         tables.forEach { table in
@@ -104,4 +108,21 @@ class TablesPlanViewModel: BaseViewModel {
         }
         return names.isEmpty ? "No one" : names
     }
+    
+    func updateTablePosition(_ table: Table) {
+        tablesService.updateTablePosition(table: table, userId: userId)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure(_) = completion {
+                    let toast = Toast(text: "Failed to save position",
+                                      textColor: Color.darkRed,
+                                      bg: Color.lightRed,
+                                      icon: .icToastRed)
+                    ToastManager.instance.show(toast)
+                }
+            } receiveValue: { _ in
+            }
+            .store(in: &bag)
+    }
+
 }

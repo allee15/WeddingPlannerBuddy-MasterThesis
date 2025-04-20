@@ -31,24 +31,24 @@ struct LiveBandScreen: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("\(viewModel.liveBand.name)")
+                                Text("\(viewModel.liveBand.name.isEmpty ? "Not specified" : viewModel.liveBand.name)")
                                     .font(.quicksandSemiBold(size: 18))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                 
-                                Text("📍 \(viewModel.liveBand.details)")
+                                Text("📍 \(viewModel.liveBand.details.isEmpty ? "Not specified" : viewModel.liveBand.details)")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("⏰ \(viewModel.liveBand.hour)")
+                                Text("⏰ \(viewModel.liveBand.hour.isEmpty ? "Not specified" : viewModel.liveBand.hour.toPrettyTimeString())")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading, 8)
                                 
-                                Text("💰 \(viewModel.liveBand.price)")
+                                Text("💰 \(viewModel.liveBand.price) RON")
                                     .font(.quicksandRegular(size: 14))
                                     .foregroundStyle(Color.mainBlack)
                                     .multilineTextAlignment(.leading)

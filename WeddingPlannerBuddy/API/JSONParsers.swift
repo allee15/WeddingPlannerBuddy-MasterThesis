@@ -10,27 +10,47 @@ import SwiftyJSON
 
 class JSONParsers {
     static func parseJsonUser(json: JSON) -> User {
-        return User(id: json["userUID"].stringValue,
-                    email: json["email"].stringValue,
-                    hasActiveWedding: json["hasActiveWedding"].boolValue,
-                    tablesAtWedding: json["tablesAtWedding"].array?.map({ subJson in
-            parseJsonTables(json: subJson)
-        }) ?? [],
-                    otherWeddings: json["otherWeddings"].array?.map({ subJson in
-            parseJsonOtherWeddings(json: subJson)
-        }) ?? [],
-                    guests: json["guests"].array?.map({ subJson in
-            parseJsonGuest(json: subJson)
-        }) ?? [],
-                    weddings: json["weddings"].array?.map({ subJson in
-            parseJsonWedding(json: subJson)
-        }) ?? [])
+        let guests = json["guests"].arrayValue.map(parseJsonGuest)
+        
+        let tables = json["tablesAtWedding"].arrayValue.map { subJson in
+            parseJsonTableWithGuests(json: subJson, allGuests: guests)
+        }
+        
+        return User(
+            id: json["userUID"].stringValue,
+            email: json["email"].stringValue,
+            hasActiveWedding: json["hasActiveWedding"].boolValue,
+            tablesAtWedding: tables,
+            otherWeddings: json["otherWeddings"].arrayValue.map(parseJsonOtherWeddings),
+            guests: guests,
+            weddings: json["weddings"].arrayValue.map(parseJsonWedding)
+        )
+    }
+    
+    static func parseJsonTableWithGuests(json: JSON, allGuests: [Guest]) -> Table {
+        let tableUID = json["tableUID"].stringValue
+
+        let participants = allGuests.filter { $0.tableUID == tableUID }
+
+        return Table(
+            id: tableUID,
+            position: CGPoint(
+                x: json["position"]["x"].doubleValue,
+                y: json["position"]["y"].doubleValue
+            ),
+            label: json["label"].stringValue,
+            participants: participants,
+            isObject: json["isObject"].boolValue
+        )
     }
     
     static func parseJsonGuest(json: JSON) -> Guest {
-        return Guest(id: json["_id"].stringValue,
-                     name: json["name"].stringValue,
-                     email: json["email"].stringValue)
+        return Guest(
+            id: json["_id"].stringValue,
+            name: json["name"].stringValue,
+            email: json["email"].stringValue,
+            tableUID: json["tableUID"].stringValue
+        )
     }
     
     static func parseJsonOtherWeddings(json: JSON) -> WeddingGuest {
@@ -40,23 +60,13 @@ class JSONParsers {
                             location: json["location"].stringValue)
     }
     
-    static func parseJsonTables(json: JSON) -> Table {
-        return Table(id: json["tableUID"].stringValue,
-                     position: CGPoint(x: json["position"]["x"].intValue, //TODO: fix us
-                                       y: json["position"]["y"].intValue),
-                     label: json["label"].stringValue,
-                     participants: json["participants"].arrayValue.map({ subJson in
-            parseJsonGuest(json: subJson)
-        }),
-                     isObject: json["isObject"].boolValue)
-    }
-    
     static func parseJsonWedding(json: JSON) -> Wedding {
-        return Wedding(id: json["weddingUUID"].stringValue,
+        return Wedding(id: json["_id"].stringValue,
                        name: json["name"].stringValue,
                        date: json["date"].stringValue,
                        location: json["location"].stringValue,
-                       images: json["images"].array?.compactMap({ $0.stringValue }) ?? [])
+                       images: json["images"].array?.compactMap({ $0.stringValue }) ?? [],
+                       weddingUUID: json["weddingUUID"].stringValue)
     }
     
     static func parseJsonWeddingDetails(json: JSON) -> WeddingDetails {
@@ -130,35 +140,19 @@ class JSONParsers {
     
     static func parseJsonFoodMenu(json: JSON) -> FoodMenu {
         return FoodMenu(id: json["foodMenuUUID"].stringValue,
-                        antreu: json["antreu"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
-                        firstCourse: json["firstCourse"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
-                        mainCourse: json["mainCourse"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
-                        secondMainCourse: json["secondMainCourse"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
+                        antreu: json["antreu"].arrayValue.map({ $0.stringValue }),
+                        firstCourse: json["firstCourse"].arrayValue.map({ $0.stringValue }),
+                        mainCourse: json["mainCourse"].arrayValue.map({ $0.stringValue }),
+                        secondMainCourse: json["secondMainCourse"].arrayValue.map({ $0.stringValue }),
                         price: json["price"].intValue)
     }
     
     static func parseJsonBarMenu(json: JSON) -> BarMenu {
         return BarMenu(id: json["barMenuUUID"].stringValue,
-                       alcoholic: json["alcoholic"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
-                       nonalcoholic: json["nonalcoholic"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
-                       coffee: json["coffee"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
-                       juice: json["juice"].arrayValue.map({ subJson in
-            return subJson[""].stringValue
-        }),
+                       alcoholic: json["alcoholic"].arrayValue.map({ $0.stringValue }),
+                       nonalcoholic: json["nonalcoholic"].arrayValue.map({ $0.stringValue }),
+                       coffee: json["coffee"].arrayValue.map({ $0.stringValue }),
+                       juice: json["juice"].arrayValue.map({ $0.stringValue }),
                        price: json["price"].intValue)
     }
     

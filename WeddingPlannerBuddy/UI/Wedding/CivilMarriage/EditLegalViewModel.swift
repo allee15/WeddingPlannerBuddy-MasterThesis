@@ -33,9 +33,10 @@ class EditLegalViewModel: BaseViewModel {
                                   date: newDate == Date() ? civilMarriage.date : newDate.description,
                                   hour: newHour == Date() ? civilMarriage.hour : newHour.description)
         self.weddingService.editCivilMarriage(civilMarriage: civil)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure(_):
                     self?.eventSubject.send(.error)
                 default:
                     break
@@ -43,7 +44,12 @@ class EditLegalViewModel: BaseViewModel {
             } receiveValue: { [weak self] civilMarriage in
                 guard let self else {return}
                 self.civilMarriage = civilMarriage
+                reloadWedding()
                 self.eventSubject.send(.completed)
             }.store(in: &bag)
+    }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
     }
 }

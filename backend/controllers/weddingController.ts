@@ -3,6 +3,10 @@ import { User } from "../models/User";
 import {BarMenu, Bouquet, ChurchCeremony, CivilMarriage, FoodMenu, GroomSuit, LiveBand, PartyLocation, WeddingCake, WeddingDetails, WeddingDress} from "../models/WeddingDetails";
 import { Wedding } from "../models/Wedding";
 
+interface MulterRequest extends Request {
+    file?: Express.Multer.File;
+}
+
 export const startWedding = async (req: Request, res: Response): Promise<any> => {
     try {
         const { userUID, date } = req.body;
@@ -68,6 +72,7 @@ export const getWeddingDetails = async (req: Request, res: Response): Promise<an
             .populate("groomSuit")
             .populate("churchCeremony")
             .populate("partyLocation")
+            .populate("civilMarriage")
             .populate("barMenu")
             .populate("foodMenu")
             .populate("weddingCake")
@@ -106,7 +111,8 @@ export const updateWeddingDate = async (req: Request, res: Response): Promise<an
 export const updateWeddingDress = async (req: Request, res: Response): Promise<any> => {
     try {
         const { id } = req.params;
-        const { weddingDressUUID, link, price, photo, description } = req.body;
+        const { weddingDressUUID, link, price, description } = req.body;
+        const imagePath = req.file?.path;
 
         const weddingDress = await WeddingDress.findOne({ weddingDressUUID: weddingDressUUID });
 
@@ -116,8 +122,10 @@ export const updateWeddingDress = async (req: Request, res: Response): Promise<a
 
         weddingDress.link = link;
         weddingDress.price = price;
-        weddingDress.photo = photo;
         weddingDress.description = description;
+        if (imagePath) {
+            weddingDress.photo = imagePath;
+        }
 
         await weddingDress.save();
         return res.status(200).json({ weddingDress });
@@ -130,7 +138,8 @@ export const updateWeddingDress = async (req: Request, res: Response): Promise<a
 export const updateBouquet = async (req: Request, res: Response): Promise<any> => {
     try {
         const { id } = req.params;
-        const { bouquetUUID, link, price, photo, description } = req.body;
+        const { bouquetUUID, link, price, description } = req.body;
+        const imagePath = req.file?.path;
 
         const bouquet = await Bouquet.findOne({ bouquetUUID: bouquetUUID });
 
@@ -140,8 +149,12 @@ export const updateBouquet = async (req: Request, res: Response): Promise<any> =
 
         bouquet.link = link;
         bouquet.price = price;
-        bouquet.photo = photo;
         bouquet.description = description;
+
+        if (imagePath) {
+            bouquet.photo = imagePath;
+        }
+
         await bouquet.save();
 
         return res.status(200).json({ bouquet });
@@ -154,7 +167,8 @@ export const updateBouquet = async (req: Request, res: Response): Promise<any> =
 export const updateGroomSuit = async (req: Request, res: Response): Promise<any> => {
     try {
         const { id } = req.params;
-        const { groomSuitUUID, link, price, photo, description } = req.body;
+        const { groomSuitUUID, link, price, description } = req.body;
+        const imagePath = req.file?.path;
 
         const groomSuit = await GroomSuit.findOne({ groomSuitUUID: groomSuitUUID });
 
@@ -164,8 +178,12 @@ export const updateGroomSuit = async (req: Request, res: Response): Promise<any>
 
         groomSuit.link = link;
         groomSuit.price = price;
-        groomSuit.photo = photo;
         groomSuit.description = description;
+
+        if (imagePath) {
+            groomSuit.photo = imagePath;
+        }
+
         await groomSuit.save();
 
         return res.status(200).json({ groomSuit });
@@ -301,7 +319,8 @@ export const updateBarMenu = async (req: Request, res: Response): Promise<any> =
 export const updateWeddingCake = async (req: Request, res: Response): Promise<any> => {
     try {
         const { id } = req.params;
-        const { weddingCakeUUID, name, photo, description, price } = req.body;
+        const { weddingCakeUUID, name, description, price } = req.body;
+        const imagePath = req.file?.path;
 
         const weddingCake = await WeddingCake.findOne({ weddingCakeUUID: weddingCakeUUID });
 
@@ -310,9 +329,13 @@ export const updateWeddingCake = async (req: Request, res: Response): Promise<an
         }
 
         weddingCake.name = name;
-        weddingCake.photo = photo;
         weddingCake.description = description;
         weddingCake.price = price;
+
+        if (imagePath) {
+            weddingCake.photo = imagePath;
+        }
+
         await weddingCake.save();
        
         return res.status(200).json({ weddingCake });
@@ -344,4 +367,34 @@ export const updateLiveBand = async (req: Request, res: Response): Promise<any> 
         console.log("Error in updateLiveBand controller", error);
         return res.status(500).json({ error: "Internal Server Error" });
     }
+
+};
+
+export const addImageToWedding = async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { id } = req.params;
+    const { weddingUUID, name, date, location, images } = req.body;
+    const imagePath = req.file?.path;
+
+    const wedding = await Wedding.findOne({ weddingUUID: weddingUUID });
+    if (!wedding) {
+      return res.status(404).json({ success: false, message: "Wedding not found" });
+    }
+
+    wedding.name = name;
+    wedding.date = date;
+    wedding.location = location;
+    wedding.images = images;
+
+    if (imagePath) {
+        wedding.images.push(imagePath);
+    }
+
+    await wedding.save();
+
+    res.json({ success: true, wedding });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 };

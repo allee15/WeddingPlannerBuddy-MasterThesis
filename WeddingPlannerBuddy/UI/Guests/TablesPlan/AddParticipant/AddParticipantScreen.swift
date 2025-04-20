@@ -11,6 +11,7 @@ struct AddParticipantScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @FocusState var focusedField: ProfileField?
     @StateObject var viewModel: AddParticipantViewModel
+    var onComplete: (() -> Void)?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -57,12 +58,12 @@ struct AddParticipantScreen: View {
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .completed:
-                    navigation.pop(animated: true)
+                    navigation.popToRoot(animated: true)
                     let toast = Toast(text: "Partipicant added successful!")
                     ToastManager.instance.show(toast)
-                    
+                    onComplete?()
                 case .error:
-                    navigation.pop(animated: true)
+                    navigation.popToRoot(animated: true)
                     let toast = Toast(text: "An error has occured. Please try again!",
                                       textColor: Color.darkRed,
                                       bg: Color.lightRed,

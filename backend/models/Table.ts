@@ -1,3 +1,4 @@
+import { Double } from "mongodb";
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
@@ -9,11 +10,11 @@ const tableSchema = new Schema({
     },
     position: {
         type: {
-            x: { type: Number, required: true },
-            y: { type: Number, required: true }  
+            x: { type: Double, required: true },
+            y: { type: Double, required: true }  
         },
         required: true,
-        default: { x: 0, y: 0 }
+        default: { x: 0.0, y: 0.0 }
     },
     label: {
         type: Schema.Types.String,

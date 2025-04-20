@@ -93,13 +93,20 @@ class HomeViewModel: BaseViewModel {
     }
     
     private func getWeddingDetails(userId: String) {
-        self.weddingService.getWeddingDetails(userId: userId)
+        self.weddingService.weddingReactiveData.getStateSubject()
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 
             } receiveValue: { [weak self] weddingDetails in
                 guard let self else {return}
-                self.weddingId = weddingDetails.id
+                switch weddingDetails {
+                case .failure(_):
+                    break
+                case .loading:
+                    break
+                case .ready(let details):
+                    self.weddingId = details.id
+                }
             }.store(in: &bag)
     }
     

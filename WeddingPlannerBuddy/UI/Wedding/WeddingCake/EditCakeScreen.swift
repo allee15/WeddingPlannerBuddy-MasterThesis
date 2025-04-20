@@ -41,14 +41,16 @@ struct EditCakeScreen: View {
                         .ignoresSafeArea()
                     }
                     
-                    ZStack(alignment: .center) {
-                        Color.nudePrimary.opacity(0.4)
-                        KFImage(URL(string: viewModel.newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? "")) //TODO: checkme
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: UIScreen.main.bounds.height / 3)
-                            .padding(.horizontal, 16)
-                            .padding(.vertical, 24)
+                    if !viewModel.weddingCake.photo.isEmpty {
+                        ZStack(alignment: .center) {
+                            Color.nudePrimary.opacity(0.4)
+                            KFImage(URL(string: "http://localhost:8000/\(viewModel.weddingCake.photo)"))
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: UIScreen.main.bounds.height / 3)
+                                .padding(.horizontal, 16)
+                                .padding(.vertical, 24)
+                        }
                     }
                 }
                 .padding(.horizontal, 16)
@@ -67,7 +69,7 @@ struct EditCakeScreen: View {
         .onReceive(viewModel.eventSubject) { event in
             switch event {
             case .completed:
-                navigation.pop(animated: true)
+                navigation.popToRoot(animated: true)
                 let toast = Toast(text: "Edit successful!")
                 ToastManager.instance.show(toast)
             case .error:

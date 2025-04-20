@@ -37,13 +37,14 @@ class EditCakeViewModel: BaseViewModel {
     func editCake() {
         let cake = WeddingCake(id: weddingCake.id.isEmpty ? UUID().uuidString : weddingCake.id,
                                name: newName.isEmpty ? weddingCake.name : newName,
-                               photo: newImageURL?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? weddingCake.photo,
+                               photo: weddingCake.photo,
                                description: newDescription.isEmpty ? weddingCake.description : newDescription,
                                price: newPrice.isEmpty ? weddingCake.price : Int(newPrice) ?? weddingCake.price)
-        self.weddingService.editWeddingCake(weddingCake: cake)
+        self.weddingService.editWeddingCake(weddingCake: cake, image: newImageURL)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure(_):
                     self?.eventSubject.send(.error)
                 default:
                     break
@@ -51,7 +52,12 @@ class EditCakeViewModel: BaseViewModel {
             } receiveValue: { [weak self] weddingCake in
                 guard let self else {return}
                 self.weddingCake = weddingCake
+                reloadWedding()
                 self.eventSubject.send(.completed)
             }.store(in: &bag)
+    }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
     }
 }

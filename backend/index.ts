@@ -20,12 +20,14 @@ admin.initializeApp({
 });
 
 app.use(cors())
-app.use(bodyParser.json())
-app.set("trust proxy", true)
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+app.set("trust proxy", true);
 
 app.use(userRoutes);
 app.use(weddingRoutes);
 app.use(tableRoutes);
+app.use('/uploads', express.static('uploads'));
 
 createDatabaseConnection().then(() => {
     app.listen(8000, () => {

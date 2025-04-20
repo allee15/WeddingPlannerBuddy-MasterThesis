@@ -27,4 +27,9 @@ class TablesService {
         return tablesApi.addParticipant(participant: participant, userId: userId, tableId: tableUUID)
             .eraseToAnyPublisher()
     }
+    
+    func updateTablePosition(table: Table, userId: String) -> AnyPublisher<Bool, Error> {
+        return tablesApi.updateTablePosition(table: table, userId: userId)
+            .eraseToAnyPublisher()
+    }
 }

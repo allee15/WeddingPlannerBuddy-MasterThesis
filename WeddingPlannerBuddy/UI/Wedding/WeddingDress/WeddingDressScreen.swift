@@ -30,7 +30,7 @@ struct WeddingDressScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Description: \(viewModel.weddingDress.description)")
+                        Text("Description: \(viewModel.weddingDress.description.isEmpty ? "Not specified" : viewModel.weddingDress.description)")
                             .font(.quicksandMedium(size: 16))
                             .foregroundStyle(Color.mainBlack)
                         
@@ -38,20 +38,28 @@ struct WeddingDressScreen: View {
                             .font(.quicksandMedium(size: 16))
                             .foregroundStyle(Color.mainBlack)
                         
-                        Text(.init("Link: \(viewModel.weddingDress.link)"))
-                            .underline()
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                            .tint(Color.mainBlack)
+                        Button {
+                            if let url = URL(string: viewModel.weddingDress.link) {
+                                navigation.push(WebViewScreen(title: "Dress Link", url: url).asDestination(), animated: true)
+                            }
+                        } label: {
+                            Text("Link: \(viewModel.weddingDress.link.isEmpty ? "Not specified" : viewModel.weddingDress.link)")
+                                .underline()
+                                .font(.quicksandMedium(size: 16))
+                                .foregroundStyle(Color.mainBlack)
+                                .tint(Color.mainBlack)
+                        }
                         
-                        ZStack(alignment: .center) {
-                            Color.nudePrimary.opacity(0.4)
-                            KFImage(URL(string: viewModel.weddingDress.photo))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: UIScreen.main.bounds.height / 3)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 24)
+                        if !viewModel.weddingDress.photo.isEmpty {
+                            ZStack(alignment: .center) {
+                                Color.nudePrimary.opacity(0.4)
+                                KFImage(URL(string: "http://localhost:8000/\(viewModel.weddingDress.photo)"))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: UIScreen.main.bounds.height / 3)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 24)
+                            }
                         }
                     }.padding(.top, 20)
                         .padding(.horizontal, 16)

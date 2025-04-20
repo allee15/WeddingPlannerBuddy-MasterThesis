@@ -69,8 +69,6 @@ struct WeddingScreen: View {
                                             let vm = EditDateViewModel(date: weddingDetails.date,
                                                                        weddingId: weddingDetails.id)
                                             mainNavigation?.push(EditDateScreen(viewModel: vm).asDestination(), animated: true)
-                                        } playlistAction: {
-                                            mainNavigation?.push(PlaylistScreen().asDestination(), animated: true)
                                         }
                                         
                                         LazyVGrid(columns: columns, spacing: 16) {
@@ -177,62 +175,37 @@ fileprivate struct WeddingDateAndMoneyView: View {
     let date: String
     let money: String
     let action: () -> ()
-    let playlistAction: () -> ()
     
     var body: some View {
         HStack {
-            VStack(alignment: .leading, spacing: 8) {
-                Button {
-                    action()
-                } label: {
-                    HStack(spacing: 4) {
-                        Image(.icCalendar)
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.mainBlack)
-                            .frame(width: 20, height: 20)
-                        
-                        Text(!date.isEmpty ? date.remakeWeather() : "No date")
-                            .underline()
-                            .foregroundStyle(Color.mainBlack)
-                            .font(.quicksandSemiBold(size: 18))
-                    }
-                }
-                
+            Button {
+                action()
+            } label: {
                 HStack(spacing: 4) {
-                    Image(.icMoney)
+                    Image(.icCalendar)
                         .resizable()
                         .renderingMode(.template)
                         .foregroundStyle(Color.mainBlack)
                         .frame(width: 20, height: 20)
                     
-                    Text("\(money) RON")
+                    Text(!date.isEmpty ? date.remakeWeather() : "No date")
+                        .underline()
                         .foregroundStyle(Color.mainBlack)
                         .font(.quicksandSemiBold(size: 18))
                 }
             }
             
             Spacer()
-            
-            Button {
-                playlistAction()
-            } label: {
-                HStack(spacing: 4) {
-                    Text("Check playlist")
-                        .foregroundStyle(Color.mainBlack)
-                        .font(.quicksandMedium(size: 16))
-                        .fixedSize()
-                    
-                    Image(.icItemresultArrow)
-                        .resizable()
-                        .renderingMode(.template)
-                        .foregroundStyle(Color.mainBlack)
-                        .frame(width: 24, height: 24)
-                }.padding(.vertical, 8)
-                    .padding(.horizontal, 16)
-                    .background(Color.mainWhite.opacity(0.5))
-                    .cornerRadius(4, corners: .allCorners)
-                    .border(Color.greenPrimary, width: 1, cornerRadius: 4)
+            HStack(spacing: 4) {
+                Image(.icMoney)
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundStyle(Color.mainBlack)
+                    .frame(width: 20, height: 20)
+                
+                Text("\(money) RON")
+                    .foregroundStyle(Color.mainBlack)
+                    .font(.quicksandSemiBold(size: 18))
             }
         }.padding(.horizontal, 16)
     }

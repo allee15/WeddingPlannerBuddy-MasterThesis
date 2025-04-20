@@ -11,10 +11,12 @@ struct TablesPlanScreen: View {
     @EnvironmentObject private var navigation: Navigation
     @StateObject var viewModel: TablesPlanViewModel
     @State var tableId: String = ""
+    @State private var shouldReloadWeddingDetails = false
     
     var body: some View {
         VStack(spacing: 0) {
             NavBarMultipleRightButtonsView(title: "Tables plan") {
+                viewModel.reloadUser()
                 navigation.pop(animated: true)
             } firstRightButtonAction: {
                 viewModel.addRectangle()
@@ -31,16 +33,27 @@ struct TablesPlanScreen: View {
                         tableId = table.id
                         navigation.dismissModal(animated: true, completion: nil)
                         let vm = AddParticipantViewModel(userId: viewModel.userId, tableId: tableId)
-                        navigation.push(AddParticipantScreen(viewModel: vm).asDestination(), animated: true)
+                        let screen = AddParticipantScreen(viewModel: vm, onComplete: {
+                            shouldReloadWeddingDetails = true
+                        })
+                        navigation.push(screen.asDestination(), animated: true)
                     } onBottomButtonTapped: {
                         navigation.dismissModal(animated: true, completion: nil)
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                } onTableMoved: { movedTable in
+                    viewModel.updateTablePosition(movedTable)
                 }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            .onChange(of: shouldReloadWeddingDetails) { _, newValue in
+                if newValue {
+                    viewModel.reloadUser()
+                    shouldReloadWeddingDetails = false
+                }
+            }
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .tableAdded:
@@ -65,6 +78,7 @@ struct TablesPlanScreen: View {
 struct TablePlanView: View {
     @Binding var tables: [Table]
     let action: (Table) -> ()
+    let onTableMoved: (Table) -> ()
     
     var body: some View {
         ZStack {
@@ -73,6 +87,7 @@ struct TablePlanView: View {
                 DraggableTable(table: table, onUpdate: { updatedTable in
                     if let index = tables.firstIndex(where: { $0.id == updatedTable.id }) {
                         tables[index] = updatedTable
+                        onTableMoved(updatedTable)
                     }
                 }, action: {
                     action(table)

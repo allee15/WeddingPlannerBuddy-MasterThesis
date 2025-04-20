@@ -30,7 +30,7 @@ struct BrideBouquetScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Description: \(viewModel.brideBouquet.description)")
+                        Text("Description: \(viewModel.brideBouquet.description.isEmpty ? "Not specified" : viewModel.brideBouquet.description)")
                             .font(.quicksandMedium(size: 16))
                             .foregroundStyle(Color.mainBlack)
                         
@@ -38,20 +38,28 @@ struct BrideBouquetScreen: View {
                             .font(.quicksandMedium(size: 16))
                             .foregroundStyle(Color.mainBlack)
                         
-                        Text(.init("Link: \(viewModel.brideBouquet.link)"))
-                            .underline()
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                            .tint(Color.mainBlack)
+                        Button {
+                            if let url = URL(string: viewModel.brideBouquet.link) {
+                                navigation.push(WebViewScreen(title: "Bouquet Link", url: url).asDestination(), animated: true)
+                            }
+                        } label: {
+                            Text("Link: \(viewModel.brideBouquet.link.isEmpty ? "Not specified" : viewModel.brideBouquet.link)")
+                                .underline()
+                                .font(.quicksandMedium(size: 16))
+                                .foregroundStyle(Color.mainBlack)
+                                .tint(Color.mainBlack)
+                        }
                         
-                        ZStack(alignment: .center) {
-                            Color.nudePrimary.opacity(0.4)
-                            KFImage(URL(string: viewModel.brideBouquet.photo))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: UIScreen.main.bounds.height / 3)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 24)
+                        if !viewModel.brideBouquet.photo.isEmpty {
+                            ZStack(alignment: .center) {
+                                Color.nudePrimary.opacity(0.4)
+                                KFImage(URL(string: "http://localhost:8000/\(viewModel.brideBouquet.photo)"))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: UIScreen.main.bounds.height / 3)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 24)
+                            }
                         }
                     }.padding(.top, 20)
                         .padding(.horizontal, 16)

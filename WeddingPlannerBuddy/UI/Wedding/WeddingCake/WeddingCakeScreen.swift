@@ -30,26 +30,28 @@ struct WeddingCakeScreen: View {
             } else {
                 ScrollView(showsIndicators: false) {
                     VStack(alignment: .leading, spacing: 12) {
-                        Text("Name: \(viewModel.weddingCake.name)")
+                        Text("Name: \(viewModel.weddingCake.name.isEmpty ? "Not specified" : viewModel.weddingCake.name)")
                             .font(.quicksandSemiBold(size: 16))
                             .foregroundStyle(Color.mainBlack)
                         
-                        Text("Description: \(viewModel.weddingCake.description)")
+                        Text("Description: \(viewModel.weddingCake.description.isEmpty ? "Not specified" : viewModel.weddingCake.description)")
                             .font(.quicksandMedium(size: 16))
                             .foregroundStyle(Color.mainBlack)
                         
-                        Text("Price: \(viewModel.weddingCake.price)")
+                        Text("Price: \(viewModel.weddingCake.price) RON")
                             .font(.quicksandMedium(size: 16))
                             .foregroundStyle(Color.mainBlack)
                         
-                        ZStack(alignment: .center) {
-                            Color.nudePrimary.opacity(0.4)
-                            KFImage(URL(string: viewModel.weddingCake.photo))
-                                .resizable()
-                                .scaledToFit()
-                                .frame(height: UIScreen.main.bounds.height / 3)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 24)
+                        if !viewModel.weddingCake.photo.isEmpty {
+                            ZStack(alignment: .center) {
+                                Color.nudePrimary.opacity(0.4)
+                                KFImage(URL(string: "http://localhost:8000/\(viewModel.weddingCake.photo)"))
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: UIScreen.main.bounds.height / 3)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 24)
+                            }
                         }
                     }.padding(.top, 20)
                         .padding(.horizontal, 16)

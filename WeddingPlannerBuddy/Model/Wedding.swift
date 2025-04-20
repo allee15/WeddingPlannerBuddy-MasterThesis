@@ -13,4 +13,5 @@ struct Wedding: Codable {
     let date: String
     let location: String
     let images: [String]
+    let weddingUUID: String
 }

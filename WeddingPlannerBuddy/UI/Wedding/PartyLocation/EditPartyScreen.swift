@@ -100,7 +100,7 @@ struct EditPartyScreen: View {
         .onReceive(viewModel.eventSubject) { event in
             switch event {
             case .completed:
-                navigation.pop(animated: true)
+                navigation.popToRoot(animated: true)
                 let toast = Toast(text: "Edit successful!")
                 ToastManager.instance.show(toast)
             case .error:

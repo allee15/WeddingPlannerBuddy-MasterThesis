@@ -17,22 +17,4 @@ class WeddingCakeViewModel: BaseViewModel {
     init(weddingCake: WeddingCake) {
         self.weddingCake = weddingCake
     }
-    
-    func editWeddingCake(_ weddingCake: WeddingCake) {
-        self.isLoading = true
-        self.weddingService.editWeddingCake(weddingCake: weddingCake)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(_):
-                    self?.isLoading = false
-                }
-            } receiveValue: { [weak self] weddingCake in
-                guard let self else {return}
-                self.weddingCake = weddingCake
-                self.isLoading = false
-            }.store(in: &bag)
-    }
 }

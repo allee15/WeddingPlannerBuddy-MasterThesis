@@ -94,9 +94,7 @@ class WeddingApi {
     
     func addImage(wedding: Wedding, image: UIImage) -> AnyPublisher<Bool, Error> {
         Future { promise in
-            
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/add-image")
-            
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
             urlRequest.httpMethod = "POST"
@@ -110,25 +108,38 @@ class WeddingApi {
             
             var body = Data()
             
-            if let weddingData = try? JSONEncoder().encode(wedding) {
-                let weddingJSON = String(data: weddingData, encoding: .utf8) ?? ""
-                body.append("--\(boundary)\r\n".data(using: .utf8)!)
-                body.append("Content-Disposition: form-data; name=\"wedding\"\r\n".data(using: .utf8)!)
-                body.append("Content-Type: application/json\r\n\r\n".data(using: .utf8)!)
-                body.append("\(weddingJSON)\r\n".data(using: .utf8)!)
-            }
-            
-            let imageData = image.jpegData(compressionQuality: 0.8)!
-            let fileName = "wedding_image.jpg"
-            
             body.append("--\(boundary)\r\n".data(using: .utf8)!)
-            body.append("Content-Disposition: form-data; name=\"image\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
-            body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
-            body.append(imageData)
-            body.append("\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"weddingUUID\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(wedding.weddingUUID)\r\n".data(using: .utf8)!)
+
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"name\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(wedding.name)\r\n".data(using: .utf8)!)
+
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"date\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(wedding.date)\r\n".data(using: .utf8)!)
+
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"location\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(wedding.location)\r\n".data(using: .utf8)!)
             
+            let imagesArrayString = try? JSONEncoder().encode(wedding.images)
+            if let imagesString = imagesArrayString.flatMap({ String(data: $0, encoding: .utf8) }) {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"images\"\r\n\r\n".data(using: .utf8)!)
+                body.append("\(imagesString)\r\n".data(using: .utf8)!)
+            }
+
+            if let imageData = image.jpegData(compressionQuality: 0.8) {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+                body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                body.append(imageData)
+                body.append("\r\n".data(using: .utf8)!)
+            }
+
             body.append("--\(boundary)--\r\n".data(using: .utf8)!)
-            
             urlRequest.httpBody = body
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
@@ -182,30 +193,49 @@ class WeddingApi {
         }.eraseToAnyPublisher()
     }
     
-    func editWeddingDress(weddingDress: WeddingDress) -> AnyPublisher<WeddingDress, Error> {
+    func editWeddingDress(weddingDress: WeddingDress, image: UIImage? = nil) -> AnyPublisher<WeddingDress, Error> {
         Future { promise in
-            
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/update-wedding-dress/\(weddingDress.id)")
-            
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
             urlRequest.httpMethod = "POST"
             
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
             
-            let body: [String: Any] = [
-                "weddingDressUUID": weddingDress.id,
-                "link": weddingDress.link,
-                "price": weddingDress.price,
-                "photo": weddingDress.photo,
-                "description": weddingDress.description
-            ]
+            let boundary = "Boundary-\(UUID().uuidString)"
+            urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             
-            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            var body = Data()
             
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"weddingDressUUID\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(weddingDress.id)\r\n".data(using: .utf8)!)
+            
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"link\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(weddingDress.link)\r\n".data(using: .utf8)!)
+            
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"price\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(weddingDress.price)\r\n".data(using: .utf8)!)
+            
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"description\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(weddingDress.description)\r\n".data(using: .utf8)!)
+            
+            if let imageData = image?.jpegData(compressionQuality: 0.8) {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+                body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                body.append(imageData)
+                body.append("\r\n".data(using: .utf8)!)
+            }
+            
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            
+            urlRequest.httpBody = body
             
             let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
@@ -224,32 +254,51 @@ class WeddingApi {
         }.eraseToAnyPublisher()
     }
     
-    func editBouquet(brideBouquet: Bouquet) -> AnyPublisher<Bouquet, Error> {
+    func editBouquet(brideBouquet: Bouquet, image: UIImage? = nil) -> AnyPublisher<Bouquet, Error> {
         Future { promise in
-            
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/update-bouquet/\(brideBouquet.id)")
-            
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
             
             urlRequest.httpMethod = "POST"
             
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
             
-            let body: [String: Any] = [
-                "bouquetUUID": brideBouquet.id,
-                "link": brideBouquet.link,
-                "price": brideBouquet.price,
-                "photo": brideBouquet.photo,
-                "description": brideBouquet.description
-            ]
+            let boundary = "Boundary-\(UUID().uuidString)"
+            urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
             
-            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
+            var body = Data()
             
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"bouquetUUID\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(brideBouquet.id)\r\n".data(using: .utf8)!)
             
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"link\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(brideBouquet.link)\r\n".data(using: .utf8)!)
+            
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"price\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(brideBouquet.price)\r\n".data(using: .utf8)!)
+            
+            body.append("--\(boundary)\r\n".data(using: .utf8)!)
+            body.append("Content-Disposition: form-data; name=\"description\"\r\n\r\n".data(using: .utf8)!)
+            body.append("\(brideBouquet.description)\r\n".data(using: .utf8)!)
+            
+            if let imageData = image?.jpegData(compressionQuality: 0.8) {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+                body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                body.append(imageData)
+                body.append("\r\n".data(using: .utf8)!)
+            }
+            
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            
+            urlRequest.httpBody = body
+
+            let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
@@ -262,36 +311,53 @@ class WeddingApi {
                     }
                 }
             }
-            dataTask.resume()
+            task.resume()
         }.eraseToAnyPublisher()
     }
     
-    func editGroomSuit(groomSuit: GroomSuit) -> AnyPublisher<GroomSuit, Error> {
+    func editGroomSuit(groomSuit: GroomSuit, image: UIImage? = nil) -> AnyPublisher<GroomSuit, Error> {
         Future { promise in
-            
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/update-groom-suit/\(groomSuit.id)")
-            
-            var urlRequest = URLRequest(url: (urlComponents?.url)!)
-            
-            urlRequest.httpMethod = "POST"
-            
-            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
-                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            let boundary = "Boundary-\(UUID().uuidString)"
+            guard let url = URL(string: "\(DefaultAPIEnvironment.basePath)api/wedding/update-groom-suit/\(groomSuit.id)") else {
+                promise(.failure(URLError(.badURL)))
+                return
             }
-            
-            let body: [String: Any] = [
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+
+            var body = Data()
+
+            let parameters: [String: String] = [
                 "groomSuitUUID": groomSuit.id,
                 "link": groomSuit.link,
-                "price": groomSuit.price,
-                "photo": groomSuit.photo,
+                "price": "\(groomSuit.price)",
                 "description": groomSuit.description
             ]
-            
-            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-            
-            
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+
+            for (key, value) in parameters {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+                body.append("\(value)\r\n".data(using: .utf8)!)
+            }
+
+            if let imageData = image?.jpegData(compressionQuality: 0.8) {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+                body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                body.append(imageData)
+                body.append("\r\n".data(using: .utf8)!)
+            }
+
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            request.httpBody = body
+
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
@@ -304,7 +370,7 @@ class WeddingApi {
                     }
                 }
             }
-            dataTask.resume()
+            task.resume()
         }.eraseToAnyPublisher()
     }
     
@@ -520,45 +586,62 @@ class WeddingApi {
         }.eraseToAnyPublisher()
     }
     
-    func editWeddingCake(weddingCake: WeddingCake) -> AnyPublisher<WeddingCake, Error> {
+    func editWeddingCake(weddingCake: WeddingCake, image: UIImage? = nil) -> AnyPublisher<WeddingCake, Error> {
         Future { promise in
-            
-            let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/update-wedding-cake/\(weddingCake.id)")
-            
-            var urlRequest = URLRequest(url: (urlComponents?.url)!)
-            
-            urlRequest.httpMethod = "POST"
-            
-            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
-                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            let boundary = "Boundary-\(UUID().uuidString)"
+            guard let url = URL(string: "\(DefaultAPIEnvironment.basePath)api/wedding/update-wedding-cake/\(weddingCake.id)") else {
+                promise(.failure(URLError(.badURL)))
+                return
             }
-            
-            let body: [String: Any] = [
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+
+            var body = Data()
+
+            let parameters: [String: String] = [
                 "weddingCakeUUID": weddingCake.id,
                 "name": weddingCake.name,
-                "photo": weddingCake.photo,
-                "description": weddingCake.description,
-                "price": weddingCake.price
+                "price": "\(weddingCake.price)",
+                "description": weddingCake.description
             ]
-            
-            urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
-            
-            
-            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+
+            for (key, value) in parameters {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8)!)
+                body.append("\(value)\r\n".data(using: .utf8)!)
+            }
+
+            if let imageData = image?.jpegData(compressionQuality: 0.8) {
+                body.append("--\(boundary)\r\n".data(using: .utf8)!)
+                body.append("Content-Disposition: form-data; name=\"photo\"; filename=\"image.jpg\"\r\n".data(using: .utf8)!)
+                body.append("Content-Type: image/jpeg\r\n\r\n".data(using: .utf8)!)
+                body.append(imageData)
+                body.append("\r\n".data(using: .utf8)!)
+            }
+
+            body.append("--\(boundary)--\r\n".data(using: .utf8)!)
+            request.httpBody = body
+
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if let error = error {
                     promise(.failure(error))
                 } else {
                     do {
                         let json = try JSON(data: data!)
-                        let weddingCake = JSONParsers.parseJsonWeddingCake(json: json["weddingCake"])
-                        promise(.success(weddingCake))
+                        let cake = JSONParsers.parseJsonWeddingCake(json: json["weddingCake"])
+                        promise(.success(cake))
                     } catch {
                         promise(.failure(error))
                     }
                 }
             }
-            dataTask.resume()
+            task.resume()
         }.eraseToAnyPublisher()
     }
     

@@ -36,9 +36,10 @@ class EditLivebandViewModel: BaseViewModel {
                             hour: newHour == Date() ? liveBand.hour : newHour.description,
                             details: newDescription.isEmpty ? liveBand.details : newDescription)
         self.weddingService.editLiveBand(liveBand: band)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
                 switch completion {
-                case .failure(let error):
+                case .failure(_):
                     self?.eventSubject.send(.error)
                 default:
                     break
@@ -46,7 +47,12 @@ class EditLivebandViewModel: BaseViewModel {
             } receiveValue: { [weak self] liveBand in
                 guard let self else {return}
                 self.liveBand = liveBand
+                reloadWedding()
                 self.eventSubject.send(.completed)
             }.store(in: &bag)
+    }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
     }
 }

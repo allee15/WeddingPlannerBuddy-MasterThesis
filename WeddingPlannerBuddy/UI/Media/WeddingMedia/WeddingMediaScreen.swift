@@ -92,7 +92,7 @@ struct WeddingMediaScreen: View {
                                     mainNavigation?.push(ZoomImageScreen(imageToZoom: image).asDestination(),
                                                          animated: true)
                                 } label: {
-                                    KFImage(URL(string: image))
+                                    KFImage(URL(string: "http://localhost:8000/\(image)"))
                                         .resizable()
                                         .placeholder {
                                             Image(.imgPlaceholder)
@@ -136,8 +136,9 @@ struct WeddingMediaScreen: View {
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .added:
+                    viewModel.reloadUSer()
                     self.addPhoto = false
-                    let toast = Toast(text: "Image added successful!", textColor: Color.lightGreen)
+                    let toast = Toast(text: "Image added successfully!")
                     ToastManager.instance.show(toast)
                     
                 case .showRateModal:
@@ -145,7 +146,10 @@ struct WeddingMediaScreen: View {
                     }
                     
                 case .failed:
-                    let toast = Toast(text: "An error has occured. Please try again!", textColor: Color.lightRed)
+                    let toast = Toast(text: "An error has occured. Please try again!",
+                                                  textColor: Color.darkRed,
+                                                  bg: Color.lightRed,
+                                                  icon: .icToastRed)
                     ToastManager.instance.show(toast)
                 }
             }

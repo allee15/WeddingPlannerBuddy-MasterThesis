@@ -116,3 +116,28 @@ export const addParticipant = async (req: Request, res: Response): Promise<any> 
         return res.status(500).json({ error: "Internal Server Error" })
     }
 }
+
+export const updateTablePosition = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { userUID, tableUID, position } = req.body;
+
+        if (!userUID || !tableUID || !position || typeof position.x !== 'number' || typeof position.y !== 'number') {
+            return res.status(400).json({ error: "Missing or invalid required fields" });
+        }
+
+        const table = await Table.findOneAndUpdate(
+            { tableUID },
+            { $set: { position } },
+            { new: true }
+        );
+
+        if (!table) {
+            return res.status(404).json({ error: "Table not found" });
+        }
+
+        return res.status(200).json({ success: true, table });
+    } catch (error) {
+        console.log("Error in updateTablePosition controller", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
