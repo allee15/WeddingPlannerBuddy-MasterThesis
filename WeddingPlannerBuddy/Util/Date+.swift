@@ -21,11 +21,11 @@ enum DateFormat: String {
 
 extension Date {
     func formatted(dateFormat: DateFormat, locale: String = "ro-RO") -> String {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = dateFormat.rawValue
-            dateFormatter.locale = Locale(identifier: locale)
-            
-            let dateAsString = dateFormatter.string(from: self)
-            return dateAsString.prefix(1).uppercased() + dateAsString.dropFirst().lowercased()
-        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat.rawValue
+        dateFormatter.locale = Locale(identifier: locale)
+        
+        let dateAsString = dateFormatter.string(from: self)
+        return dateAsString.prefix(1).uppercased() + dateAsString.dropFirst().lowercased()
+    }
 }

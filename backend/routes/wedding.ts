@@ -18,5 +18,4 @@ router.post("/api/wedding/update-wedding-cake/:id", upload.single("photo"), Wedd
 router.post("/api/wedding/update-live-band/:id", WeddingController.updateLiveBand);
 router.post("/api/wedding/edit-wedding-date", WeddingController.updateWeddingDate);
 router.post("/api/wedding/add-image", upload.single("photo"), WeddingController.addImageToWedding);
-
 export default router;
