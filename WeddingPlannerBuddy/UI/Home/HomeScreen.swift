@@ -53,12 +53,6 @@ struct HomeScreen: View {
                             viewModel.selectedDateType = .singleDate
                         }
                         
-                        PeriodOfTimeFilterButtonView(text: "A period",
-                                                    dateType: .periodOfTime,
-                                                    selectedDateType: viewModel.selectedDateType) {
-                            viewModel.selectedDateType = .periodOfTime
-                        }
-                        
                         Spacer()
                     }.padding(.horizontal, 16)
                     
@@ -91,61 +85,6 @@ struct HomeScreen: View {
                             }.padding(.horizontal, 16)
                         }
                         
-                        if viewModel.selectedDateType == .periodOfTime {
-                            VStack(spacing: 0) {
-                                DateView(
-                                    placeHolder: "From date",
-                                    date: $viewModel.startDate,
-                                    selectedStartDate: viewModel.startDate) {
-                                        withAnimation {
-                                            showStartDate = true
-                                            showEndDate = false
-                                        }
-                                    }
-                                    .background(Color.nudePrimary.opacity(0.5))
-                                    .cornerRadius(8, corners: [.topLeft, .topRight])
-                                
-                                if showStartDate == true {
-                                    DividerView(color: Color.nudePrimary)
-                                    
-                                    DatePicker("", selection: $viewModel.startDate, in: (Date())..., displayedComponents: .date)
-                                        .datePickerStyle(WheelDatePickerStyle())
-                                        .accentColor(Color.greenSecondary)
-                                        .background(Color.nudePrimary.opacity(0.35))
-                                        .transition(.opacity)
-                                }
-                                
-                                DividerView(color: Color.nudePrimary)
-                                
-                                DateView(
-                                    placeHolder: "To date",
-                                    date: $viewModel.endDate,
-                                    selectedEndDate: viewModel.endDate) {
-                                        withAnimation {
-                                            showEndDate = true
-                                            showStartDate = false
-                                        }
-                                    }
-                                    .background(Color.nudePrimary.opacity(0.5))
-                                    .cornerRadius(8, corners: showStartDate == true ? [.bottomLeft, .bottomRight] : [])
-                                
-                                if showEndDate == true {
-                                    DividerView(color: Color.nudePrimary)
-                                    
-                                    DatePicker("", selection: $viewModel.endDate, in: viewModel.startDate..., displayedComponents: .date)
-                                        .datePickerStyle(WheelDatePickerStyle())
-                                        .accentColor(Color.greenSecondary)
-                                        .background(Color.nudePrimary.opacity(0.35))
-                                        .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
-                                        .transition(.opacity)
-                                }
-                            }.padding(.horizontal, 16)
-                            
-                            MainButtonView(text: "Get recommendations") {
-                                viewModel.getRecommendations()
-                            }.padding(.horizontal, 16)
-                        }
-                        
                         switch viewModel.initialWeatherState {
                         case .notStarted:
                             EmptyView()
@@ -160,43 +99,20 @@ struct HomeScreen: View {
                             EmptyView()
                             
                         case .value(let weather):
-                            if weather.predictions.count == 1 {
-                                WeatherCardView(prediction: weather.predictions[0]) {
-                                    if let user = viewModel.user {
-                                        viewModel.startWedding(date: weather.predictions[0].date)
-                                    } else {
-                                        let modal = ModalChooseOptionView(title: "Error",
-                                                                          description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
-                                            navigation.dismissModal(animated: true, completion: nil)
-                                            mainNavigation?.push(LoginScreen().asDestination(), animated: true)
-                                        } onBottomButtonTapped: {
-                                            navigation.dismissModal(animated: true, completion: nil)
-                                        }
-                                        navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                            WeatherCardView(prediction: weather.prediction, date: weather.date) {
+                                if let user = viewModel.user {
+                                    viewModel.startWedding(date: weather.date)
+                                } else {
+                                    let modal = ModalChooseOptionView(title: "Error",
+                                                                      description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
+                                        navigation.dismissModal(animated: true, completion: nil)
+                                        mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                                    } onBottomButtonTapped: {
+                                        navigation.dismissModal(animated: true, completion: nil)
                                     }
-                                }.padding(.horizontal, 16)
-                            } else {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 12) {
-                                        ForEach(weather.predictions, id: \.id) { prediction in
-                                            WeatherCardView(prediction: prediction) {
-                                                if let user = viewModel.user {
-                                                    viewModel.startWedding(date: prediction.date)
-                                                } else {
-                                                    let modal = ModalChooseOptionView(title: "Error",
-                                                                                      description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
-                                                        navigation.dismissModal(animated: true, completion: nil)
-                                                        mainNavigation?.push(LoginScreen().asDestination(), animated: true)
-                                                    } onBottomButtonTapped: {
-                                                        navigation.dismissModal(animated: true, completion: nil)
-                                                    }
-                                                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                                                }
-                                            }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
-                                        }
-                                    }.padding(.horizontal, 16)
+                                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                                 }
-                            }
+                            }.padding(.horizontal, 16)
                         }
                         
                     case .loading:
@@ -217,10 +133,9 @@ struct HomeScreen: View {
                         }.padding(.horizontal, 16)
                         
                     case .value(let weather):
-                        if weather.predictions.count == 1 {
-                            WeatherCardView(prediction: weather.predictions[0]) {
+                            WeatherCardView(prediction: weather.prediction, date: weather.date) {
                                 if let user = viewModel.user {
-                                    viewModel.startWedding(date: weather.predictions[0].date)
+                                    viewModel.startWedding(date: weather.date)
                                 } else {
                                     let modal = ModalChooseOptionView(title: "Error",
                                                                       description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -232,28 +147,6 @@ struct HomeScreen: View {
                                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                                 }
                             }.padding(.horizontal, 16)
-                        } else {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 12) {
-                                    ForEach(weather.predictions, id: \.id) { prediction in
-                                        WeatherCardView(prediction: prediction) {
-                                            if let user = viewModel.user {
-                                                viewModel.startWedding(date: prediction.date)
-                                            } else {
-                                                let modal = ModalChooseOptionView(title: "Error",
-                                                                                  description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
-                                                    navigation.dismissModal(animated: true, completion: nil)
-                                                    mainNavigation?.push(LoginScreen().asDestination(), animated: true)
-                                                } onBottomButtonTapped: {
-                                                    navigation.dismissModal(animated: true, completion: nil)
-                                                }
-                                                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                                            }
-                                        }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
-                                    }
-                                }.padding(.horizontal, 16)
-                            }
-                        }
                         
                         MainButtonView(text: "Restart") {
                             viewModel.resetAll()
@@ -362,11 +255,12 @@ fileprivate struct PeriodOfTimeFilterButtonView: View {
 
 fileprivate struct WeatherCardView: View {
     let prediction: Prediction
+    let date: String
     let action: () -> ()
     
     var body: some View {
         VStack(spacing: 0) {
-            Text(prediction.date.remakeWeather())
+            Text(date.remakeWeather())
                 .font(.quicksandSemiBold(size: 14))
                 .foregroundStyle(Color.mainBlack)
                 .multilineTextAlignment(.center)

@@ -171,4 +171,18 @@ class JSONParsers {
                         hour: json["hour"].stringValue,
                         details: json["details"].stringValue)
     }
+    
+    static func parseJsonWeather(json: JSON) -> Weather {
+        return Weather(latitude: json["latitude"].doubleValue,
+                       longitude: json["longitude"].doubleValue,
+                       date: json["date"].stringValue,
+                       prediction: parseJsonPrediction(json: json["prediction"]))
+    }
+    
+    static func parseJsonPrediction(json: JSON) -> Prediction {
+        return Prediction(minTemperature: json["minTemperature"].doubleValue,
+                          maxTemperature: json["maxTemperature"].doubleValue,
+                          precipitationProbability: json["precProbability"].intValue,
+                          condition: json["condition"].stringValue)
+    }
 }

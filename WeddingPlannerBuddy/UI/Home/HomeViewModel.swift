@@ -11,7 +11,6 @@ import Combine
 enum TypeOfDate {
     case anytime
     case singleDate
-    case periodOfTime
 }
 
 enum WeatherState {
@@ -36,8 +35,6 @@ class HomeViewModel: BaseViewModel {
     
     @Published var selectedDateType: TypeOfDate = .anytime
     @Published var currentDate = Date()
-    @Published var startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-    @Published var endDate = Date()
     @Published var weatherState: WeatherState = .notStarted
     @Published var initialWeatherState: WeatherState = .notStarted
     @Published var user: User?
@@ -112,8 +109,7 @@ class HomeViewModel: BaseViewModel {
     
     private func getInitialWeather() {
         self.initialWeatherState = .loading
-        self.weatherService.getWeather(startDate: Date(),
-                                       endDate: Calendar.current.date(byAdding: .day, value: +4, to: Date())!,
+        self.weatherService.getWeather(date: Date(),
                                        latitude: self.locationManager.lastKnownLocation?.latitude ?? 44.4268,
                                        longitude: self.locationManager.lastKnownLocation?.longitude ?? 26.1025)
         .receive(on: DispatchQueue.main)
@@ -132,8 +128,7 @@ class HomeViewModel: BaseViewModel {
     
     func getRecommendations() {
         self.weatherState = .loading
-        self.weatherService.getWeather(startDate: self.selectedDateType == .singleDate ? self.currentDate : self.startDate,
-                                       endDate: self.endDate,
+        self.weatherService.getWeather(date: self.currentDate,
                                        latitude: self.locationManager.lastKnownLocation?.latitude ?? 44.4268,
                                        longitude: self.locationManager.lastKnownLocation?.longitude ?? 26.1025)
         .receive(on: DispatchQueue.main)
@@ -190,7 +185,5 @@ class HomeViewModel: BaseViewModel {
         self.weatherState = .notStarted
         self.selectedDateType = .anytime
         self.currentDate = Date()
-        self.startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())!
-        self.endDate = Date()
     }
 }
