@@ -172,6 +172,12 @@ class JSONParsers {
                         details: json["details"].stringValue)
     }
     
+    static func parseJsonWeatherArray(json: JSON) -> [Weather] {
+        return json.arrayValue.map { subJson in
+            parseJsonWeather(json: subJson)
+        }
+    }
+    
     static func parseJsonWeather(json: JSON) -> Weather {
         return Weather(latitude: json["latitude"].doubleValue,
                        longitude: json["longitude"].doubleValue,
@@ -182,7 +188,7 @@ class JSONParsers {
     static func parseJsonPrediction(json: JSON) -> Prediction {
         return Prediction(minTemperature: json["minTemperature"].doubleValue,
                           maxTemperature: json["maxTemperature"].doubleValue,
-                          precipitationProbability: json["precProbability"].intValue,
+                          precipitationProbability: json["precipitationProbability"].intValue,
                           condition: json["condition"].stringValue)
     }
 }

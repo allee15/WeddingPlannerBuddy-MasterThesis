@@ -11,13 +11,14 @@ import Combine
 enum TypeOfDate {
     case anytime
     case singleDate
+    case periodOfTime
 }
 
 enum WeatherState {
     case notStarted
     case loading
     case failure
-    case value(Weather)
+    case value([Weather])
 }
 
 enum StartWeddingEvent {
@@ -35,6 +36,8 @@ class HomeViewModel: BaseViewModel {
     
     @Published var selectedDateType: TypeOfDate = .anytime
     @Published var currentDate = Date()
+    @Published var startDate = Date()
+    @Published var endDate = Calendar.current.date(byAdding: .day, value: +1, to: Date())!
     @Published var weatherState: WeatherState = .notStarted
     @Published var initialWeatherState: WeatherState = .notStarted
     @Published var user: User?
@@ -109,7 +112,8 @@ class HomeViewModel: BaseViewModel {
     
     private func getInitialWeather() {
         self.initialWeatherState = .loading
-        self.weatherService.getWeather(date: Date(),
+        self.weatherService.getWeather(startDate: Date(),
+                                       endDate: Calendar.current.date(byAdding: .day, value: +3, to: Date())!,
                                        latitude: self.locationManager.lastKnownLocation?.latitude ?? 44.4268,
                                        longitude: self.locationManager.lastKnownLocation?.longitude ?? 26.1025)
         .receive(on: DispatchQueue.main)
@@ -128,7 +132,8 @@ class HomeViewModel: BaseViewModel {
     
     func getRecommendations() {
         self.weatherState = .loading
-        self.weatherService.getWeather(date: self.currentDate,
+        self.weatherService.getWeather(startDate: self.selectedDateType == .singleDate ? self.currentDate : self.startDate,
+                                       endDate: self.endDate,
                                        latitude: self.locationManager.lastKnownLocation?.latitude ?? 44.4268,
                                        longitude: self.locationManager.lastKnownLocation?.longitude ?? 26.1025)
         .receive(on: DispatchQueue.main)

@@ -30,6 +30,22 @@ extension String {
         return ""
     }
     
+    func formatDate(_ dateString: String) -> String {
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+        inputFormatter.locale = Locale(identifier: "en_US")
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.dateFormat = "d MMMM yyyy"
+        outputFormatter.locale = Locale(identifier: "en_US")
+
+        if let date = inputFormatter.date(from: dateString) {
+            return outputFormatter.string(from: date)
+        } else {
+            return dateString
+        }
+    }
+    
     func toPrettyDateString() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"

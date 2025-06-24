@@ -17,10 +17,11 @@ enum DateFormat: String {
     case monthName = "MMMM"
     case dd = "dd"
     case ddMM = "dd.MM"
+    case yyyyMMdd_dash = "yyyy-MM-dd"
 }
 
 extension Date {
-    func formatted(dateFormat: DateFormat, locale: String = "ro-RO") -> String {
+    func formatted(dateFormat: DateFormat, locale: String = "en_US") -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat.rawValue
         dateFormatter.locale = Locale(identifier: locale)
