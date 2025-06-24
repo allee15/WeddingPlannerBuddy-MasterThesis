@@ -37,7 +37,7 @@ export const getPredictions = async (req: Request, res: Response): Promise<any> 
             prediction: {
                 minTemperature: predictionData.temp_min || 0,
                 maxTemperature: predictionData.temp_max || 0,
-                precipitationProbability: predictionData.precipitationProbability || 0,
+                precipitationProbability: predictionData.precipitation || 0,
                 condition: predictionData.weather || "Unknown"
             }
         }));

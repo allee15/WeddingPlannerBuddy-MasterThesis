@@ -25,7 +25,7 @@ params = {
     "longitude": LON,
     "start_date": START,
     "end_date": END,
-    "daily": "weathercode,temperature_2m_max,temperature_2m_min",
+    "daily": "weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum",
     "timezone": "Europe/Bucharest"
 }
 
@@ -36,7 +36,8 @@ df = pd.DataFrame({
     "date": data["daily"]["time"],
     "weather_code": data["daily"]["weathercode"],
     "temp_max": data["daily"]["temperature_2m_max"],
-    "temp_min": data["daily"]["temperature_2m_min"]
+    "temp_min": data["daily"]["temperature_2m_min"],
+    "precipitation": data["daily"]["precipitation_sum"]
 })
 
 df["weather"] = df["weather_code"].apply(map_weathercode)
