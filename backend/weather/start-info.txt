@@ -1,0 +1,7 @@
+source venv/bin/activate
+
+python weather-open-api.py
+
+python predictions.py
+
+python flask-server.py

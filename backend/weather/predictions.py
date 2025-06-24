@@ -15,6 +15,7 @@ def prepare_features(df):
     df["day"] = df["date"].dt.day
     df["month"] = df["date"].dt.month
     df["year"] = df["date"].dt.year
+    df["precipitation"] = df["precipitation"].fillna(0)
     return df
 
 train_df = prepare_features(train_df)
@@ -23,29 +24,33 @@ train_df = prepare_features(train_df)
 weather_encoder = LabelEncoder()
 train_df["weather_encoded"] = weather_encoder.fit_transform(train_df["weather"])
 
-X = train_df[["day", "month", "year"]]
+X = train_df[["day", "month", "year", "precipitation"]]
 y_temp_max = train_df["temp_max"]
 y_temp_min = train_df["temp_min"]
 y_weather = train_df["weather_encoded"]
+y_precip = train_df["precipitation"]
 
 # 4. Split train/test
-X_train, X_test, y_temp_max_train, y_temp_max_test, y_temp_min_train, y_temp_min_test, y_weather_train, y_weather_test = train_test_split(
-    X, y_temp_max, y_temp_min, y_weather, test_size=0.2, random_state=42
+X_train, X_test, y_temp_max_train, y_temp_max_test, y_temp_min_train, y_temp_min_test, y_weather_train, y_weather_test, y_precip_train, y_precip_test = train_test_split(
+    X, y_temp_max, y_temp_min, y_weather, y_precip, test_size=0.2, random_state=42
 )
 
 # 5. Antrenare modele pe setul de train
 model_temp_max = RandomForestRegressor(random_state=42)
 model_temp_min = RandomForestRegressor(random_state=42)
 model_weather = RandomForestClassifier(random_state=42)
+model_precip = RandomForestRegressor(random_state=42)
 
 model_temp_max.fit(X_train, y_temp_max_train)
 model_temp_min.fit(X_train, y_temp_min_train)
 model_weather.fit(X_train, y_weather_train)
+model_precip.fit(X_train, y_precip_train)
 
 # 6. Evaluare modele pe setul de test
 y_pred_max = model_temp_max.predict(X_test)
 y_pred_min = model_temp_min.predict(X_test)
 y_pred_weather = model_weather.predict(X_test)
+y_pred_precip = model_precip.predict(X_test)
 
 print("=== Temp Max Metrics ===")
 print(f"MAE: {mean_absolute_error(y_temp_max_test, y_pred_max):.2f}")
@@ -63,6 +68,11 @@ print(f"F1 Score (macro): {f1_score(y_weather_test, y_pred_weather, average='mac
 print("\nClassification Report:")
 print(classification_report(y_weather_test, y_pred_weather, target_names=weather_encoder.classes_))
 
+print("\n=== Precipitation Metrics ===")
+print(f"MAE: {mean_absolute_error(y_precip_test, y_pred_precip):.2f}")
+print(f"RMSE: {np.sqrt(mean_squared_error(y_precip_test, y_pred_precip)):.2f}")
+print(f"R² Score: {r2_score(y_precip_test, y_pred_precip):.2f}")
+
 # 7. Funcția de predicție
 def predict_weather(start_date_str, end_date_str=None):
     start_date = pd.to_datetime(start_date_str)
@@ -73,12 +83,16 @@ def predict_weather(start_date_str, end_date_str=None):
         "date": dates,
         "day": dates.day,
         "month": dates.month,
-        "year": dates.year
+        "year": dates.year,
+        "precipitation": 0
     })
 
-    temp_max_preds = model_temp_max.predict(features[["day", "month", "year"]])
-    temp_min_preds = model_temp_min.predict(features[["day", "month", "year"]])
-    weather_preds = model_weather.predict(features[["day", "month", "year"]])
+    precip_preds = model_precip.predict(features[["day", "month", "year", "precipitation"]])
+    features["precipitation"] = precip_preds 
+
+    temp_max_preds = model_temp_max.predict(features[["day", "month", "year", "precipitation"]])
+    temp_min_preds = model_temp_min.predict(features[["day", "month", "year", "precipitation"]])
+    weather_preds = model_weather.predict(features[["day", "month", "year", "precipitation"]])
     weather_labels = weather_encoder.inverse_transform(weather_preds)
 
     results = []
@@ -87,7 +101,8 @@ def predict_weather(start_date_str, end_date_str=None):
             "date": dates[i].strftime("%Y-%m-%d"),
             "temp_max": round(temp_max_preds[i], 1),
             "temp_min": round(temp_min_preds[i], 1),
-            "weather": weather_labels[i]
+            "weather": weather_labels[i],
+            "precipitation": round(precip_preds[i], 1)
         })
     return results
 
