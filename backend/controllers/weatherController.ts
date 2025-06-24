@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-import { spawn } from "child_process";
-import path from "path";
+import axios from "axios";
 
 type Prediction = {
     minTemperature: number;
@@ -17,64 +16,35 @@ type Weather = {
 }
 
 export const getPredictions = async (req: Request, res: Response): Promise<any> => {
-    const { latitude, longitude, date } = req.body;
+    const { latitude, longitude, start_date, end_date } = req.body;
 
-    if (!latitude || !longitude || !date) {
+    if (!latitude || !longitude || !start_date) {
         return res.status(400).json({ error: "Incomplete data" });
     }
 
     try {
-        const prediction = await predictWeather();
+        const response = await axios.post("http://localhost:5001/predict", {
+            start_date,
+            end_date
+        });
 
-        const weather: Weather = {
+        const predictionsArray = Array.isArray(response.data) ? response.data : [response.data];
+
+        const weatherList = predictionsArray.map((predictionData: any) => ({
             latitude: Number(latitude),
             longitude: Number(longitude),
-            date: date,
+            date: predictionData.date, 
             prediction: {
-                minTemperature: prediction.minTemperature,
-                maxTemperature: prediction.maxTemperature,
-                precipitationProbability: prediction.precipitationProbability,
-                condition: prediction.condition || "Unknown"
+                minTemperature: predictionData.temp_min || 0,
+                maxTemperature: predictionData.temp_max || 0,
+                precipitationProbability: predictionData.precipitationProbability || 0,
+                condition: predictionData.weather || "Unknown"
             }
-        };
+        }));
 
-        res.json(weather);
+        res.json(weatherList);
     } catch (error) {
         console.error("Eroare la predicție:", error);
-        res.status(500).json({ error: "Eroare internă." });
+        res.status(500).json({ error: "Eroare internă la apelarea serviciului de predicție." });
     }
 };
-
-function predictWeather(): Promise<Prediction> {
-    return new Promise((resolve, reject) => {
-        const scriptPath = path.join(__dirname, '..', 'ml', 'predict.py');
-        const py = spawn('python3', [scriptPath]);
-
-        let data = '';
-
-        py.stdout.on('data', chunk => {
-            data += chunk;
-        });
-
-        py.stderr.on('data', err => {
-            reject(err.toString());
-        });
-
-        py.on('close', () => {
-            try {
-                const result = JSON.parse(data);
-                resolve({
-                    minTemperature: result.minTemperature,
-                    maxTemperature: result.maxTemperature,
-                    precipitationProbability: result.precipitationProbability,
-                    condition: result.condition
-                });
-            } catch (e) {
-                reject("Eroare la procesarea răspunsului din scriptul Python.");
-            }
-        });
-
-        py.stdin.write(JSON.stringify({}));
-        py.stdin.end();
-    });
-}

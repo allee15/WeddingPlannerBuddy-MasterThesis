@@ -10,7 +10,7 @@ import Combine
 import SwiftyJSON
 
 class WeatherApi {
-    func getWeather(date: Date, latitude: Double, longitude: Double) -> AnyPublisher<Weather, Error> {
+    func getWeather(startDate: Date, endDate: Date? = nil, latitude: Double, longitude: Double) -> AnyPublisher<[Weather], Error> {
         Future { promise in
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/weather/prediction")
             
@@ -20,13 +20,14 @@ class WeatherApi {
             
             if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
             let body: [String: Any] = [
                 "latitude": latitude,
                 "longitude": longitude,
-                "date": date.formatted(dateFormat: .ddMMYYYY_dash)
+                "start_date": startDate.formatted(dateFormat: .yyyyMMdd_dash),
+                "end_date": endDate?.formatted(dateFormat: .yyyyMMdd_dash) ?? startDate.formatted(dateFormat: .yyyyMMdd_dash)
             ]
             urlRequest.httpBody = try? JSONSerialization.data(withJSONObject: body, options: [])
             
@@ -36,7 +37,7 @@ class WeatherApi {
                 } else {
                     do {
                         let json = try JSON(data: data!)
-                        let weddingDetails = JSONParsers.parseJsonWeather(json: json)
+                        let weddingDetails = JSONParsers.parseJsonWeatherArray(json: json)
                         promise(.success(weddingDetails))
                     } catch {
                         promise(.failure(error))

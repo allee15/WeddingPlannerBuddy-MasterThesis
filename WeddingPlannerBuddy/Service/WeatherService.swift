@@ -13,8 +13,8 @@ class WeatherService {
     private let weatherApi = WeatherApi()
     var bag = Set<AnyCancellable>()
     
-    func getWeather(date: Date, latitude: Double, longitude: Double) -> AnyPublisher<Weather, Error> {
-        return weatherApi.getWeather(date: date, latitude: latitude, longitude: longitude)
+    func getWeather(startDate: Date, endDate: Date?, latitude: Double, longitude: Double) -> AnyPublisher<[Weather], Error> {
+        return weatherApi.getWeather(startDate: startDate, endDate: endDate, latitude: latitude, longitude: longitude)
             .eraseToAnyPublisher()
     }
 }
