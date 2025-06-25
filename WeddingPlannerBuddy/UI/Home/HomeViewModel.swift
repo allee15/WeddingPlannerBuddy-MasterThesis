@@ -62,10 +62,6 @@ class HomeViewModel: BaseViewModel {
         self.getUserInfo()
         locationManager.checkLocationAuthorization()
         self.getInitialWeather()
-//        locationManager.$lastKnownLocation.sink { [weak self] location in
-//            guard let self else {return}
-//            self.getInitialWeather()
-//        }.store(in: &bag)
     }
     
     private func getUserInfo() {
@@ -133,7 +129,7 @@ class HomeViewModel: BaseViewModel {
     func getRecommendations() {
         self.weatherState = .loading
         self.weatherService.getWeather(startDate: self.selectedDateType == .singleDate ? self.currentDate : self.startDate,
-                                       endDate: self.endDate,
+                                       endDate: self.selectedDateType == .singleDate ? self.currentDate : self.endDate,
                                        latitude: self.locationManager.lastKnownLocation?.latitude ?? 44.4268,
                                        longitude: self.locationManager.lastKnownLocation?.longitude ?? 26.1025)
         .receive(on: DispatchQueue.main)
