@@ -187,4 +187,8 @@ class HomeViewModel: BaseViewModel {
         self.selectedDateType = .anytime
         self.currentDate = Date()
     }
+    
+    func reloadWedding() {
+        weddingService.weddingReactiveData.reload()
+    }
 }

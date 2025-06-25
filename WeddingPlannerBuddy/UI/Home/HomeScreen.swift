@@ -297,6 +297,7 @@ struct HomeScreen: View {
                 switch event {
                 case .showRatingModal:
                     TabBarCoordinator.instance.tabBarNavigation = .wedding
+                    viewModel.reloadWedding()
                     
                 case .error:
                     let toast = Toast(text: "An error has occured. Please try again!",
@@ -306,6 +307,7 @@ struct HomeScreen: View {
                     ToastManager.instance.show(toast)
                 case .completed:
                     TabBarCoordinator.instance.tabBarNavigation = .wedding
+                    viewModel.reloadWedding()
                     let toast = Toast(text: "Date added successful!")
                     ToastManager.instance.show(toast)
                 }
