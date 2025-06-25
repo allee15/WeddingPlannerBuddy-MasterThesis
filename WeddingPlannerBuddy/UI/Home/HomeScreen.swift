@@ -13,7 +13,7 @@ struct HomeScreen: View {
     @StateObject private var viewModel = HomeViewModel()
     
     @State var showDatePicker: Bool = false
-    @State var showStartDate: Bool = true
+    @State var showStartDate: Bool = false
     @State var showEndDate: Bool = false
     
     var body: some View {
@@ -45,18 +45,21 @@ struct HomeScreen: View {
                                                      dateType: .anytime,
                                                      selectedDateType: viewModel.selectedDateType) {
                             viewModel.selectedDateType = .anytime
+                            viewModel.weatherState = .notStarted
                         }
                         
                         PeriodOfTimeFilterButtonView(text: "One day",
                                                     dateType: .singleDate,
                                                     selectedDateType: viewModel.selectedDateType) {
                             viewModel.selectedDateType = .singleDate
+                            viewModel.weatherState = .notStarted
                         }
                         
                         PeriodOfTimeFilterButtonView(text: "A period",
                                                     dateType: .periodOfTime,
                                                     selectedDateType: viewModel.selectedDateType) {
                             viewModel.selectedDateType = .periodOfTime
+                            viewModel.weatherState = .notStarted
                         }
 
                         Spacer()
@@ -160,7 +163,72 @@ struct HomeScreen: View {
                             EmptyView()
                             
                         case .value(let weatherArray):
-                            if weatherArray.count == 1 {
+                            if !weatherArray.isEmpty {
+                                if weatherArray.count == 1 || viewModel.selectedDateType == .singleDate {
+                                    WeatherCardView(prediction: weatherArray[0].prediction, date: weatherArray[0].date) {
+                                        if let user = viewModel.user {
+                                            viewModel.startWedding(date: weatherArray[0].date)
+                                        } else {
+                                            let modal = ModalChooseOptionView(title: "Error",
+                                                                              description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
+                                                navigation.dismissModal(animated: true, completion: nil)
+                                                mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                                            } onBottomButtonTapped: {
+                                                navigation.dismissModal(animated: true, completion: nil)
+                                            }
+                                            navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                                        }
+                                    }.padding(.horizontal, 16)
+                                } else {
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 12) {
+                                            ForEach(weatherArray, id: \.id) { weather in
+                                                WeatherCardView(prediction: weather.prediction, date: weather.date) {
+                                                    if let user = viewModel.user {
+                                                        viewModel.startWedding(date: weather.date)
+                                                    } else {
+                                                        let modal = ModalChooseOptionView(title: "Error",
+                                                                                          description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
+                                                            navigation.dismissModal(animated: true, completion: nil)
+                                                            mainNavigation?.push(LoginScreen().asDestination(), animated: true)
+                                                        } onBottomButtonTapped: {
+                                                            navigation.dismissModal(animated: true, completion: nil)
+                                                        }
+                                                        navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
+                                                    }
+                                                }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
+                                            }
+                                        }
+                                    }.padding(.horizontal, 16)
+                                }
+                            } else {
+                                Spacer()
+                                EmptyStateView(title: "An error has occured.",
+                                               subtitle: "There has been an error while fetching data. Please try again later.")
+                                Spacer()
+                            }
+                        }
+                        
+                    case .loading:
+                        HStack {
+                            Spacer()
+                            LoaderView(height: 40, width: 40)
+                            Spacer()
+                        }.padding(.horizontal, 16)
+                        
+                    case .failure:
+                        Spacer()
+                        EmptyStateView(title: "An error has occured.",
+                                       subtitle: "There has been an error while fetching data. Please try again later.")
+                        Spacer()
+                        
+                        MainButtonView(text: "Try again") {
+                            viewModel.resetAll()
+                        }.padding(.horizontal, 16)
+                        
+                    case .value(let weatherArray):
+                        if !weatherArray.isEmpty {
+                            if weatherArray.count == 1 || viewModel.selectedDateType == .singleDate {
                                 WeatherCardView(prediction: weatherArray[0].prediction, date: weatherArray[0].date) {
                                     if let user = viewModel.user {
                                         viewModel.startWedding(date: weatherArray[0].date)
@@ -197,62 +265,11 @@ struct HomeScreen: View {
                                     }
                                 }.padding(.horizontal, 16)
                             }
-                        }
-                        
-                    case .loading:
-                        HStack {
-                            Spacer()
-                            LoaderView(height: 40, width: 40)
-                            Spacer()
-                        }.padding(.horizontal, 16)
-                        
-                    case .failure:
-                        Spacer()
-                        EmptyStateView(title: "An error has occured.",
-                                       subtitle: "There has been an error while fetching data. Please try again later.")
-                        Spacer()
-                        
-                        MainButtonView(text: "Try again") {
-                            viewModel.resetAll()
-                        }.padding(.horizontal, 16)
-                        
-                    case .value(let weatherArray):
-                        if weatherArray.count == 1 {
-                            WeatherCardView(prediction: weatherArray[0].prediction, date: weatherArray[0].date) {
-                                if let user = viewModel.user {
-                                    viewModel.startWedding(date: weatherArray[0].date)
-                                } else {
-                                    let modal = ModalChooseOptionView(title: "Error",
-                                                                      description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
-                                        navigation.dismissModal(animated: true, completion: nil)
-                                        mainNavigation?.push(LoginScreen().asDestination(), animated: true)
-                                    } onBottomButtonTapped: {
-                                        navigation.dismissModal(animated: true, completion: nil)
-                                    }
-                                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                                }
-                            }.padding(.horizontal, 16)
                         } else {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 12) {
-                                    ForEach(weatherArray, id: \.id) { weather in
-                                        WeatherCardView(prediction: weather.prediction, date: weather.date) {
-                                            if let user = viewModel.user {
-                                                viewModel.startWedding(date: weather.date)
-                                            } else {
-                                                let modal = ModalChooseOptionView(title: "Error",
-                                                                                  description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
-                                                    navigation.dismissModal(animated: true, completion: nil)
-                                                    mainNavigation?.push(LoginScreen().asDestination(), animated: true)
-                                                } onBottomButtonTapped: {
-                                                    navigation.dismissModal(animated: true, completion: nil)
-                                                }
-                                                navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                                            }
-                                        }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
-                                    }
-                                }
-                            }.padding(.horizontal, 16)
+                            Spacer()
+                            EmptyStateView(title: "An error has occured.",
+                                           subtitle: "There has been an error while fetching data. Please try again later.")
+                            Spacer()
                         }
                         
                         MainButtonView(text: "Restart") {

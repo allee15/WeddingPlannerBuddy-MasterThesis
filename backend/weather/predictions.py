@@ -44,13 +44,13 @@ model_precip = RandomForestRegressor(random_state=42)
 model_temp_max.fit(X_train, y_temp_max_train)
 model_temp_min.fit(X_train, y_temp_min_train)
 model_weather.fit(X_train, y_weather_train)
-model_precip.fit(X_train, y_precip_train)
+model_precip.fit(X_train[["day", "month", "year"]], y_precip_train)
 
 # 6. Evaluare modele pe setul de test
 y_pred_max = model_temp_max.predict(X_test)
 y_pred_min = model_temp_min.predict(X_test)
 y_pred_weather = model_weather.predict(X_test)
-y_pred_precip = model_precip.predict(X_test)
+y_pred_precip = model_precip.predict(X_test[["day", "month", "year"]])
 
 print("=== Temp Max Metrics ===")
 print(f"MAE: {mean_absolute_error(y_temp_max_test, y_pred_max):.2f}")
@@ -78,7 +78,7 @@ def predict_weather(start_date_str, end_date_str=None):
     start_date = pd.to_datetime(start_date_str)
     end_date = pd.to_datetime(end_date_str) if end_date_str else start_date
 
-    dates = pd.date_range(start=start_date, end=end_date)
+    dates = pd.date_range(start=start_date, end=end_date, inclusive="both")
     features = pd.DataFrame({
         "date": dates,
         "day": dates.day,
@@ -87,7 +87,7 @@ def predict_weather(start_date_str, end_date_str=None):
         "precipitation": 0
     })
 
-    precip_preds = model_precip.predict(features[["day", "month", "year", "precipitation"]])
+    precip_preds = model_precip.predict(features[["day", "month", "year"]])
     features["precipitation"] = precip_preds 
 
     temp_max_preds = model_temp_max.predict(features[["day", "month", "year", "precipitation"]])
