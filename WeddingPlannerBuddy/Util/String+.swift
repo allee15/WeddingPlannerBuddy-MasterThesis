@@ -17,6 +17,20 @@ extension String {
         return self.replacingOccurrences(of: " ", with: "_")
     }
     
+    func checkWeddingFormat() -> String {
+        if self.contains("-") {
+            let parts = self.split(separator: "-")
+            if parts.count == 3 {
+                if parts[0].count == 4 {
+                    return formatDate(self)
+                } else if parts[0].count == 2 {
+                    return self.remakeWeather()
+                }
+            }
+        }
+        return ""
+    }
+    
     func remakeWeather() -> String {
         let inputFormatter = DateFormatter()
         inputFormatter.dateFormat = "dd-MM-yyyy"

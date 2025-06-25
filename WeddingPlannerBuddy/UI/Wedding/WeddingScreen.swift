@@ -188,7 +188,7 @@ fileprivate struct WeddingDateAndMoneyView: View {
                         .foregroundStyle(Color.mainBlack)
                         .frame(width: 20, height: 20)
                     
-                    Text(!date.isEmpty ? date.remakeWeather() : "No date")
+                    Text(!date.isEmpty ? date.checkWeddingFormat() : "No date")
                         .underline()
                         .foregroundStyle(Color.mainBlack)
                         .font(.quicksandSemiBold(size: 18))
