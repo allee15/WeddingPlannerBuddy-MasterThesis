@@ -191,4 +191,10 @@ class JSONParsers {
                           precipitationProbability: json["precipitationProbability"].intValue,
                           condition: json["condition"].stringValue)
     }
+    
+    static func parseJsonNewUserGuest(json: JSON) -> NewUserGuest {
+        return NewUserGuest(id: json["guestUUID"].stringValue,
+                            email: json["email"].stringValue,
+                            password: json["password"].stringValue)
+    }
 }

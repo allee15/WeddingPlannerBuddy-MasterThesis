@@ -10,6 +10,8 @@ import Combine
 import UIKit
 
 class GuestsListViewModel: BaseViewModel {
+    private var tablesService = TablesService.shared
+    
     @Published var guestsList: [Guest] = []
     @Published var weddingDate: String
     @Published var weddingChurchLocation: String
@@ -25,6 +27,11 @@ class GuestsListViewModel: BaseViewModel {
     func openEmail(to recipient: Guest) {
         let subject = "Our wedding"
         let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        
+        let guestDetails = self.getGuestDetails(guestId: recipient.id)
+        let email = guestDetails?.email ?? "unknown@example.com"
+        let password = guestDetails?.password ?? "N/A"
+        
         let body = """
         Dear \(recipient.name),
         
@@ -34,6 +41,9 @@ class GuestsListViewModel: BaseViewModel {
         Date: \(self.weddingDate)
         Church location: \(self.weddingChurchLocation)
         Party location: \(self.weddingPartyLocation)
+        Here you'll find your account details, in order to authenticate into the app:
+        Email: \(email)
+        Password: \(password)
         
         If you want to keep this information stored in one place, you can download the app "Wedding Planner Buddy".
         
@@ -48,5 +58,12 @@ class GuestsListViewModel: BaseViewModel {
         } else {
             print("Unable to open email client.")
         }
+    }
+    
+    private func getGuestDetails(guestId: String) -> (email: String, password: String)? {
+        if let guest = tablesService.newGuests.first(where: { $0.id == guestId }) {
+            return (guest.email, guest.password)
+        }
+        return nil
     }
 }

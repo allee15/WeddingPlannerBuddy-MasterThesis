@@ -21,3 +21,9 @@ struct User {
     let guests: [Guest]
     let weddings: [Wedding]
 }
+
+struct NewUserGuest {
+    let id: String
+    let email: String
+    let password: String
+}

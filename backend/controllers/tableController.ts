@@ -2,6 +2,12 @@ import { Request, Response } from "express";
 import { Table } from "../models/Table";
 import { User } from "../models/User";
 import { Guest } from "../models/Guest";
+import * as admin from "firebase-admin";
+import crypto from "crypto";
+
+function generateRandomPassword(length = 10) {
+    return crypto.randomBytes(length).toString("hex").slice(0, length);
+}  
 
 export const addTable = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -77,15 +83,32 @@ export const addParticipant = async (req: Request, res: Response): Promise<any> 
     try {
         const { guestUUID, userUID, tableUID, name, email } = req.body;
 
-        if (!tableUID || !userUID ) {
+        if (!tableUID || !userUID || !email) {
             return res.status(400).json({ error: "Missing required fields" });
         }
+
+        const password = generateRandomPassword();
+
+        const firebaseUser = await admin.auth().createUser({
+            email,
+            password,
+            displayName: name,
+        });
+
+        const newUser = new User({
+            userUID: firebaseUser.uid,
+            email,
+            hasActiveWedding: false,
+        });
+
+        await newUser.save();
 
         const newGuest = new Guest({
             guestUUID,
             tableUID,
             name,
-            email
+            email,
+            user: newUser._id,
         })
 
         await newGuest.save();
@@ -110,7 +133,7 @@ export const addParticipant = async (req: Request, res: Response): Promise<any> 
             return res.status(404).json({ error: "User not found" });
         }
 
-        return res.status(200).json({ success: true, user });
+        return res.status(200).json({ success: true, email, password, guestUUID });
     } catch(error) {
         console.log("Error in addParticipant controller", error);
         return res.status(500).json({ error: "Internal Server Error" })

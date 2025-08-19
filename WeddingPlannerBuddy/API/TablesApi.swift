@@ -126,7 +126,7 @@ class TablesApi {
         }.eraseToAnyPublisher()
     }
     
-    func addParticipant(participant: Guest, userId: String, tableId: String) -> AnyPublisher<Bool, Error> {
+    func addParticipant(participant: Guest, userId: String, tableId: String) -> AnyPublisher<(Bool, NewUserGuest), Error> {
         Future { promise in
             
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/table/add-guest")
@@ -157,10 +157,11 @@ class TablesApi {
                 } else {
                     do {
                         let json = try JSON(data: data!)
+                        let newUser = JSONParsers.parseJsonNewUserGuest(json: json)
                         if json["success"].boolValue {
-                            promise(.success(true))
+                            promise(.success((true, newUser)))
                         } else {
-                            promise(.success(false))
+                            promise(.success((false, newUser)))
                         }
                     } catch {
                         promise(.failure(error))
