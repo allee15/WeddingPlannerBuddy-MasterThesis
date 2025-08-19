@@ -13,6 +13,8 @@ class TablesService {
     private let tablesApi = TablesApi()
     var bag = Set<AnyCancellable>()
     
+    @Published var newGuests: [NewUserGuest] = []
+    
     func addTable(table: Table, userId: String) -> AnyPublisher<Bool, Error> {
         return tablesApi.addTable(table: table, userId: userId)
             .eraseToAnyPublisher()
@@ -25,6 +27,12 @@ class TablesService {
     
     func addParticipant(participant: Guest, userId: String, tableUUID: String) -> AnyPublisher<Bool, Error> {
         return tablesApi.addParticipant(participant: participant, userId: userId, tableId: tableUUID)
+            .handleEvents(receiveOutput: { [weak self] success, newGuest in
+                if success {
+                    self?.newGuests.append(newGuest)
+                }
+            })
+            .map { $0.0 }
             .eraseToAnyPublisher()
     }
     
