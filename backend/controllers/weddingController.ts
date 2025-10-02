@@ -371,30 +371,40 @@ export const updateLiveBand = async (req: Request, res: Response): Promise<any> 
 };
 
 export const addImageToWedding = async (req: Request, res: Response): Promise<any> => {
-  try {
-    const { id } = req.params;
-    const { weddingUUID, name, date, location, images } = req.body;
-    const imagePath = req.file?.path;
-
-    const wedding = await Wedding.findOne({ weddingUUID: weddingUUID });
-    if (!wedding) {
-      return res.status(404).json({ success: false, message: "Wedding not found" });
+    try {
+      const { weddingUUID, name, date, location, images } = req.body;
+      const imagePath = req.file?.path;
+  
+      const wedding = await Wedding.findOne({ weddingUUID });
+      if (!wedding) {
+        return res.status(404).json({ success: false, message: "Wedding not found" });
+      }
+  
+      wedding.name = name;
+      wedding.date = date;
+      wedding.location = location;
+  
+      let newImages: string[] = [];
+      if (images) {
+          if (typeof images === 'string') {
+              newImages = JSON.parse(images);
+          } else if (Array.isArray(images)) {
+              newImages = images;
+          }
+      }
+  
+      if (imagePath) {
+          newImages.push(imagePath);
+      }
+  
+      wedding.images = Array.from(new Set([...wedding.images, ...newImages]));
+  
+      await wedding.save();
+  
+      res.json({ success: true, wedding });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ success: false, message: "Server error" });
     }
-
-    wedding.name = name;
-    wedding.date = date;
-    wedding.location = location;
-    wedding.images = images;
-
-    if (imagePath) {
-        wedding.images.push(imagePath);
-    }
-
-    await wedding.save();
-
-    res.json({ success: true, wedding });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ success: false, message: "Server error" });
-  }
-};
+  };  
+  

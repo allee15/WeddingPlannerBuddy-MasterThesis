@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { Table } from "../models/Table";
 import { User } from "../models/User";
 import { Guest } from "../models/Guest";
+import { WeddingGuest } from "../models/WeddingGuest";
 import * as admin from "firebase-admin";
 import crypto from "crypto";
 
@@ -87,6 +88,13 @@ export const addParticipant = async (req: Request, res: Response): Promise<any> 
             return res.status(400).json({ error: "Missing required fields" });
         }
 
+        const organizer = await User.findOne({ userUID }).populate("weddings");
+        if (!organizer || organizer.weddings.length === 0) {
+            return res.status(404).json({ error: "Organizer or wedding not found" });
+        }
+
+        const weddingId = organizer.weddings[0]._id;
+
         const password = generateRandomPassword();
 
         const firebaseUser = await admin.auth().createUser({
@@ -112,6 +120,19 @@ export const addParticipant = async (req: Request, res: Response): Promise<any> 
         })
 
         await newGuest.save();
+
+        const weddingGuest = new WeddingGuest({
+            weddingGuestUID: guestUUID,
+            tableNb: 1,
+            location: "Restaurant X",
+            date: new Date().toISOString(),
+            weddingUUID: weddingId
+        });
+        await weddingGuest.save();
+
+        await User.findByIdAndUpdate(newUser._id, {
+            $push: { otherWeddings: weddingGuest._id }
+        });
 
         const table = await Table.findOneAndUpdate(
             { tableUID },

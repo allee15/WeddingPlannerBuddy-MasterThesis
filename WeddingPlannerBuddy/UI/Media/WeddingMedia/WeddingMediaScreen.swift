@@ -136,7 +136,6 @@ struct WeddingMediaScreen: View {
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .added:
-                    viewModel.reloadUSer()
                     self.addPhoto = false
                     let toast = Toast(text: "Image added successfully!")
                     ToastManager.instance.show(toast)

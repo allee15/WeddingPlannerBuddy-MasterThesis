@@ -92,7 +92,7 @@ class WeddingApi {
         }.eraseToAnyPublisher()
     }
     
-    func addImage(wedding: Wedding, image: UIImage) -> AnyPublisher<Bool, Error> {
+    func addImage(wedding: Wedding, image: UIImage) -> AnyPublisher<Wedding, Error> {
         Future { promise in
             let urlComponents = URLComponents(string: "\(DefaultAPIEnvironment.basePath)api/wedding/add-image")
             var urlRequest = URLRequest(url: (urlComponents?.url)!)
@@ -149,9 +149,8 @@ class WeddingApi {
                     do {
                         let json = try JSON(data: data!)
                         if json["success"].boolValue {
-                            promise(.success(true))
-                        } else {
-                            promise(.success(false))
+                            let result = JSONParsers.parseJsonWedding(json: json["wedding"])
+                            promise(.success(result))
                         }
                     } catch {
                         promise(.failure(error))
