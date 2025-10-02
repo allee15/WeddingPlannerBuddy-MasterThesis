@@ -18,6 +18,11 @@ const WeddingGuestSchema = new Schema({
     date: {
         type: Schema.Types.String,
         required: true
+    },
+    weddingUUID: {                 
+        type: Schema.Types.ObjectId,
+        ref: "Wedding",
+        required: true
     }
 })
 

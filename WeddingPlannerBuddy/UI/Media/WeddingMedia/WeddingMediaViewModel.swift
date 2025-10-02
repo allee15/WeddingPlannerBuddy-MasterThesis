@@ -39,16 +39,13 @@ class WeddingMediaViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] result in
                 guard let self else {return}
-                if result {
-                    self.eventSubject.send(.added)
-                    if !userDefaultsService.getShowRateModalStatus() {
-                        self.eventSubject.send(.showRateModal)
-                        userDefaultsService.setShowRateModal(hasShownRateModal: true)
-                    }
-                    userService.userReactiveData.reload()
-                } else {
-                    self.eventSubject.send(.failed)
+                self.wedding = result
+                self.eventSubject.send(.added)
+                if !userDefaultsService.getShowRateModalStatus() {
+                    self.eventSubject.send(.showRateModal)
+                    userDefaultsService.setShowRateModal(hasShownRateModal: true)
                 }
+                self.reloadUSer()
             }.store(in: &bag)
     }
     
