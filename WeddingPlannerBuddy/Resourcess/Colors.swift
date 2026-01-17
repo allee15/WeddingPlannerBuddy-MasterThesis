@@ -23,6 +23,7 @@ extension Color {
     static let lightRed = Color(hex: "#EFD0D0")
     static let darkRed = Color(hex: "#B21010")
     static let bottomSheetLine = Color(hex: "#D5D6D8")
+    static let bgSecondary = Color(hex: "#DFCEC4")
 }
 
 extension Color {

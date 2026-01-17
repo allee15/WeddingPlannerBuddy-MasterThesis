@@ -26,7 +26,10 @@ struct WeddingScreen: View {
                 .ignoresSafeArea(.container, edges: .top)
             
             VStack(spacing: 0) {
-                LeftNavBarView(title: "Your wedding", hasBackButton: false) { }
+                RightNavBarView(icon: .icStatistics, title: "Your wedding") {
+                    let vm = StatisticsViewModel(prices: viewModel.prices)
+                    mainNavigation?.push(StatisticsScreen(viewModel: vm).asDestination(), animated: true)
+                }
                 
                 if viewModel.isLoading {
                     Spacer()
@@ -65,7 +68,7 @@ struct WeddingScreen: View {
                                 ScrollView(showsIndicators: false) {
                                     VStack(alignment: .leading, spacing: 16) {
                                         WeddingDateAndMoneyView(date: weddingDetails.date,
-                                                                money: String(weddingDetails.price)) {
+                                                                money: weddingDetails.price) {
                                             let vm = EditDateViewModel(date: weddingDetails.date,
                                                                        weddingId: weddingDetails.id)
                                             mainNavigation?.push(EditDateScreen(viewModel: vm).asDestination(), animated: true)
@@ -173,7 +176,7 @@ struct WeddingScreen: View {
 
 fileprivate struct WeddingDateAndMoneyView: View {
     let date: String
-    let money: String
+    let money: Int
     let action: () -> ()
     
     var body: some View {

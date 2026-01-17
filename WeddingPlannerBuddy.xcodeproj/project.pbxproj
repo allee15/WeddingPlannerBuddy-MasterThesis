@@ -54,6 +54,9 @@
 		0F24D6302CC6FA3100A833E1 /* FirebaseInAppMessaging-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D62F2CC6FA3100A833E1 /* FirebaseInAppMessaging-Beta */; };
 		0F24D6322CC6FA3100A833E1 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D6312CC6FA3100A833E1 /* FirebaseMessaging */; };
 		0F24D6342CC6FA3100A833E1 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 0F24D6332CC6FA3100A833E1 /* FirebasePerformance */; };
+		0F2A9F362F1BC6C400E65682 /* StatisticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F352F1BC6C400E65682 /* StatisticsScreen.swift */; };
+		0F2A9F382F1BC70B00E65682 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F372F1BC70B00E65682 /* StatisticsViewModel.swift */; };
+		0F2A9F3A2F1BC81900E65682 /* TotalExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F392F1BC81900E65682 /* TotalExpensesView.swift */; };
 		0F327EBD2CDBB16D00EDF536 /* KFImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */; };
 		0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */; };
 		0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */; };
@@ -229,6 +232,9 @@
 		0F24D61C2CC2A8AB00A833E1 /* ModalChooseOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalChooseOptionView.swift; sourceTree = "<group>"; };
 		0F24D61E2CC2AA8000A833E1 /* WebViewScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewScreen.swift; sourceTree = "<group>"; };
 		0F24D6202CC2AAA500A833E1 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
+		0F2A9F352F1BC6C400E65682 /* StatisticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScreen.swift; sourceTree = "<group>"; };
+		0F2A9F372F1BC70B00E65682 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		0F2A9F392F1BC81900E65682 /* TotalExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalExpensesView.swift; sourceTree = "<group>"; };
 		0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KFImage+.swift"; sourceTree = "<group>"; };
 		0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloggedUserView.swift; sourceTree = "<group>"; };
 		0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveData.swift; sourceTree = "<group>"; };
@@ -548,6 +554,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		0F2A9F342F1BC6AF00E65682 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				0F2A9F352F1BC6C400E65682 /* StatisticsScreen.swift */,
+				0F2A9F372F1BC70B00E65682 /* StatisticsViewModel.swift */,
+				0F2A9F392F1BC81900E65682 /* TotalExpensesView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
 		0F572F332D4C249A003FD5E9 /* WeddingDress */ = {
 			isa = PBXGroup;
 			children = (
@@ -761,6 +777,7 @@
 				0FE515472CFF9C7B00CA9601 /* WeddingViewModel.swift */,
 				0F79300D2DA0147000052790 /* EditDateScreen.swift */,
 				0F79300F2DA04AA000052790 /* EditDateViewModel.swift */,
+				0F2A9F342F1BC6AF00E65682 /* Statistics */,
 				0F572F332D4C249A003FD5E9 /* WeddingDress */,
 				0F572F3B2D4C2591003FD5E9 /* BrideBouquet */,
 				0F572F472D4C25F8003FD5E9 /* GroomSuit */,
@@ -991,6 +1008,7 @@
 			files = (
 				0F7930142DA14C8500052790 /* EditFoodMenuViewModel.swift in Sources */,
 				0F24D5962CC0F89A00A833E1 /* RootView.swift in Sources */,
+				0F2A9F362F1BC6C400E65682 /* StatisticsScreen.swift in Sources */,
 				0F792FC12D9ADC4400052790 /* SecondaryButtonView.swift in Sources */,
 				0F572F492D4C25F8003FD5E9 /* GroomSuitViewModel.swift in Sources */,
 				0F24D5B02CC1A7CA00A833E1 /* Colors.swift in Sources */,
@@ -1088,6 +1106,7 @@
 				9B1A697D2CC0420500B19BF1 /* SceneDelegate.swift in Sources */,
 				0FDE16C02D1B34A500C1580E /* TablesService.swift in Sources */,
 				0FD38F1A2CDBAFB500338FAC /* ClearButton.swift in Sources */,
+				0F2A9F3A2F1BC81900E65682 /* TotalExpensesView.swift in Sources */,
 				0F7930122DA14C7800052790 /* EditFoodMenuScreen.swift in Sources */,
 				0F24D5A12CC0F95B00A833E1 /* BaseViewModel.swift in Sources */,
 				0FDE16AF2D1AEAC100C1580E /* OtherWeddingsScreen.swift in Sources */,
@@ -1127,6 +1146,7 @@
 				0F40D6AF2D48D5F80020D433 /* WeatherApi.swift in Sources */,
 				0F792FF82D9EBFDE00052790 /* EditLegalViewModel.swift in Sources */,
 				0F572F672D4C2613003FD5E9 /* BarMenuViewModel.swift in Sources */,
+				0F2A9F382F1BC70B00E65682 /* StatisticsViewModel.swift in Sources */,
 				0F792FE62D9E720200052790 /* EditChurchScreen.swift in Sources */,
 				0F24D5A52CC0F98000A833E1 /* EnvironmentObjects.swift in Sources */,
 				0F24D59C2CC0F91600A833E1 /* TabBarScreen.swift in Sources */,
