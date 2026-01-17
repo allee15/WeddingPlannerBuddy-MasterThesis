@@ -27,6 +27,8 @@ class WeddingViewModel: BaseViewModel {
     @Published var user: User?
     @Published var isLoading: Bool = false
     @Published var weddingDetailsState: WeddingDetailsState = .loading
+    @Published var prices: [PriceItem] = []
+    @Published var schedule: [ScheduleItem] = []
     
     let eventSubject = PassthroughSubject<WeddingEvent, Never>()
     
@@ -108,6 +110,8 @@ class WeddingViewModel: BaseViewModel {
                 case .loading:
                     self.weddingDetailsState = .loading
                 case .ready(let details):
+                    self.prices = details.priceItems
+                    self.schedule = details.scheduleItems
                     self.weddingDetailsState = .value(details)
                 }
             }.store(in: &bag)
