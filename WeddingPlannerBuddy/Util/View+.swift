@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 extension View {
     func border(_ color: Color, width: CGFloat, cornerRadius: CGFloat) -> some View {
@@ -40,3 +41,21 @@ struct RoundedCorner: Shape {
     }
 }
 
+extension View {
+    func snapshot(completion: @escaping (UIImage?) -> Void) {
+        let controller = UIHostingController(rootView: self)
+        controller.view.backgroundColor = .clear
+        
+        let targetSize = controller.view.intrinsicContentSize
+        controller.view.bounds = CGRect(origin: .zero, size: targetSize)
+        controller.view.layoutIfNeeded()
+        
+        DispatchQueue.main.async {
+            let renderer = UIGraphicsImageRenderer(size: targetSize)
+            let image = renderer.image { _ in
+                controller.view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+            }
+            completion(image)
+        }
+    }
+}

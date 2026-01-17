@@ -67,12 +67,22 @@ struct WeddingScreen: View {
                                 
                                 ScrollView(showsIndicators: false) {
                                     VStack(alignment: .leading, spacing: 16) {
-                                        WeddingDateAndMoneyView(date: weddingDetails.date,
-                                                                money: weddingDetails.price) {
-                                            let vm = EditDateViewModel(date: weddingDetails.date,
-                                                                       weddingId: weddingDetails.id)
-                                            mainNavigation?.push(EditDateScreen(viewModel: vm).asDestination(), animated: true)
-                                        }
+                                        HStack {
+                                            WeddingDateAndMoneyView(date: weddingDetails.date,
+                                                                    money: weddingDetails.price) {
+                                                let vm = EditDateViewModel(date: weddingDetails.date,
+                                                                           weddingId: weddingDetails.id)
+                                                mainNavigation?.push(EditDateScreen(viewModel: vm).asDestination(), animated: true)
+                                            }
+                                            
+                                            Spacer()
+                                            
+                                            TimelineCardView() {
+                                                mainNavigation?.push(TimelineScreen(items: viewModel.schedule,
+                                                                                    weddingDate: weddingDetails.date).asDestination(),
+                                                                     animated: true)
+                                            }
+                                        }.padding(.horizontal, 16)
                                         
                                         LazyVGrid(columns: columns, spacing: 16) {
                                             WeddingCardView(name: "Dress",
@@ -180,7 +190,7 @@ fileprivate struct WeddingDateAndMoneyView: View {
     let action: () -> ()
     
     var body: some View {
-        HStack {
+        VStack(alignment: .leading, spacing: 4) {
             Button {
                 action()
             } label: {
@@ -198,7 +208,6 @@ fileprivate struct WeddingDateAndMoneyView: View {
                 }
             }
             
-            Spacer()
             HStack(spacing: 4) {
                 Image(.icMoney)
                     .resizable()
@@ -210,7 +219,7 @@ fileprivate struct WeddingDateAndMoneyView: View {
                     .foregroundStyle(Color.mainBlack)
                     .font(.quicksandSemiBold(size: 18))
             }
-        }.padding(.horizontal, 16)
+        }
     }
 }
 
@@ -253,6 +262,33 @@ fileprivate struct WeddingCardView: View {
             }.background(Color.mainWhite.opacity(0.5))
                 .cornerRadius(4, corners: .allCorners)
                 .border(Color.greenPrimary, width: 1, cornerRadius: 4)
+        }
+    }
+}
+
+fileprivate struct TimelineCardView: View {
+    let action: () -> ()
+    
+    var body: some View {
+        Button {
+            action()
+        } label: {
+            HStack(spacing: 4) {
+                Text("View timeline")
+                    .foregroundStyle(Color.mainBlack)
+                    .font(.quicksandMedium(size: 16))
+                    .multilineTextAlignment(.center)
+                
+                Image(.icItemresultArrow)
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundStyle(Color.mainBlack)
+                    .frame(width: 24, height: 24)
+            }
+            .padding(.all, 12)
+            .background(Color.mainWhite.opacity(0.5))
+            .cornerRadius(4, corners: .allCorners)
+            .border(Color.greenPrimary, width: 1, cornerRadius: 4)
         }
     }
 }

@@ -57,6 +57,9 @@
 		0F2A9F362F1BC6C400E65682 /* StatisticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F352F1BC6C400E65682 /* StatisticsScreen.swift */; };
 		0F2A9F382F1BC70B00E65682 /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F372F1BC70B00E65682 /* StatisticsViewModel.swift */; };
 		0F2A9F3A2F1BC81900E65682 /* TotalExpensesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F392F1BC81900E65682 /* TotalExpensesView.swift */; };
+		0F2A9F3D2F1C421D00E65682 /* TimelineScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F3C2F1C421D00E65682 /* TimelineScreen.swift */; };
+		0F2A9F3F2F1C449F00E65682 /* ScheduleItem+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F3E2F1C449F00E65682 /* ScheduleItem+.swift */; };
+		0F2A9F412F1C44B900E65682 /* WeddingDetails+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2A9F402F1C44B900E65682 /* WeddingDetails+.swift */; };
 		0F327EBD2CDBB16D00EDF536 /* KFImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */; };
 		0F327EDA2CDCE79700EDF536 /* UnloggedUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */; };
 		0F327EDC2CDE429D00EDF536 /* ReactiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */; };
@@ -235,6 +238,9 @@
 		0F2A9F352F1BC6C400E65682 /* StatisticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScreen.swift; sourceTree = "<group>"; };
 		0F2A9F372F1BC70B00E65682 /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
 		0F2A9F392F1BC81900E65682 /* TotalExpensesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalExpensesView.swift; sourceTree = "<group>"; };
+		0F2A9F3C2F1C421D00E65682 /* TimelineScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineScreen.swift; sourceTree = "<group>"; };
+		0F2A9F3E2F1C449F00E65682 /* ScheduleItem+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduleItem+.swift"; sourceTree = "<group>"; };
+		0F2A9F402F1C44B900E65682 /* WeddingDetails+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeddingDetails+.swift"; sourceTree = "<group>"; };
 		0F327EBC2CDBB16D00EDF536 /* KFImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KFImage+.swift"; sourceTree = "<group>"; };
 		0F327ED92CDCE79700EDF536 /* UnloggedUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnloggedUserView.swift; sourceTree = "<group>"; };
 		0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveData.swift; sourceTree = "<group>"; };
@@ -427,6 +433,8 @@
 				0F327EDB2CDE429D00EDF536 /* ReactiveData.swift */,
 				0F327EFA2CE3DDC500EDF536 /* ZoomableScrollView.swift */,
 				0F40D6AC2D48D3370020D433 /* Date+.swift */,
+				0F2A9F3E2F1C449F00E65682 /* ScheduleItem+.swift */,
+				0F2A9F402F1C44B900E65682 /* WeddingDetails+.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -777,6 +785,7 @@
 				0FE515472CFF9C7B00CA9601 /* WeddingViewModel.swift */,
 				0F79300D2DA0147000052790 /* EditDateScreen.swift */,
 				0F79300F2DA04AA000052790 /* EditDateViewModel.swift */,
+				0F2A9F3C2F1C421D00E65682 /* TimelineScreen.swift */,
 				0F2A9F342F1BC6AF00E65682 /* Statistics */,
 				0F572F332D4C249A003FD5E9 /* WeddingDress */,
 				0F572F3B2D4C2591003FD5E9 /* BrideBouquet */,
@@ -1015,6 +1024,7 @@
 				0F7930182DA1512100052790 /* EditBarMenuScreen.swift in Sources */,
 				0FD38F1C2CDBAFF000338FAC /* ImagePicker.swift in Sources */,
 				0F792FE42D9E712800052790 /* EditGroomViewModel.swift in Sources */,
+				0F2A9F412F1C44B900E65682 /* WeddingDetails+.swift in Sources */,
 				0F24D5F32CC1BBE500A833E1 /* LeftNavBar.swift in Sources */,
 				0F792FDC2D9E692300052790 /* EditDressViewModel.swift in Sources */,
 				0FE515552CFF9D2A00CA9601 /* LoginScreen.swift in Sources */,
@@ -1067,6 +1077,7 @@
 				0FDE16922D0B153D00C1580E /* Guest.swift in Sources */,
 				0FE515522CFF9CF100CA9601 /* ProfileScreen.swift in Sources */,
 				0F24D5DE2CC1B5A200A833E1 /* UserDefaultsService.swift in Sources */,
+				0F2A9F3D2F1C421D00E65682 /* TimelineScreen.swift in Sources */,
 				0FE515702D0320EB00CA9601 /* FirebaseService.swift in Sources */,
 				0F792FF42D9EBDDD00052790 /* EditPartyViewModel.swift in Sources */,
 				0F24D59A2CC0F8D600A833E1 /* TabBarItem.swift in Sources */,
@@ -1126,6 +1137,7 @@
 				0F572F662D4C2613003FD5E9 /* BarMenuScreen.swift in Sources */,
 				0F24D5F52CC1BC3B00A833E1 /* RightNavBar.swift in Sources */,
 				0F327EBD2CDBB16D00EDF536 /* KFImage+.swift in Sources */,
+				0F2A9F3F2F1C449F00E65682 /* ScheduleItem+.swift in Sources */,
 				0FDE16892D08694A00C1580E /* TablesPlanViewModel.swift in Sources */,
 				0FE515432CFF9C1E00CA9601 /* HomeViewModel.swift in Sources */,
 				0F24D5A32CC0F96E00A833E1 /* ControllerRepresentable.swift in Sources */,
