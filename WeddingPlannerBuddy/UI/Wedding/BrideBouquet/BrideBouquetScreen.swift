@@ -29,36 +29,47 @@ struct BrideBouquetScreen: View {
                 Spacer()
             } else {
                 ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Description: \(viewModel.brideBouquet.description.isEmpty ? "Not specified" : viewModel.brideBouquet.description)")
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                        
-                        Text("Price: \(viewModel.brideBouquet.price)")
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                        
-                        Button {
-                            if let url = URL(string: viewModel.brideBouquet.link) {
-                                navigation.push(WebViewScreen(title: "Bouquet Link", url: url).asDestination(), animated: true)
+                    VStack(alignment: .leading, spacing: 20) {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("Description: \(viewModel.brideBouquet.description.isEmpty ? "Not specified" : viewModel.brideBouquet.description)")
+                                    .font(.quicksandMedium(size: 16))
+                                    .foregroundStyle(Color.mainBlack)
+                                
+                                Text("Price: \(viewModel.brideBouquet.price)")
+                                    .font(.quicksandMedium(size: 16))
+                                    .foregroundStyle(Color.mainBlack)
+                                
+                                Button {
+                                    if let url = URL(string: viewModel.brideBouquet.link) {
+                                        navigation.push(WebViewScreen(title: "Bouquet Link", url: url).asDestination(), animated: true)
+                                    }
+                                } label: {
+                                    Text("Link: \(viewModel.brideBouquet.link.isEmpty ? "Not specified" : viewModel.brideBouquet.link)")
+                                        .underline()
+                                        .font(.quicksandMedium(size: 16))
+                                        .foregroundStyle(Color.mainBlack)
+                                        .tint(Color.mainBlack)
+                                        .multilineTextAlignment(.leading)
+                                }
                             }
-                        } label: {
-                            Text("Link: \(viewModel.brideBouquet.link.isEmpty ? "Not specified" : viewModel.brideBouquet.link)")
-                                .underline()
-                                .font(.quicksandMedium(size: 16))
-                                .foregroundStyle(Color.mainBlack)
-                                .tint(Color.mainBlack)
+                            Spacer()
                         }
+                        .padding(.all, 12)
+                        .background(
+                            Color.nudePrimary.opacity(0.4)
+                                .cornerRadius(8, corners: .allCorners))
                         
                         if !viewModel.brideBouquet.photo.isEmpty {
                             ZStack(alignment: .center) {
                                 Color.nudePrimary.opacity(0.4)
+                                    .cornerRadius(8, corners: .allCorners)
+                                
                                 KFImage(URL(string: "http://localhost:8000/\(viewModel.brideBouquet.photo)"))
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: UIScreen.main.bounds.height / 3)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 24)
+                                    .padding(.all, 12)
                             }
                         }
                     }.padding(.top, 20)

@@ -29,6 +29,7 @@ struct TablesPlanScreen: View {
                     let modal = ModalChooseOptionView(title: "Table's participants",
                                                       description: viewModel.getTableNames(table: table),
                                                       topButtonText: "Add participant",
+                                                      middleButtonText: "Delete table",
                                                       bottomButtonText: "Close") {
                         tableId = table.id
                         navigation.dismissModal(animated: true, completion: nil)
@@ -37,12 +38,24 @@ struct TablesPlanScreen: View {
                             shouldReloadWeddingDetails = true
                         })
                         navigation.push(screen.asDestination(), animated: true)
+                    } middleButtonTapped: {
+                        viewModel.removeTableOrObject(table: table)
                     } onBottomButtonTapped: {
                         navigation.dismissModal(animated: true, completion: nil)
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 } onTableMoved: { movedTable in
                     viewModel.updateTablePosition(movedTable)
+                } deleteAction: { table in
+                    let modal = ModalChooseOptionView(title: "Delete object",
+                                                      description: "",
+                                                      topButtonText: "Delete object",
+                                                      bottomButtonText: "Close") {
+                        viewModel.removeTableOrObject(table: table)
+                    } onBottomButtonTapped: {
+                        navigation.dismissModal(animated: true, completion: nil)
+                    }
+                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                 }
             }
         }.background(Color.mainWhite)
@@ -57,15 +70,25 @@ struct TablesPlanScreen: View {
             .onReceive(viewModel.eventSubject) { event in
                 switch event {
                 case .tableAdded:
-                    let toast = Toast(text: "Table added successful!")
+                    let toast = Toast(text: "Table added successfully!")
                     ToastManager.instance.show(toast)
                     
                 case .rectangleAdded:
-                    let toast = Toast(text: "Object added successful!")
+                    let toast = Toast(text: "Object added successfully!")
                     ToastManager.instance.show(toast)
                     
                 case .failed:
                     let toast = Toast(text: "An error has occured. Please try again!",
+                                      textColor: Color.darkRed,
+                                      bg: Color.lightRed,
+                                      icon: .icToastRed)
+                    ToastManager.instance.show(toast)
+                    
+                case .objectDeleted:
+                    self.shouldReloadWeddingDetails = true
+                    navigation.dismissModal(animated: true, completion: nil)
+                    navigation.pop(animated: true)
+                    let toast = Toast(text: "Table deleted successfully!",
                                       textColor: Color.darkRed,
                                       bg: Color.lightRed,
                                       icon: .icToastRed)
@@ -79,6 +102,7 @@ struct TablePlanView: View {
     @Binding var tables: [Table]
     let action: (Table) -> ()
     let onTableMoved: (Table) -> ()
+    let deleteAction: (Table) -> ()
     
     var body: some View {
         ZStack {
@@ -91,6 +115,8 @@ struct TablePlanView: View {
                     }
                 }, action: {
                     action(table)
+                }, deleteAction: {
+                    deleteAction(table)
                 })
             }
         }
@@ -101,7 +127,7 @@ struct DraggableTable: View {
     @State var table: Table
     let onUpdate: (Table) -> ()
     let action: () -> ()
-    
+    let deleteAction: () -> ()
     @State private var dragOffset = CGSize.zero
     
     var body: some View {
@@ -110,16 +136,19 @@ struct DraggableTable: View {
                 Rectangle()
                     .fill(Color.greenSecondary)
                     .frame(width: 80, height: 35)
+                    .cornerRadius(8, corners: .allCorners)
                     
             } else {
                 Circle()
-                    .fill(Color.nudeSecondary)
+                    .fill(!table.participants.isEmpty ? Color.nudeSecondary : Color.bgSecondary)
                     .frame(width: 56, height: 56)
             }
             
             Button {
                 if !table.isObject {
                     action()
+                } else {
+                    deleteAction()
                 }
             } label: {
                 Text(table.label)

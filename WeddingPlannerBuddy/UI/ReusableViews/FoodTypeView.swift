@@ -18,10 +18,9 @@ struct FoodTypeView: View {
                    .foregroundStyle(Color.mainBlack)
                    .font(.quicksandMedium(size: 16))
                    .fixedSize()
-                   .padding(.vertical, 8)
-                   .padding(.horizontal, 12)
+                   .padding(.all, 8)
                    .background(Color.mainWhite.opacity(0.5))
-                   .cornerRadius(4, corners: .allCorners)
+                   .cornerRadius(8, corners: .allCorners)
                
                ForEach(food, id: \.self) { item in
                    HStack(spacing: 4) {
@@ -29,7 +28,7 @@ struct FoodTypeView: View {
                            .resizable()
                            .renderingMode(.template)
                            .foregroundStyle(Color.mainBlack)
-                           .frame(width: 16, height: 16)
+                           .frame(width: 12, height: 12)
                        
                        Text(item)
                            .foregroundStyle(Color.mainBlack)
@@ -40,7 +39,7 @@ struct FoodTypeView: View {
                }
            }.padding(.all, 12)
                .background(Color.nudePrimary.opacity(0.4))
-               .cornerRadius(4, corners: .allCorners)
+               .cornerRadius(8, corners: .allCorners)
        }
    }
 }

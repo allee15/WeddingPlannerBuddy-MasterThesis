@@ -78,7 +78,7 @@ fileprivate struct WeddingInvitationLineView: View {
             }
             .padding(.all, 12)
             .background(Color.nudePrimary.opacity(0.4))
-            .cornerRadius(4, corners: .allCorners)
+            .cornerRadius(8, corners: .allCorners)
             .padding(.horizontal, 16)
         }
     }

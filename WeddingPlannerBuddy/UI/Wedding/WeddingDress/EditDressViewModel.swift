@@ -18,15 +18,18 @@ class EditDressViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
     @Published var weddingDress: WeddingDress
-    @Published var newDescription: String = ""
-    @Published var newPrice: String = ""
-    @Published var newLink: String = ""
+    @Published var newDescription: String
+    @Published var newPrice: String
+    @Published var newLink: String
     @Published var newImageURL: UIImage?
     
     let eventSubject = PassthroughSubject<EditDressState, Never>()
     
     init(weddingDress: WeddingDress) {
         self.weddingDress = weddingDress
+        self.newDescription = weddingDress.description
+        self.newPrice = weddingDress.price.description
+        self.newLink = weddingDress.link
     }
     
     func addImage(image: UIImage?) {
@@ -36,10 +39,10 @@ class EditDressViewModel: BaseViewModel {
     
     func editDress() {
         let dress = WeddingDress(id: weddingDress.id.isEmpty ? UUID().uuidString : weddingDress.id,
-                                 link: newLink.isEmpty ? weddingDress.link : newLink,
-                                 price: newPrice.isEmpty ? weddingDress.price : Int(newPrice) ?? weddingDress.price,
+                                 link: newLink,
+                                 price: Int(newPrice) ?? weddingDress.price,
                                  photo: weddingDress.photo,
-                                 description: newDescription.isEmpty ? weddingDress.description : newDescription)
+                                 description: newDescription)
         
         self.weddingService.editWeddingDress(weddingDress: dress, image: newImageURL)
             .receive(on: DispatchQueue.main)

@@ -17,7 +17,7 @@ class EditLegalViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
     @Published var civilMarriage: CivilMarriage
-    @Published var newAddress: String = ""
+    @Published var newAddress: String
     @Published var newHour = Date()
     @Published var newDate = Date()
     
@@ -25,11 +25,12 @@ class EditLegalViewModel: BaseViewModel {
     
     init(civilMarriage: CivilMarriage) {
         self.civilMarriage = civilMarriage
+        self.newAddress = civilMarriage.address
     }
     
     func editLegal() {
         let civil = CivilMarriage(id: civilMarriage.id.isEmpty ? UUID().uuidString : civilMarriage.id,
-                                  address: newAddress.isEmpty ? civilMarriage.address : newAddress,
+                                  address: newAddress,
                                   date: newDate == Date() ? civilMarriage.date : newDate.description,
                                   hour: newHour == Date() ? civilMarriage.hour : newHour.description)
         self.weddingService.editCivilMarriage(civilMarriage: civil)

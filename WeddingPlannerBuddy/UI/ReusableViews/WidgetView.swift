@@ -11,6 +11,7 @@ struct WidgetView: View {
     let title: String
     let icon: ImageResource
     var showToggle: Bool = true
+    var hasBg: Bool = true
     let action: () -> ()
     
     var body: some View {
@@ -39,7 +40,8 @@ struct WidgetView: View {
                 }
             }.padding(.horizontal, 16)
                 .padding(.vertical, 12)
-                .background(Color.greenPrimary.opacity(0.5))
+                .background(hasBg ? Color.greenPrimary.opacity(0.5) : Color.clear)
+                .cornerRadius(8, corners: .allCorners)
                 .frame(maxWidth: .infinity)
                 .padding(.horizontal, 16)
         }

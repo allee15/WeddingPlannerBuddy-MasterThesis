@@ -185,3 +185,36 @@ export const updateTablePosition = async (req: Request, res: Response): Promise<
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+export const deleteTableOrObject = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { userUID, tableUID } = req.body;
+
+        if (!userUID || !tableUID) {
+            return res.status(400).json({ error: "Missing required fields" });
+        }
+
+        const table = await Table.findOne({ tableUID });
+        if (!table) {
+            return res.status(404).json({ error: "Table not found" });
+        }
+
+        await User.findOneAndUpdate(
+            { userUID },
+            { $pull: { tablesAtWedding: table._id } }
+        );
+
+        if (table.participants?.length) {
+            await Guest.deleteMany({ _id: { $in: table.participants } });
+        }
+
+        await Table.deleteOne({ _id: table._id });
+
+        return res.status(200).json({ success: true });
+    } catch (error) {
+        console.log("Error in deleteTableOrObject controller", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+

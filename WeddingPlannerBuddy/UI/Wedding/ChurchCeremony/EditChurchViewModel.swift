@@ -18,9 +18,9 @@ class EditChurchViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
     @Published var churchCeremony: ChurchCeremony
-    @Published var newAddress: String = ""
-    @Published var newPrice: String = ""
-    @Published var newPreotName: String = ""
+    @Published var newAddress: String
+    @Published var newPrice: String
+    @Published var newPreotName: String
     @Published var newHour = Date()
     @Published var newDate = Date()
     
@@ -28,15 +28,18 @@ class EditChurchViewModel: BaseViewModel {
     
     init(churchCeremony: ChurchCeremony) {
         self.churchCeremony = churchCeremony
+        self.newAddress = churchCeremony.churchAddress
+        self.newPrice = churchCeremony.price.description
+        self.newPreotName = churchCeremony.preotName
     }
     
     func editChurch() {
         let church = ChurchCeremony(id: churchCeremony.id.isEmpty ? UUID().uuidString : churchCeremony.id,
-                                    churchAddress: newAddress.isEmpty ? churchCeremony.churchAddress : newAddress,
+                                    churchAddress: newAddress,
                                     date: newDate == Date() ? churchCeremony.date : newDate.description,
                                     hour: newHour == Date() ? churchCeremony.hour : newHour.description,
-                                    preotName: newPreotName.isEmpty ? churchCeremony.preotName : newPreotName,
-                                    price: newPrice.isEmpty ? churchCeremony.price : Int(newPrice) ?? churchCeremony.price)
+                                    preotName: newPreotName,
+                                    price: Int(newPrice) ?? churchCeremony.price)
         self.weddingService.editChurchCeremony(churchCeremony: church)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in

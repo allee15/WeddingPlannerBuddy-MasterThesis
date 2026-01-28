@@ -167,7 +167,15 @@ struct HomeScreen: View {
                                 if weatherArray.count == 1 || viewModel.selectedDateType == .singleDate {
                                     WeatherCardView(prediction: weatherArray[0].prediction, date: weatherArray[0].date) {
                                         if let user = viewModel.user {
-                                            viewModel.startWedding(date: weatherArray[0].date)
+                                            let modal = ModalChooseOptionView(title: "Change wedding date",
+                                                                              description: "Are you sure you want to select this date? This action will change your wedding date.",
+                                                                              topButtonText: "Continue",
+                                                                              bottomButtonText: "Back") {
+                                                viewModel.startWedding(date: weatherArray[0].date)
+                                            } onBottomButtonTapped: {
+                                                navigation.dismissModal(animated: true, completion: nil)
+                                            }
+                                            navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                                         } else {
                                             let modal = ModalChooseOptionView(title: "Error",
                                                                               description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -185,7 +193,15 @@ struct HomeScreen: View {
                                             ForEach(weatherArray, id: \.id) { weather in
                                                 WeatherCardView(prediction: weather.prediction, date: weather.date) {
                                                     if let user = viewModel.user {
-                                                        viewModel.startWedding(date: weather.date)
+                                                        let modal = ModalChooseOptionView(title: "Change wedding date",
+                                                                                          description: "Are you sure you want to select this date? This action will change your wedding date.",
+                                                                                          topButtonText: "Continue",
+                                                                                          bottomButtonText: "Back") {
+                                                            viewModel.startWedding(date: weather.date)
+                                                        } onBottomButtonTapped: {
+                                                            navigation.dismissModal(animated: true, completion: nil)
+                                                        }
+                                                        navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                                                     } else {
                                                         let modal = ModalChooseOptionView(title: "Error",
                                                                                           description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -231,7 +247,15 @@ struct HomeScreen: View {
                             if weatherArray.count == 1 || viewModel.selectedDateType == .singleDate {
                                 WeatherCardView(prediction: weatherArray[0].prediction, date: weatherArray[0].date) {
                                     if let user = viewModel.user {
-                                        viewModel.startWedding(date: weatherArray[0].date)
+                                        let modal = ModalChooseOptionView(title: "Change wedding date",
+                                                                          description: "Are you sure you want to select this date? This action will change your wedding date.",
+                                                                          topButtonText: "Continue",
+                                                                          bottomButtonText: "Back") {
+                                            viewModel.startWedding(date: weatherArray[0].date)
+                                        } onBottomButtonTapped: {
+                                            navigation.dismissModal(animated: true, completion: nil)
+                                        }
+                                        navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                                     } else {
                                         let modal = ModalChooseOptionView(title: "Error",
                                                                           description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -249,7 +273,15 @@ struct HomeScreen: View {
                                         ForEach(weatherArray, id: \.id) { weather in
                                             WeatherCardView(prediction: weather.prediction, date: weather.date) {
                                                 if let user = viewModel.user {
-                                                    viewModel.startWedding(date: weather.date)
+                                                    let modal = ModalChooseOptionView(title: "Change wedding date",
+                                                                                      description: "Are you sure you want to select this date? This action will change your wedding date.",
+                                                                                      topButtonText: "Continue",
+                                                                                      bottomButtonText: "Back") {
+                                                        viewModel.startWedding(date: weather.date)
+                                                    } onBottomButtonTapped: {
+                                                        navigation.dismissModal(animated: true, completion: nil)
+                                                    }
+                                                    navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
                                                 } else {
                                                     let modal = ModalChooseOptionView(title: "Error",
                                                                                       description: "You're not logged in. In order to continue with this proccess, you have to first login.", topButtonText: "Login", bottomButtonText: "Close") {
@@ -262,8 +294,8 @@ struct HomeScreen: View {
                                                 }
                                             }.frame(width: (UIScreen.main.bounds.size.width - 32) / 2.35 )
                                         }
-                                    }
-                                }.padding(.horizontal, 16)
+                                    }.padding(.horizontal, 16)
+                                }
                             }
                         } else {
                             Spacer()
@@ -306,6 +338,7 @@ struct HomeScreen: View {
                                       icon: .icToastRed)
                     ToastManager.instance.show(toast)
                 case .completed:
+                    navigation.dismissModal(animated: true, completion: nil)
                     TabBarCoordinator.instance.tabBarNavigation = .wedding
                     viewModel.reloadWedding()
                     let toast = Toast(text: "Date added successful!")
@@ -351,6 +384,7 @@ fileprivate struct HomeCardView: View {
             }
         }
         .background(Color.greenSecondary.opacity(0.5))
+        .cornerRadius(8, corners: .allCorners)
         .padding(.horizontal, 16)
     }
 }
@@ -421,6 +455,7 @@ fileprivate struct WeatherCardView: View {
             }.padding(.top, 8)
         }.padding(.all, 12)
             .background(Color.nudePrimary.opacity(0.5))
+            .cornerRadius(8, corners: .allCorners)
     }
     
     func weatherIcon(for condition: String) -> String {

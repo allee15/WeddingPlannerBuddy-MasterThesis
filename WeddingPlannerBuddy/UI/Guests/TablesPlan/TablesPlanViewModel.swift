@@ -13,6 +13,7 @@ enum TablesCompletion {
     case tableAdded
     case failed
     case rectangleAdded
+    case objectDeleted
 }
 
 class TablesPlanViewModel: BaseViewModel {
@@ -124,5 +125,27 @@ class TablesPlanViewModel: BaseViewModel {
             }
             .store(in: &bag)
     }
-
+    
+    func removeTableOrObject(table: Table) {
+        tablesService.deleteTableOrObject(tableId: table.id, userId: userId)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure(_) = completion {
+                    let toast = Toast(text: "Failed to save position",
+                                      textColor: Color.darkRed,
+                                      bg: Color.lightRed,
+                                      icon: .icToastRed)
+                    ToastManager.instance.show(toast)
+                }
+            } receiveValue: { [weak self] result in
+                guard let self else {return}
+                if result {
+                    reloadUser()
+                    self.eventSubject.send(.objectDeleted)
+                } else {
+                    self.eventSubject.send(.failed)
+                }
+            }
+            .store(in: &bag)
+    }
 }

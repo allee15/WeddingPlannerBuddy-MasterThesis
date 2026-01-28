@@ -29,36 +29,47 @@ struct GroomSuitScreen: View {
                 Spacer()
             } else {
                 ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Description: \(viewModel.groomSuit.description.isEmpty ? "Not specified" : viewModel.groomSuit.description)")
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                        
-                        Text("Price: \(viewModel.groomSuit.price)")
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                        
-                        Button {
-                            if let url = URL(string: viewModel.groomSuit.link) {
-                                navigation.push(WebViewScreen(title: "Suit Link", url: url).asDestination(), animated: true)
+                    VStack(alignment: .leading, spacing: 20) {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("Description: \(viewModel.groomSuit.description.isEmpty ? "Not specified" : viewModel.groomSuit.description)")
+                                    .font(.quicksandMedium(size: 16))
+                                    .foregroundStyle(Color.mainBlack)
+                                
+                                Text("Price: \(viewModel.groomSuit.price)")
+                                    .font(.quicksandMedium(size: 16))
+                                    .foregroundStyle(Color.mainBlack)
+                                
+                                Button {
+                                    if let url = URL(string: viewModel.groomSuit.link) {
+                                        navigation.push(WebViewScreen(title: "Suit Link", url: url).asDestination(), animated: true)
+                                    }
+                                } label: {
+                                    Text("Link: \(viewModel.groomSuit.link.isEmpty ? "Not specified" : viewModel.groomSuit.link)")
+                                        .underline()
+                                        .font(.quicksandMedium(size: 16))
+                                        .foregroundStyle(Color.mainBlack)
+                                        .tint(Color.mainBlack)
+                                        .multilineTextAlignment(.leading)
+                                }
                             }
-                        } label: {
-                            Text("Link: \(viewModel.groomSuit.link.isEmpty ? "Not specified" : viewModel.groomSuit.link)")
-                                .underline()
-                                .font(.quicksandMedium(size: 16))
-                                .foregroundStyle(Color.mainBlack)
-                                .tint(Color.mainBlack)
+                            Spacer()
                         }
+                        .padding(.all, 12)
+                        .background(
+                            Color.nudePrimary.opacity(0.4)
+                                .cornerRadius(8, corners: .allCorners))
                         
                         if !viewModel.groomSuit.photo.isEmpty {
                             ZStack(alignment: .center) {
                                 Color.nudePrimary.opacity(0.4)
+                                    .cornerRadius(8, corners: .allCorners)
+                                
                                 KFImage(URL(string: "http://localhost:8000/\(viewModel.groomSuit.photo)"))
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: UIScreen.main.bounds.height / 3)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 24)
+                                    .padding(.all, 12)
                             }
                         }
                     }.padding(.top, 20)

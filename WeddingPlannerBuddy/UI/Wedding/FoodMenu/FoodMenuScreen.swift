@@ -37,6 +37,9 @@ struct FoodMenuScreen: View {
                             
                             Spacer()
                         }
+                        .padding(.all, 12)
+                        .background(Color.nudePrimary.opacity(0.4))
+                        .cornerRadius(8, corners: .allCorners)
                         
                         FoodTypeView(title: "Entryway", food: viewModel.foodMenu.antreu)
                         FoodTypeView(title: "First course", food: viewModel.foodMenu.firstCourse)

@@ -66,7 +66,7 @@ fileprivate struct GuestLineView: View {
             .padding(.vertical, 12)
             .padding(.horizontal, 16)
             .background(Color.nudePrimary.opacity(0.4))
-            .cornerRadius(4, corners: .allCorners)
+            .cornerRadius(8, corners: .allCorners)
             .padding(.horizontal, 16)
         }
     }

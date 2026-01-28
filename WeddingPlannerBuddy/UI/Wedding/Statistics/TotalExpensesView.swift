@@ -36,7 +36,7 @@ struct TotalExpensesView: View {
                 .padding(40)
         }
         .background(.white)
-        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }
 
@@ -115,6 +115,6 @@ struct ExpenseCardView: View {
         .padding(.vertical, 20)
         .padding(.horizontal, 25)
         .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }

@@ -139,7 +139,7 @@ class TablesApi {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
-
+            
             let body: [String: Any] = [
                 "guestUUID": participant.id,
                 "userUID": userId,
@@ -216,5 +216,48 @@ class TablesApi {
             dataTask.resume()
         }.eraseToAnyPublisher()
     }
-
+    
+    func deleteTableOrObject(tableId: String, userId: String) -> AnyPublisher<Bool, Error> {
+        Future { promise in
+            
+            let urlComponents = URLComponents(
+                string: "\(DefaultAPIEnvironment.basePath)api/table/remove-table"
+            )
+            
+            var urlRequest = URLRequest(url: (urlComponents?.url)!)
+            urlRequest.httpMethod = "DELETE"
+            
+            if let token = UserDefaultsService.shared.getValue(key: UserDefaultsKeys.token) {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
+            
+            let body: [String: Any] = [
+                "userUID": userId,
+                "tableUID": tableId
+            ]
+            
+            urlRequest.httpBody = try? JSONSerialization.data(
+                withJSONObject: body,
+                options: []
+            )
+            
+            let dataTask = URLSession.shared.dataTask(with: urlRequest) { data, _, error in
+                if let error = error {
+                    promise(.failure(error))
+                    return
+                }
+                
+                do {
+                    let json = try JSON(data: data ?? Data())
+                    promise(.success(json["success"].boolValue))
+                } catch {
+                    promise(.failure(error))
+                }
+            }
+            
+            dataTask.resume()
+            
+        }.eraseToAnyPublisher()
+    }
 }

@@ -58,7 +58,8 @@ struct LiveBandScreen: View {
                         }
                         .padding(.all, 12)
                         .background(Color.nudePrimary.opacity(0.4))
-                        .cornerRadius(4, corners: .allCorners)
+                        .cornerRadius(8, corners: .allCorners)
+                        
                     }.padding(.top, 20)
                         .padding(.horizontal, 16)
                 }

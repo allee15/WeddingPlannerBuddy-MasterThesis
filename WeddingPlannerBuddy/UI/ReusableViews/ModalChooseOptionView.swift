@@ -11,8 +11,10 @@ struct ModalChooseOptionView: View {
     let title: String
     let description: String
     let topButtonText: String
+    var middleButtonText: String?
     var bottomButtonText: String?
     let onTopButtonTapped: () -> ()
+    var middleButtonTapped: (() -> ())?
     var onBottomButtonTapped: (() -> ())?
     
     var body: some View {
@@ -45,8 +47,15 @@ struct ModalChooseOptionView: View {
                         onTopButtonTapped()
                     }
                     
+                    if let middleButtonTapped = middleButtonTapped,
+                       let middleButtonText = middleButtonText {
+                        SecondaryButtonView(text: middleButtonText) {
+                            middleButtonTapped()
+                        }
+                    }
+                    
                     if let onBottomButtonTapped = onBottomButtonTapped,
-                        let bottomButtonText = bottomButtonText {
+                       let bottomButtonText = bottomButtonText {
                         ClearButton(text: bottomButtonText) {
                             onBottomButtonTapped()
                         }

@@ -37,6 +37,9 @@ struct BarMenuScreen: View {
                             
                             Spacer()
                         }
+                        .padding(.all, 12)
+                        .background(Color.nudePrimary.opacity(0.4))
+                        .cornerRadius(8, corners: .allCorners)
                         
                         FoodTypeView(title: "Alcoholic drinks", food: viewModel.barMenu.alcoholic)
                         FoodTypeView(title: "Non-alcoholic drinks", food: viewModel.barMenu.nonalcoholic)

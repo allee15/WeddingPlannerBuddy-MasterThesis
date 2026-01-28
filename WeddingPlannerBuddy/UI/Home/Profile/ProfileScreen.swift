@@ -80,7 +80,7 @@ struct ProfileScreen: View {
                             .foregroundStyle(Color.mainBlack)
                             .padding(.horizontal, 16)
                         
-                        WidgetView(title: "App version \(viewModel.appVersion)", icon: .icAppVersion, showToggle: false) {}
+                        WidgetView(title: "App version \(viewModel.appVersion)", icon: .icAppVersion, showToggle: false, hasBg: false) {}
                     }
                 }.padding(.top, 20)
             }
