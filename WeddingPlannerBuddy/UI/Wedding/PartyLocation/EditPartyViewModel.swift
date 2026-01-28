@@ -18,9 +18,9 @@ class EditPartyViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
     @Published var partyLocation: PartyLocation
-    @Published var newAddress: String = ""
-    @Published var newPrice: String = ""
-    @Published var newDescription: String = ""
+    @Published var newAddress: String
+    @Published var newPrice: String
+    @Published var newDescription: String
     @Published var newHour = Date()
     @Published var newDate = Date()
     
@@ -28,15 +28,18 @@ class EditPartyViewModel: BaseViewModel {
     
     init(partyLocation: PartyLocation) {
         self.partyLocation = partyLocation
+        self.newAddress = partyLocation.partyAddress
+        self.newPrice = partyLocation.price.description
+        self.newDescription = partyLocation.decorationsOrganizerDetails
     }
     
     func editParty() {
         let party = PartyLocation(id: partyLocation.id.isEmpty ? UUID().uuidString : partyLocation.id,
-                                  partyAddress: newAddress.isEmpty ? partyLocation.partyAddress : newAddress,
-                                    date: newDate == Date() ? partyLocation.date : newDate.description,
-                                    hour: newHour == Date() ? partyLocation.hour : newHour.description,
-                                    decorationsOrganizerDetails: newDescription.isEmpty ? partyLocation.decorationsOrganizerDetails : newDescription,
-                                    price: newPrice.isEmpty ? partyLocation.price : Int(newPrice) ?? partyLocation.price)
+                                  partyAddress: newAddress,
+                                  date: newDate == Date() ? partyLocation.date : newDate.description,
+                                  hour: newHour == Date() ? partyLocation.hour : newHour.description,
+                                  decorationsOrganizerDetails: newDescription,
+                                  price: Int(newPrice) ?? partyLocation.price)
         self.weddingService.editPartyLocation(partyLocation: party)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in

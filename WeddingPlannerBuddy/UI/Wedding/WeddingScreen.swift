@@ -64,6 +64,7 @@ struct WeddingScreen: View {
                         case .value(let weddingDetails):
                             ZStack(alignment: .top) {
                                 Color(hex: "#DFCEC4")
+                                    .cornerRadius(8, corners: [.topLeft, .topRight])
                                 
                                 ScrollView(showsIndicators: false) {
                                     VStack(alignment: .leading, spacing: 16) {
@@ -260,7 +261,7 @@ fileprivate struct WeddingCardView: View {
                 }
                 Spacer()
             }.background(Color.mainWhite.opacity(0.5))
-                .cornerRadius(4, corners: .allCorners)
+                .cornerRadius(8, corners: .allCorners)
                 .border(Color.greenPrimary, width: 1, cornerRadius: 4)
         }
     }
@@ -287,7 +288,7 @@ fileprivate struct TimelineCardView: View {
             }
             .padding(.all, 12)
             .background(Color.mainWhite.opacity(0.5))
-            .cornerRadius(4, corners: .allCorners)
+            .cornerRadius(8, corners: .allCorners)
             .border(Color.greenPrimary, width: 1, cornerRadius: 4)
         }
     }

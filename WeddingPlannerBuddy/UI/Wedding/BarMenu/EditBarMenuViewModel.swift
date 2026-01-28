@@ -17,7 +17,7 @@ class EditBarMenuViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
     @Published var barMenu: BarMenu
-    @Published var newPrice: String = ""
+    @Published var newPrice: String
     @Published var newAlcool: String = ""
     @Published var newNonAlcool: String = ""
     @Published var newCoffee: String = ""
@@ -32,6 +32,7 @@ class EditBarMenuViewModel: BaseViewModel {
     
     init(barMenu: BarMenu) {
         self.barMenu = barMenu
+        self.newPrice = barMenu.price.description
         self.newAlcoolArray = barMenu.alcoholic
         self.newNonalcoolArray = barMenu.nonalcoholic
         self.newJuiceArray = barMenu.juice
@@ -64,7 +65,7 @@ class EditBarMenuViewModel: BaseViewModel {
                            nonalcoholic: newNonalcoolArray,
                            coffee: newCoffeeArray,
                            juice: newJuiceArray,
-                           price: newPrice.isEmpty ? barMenu.price : Int(newPrice) ?? barMenu.price)
+                           price: Int(newPrice) ?? barMenu.price)
         self.weddingService.editBarMenu(barMenu: menu)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in

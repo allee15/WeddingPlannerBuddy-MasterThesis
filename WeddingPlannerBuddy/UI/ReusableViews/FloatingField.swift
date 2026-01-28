@@ -116,10 +116,10 @@ struct FloatingField: View {
             }
             .frame(height: 54)
             .background(!isEditing ? colors.bgColor : isDisabled ? colors.bgColor.opacity(0.5) : colors.bgColor)
-            .cornerRadius(4, corners: .allCorners)
+            .cornerRadius(8, corners: .allCorners)
             .border((errorMessage ?? "").isEmpty ? (!isEditing ? colors.borderColor :  isDisabled ? colors.borderColor.opacity(0.5) : colors.borderColor) : Color.darkRed,
                     width: 1,
-                    cornerRadius: 4)
+                    cornerRadius: 8)
             .onTapGesture {
                 self.isEditing = true
             }

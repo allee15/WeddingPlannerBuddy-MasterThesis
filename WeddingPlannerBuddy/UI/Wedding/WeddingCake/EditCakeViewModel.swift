@@ -18,15 +18,18 @@ class EditCakeViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
     @Published var weddingCake: WeddingCake
-    @Published var newDescription: String = ""
-    @Published var newPrice: String = ""
-    @Published var newName: String = ""
+    @Published var newDescription: String
+    @Published var newPrice: String
+    @Published var newName: String
     @Published var newImageURL: UIImage?
     
     let eventSubject = PassthroughSubject<EditCakeState, Never>()
     
     init(weddingCake: WeddingCake) {
         self.weddingCake = weddingCake
+        self.newDescription = weddingCake.description
+        self.newPrice = weddingCake.price.description
+        self.newName = weddingCake.name
     }
     
     func addImage(image: UIImage?) {
@@ -36,10 +39,10 @@ class EditCakeViewModel: BaseViewModel {
     
     func editCake() {
         let cake = WeddingCake(id: weddingCake.id.isEmpty ? UUID().uuidString : weddingCake.id,
-                               name: newName.isEmpty ? weddingCake.name : newName,
+                               name: newName,
                                photo: weddingCake.photo,
-                               description: newDescription.isEmpty ? weddingCake.description : newDescription,
-                               price: newPrice.isEmpty ? weddingCake.price : Int(newPrice) ?? weddingCake.price)
+                               description: newDescription,
+                               price: Int(newPrice) ?? weddingCake.price)
         self.weddingService.editWeddingCake(weddingCake: cake, image: newImageURL)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in

@@ -40,4 +40,9 @@ class TablesService {
         return tablesApi.updateTablePosition(table: table, userId: userId)
             .eraseToAnyPublisher()
     }
+    
+    func deleteTableOrObject(tableId: String, userId: String) -> AnyPublisher<Bool, Error> {
+        return tablesApi.deleteTableOrObject(tableId: tableId, userId: userId)
+            .eraseToAnyPublisher()
+    }
 }

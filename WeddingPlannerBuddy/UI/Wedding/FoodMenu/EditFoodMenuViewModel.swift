@@ -17,7 +17,7 @@ class EditFoodMenuViewModel: BaseViewModel {
     private let weddingService = WeddingService.shared
     
     @Published var foodMenu: FoodMenu
-    @Published var newPrice: String = ""
+    @Published var newPrice: String
     @Published var newFirstCourse: String = ""
     @Published var newMainCourse: String = ""
     @Published var newSecondMainCourse: String = ""
@@ -32,6 +32,7 @@ class EditFoodMenuViewModel: BaseViewModel {
     
     init(foodMenu: FoodMenu) {
         self.foodMenu = foodMenu
+        self.newPrice = foodMenu.price.description
         self.newFirstCourseArray = foodMenu.firstCourse
         self.newAntreuArray = foodMenu.antreu
         self.newMainCourseArray = foodMenu.mainCourse
@@ -65,7 +66,7 @@ class EditFoodMenuViewModel: BaseViewModel {
                             firstCourse: newFirstCourseArray,
                             mainCourse: newMainCourseArray,
                             secondMainCourse: newSecondMainCourseArray,
-                            price: newPrice.isEmpty ? foodMenu.price : Int(newPrice) ?? foodMenu.price)
+                            price: Int(newPrice) ?? foodMenu.price)
         self.weddingService.editFoodMenu(foodMenu: menu)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in

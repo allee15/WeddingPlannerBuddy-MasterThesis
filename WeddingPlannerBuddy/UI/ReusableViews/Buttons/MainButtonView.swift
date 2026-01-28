@@ -31,7 +31,7 @@ struct MainButtonView: View {
                 Spacer()
             }.padding(.vertical, 12)
                 .background(bgColor)
-                .cornerRadius(4, corners: .allCorners)
+                .cornerRadius(8, corners: .allCorners)
         }.disabled(isDisabled)
     }
 }

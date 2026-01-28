@@ -44,12 +44,13 @@ struct EditDressScreen: View {
                     if !viewModel.weddingDress.photo.isEmpty {
                         ZStack(alignment: .center) {
                             Color.nudePrimary.opacity(0.4)
+                                .cornerRadius(8, corners: .allCorners)
+                            
                             KFImage(URL(string: "http://localhost:8000/\(viewModel.weddingDress.photo)"))
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: UIScreen.main.bounds.height / 3)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 24)
+                                .padding(.all, 12)
                         }
                     }
                 }

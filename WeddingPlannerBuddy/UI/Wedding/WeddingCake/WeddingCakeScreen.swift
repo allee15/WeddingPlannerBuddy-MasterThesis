@@ -29,28 +29,38 @@ struct WeddingCakeScreen: View {
                 Spacer()
             } else {
                 ScrollView(showsIndicators: false) {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text("Name: \(viewModel.weddingCake.name.isEmpty ? "Not specified" : viewModel.weddingCake.name)")
-                            .font(.quicksandSemiBold(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                        
-                        Text("Description: \(viewModel.weddingCake.description.isEmpty ? "Not specified" : viewModel.weddingCake.description)")
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
-                        
-                        Text("Price: \(viewModel.weddingCake.price) RON")
-                            .font(.quicksandMedium(size: 16))
-                            .foregroundStyle(Color.mainBlack)
+                    VStack(alignment: .leading, spacing: 20) {
+                        HStack {
+                            VStack(alignment: .leading, spacing: 12) {
+                                Text("Name: \(viewModel.weddingCake.name.isEmpty ? "Not specified" : viewModel.weddingCake.name)")
+                                    .font(.quicksandSemiBold(size: 16))
+                                    .foregroundStyle(Color.mainBlack)
+                                
+                                Text("Description: \(viewModel.weddingCake.description.isEmpty ? "Not specified" : viewModel.weddingCake.description)")
+                                    .font(.quicksandMedium(size: 16))
+                                    .foregroundStyle(Color.mainBlack)
+                                
+                                Text("Price: \(viewModel.weddingCake.price) RON")
+                                    .font(.quicksandMedium(size: 16))
+                                    .foregroundStyle(Color.mainBlack)
+                            }
+                            Spacer()
+                        }
+                        .padding(.all, 12)
+                        .background(
+                            Color.nudePrimary.opacity(0.4)
+                                .cornerRadius(8, corners: .allCorners))
                         
                         if !viewModel.weddingCake.photo.isEmpty {
                             ZStack(alignment: .center) {
                                 Color.nudePrimary.opacity(0.4)
+                                    .cornerRadius(8, corners: .allCorners)
+                                
                                 KFImage(URL(string: "http://localhost:8000/\(viewModel.weddingCake.photo)"))
                                     .resizable()
                                     .scaledToFit()
                                     .frame(height: UIScreen.main.bounds.height / 3)
-                                    .padding(.horizontal, 16)
-                                    .padding(.vertical, 24)
+                                    .padding(.all, 12)
                             }
                         }
                     }.padding(.top, 20)

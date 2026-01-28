@@ -26,7 +26,7 @@ struct InvisibleButtonView: View {
                 .padding(.vertical, 8)
                 .padding(.horizontal, 12)
                 .background(bgColor)
-                .cornerRadius(4, corners: .allCorners)
+                .cornerRadius(8, corners: .allCorners)
         }
     }
 }
