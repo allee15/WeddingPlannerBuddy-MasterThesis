@@ -21,8 +21,8 @@ admin.initializeApp({
 });
 
 app.use(cors())
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.set("trust proxy", true);
 
 app.use(userRoutes);
