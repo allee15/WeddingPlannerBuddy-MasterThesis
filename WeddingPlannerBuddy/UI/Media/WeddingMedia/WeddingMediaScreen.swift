@@ -92,7 +92,7 @@ struct WeddingMediaScreen: View {
                                     mainNavigation?.push(ZoomImageScreen(imageToZoom: "http://localhost:8000/\(image)").asDestination(),
                                                          animated: true)
                                 } label: {
-                                    KFImage(URL(string: "http://localhost:8000/\(image)"))
+                                    KFImage(URL(string: "\(DefaultAPIEnvironment.basePath)\(image)")) //http://localhost:8000/
                                         .resizable()
                                         .placeholder {
                                             Image(.imgPlaceholder)
