@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { User } from "../models/User";
 import {BarMenu, Bouquet, ChurchCeremony, CivilMarriage, FoodMenu, GroomSuit, LiveBand, PartyLocation, WeddingCake, WeddingDetails, WeddingDress} from "../models/WeddingDetails";
 import { Wedding } from "../models/Wedding";
+import { put } from "@vercel/blob";
 
 interface MulterRequest extends Request {
     file?: Express.Multer.File;
@@ -112,7 +113,7 @@ export const updateWeddingDress = async (req: Request, res: Response): Promise<a
     try {
         const { id } = req.params;
         const { weddingDressUUID, link, price, description } = req.body;
-        const imagePath = req.file?.path;
+        // const imagePath = req.file?.path;
 
         const weddingDress = await WeddingDress.findOne({ weddingDressUUID: weddingDressUUID });
 
@@ -123,9 +124,27 @@ export const updateWeddingDress = async (req: Request, res: Response): Promise<a
         weddingDress.link = link;
         weddingDress.price = price;
         weddingDress.description = description;
-        if (imagePath) {
-            weddingDress.photo = imagePath;
-        }
+        // if (imagePath) {
+        //     weddingDress.photo = imagePath;
+        // }
+        let imageUrl: string | undefined;
+
+if (req.file) {
+  const blob = await put(
+    `wedding-dress/${Date.now()}-${req.file.originalname}`,
+    req.file.buffer,
+    {
+      access: "public",
+      contentType: req.file.mimetype,
+    }
+  );
+
+  imageUrl = blob.url;
+}
+
+if (imageUrl) {
+    weddingDress.photo = imageUrl;
+  }
 
         await weddingDress.save();
         return res.status(200).json({ weddingDress });
@@ -373,7 +392,7 @@ export const updateLiveBand = async (req: Request, res: Response): Promise<any> 
 export const addImageToWedding = async (req: Request, res: Response): Promise<any> => {
     try {
       const { weddingUUID, name, date, location, images } = req.body;
-      const imagePath = req.file?.path;
+    //   const imagePath = req.file?.path;
   
       const wedding = await Wedding.findOne({ weddingUUID });
       if (!wedding) {
@@ -393,9 +412,28 @@ export const addImageToWedding = async (req: Request, res: Response): Promise<an
           }
       }
   
-      if (imagePath) {
-          newImages.push(imagePath);
-      }
+      let imageUrl: string | undefined;
+
+if (req.file) {
+  const blob = await put(
+    `weddings/${Date.now()}-${req.file.originalname}`,
+    req.file.buffer,
+    {
+      access: "public",
+      contentType: req.file.mimetype,
+    }
+  );
+
+  imageUrl = blob.url;
+}
+
+if (imageUrl) {
+  newImages.push(imageUrl);
+}
+
+    //   if (imagePath) {
+    //       newImages.push(imagePath);
+    //   }
   
       wedding.images = Array.from(new Set([...wedding.images, ...newImages]));
   
