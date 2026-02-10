@@ -9,6 +9,7 @@ import tableRoutes from './routes/table';
 import weatherRoutes from './routes/weather';
 import { createDatabaseConnection } from './configs/db';
 import * as admin from "firebase-admin";
+import path from 'path';
 
 const firebaseCertificate = require("./weddingplannerbuddy-firebase-adminsdk-bajjl-5027c2ca42.json");
 
@@ -29,7 +30,7 @@ app.use(userRoutes);
 app.use(weddingRoutes);
 app.use(tableRoutes);
 app.use(weatherRoutes);
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 createDatabaseConnection().then(() => {
     app.listen(8000, () => {
