@@ -89,10 +89,10 @@ struct WeddingMediaScreen: View {
                         LazyVGrid(columns: columns, spacing: 4) {
                             ForEach(viewModel.wedding.images, id: \.self) { image in
                                 Button {
-                                    mainNavigation?.push(ZoomImageScreen(imageToZoom: "http://localhost:8000/\(image)").asDestination(),
+                                    mainNavigation?.push(ZoomImageScreen(imageToZoom: image).asDestination(),
                                                          animated: true)
                                 } label: {
-                                    KFImage(URL(string: "\(DefaultAPIEnvironment.basePath)\(image)")) //http://localhost:8000/
+                                    KFImage(URL(string: image))
                                         .resizable()
                                         .placeholder {
                                             Image(.imgPlaceholder)

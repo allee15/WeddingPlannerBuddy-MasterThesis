@@ -46,7 +46,7 @@ struct EditGroomScreen: View {
                             Color.nudePrimary.opacity(0.4)
                                 .cornerRadius(8, corners: .allCorners)
                             
-                            KFImage(URL(string: "http://localhost:8000/\(viewModel.groomSuit.photo)"))
+                            KFImage(URL(string: viewModel.groomSuit.photo))
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: UIScreen.main.bounds.height / 3)
