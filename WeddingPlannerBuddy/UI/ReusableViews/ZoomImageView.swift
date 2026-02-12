@@ -43,8 +43,6 @@ struct ZoomImageScreen: View {
     
     private func zoomableImageView(imageURL: String, geometry: GeometryProxy) -> some View {
         ZoomableScrollView {
-//                    let localPath = avatarUrl
-//                    KFImage(URL(string: "file://\(localPath)"))
             KFImage(URL(string: imageURL))
                 .resizable()
                 .placeholder {
