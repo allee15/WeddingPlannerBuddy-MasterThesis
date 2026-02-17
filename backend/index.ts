@@ -3,11 +3,11 @@ import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 
-import userRoutes from '../routes/user';
-import weddingRoutes from '../routes/wedding';
-import tableRoutes from '../routes/table';
-import weatherRoutes from '../routes/weather';
-import { createDatabaseConnection } from '../configs/db';
+import userRoutes from './routes/user';
+import weddingRoutes from './routes/wedding';
+import tableRoutes from './routes/table';
+import weatherRoutes from './routes/weather';
+import { createDatabaseConnection } from './configs/db';
 import * as admin from "firebase-admin";
 
 const firebaseCertificate = require("./weddingplannerbuddy-firebase-adminsdk-bajjl-5027c2ca42.json");
