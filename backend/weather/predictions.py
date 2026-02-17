@@ -42,8 +42,3 @@ def predict_weather(start_date_str, end_date_str=None):
             "precipitation": round(precip_preds[i], 1)
         })
     return results
-
-if __name__ == "__main__":
-    predictions = predict_weather("2024-08-01", "2024-08-07")
-    for p in predictions:
-        print(p)
