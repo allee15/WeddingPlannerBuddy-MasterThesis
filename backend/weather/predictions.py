@@ -1,12 +1,15 @@
 import pandas as pd
 import numpy as np
 import joblib
+import os
 
-model_temp_max = joblib.load("model_temp_max.pkl")
-model_temp_min = joblib.load("model_temp_min.pkl")
-model_weather = joblib.load("model_weather.pkl")
-model_precip = joblib.load("model_precip.pkl")
-weather_encoder = joblib.load("weather_encoder.pkl")
+MODEL_DIR = os.path.dirname(__file__)
+
+model_temp_max = joblib.load(os.path.join(MODEL_DIR, "model_temp_max.pkl"))
+model_temp_min = joblib.load(os.path.join(MODEL_DIR, "model_temp_min.pkl"))
+model_weather = joblib.load(os.path.join(MODEL_DIR, "model_weather.pkl"))
+model_precip = joblib.load(os.path.join(MODEL_DIR, "model_precip.pkl"))
+weather_encoder = joblib.load(os.path.join(MODEL_DIR, "weather_encoder.pkl"))
 
 def predict_weather(start_date_str, end_date_str=None):
     start_date = pd.to_datetime(start_date_str)
