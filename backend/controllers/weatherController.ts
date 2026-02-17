@@ -23,7 +23,7 @@ export const getPredictions = async (req: Request, res: Response): Promise<any> 
     }
 
     try {
-        const response = await axios.post("https://wedding-planner-buddy-master-thesis.vercel.app/predict", {
+        const response = await axios.post("https://wedding-planner-buddy-master-thesis.vercel.app/api/predict", {
             start_date,
             end_date
         });
