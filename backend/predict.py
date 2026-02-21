@@ -1,27 +1,27 @@
 import json
 from weather.predictions import predict_weather
 
-def main(request):
+def handler(request, context=None):
     try:
-        body = request.json()
+        body = json.loads(request.body)
         start_date = body.get("start_date")
         end_date = body.get("end_date")
 
         if not start_date:
             return {
-                "status": 400,
-                "body": {"error": "Missing start_date"}
+                "statusCode": 400,
+                "body": json.dumps({"error": "Missing start_date"})
             }
 
         predictions = predict_weather(start_date, end_date)
 
         return {
-            "status": 200,
-            "body": predictions
+            "statusCode": 200,
+            "body": json.dumps(predictions)
         }
 
     except Exception as e:
         return {
-            "status": 500,
-            "body": {"error": str(e)}
+            "statusCode": 500,
+            "body": json.dumps({"error": str(e)})
         }
