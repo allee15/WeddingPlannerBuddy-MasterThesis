@@ -28,7 +28,7 @@ app.set("trust proxy", true);
 app.use(userRoutes);
 app.use(weddingRoutes);
 app.use(tableRoutes);
-// app.use(weatherRoutes);
+app.use(weatherRoutes);
 app.use('/uploads', express.static('uploads'));
 
 createDatabaseConnection().then(() => {
