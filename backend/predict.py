@@ -1,5 +1,5 @@
 import json
-from predictions import predict_weather
+from weather.predictions import predict_weather
 
 def handler(request, context=None):
     try:
