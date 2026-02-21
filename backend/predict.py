@@ -1,7 +1,17 @@
-from flask import Flask
+import json
+from weather.predictions import predict_weather
 
-app = Flask(__name__)
+def handler(request):
+    try:
+        body = json.loads(request.body)
+        start_date = body.get("start_date")
+        end_date = body.get("end_date")
 
-@app.get('/')
-async def index():
-    return {"status": "ok"}
+        if not start_date:
+            return {"statusCode": 400, "body": json.dumps({"error": "Missing start_date"})}
+
+        predictions = predict_weather(start_date, end_date)
+        return {"statusCode": 200, "body": json.dumps(predictions)}
+
+    except Exception as e:
+        return {"statusCode": 500, "body": json.dumps({"error": str(e)})}
