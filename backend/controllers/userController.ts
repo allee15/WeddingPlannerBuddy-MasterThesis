@@ -12,7 +12,7 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
     try {
         Wedding.exists({});
         WeddingGuest.exists({});
-        const user = await User.find({ userUID: token })
+        const user = await User.findOne({ userUID: token })
         .populate("tablesAtWedding")
         .populate({
         path: "otherWeddings",
