@@ -14,7 +14,12 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
         WeddingGuest.exists({});
         const user = await User.find({ userUID: token })
         .populate("tablesAtWedding")
-        .populate("otherWeddings")
+        .populate({
+        path: "otherWeddings",
+        populate: {
+            path: "weddingUUID"
+        }
+        })
         .populate("guests")
         .populate("weddings");
 
