@@ -3,6 +3,7 @@ import { User } from "../models/User";
 import {BarMenu, Bouquet, ChurchCeremony, CivilMarriage, FoodMenu, GroomSuit, LiveBand, PartyLocation, WeddingCake, WeddingDetails, WeddingDress} from "../models/WeddingDetails";
 import { Wedding } from "../models/Wedding";
 import { put } from "@vercel/blob";
+import { WeddingGuest } from "../models/WeddingGuest";
 
 interface MulterRequest extends Request {
     file?: Express.Multer.File;
@@ -93,14 +94,36 @@ export const getWeddingDetails = async (req: Request, res: Response): Promise<an
 export const updateWeddingDate = async (req: Request, res: Response): Promise<any> => {
     try {
         const { date, weddingId } = req.body;
-        const wedding = await WeddingDetails.findOne({ weddingDetailsUUID: weddingId });
+        const weddingDetails = await WeddingDetails.findOne({ weddingDetailsUUID: weddingId });
 
-        if (!wedding) {
+        if (!weddingDetails) {
             return res.status(404).json({ error: "Wedding not found" });
         }
 
-        wedding.date = date;
-        await wedding.save();
+        weddingDetails.date = date;
+        await weddingDetails.save();
+
+        const wedding = await Wedding.findOne({ weddingUUID: weddingId });
+        if (wedding) {
+            wedding.date = date;
+
+            const partyLocation = weddingDetails.partyLocation as any;
+            if (partyLocation) {
+                wedding.location = partyLocation.partyAddress;
+            }
+
+            await wedding.save();
+        }
+
+        await WeddingGuest.updateMany(
+            { weddingUUID: wedding?._id },
+            {
+                $set: {
+                    date: date,
+                    location: wedding?.location
+                }
+            }
+        );
 
         return res.status(200).json({ success: true });
     } catch (error) {
@@ -113,7 +136,6 @@ export const updateWeddingDress = async (req: Request, res: Response): Promise<a
     try {
         const { id } = req.params;
         const { weddingDressUUID, link, price, description } = req.body;
-        // const imagePath = req.file?.path;
 
         const weddingDress = await WeddingDress.findOne({ weddingDressUUID: weddingDressUUID });
 
@@ -124,9 +146,6 @@ export const updateWeddingDress = async (req: Request, res: Response): Promise<a
         weddingDress.link = link;
         weddingDress.price = price;
         weddingDress.description = description;
-        // if (imagePath) {
-        //     weddingDress.photo = imagePath;
-        // }
         let imageUrl: string | undefined;
 
 if (req.file) {
@@ -254,6 +273,32 @@ export const updatePartyLocation = async (req: Request, res: Response): Promise<
         partyLocation.decorationsOrganizerDetails = decorationsOrganizerDetails;
         partyLocation.price = price;
         await partyLocation.save();
+
+        const weddingDetails = await WeddingDetails.findOne({
+            partyLocation: partyLocation._id
+        });
+
+        if (!weddingDetails) {
+            return res.status(404).json({ error: "WeddingDetails not found" });
+        }
+
+        const wedding = await Wedding.findOne({ weddingUUID: weddingDetails.weddingDetailsUUID });
+
+        if (wedding) {
+            wedding.location = partyAddress;
+            wedding.date = weddingDetails.date; 
+            await wedding.save();
+
+            await WeddingGuest.updateMany(
+                { weddingUUID: wedding._id },
+                {
+                    $set: {
+                        location: partyAddress,
+                        date: wedding.date
+                    }
+                }
+            );
+        }
 
         return res.status(200).json({ partyLocation });
     } catch (error) {
@@ -392,7 +437,6 @@ export const updateLiveBand = async (req: Request, res: Response): Promise<any> 
 export const addImageToWedding = async (req: Request, res: Response): Promise<any> => {
     try {
       const { weddingUUID, name, date, location, images } = req.body;
-    //   const imagePath = req.file?.path;
   
       const wedding = await Wedding.findOne({ weddingUUID });
       if (!wedding) {
@@ -414,26 +458,22 @@ export const addImageToWedding = async (req: Request, res: Response): Promise<an
   
       let imageUrl: string | undefined;
 
-if (req.file) {
-  const blob = await put(
-    `weddings/${Date.now()}-${req.file.originalname}`,
-    req.file.buffer,
-    {
-      access: "public",
-      contentType: req.file.mimetype,
+    if (req.file) {
+    const blob = await put(
+        `weddings/${Date.now()}-${req.file.originalname}`,
+        req.file.buffer,
+        {
+        access: "public",
+        contentType: req.file.mimetype,
+        }
+    );
+
+    imageUrl = blob.url;
     }
-  );
 
-  imageUrl = blob.url;
-}
-
-if (imageUrl) {
-  newImages.push(imageUrl);
-}
-
-    //   if (imagePath) {
-    //       newImages.push(imagePath);
-    //   }
+    if (imageUrl) {
+    newImages.push(imageUrl);
+    }
   
       wedding.images = Array.from(new Set([...wedding.images, ...newImages]));
   
