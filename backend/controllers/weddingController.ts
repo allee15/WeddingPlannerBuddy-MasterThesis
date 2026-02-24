@@ -106,12 +106,6 @@ export const updateWeddingDate = async (req: Request, res: Response): Promise<an
         const wedding = await Wedding.findOne({ weddingUUID: weddingId });
         if (wedding) {
             wedding.date = date;
-
-            const partyLocation = weddingDetails.partyLocation as any;
-            if (partyLocation) {
-                wedding.location = partyLocation.partyAddress;
-            }
-
             await wedding.save();
         }
 
