@@ -12,4 +12,5 @@ struct WeddingGuest {
     let tableNb: String
     let date: String
     let location: String
+    let weddingUUID: Wedding
 }

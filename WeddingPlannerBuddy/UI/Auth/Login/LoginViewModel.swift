@@ -20,6 +20,7 @@ enum LoginField {
 
 class LoginViewModel: BaseViewModel {
     private var userService = UserService.shared
+    private var weddingService = WeddingService.shared
     
     @Published var email: String = ""
     @Published var password: String = ""
@@ -57,6 +58,7 @@ class LoginViewModel: BaseViewModel {
                 }
             } receiveValue: { [weak self] user in
                 guard let self else { return }
+                self.weddingService.weddingReactiveData.reload()
                 self.loginCompletion.send(.login)
             }
             .store(in: &bag)
