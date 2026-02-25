@@ -26,7 +26,8 @@ export const getPredictions = async (req: Request, res: Response): Promise<any> 
         const response = await axios.post("https://wedding-planner-buddy-predictions.vercel.app/", {
             start_date,
             end_date
-        });
+        },
+  { timeout: 20000 });
 
         const predictionsArray = Array.isArray(response.data) ? response.data : [response.data];
 
