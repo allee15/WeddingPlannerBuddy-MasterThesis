@@ -47,7 +47,11 @@ class MediaViewModel: BaseViewModel {
                         self.weddingsState = .value([])
                     case .loggedIn(let user):
                         self.user = user
-                        self.weddings = user.weddings
+                        
+                        let ownedWeddings = user.weddings
+                        let guestWeddings = user.otherWeddings.map { $0.weddingUUID }
+                        
+                        self.weddings = ownedWeddings + guestWeddings
                         self.weddingsState = .value(user.weddings)
                     }
                 }

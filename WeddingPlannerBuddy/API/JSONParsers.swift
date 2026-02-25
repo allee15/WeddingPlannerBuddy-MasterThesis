@@ -16,12 +16,24 @@ class JSONParsers {
             parseJsonTableWithGuests(json: subJson, allGuests: guests)
         }
         
+        let parsedOtherWeddings = json["otherWeddings"].arrayValue.map(parseJsonOtherWeddings)
+
+        var seenWeddingUUIDs = Set<String>()
+        let uniqueOtherWeddings = parsedOtherWeddings.filter { wg in
+            if seenWeddingUUIDs.contains(wg.weddingUUID.id) {
+                return false
+            } else {
+                seenWeddingUUIDs.insert(wg.weddingUUID.id)
+                return true
+            }
+        }
+        
         return User(
             id: json["userUID"].stringValue,
             email: json["email"].stringValue,
             hasActiveWedding: json["hasActiveWedding"].boolValue,
             tablesAtWedding: tables,
-            otherWeddings: json["otherWeddings"].arrayValue.map(parseJsonOtherWeddings),
+            otherWeddings: uniqueOtherWeddings,
             guests: guests,
             weddings: json["weddings"].arrayValue.map(parseJsonWedding)
         )
@@ -57,7 +69,8 @@ class JSONParsers {
         return WeddingGuest(id: json["_id"].stringValue,
                             tableNb: json["tableNb"].stringValue,
                             date: json["date"].stringValue,
-                            location: json["location"].stringValue)
+                            location: json["location"].stringValue,
+                            weddingUUID: parseJsonWedding(json: json["weddingUUID"]))
     }
     
     static func parseJsonWedding(json: JSON) -> Wedding {
