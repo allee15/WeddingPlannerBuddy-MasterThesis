@@ -57,12 +57,12 @@ fileprivate struct WeddingInvitationLineView: View {
         } label: {
             HStack {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("\(counter). \(invitation.date)")
+                    Text("\(counter). \(invitation.weddingUUID.date)")
                         .font(.quicksandSemiBold(size: 18))
                         .foregroundStyle(Color.mainBlack)
                         .multilineTextAlignment(.leading)
                     
-                    Text("📍 \(invitation.location)")
+                    Text("📍 \(invitation.weddingUUID.location)")
                         .font(.quicksandRegular(size: 14))
                         .foregroundStyle(Color.mainBlack)
                         .multilineTextAlignment(.leading)
