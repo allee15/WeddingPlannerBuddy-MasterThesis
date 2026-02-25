@@ -24,7 +24,7 @@ export const getUser = async (req: Request, res: Response): Promise<any> => {
 
     const otherWeddingIds = user.otherWeddings.map(id => id.toString());
     const otherWeddings = await WeddingGuest.find({
-        weddingUUID: { $in: otherWeddingIds }
+        _id: { $in: otherWeddingIds }
     }).populate("weddingUUID");
 
     return res.status(200).json({
