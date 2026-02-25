@@ -37,6 +37,8 @@ class AddParticipantViewModel: BaseViewModel {
     init(userId: String, tableId: String) {
         self.userId = userId
         self.tableId = tableId
+        super.init()
+        self.getWeddingDetails()
     }
     
     func hasChanges() -> Bool {

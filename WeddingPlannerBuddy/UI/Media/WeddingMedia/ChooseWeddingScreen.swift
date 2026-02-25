@@ -17,15 +17,22 @@ struct ChooseWeddingScreen: View {
                 navigation.pop(animated: true)
             }
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 20) {
-                    ForEach(viewModel.weddings, id: \.id) { wedding in
-                        WidgetView(title: wedding.name, icon: .icWeddingsProfile) {
-                            let vm = WeddingMediaViewModel(wedding: wedding)
-                            navigation.push(WeddingMediaScreen(viewModel: vm).asDestination(), animated: true)
+            if viewModel.weddings.isEmpty {
+                Spacer()
+                EmptyStateView(title: "📸 No memories here... yet!",
+                               subtitle: "When a wedding is added, you’ll see all the details here.")
+                Spacer()
+            } else {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        ForEach(viewModel.weddings, id: \.id) { wedding in
+                            WidgetView(title: wedding.name, icon: .icWeddingsProfile) {
+                                let vm = WeddingMediaViewModel(wedding: wedding)
+                                navigation.push(WeddingMediaScreen(viewModel: vm).asDestination(), animated: true)
+                            }
                         }
-                    }
-                }.padding(.top, 20)
+                    }.padding(.top, 20)
+                }
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
