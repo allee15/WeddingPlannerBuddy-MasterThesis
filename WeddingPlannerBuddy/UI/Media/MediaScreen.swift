@@ -34,36 +34,29 @@ struct MediaScreen: View {
                                    subtitle: "There has been an error while fetching data. Please try again later.")
                     Spacer()
                 case .value(let weddings):
-                    if weddings.isEmpty {
+                    VStack(alignment: .leading) {
+                        Text("Capture the magic!")
+                            .foregroundStyle(Color.mainBlack)
+                            .font(.quicksandBold(size: 18))
+                            .multilineTextAlignment(.leading)
+                            .padding(.bottom, 12)
+                            .padding(.horizontal, 16)
+                        
+                        Text("Every love story deserves to be told. Choose your wedding and start adding unforgettable memories! 💍💖")
+                            .foregroundStyle(Color.mainBlack)
+                            .font(.quicksandMedium(size: 16))
+                            .multilineTextAlignment(.leading)
+                            .padding(.bottom, 36)
+                            .padding(.horizontal, 16)
+                        
+                        Image(.imgMedia)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: UIScreen.main.bounds.width,
+                                   height: UIScreen.main.bounds.width)
+                        
                         Spacer()
-                        EmptyStateView(title: "📸 No memories here... yet!",
-                                       subtitle: "When a wedding is added, you’ll see all the details here.")
-                        Spacer()
-                    } else {
-                        VStack(alignment: .leading) {
-                            Text("Capture the magic!")
-                                .foregroundStyle(Color.mainBlack)
-                                .font(.quicksandBold(size: 18))
-                                .multilineTextAlignment(.leading)
-                                .padding(.bottom, 12)
-                                .padding(.horizontal, 16)
-                            
-                            Text("Every love story deserves to be told. Choose your wedding and start adding unforgettable memories! 💍💖")
-                                .foregroundStyle(Color.mainBlack)
-                                .font(.quicksandMedium(size: 16))
-                                .multilineTextAlignment(.leading)
-                                .padding(.bottom, 36)
-                                .padding(.horizontal, 16)
-                            
-                            Image(.imgMedia)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: UIScreen.main.bounds.width,
-                                       height: UIScreen.main.bounds.width)
-                            
-                            Spacer()
-                        }.padding(.top, 20)
-                    }
+                    }.padding(.top, 20)
                 }
             } else {
                 UnloggedUserView()
