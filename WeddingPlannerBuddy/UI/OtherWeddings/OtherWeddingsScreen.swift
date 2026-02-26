@@ -23,13 +23,13 @@ struct OtherWeddingsScreen: View {
                         ForEach(Array(viewModel.otherWeddingsList.enumerated()), id: \.element.id) { index, invitation in
                             WeddingInvitationLineView(invitation: invitation, counter: index + 1) {
                                 let screen = ChooseFolderBottomSheetView {
-                                    viewModel.openGoogleMaps(for: invitation.location)
+                                    viewModel.openGoogleMaps(for: invitation.weddingUUID.location)
                                 } appleMapsAction: {
-                                    viewModel.openAppleMaps(for: invitation.location)
+                                    viewModel.openAppleMaps(for: invitation.weddingUUID.location)
                                 } wazeAction: {
-                                    viewModel.openWaze(for: invitation.location)
+                                    viewModel.openWaze(for: invitation.weddingUUID.location)
                                 } uberAction: {
-                                    viewModel.openUber(for: invitation.location)
+                                    viewModel.openUber(for: invitation.weddingUUID.location)
                                 }
                                 navigation.presentPopup(screen.asDestination(), animated: true, completion: nil)
                             }
