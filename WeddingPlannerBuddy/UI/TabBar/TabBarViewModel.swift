@@ -8,9 +8,10 @@
 import Foundation
 import Combine
 
-class TabBarViewModel: ObservableObject {
-    @Published var selectedTabItem: TabBarItemType
-    @Published var tabBarItems: [TabBarItem]
+@Observable
+class TabBarViewModel {
+    var selectedTabItem: TabBarItemType
+    var tabBarItems: [TabBarItem]
     
     public var oldSelectedTab: TabBarItemType
     

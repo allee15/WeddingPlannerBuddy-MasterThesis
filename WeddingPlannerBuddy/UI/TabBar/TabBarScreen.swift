@@ -24,7 +24,7 @@ struct TabBarScreen: View {
     @EnvironmentObject private var navigation: Navigation
 
     @ObservedObject private var tabBarCoordinator = TabBarCoordinator.instance
-    @StateObject private var viewModel = TabBarViewModel()
+    @State private var viewModel = TabBarViewModel()
     
     @StateObject private var homeNavigation = Navigation(root: HomeScreen().asDestination())
     @StateObject private var weddingNavigation = Navigation(root: WeddingScreen().asDestination())
@@ -47,7 +47,7 @@ struct TabBarScreen: View {
                             NavigationHostView(navigation: mediaNavigation)
                         }
                     }.frame(width: proxy.size.width, height: proxy.size.height)
-                }.onReceive(viewModel.$selectedTabItem) { newValue in
+                }.onChange(of: viewModel.selectedTabItem) { _, newValue in
                     homeNavigation.popToRoot(animated: false)
                     weddingNavigation.popToRoot(animated: false)
                     guestsNavigation.popToRoot(animated: false)
