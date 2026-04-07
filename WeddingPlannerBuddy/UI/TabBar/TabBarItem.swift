@@ -127,3 +127,4 @@ struct TabBarView: View {
         .padding(.bottom, -8)
     }
 }
+
