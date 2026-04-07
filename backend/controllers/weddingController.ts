@@ -171,7 +171,6 @@ export const updateBouquet = async (req: Request, res: Response): Promise<any> =
     try {
         const { id } = req.params;
         const { bouquetUUID, link, price, description } = req.body;
-        const imagePath = req.file?.path;
 
         const bouquet = await Bouquet.findOne({ bouquetUUID: bouquetUUID });
 
@@ -182,9 +181,23 @@ export const updateBouquet = async (req: Request, res: Response): Promise<any> =
         bouquet.link = link;
         bouquet.price = price;
         bouquet.description = description;
+        let imageUrl: string | undefined;
 
-        if (imagePath) {
-            bouquet.photo = imagePath;
+        if (req.file) {
+        const blob = await put(
+            `wedding-bouquet/${Date.now()}-${req.file.originalname}`,
+            req.file.buffer,
+            {
+            access: "public",
+            contentType: req.file.mimetype,
+            }
+        );
+
+        imageUrl = blob.url;
+        }
+
+        if (imageUrl) {
+            bouquet.photo = imageUrl;
         }
 
         await bouquet.save();
@@ -211,9 +224,23 @@ export const updateGroomSuit = async (req: Request, res: Response): Promise<any>
         groomSuit.link = link;
         groomSuit.price = price;
         groomSuit.description = description;
+        let imageUrl: string | undefined;
 
-        if (imagePath) {
-            groomSuit.photo = imagePath;
+        if (req.file) {
+        const blob = await put(
+            `wedding-groom-suit/${Date.now()}-${req.file.originalname}`,
+            req.file.buffer,
+            {
+            access: "public",
+            contentType: req.file.mimetype,
+            }
+        );
+
+        imageUrl = blob.url;
+        }
+
+        if (imageUrl) {
+            groomSuit.photo = imageUrl;
         }
 
         await groomSuit.save();
@@ -378,7 +405,6 @@ export const updateWeddingCake = async (req: Request, res: Response): Promise<an
     try {
         const { id } = req.params;
         const { weddingCakeUUID, name, description, price } = req.body;
-        const imagePath = req.file?.path;
 
         const weddingCake = await WeddingCake.findOne({ weddingCakeUUID: weddingCakeUUID });
 
@@ -389,9 +415,23 @@ export const updateWeddingCake = async (req: Request, res: Response): Promise<an
         weddingCake.name = name;
         weddingCake.description = description;
         weddingCake.price = price;
+        let imageUrl: string | undefined;
 
-        if (imagePath) {
-            weddingCake.photo = imagePath;
+        if (req.file) {
+        const blob = await put(
+            `wedding-cake/${Date.now()}-${req.file.originalname}`,
+            req.file.buffer,
+            {
+            access: "public",
+            contentType: req.file.mimetype,
+            }
+        );
+
+        imageUrl = blob.url;
+        }
+
+        if (imageUrl) {
+            weddingCake.photo = imageUrl;
         }
 
         await weddingCake.save();
