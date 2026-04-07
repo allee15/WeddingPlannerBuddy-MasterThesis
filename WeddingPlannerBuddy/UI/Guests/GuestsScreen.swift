@@ -87,13 +87,13 @@ struct GuestsScreen: View {
                         MainButtonView(text: "Start planning") {
                             viewModel.startWedding()
                         }.padding(.horizontal, 16)
-                            .padding(.bottom, 8)
+                            .padding(.bottom, 36)
                     } else if !user.otherWeddings.isEmpty {
                         MainButtonView(text: "Check other weddings") {
                             let vm = OtherWeddingsViewModel(otherWeddingsList: user.otherWeddings)
                             navigation.push(OtherWeddingsScreen(viewModel: vm).asDestination(), animated: true)
                         }.padding(.horizontal, 16)
-                            .padding(.bottom, 8)
+                            .padding(.bottom, 36)
                     }
                 }
             }
