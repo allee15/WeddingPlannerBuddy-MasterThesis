@@ -320,7 +320,8 @@ struct HomeScreen: View {
                     HomeCardView(card: viewModel.mediaCard) {
                         TabBarCoordinator.instance.tabBarNavigation = .media
                     }
-                }.padding(.vertical, 20)
+                }.padding(.top, 20)
+                    .padding(.bottom, 36)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)

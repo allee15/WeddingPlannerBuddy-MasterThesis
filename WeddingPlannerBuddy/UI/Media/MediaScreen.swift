@@ -33,7 +33,7 @@ struct MediaScreen: View {
                     EmptyStateView(title: "An error has occured.",
                                    subtitle: "There has been an error while fetching data. Please try again later.")
                     Spacer()
-                case .value(let weddings):
+                case .value(_):
                     VStack(alignment: .leading) {
                         Text("Capture the magic!")
                             .foregroundStyle(Color.mainBlack)
@@ -69,7 +69,7 @@ struct MediaScreen: View {
                     let vm = ChooseWeddingViewModel(weddings: viewModel.weddings)
                     mainNavigation?.push(ChooseWeddingScreen(viewModel: vm).asDestination(), animated: true)
                 }.padding(.horizontal, 16)
-                    .padding(.bottom, 12)
+                    .padding(.bottom, 36)
             }
     }
 }
