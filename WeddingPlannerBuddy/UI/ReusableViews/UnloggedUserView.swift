@@ -31,7 +31,8 @@ struct UnloggedUserView: View {
             .safeAreaInset(edge: .bottom) {
                 MainButtonView(text: "Login") {
                     mainNavigation?.push(LoginScreen().asDestination(), animated: true)
-                }.padding([.bottom, .horizontal], 16)
+                }.padding(.horizontal, 16)
+                    .padding(.bottom, 32)
             }
     }
 }

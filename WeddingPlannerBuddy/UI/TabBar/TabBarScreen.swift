@@ -17,12 +17,11 @@ enum TabBarNavigation {
 class TabBarCoordinator: ObservableObject {
     static let instance = TabBarCoordinator()
     @Published var tabBarNavigation: TabBarNavigation?
-    @Published var showTabBar: Bool = true
 }
 
 struct TabBarScreen: View {
     @EnvironmentObject private var navigation: Navigation
-
+    
     @ObservedObject private var tabBarCoordinator = TabBarCoordinator.instance
     @State private var viewModel = TabBarViewModel()
     
@@ -30,7 +29,7 @@ struct TabBarScreen: View {
     @StateObject private var weddingNavigation = Navigation(root: WeddingScreen().asDestination())
     @StateObject private var guestsNavigation = Navigation(root: GuestsScreen().asDestination())
     @StateObject private var mediaNavigation = Navigation(root: MediaScreen().asDestination())
-   
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             GeometryReader { proxy in
@@ -81,17 +80,21 @@ struct TabBarScreen: View {
                 })
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
             
-            if tabBarCoordinator.showTabBar {
-                TabBarView(
-                    selectedItem: $viewModel.selectedTabItem,
-                    items: viewModel.tabBarItems
-                )
-            }
-            
-        }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.mainWhite)
-            .ignoresSafeArea(.container)
-            .ignoresSafeArea(.keyboard)
-            .shadow(color: Color.mainBlack.opacity(0.2), radius: 1, x: 0, y: -1)
+            TabBarView(
+                selectedItem: $viewModel.selectedTabItem,
+                items: viewModel.tabBarItems
+            )
+            .opacity(0.01)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.mainWhite)
+        .ignoresSafeArea(.container)
+        .ignoresSafeArea(.keyboard)
+        .safeAreaInset(edge: .bottom) {
+            TabBarView(
+                selectedItem: $viewModel.selectedTabItem,
+                items: viewModel.tabBarItems
+            )
+        }
     }
 }

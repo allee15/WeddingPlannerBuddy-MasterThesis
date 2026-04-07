@@ -58,14 +58,32 @@ struct TabBarItemView: View {
                 Image(tabBarItem.imageName)
                     .resizable()
                     .renderingMode(.template)
-                    .foregroundStyle(isSelected ? .greenSecondary : Color.mainBlack.opacity(0.8))
-                    .aspectRatio(contentMode: .fill)
                     .frame(width: 24, height: 24)
+                    .foregroundStyle(isSelected ? Color.greenSecondary : Color.mainBlack.opacity(0.4))
+                    .scaleEffect(isSelected ? 1.05 : 1.0)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isSelected)
+                
                 
                 Text(tabBarItem.title)
                     .font(.quicksandMedium(size: 12))
-                    .foregroundColor(isSelected ? .greenSecondary : Color.mainBlack.opacity(0.8))
+                    .foregroundColor(isSelected ? .greenSecondary : Color.mainBlack.opacity(0.4))
             }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 8)
+            .background(
+                Group {
+                    if isSelected {
+                        RoundedRectangle(cornerRadius: 20, style: .continuous)
+                            .fill(Color.white.opacity(0.4))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                    .strokeBorder(Color.white.opacity(0.7), lineWidth: 0.5)
+                            )
+                            .shadow(color: Color.accentColor.opacity(0.12), radius: 8, x: 0, y: 2)
+                    }
+                }
+            )
+            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
         }
     }
 }
@@ -80,16 +98,32 @@ struct TabBarView: View {
                 TabBarItemView(
                     tabBarItem: item,
                     isSelected: selectedItem == item.type) { tabBarItem in
-                        self.selectedItem = item.type
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.7)) {
+                            selectedItem = item.type
+                        }
                     }
                     .frame(maxWidth: .infinity)
-                    .padding(.bottom, SafeAreaInsets.bottom > 0 ? 0 : 4)
+                    .contentShape(Rectangle())
             }
-        }.frame(maxWidth: .infinity)
-            .frame(height: 46)
-            .padding(.bottom, SafeAreaInsets.bottom)
-            .padding(.horizontal, 16)
-            .padding(.top, 8)
-            .background(Color.mainWhite)
+        }
+        .padding(.horizontal, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 28, style: .continuous)
+                .fill(.ultraThinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 28, style: .continuous)
+                        .strokeBorder(Color.white.opacity(0.35), lineWidth: 0.5)
+                )
+                .shadow(color: Color.black.opacity(0.05), radius: 12, x: 0, y: 2)
+                .overlay(alignment: .top) {
+                    Capsule()
+                        .fill(Color.white.opacity(0.35))
+                        .frame(height: 1)
+                        .padding(.horizontal, 24)
+                        .padding(.top, 0.5)
+                }
+        )
+        .padding(.horizontal, 14)
+        .padding(.bottom, -8)
     }
 }
