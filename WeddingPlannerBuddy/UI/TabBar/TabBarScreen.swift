@@ -79,12 +79,6 @@ struct TabBarScreen: View {
                     }
                 })
             }.frame(maxWidth: .infinity, maxHeight: .infinity)
-            
-            TabBarView(
-                selectedItem: $viewModel.selectedTabItem,
-                items: viewModel.tabBarItems
-            )
-            .opacity(0.01)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color.mainWhite)

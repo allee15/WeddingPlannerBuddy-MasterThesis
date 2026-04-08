@@ -56,6 +56,12 @@ struct MediaScreen: View {
                                    height: UIScreen.main.bounds.width)
                         
                         Spacer()
+                        
+                        MainButtonView(text: "Select wedding") {
+                            let vm = ChooseWeddingViewModel(weddings: viewModel.weddings)
+                            mainNavigation?.push(ChooseWeddingScreen(viewModel: vm).asDestination(), animated: true)
+                        }.padding(.horizontal, 16)
+                            .padding(.bottom, MainTabBarReservedSpace)
                     }.padding(.top, 20)
                 }
             } else {
@@ -64,13 +70,6 @@ struct MediaScreen: View {
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
-            .safeAreaInset(edge: .bottom) {
-                MainButtonView(text: "Select wedding") {
-                    let vm = ChooseWeddingViewModel(weddings: viewModel.weddings)
-                    mainNavigation?.push(ChooseWeddingScreen(viewModel: vm).asDestination(), animated: true)
-                }.padding(.horizontal, 16)
-                    .padding(.bottom, 36)
-            }
     }
 }
 

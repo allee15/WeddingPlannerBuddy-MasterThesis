@@ -166,7 +166,7 @@ struct HomeScreen: View {
                             if !weatherArray.isEmpty {
                                 if weatherArray.count == 1 || viewModel.selectedDateType == .singleDate {
                                     WeatherCardView(prediction: weatherArray[0].prediction, date: weatherArray[0].date) {
-                                        if let user = viewModel.user {
+                                        if viewModel.user != nil {
                                             let modal = ModalChooseOptionView(title: "Change wedding date",
                                                                               description: "Are you sure you want to select this date? This action will change your wedding date.",
                                                                               topButtonText: "Continue",
@@ -192,7 +192,7 @@ struct HomeScreen: View {
                                         HStack(spacing: 12) {
                                             ForEach(weatherArray, id: \.id) { weather in
                                                 WeatherCardView(prediction: weather.prediction, date: weather.date) {
-                                                    if let user = viewModel.user {
+                                                    if viewModel.user != nil {
                                                         let modal = ModalChooseOptionView(title: "Change wedding date",
                                                                                           description: "Are you sure you want to select this date? This action will change your wedding date.",
                                                                                           topButtonText: "Continue",
@@ -246,7 +246,7 @@ struct HomeScreen: View {
                         if !weatherArray.isEmpty {
                             if weatherArray.count == 1 || viewModel.selectedDateType == .singleDate {
                                 WeatherCardView(prediction: weatherArray[0].prediction, date: weatherArray[0].date) {
-                                    if let user = viewModel.user {
+                                    if viewModel.user != nil {
                                         let modal = ModalChooseOptionView(title: "Change wedding date",
                                                                           description: "Are you sure you want to select this date? This action will change your wedding date.",
                                                                           topButtonText: "Continue",
@@ -272,7 +272,7 @@ struct HomeScreen: View {
                                     HStack(spacing: 12) {
                                         ForEach(weatherArray, id: \.id) { weather in
                                             WeatherCardView(prediction: weather.prediction, date: weather.date) {
-                                                if let user = viewModel.user {
+                                                if viewModel.user != nil {
                                                     let modal = ModalChooseOptionView(title: "Change wedding date",
                                                                                       description: "Are you sure you want to select this date? This action will change your wedding date.",
                                                                                       topButtonText: "Continue",
@@ -321,7 +321,7 @@ struct HomeScreen: View {
                         TabBarCoordinator.instance.tabBarNavigation = .media
                     }
                 }.padding(.top, 20)
-                    .padding(.bottom, 36)
+                    .padding(.bottom, MainTabBarReservedSpace)
             }
         }.background(Color.mainWhite)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
