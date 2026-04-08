@@ -32,7 +32,7 @@ struct UnloggedUserView: View {
                 MainButtonView(text: "Login") {
                     mainNavigation?.push(LoginScreen().asDestination(), animated: true)
                 }.padding(.horizontal, 16)
-                    .padding(.bottom, 32)
+                    .padding(.bottom, MainTabBarReservedSpace)
             }
     }
 }

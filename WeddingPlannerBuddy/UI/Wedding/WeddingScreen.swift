@@ -148,7 +148,7 @@ struct WeddingScreen: View {
                                             
                                         }.padding(.horizontal, 16)
                                     }.padding(.top, 16)
-                                        .padding(.bottom, 36)
+                                        .padding(.bottom, MainTabBarReservedSpace)
                                 }
                             }.padding(.top, UIScreen.main.bounds.height / 4.25)
                                 .padding(.horizontal, 16)
@@ -161,7 +161,7 @@ struct WeddingScreen: View {
                         MainButtonView(text: "Start planning") {
                             viewModel.startWedding()
                         }.padding(.horizontal, 16)
-                            .padding(.bottom, 36)
+                            .padding(.bottom, MainTabBarReservedSpace)
                     }
                 } else {
                     UnloggedUserView()

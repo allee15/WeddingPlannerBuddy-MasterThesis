@@ -54,11 +54,27 @@ struct GuestsScreen: View {
                             }
                         }.padding(.top, 24)
                     }
+                    
+                    Spacer()
+                    
+                    if !user.otherWeddings.isEmpty {
+                        MainButtonView(text: "Check other weddings") {
+                            let vm = OtherWeddingsViewModel(otherWeddingsList: user.otherWeddings)
+                            navigation.push(OtherWeddingsScreen(viewModel: vm).asDestination(), animated: true)
+                        }.padding(.horizontal, 16)
+                            .padding(.bottom, MainTabBarReservedSpace)
+                    }
+                    
                 } else {
                     Spacer()
                     EmptyStateView(title: "Let’s get this wedding started! 🎉",
                                    subtitle: "Add your wedding details and start planning the best day ever.")
                     Spacer()
+                    
+                    MainButtonView(text: "Start planning") {
+                        viewModel.startWedding()
+                    }.padding(.horizontal, 16)
+                        .padding(.bottom, MainTabBarReservedSpace)
                 }
                 
             } else {
@@ -79,22 +95,6 @@ struct GuestsScreen: View {
                         navigation.dismissModal(animated: true, completion: nil)
                     }
                     navigation.presentPopup(modal.asDestination(), animated: true, completion: nil)
-                }
-            }
-            .safeAreaInset(edge: .bottom) {
-                if let user = viewModel.user {
-                    if !user.hasActiveWedding {
-                        MainButtonView(text: "Start planning") {
-                            viewModel.startWedding()
-                        }.padding(.horizontal, 16)
-                            .padding(.bottom, 36)
-                    } else if !user.otherWeddings.isEmpty {
-                        MainButtonView(text: "Check other weddings") {
-                            let vm = OtherWeddingsViewModel(otherWeddingsList: user.otherWeddings)
-                            navigation.push(OtherWeddingsScreen(viewModel: vm).asDestination(), animated: true)
-                        }.padding(.horizontal, 16)
-                            .padding(.bottom, 36)
-                    }
                 }
             }
     }

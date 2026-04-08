@@ -32,3 +32,6 @@ public var SafeAreaInsets: EdgeInsets {
     UIApplication.shared.keyWindow?.safeAreaInsets.insets ?? EdgeInsets()
 }
 
+public var MainTabBarReservedSpace: CGFloat {
+    88
+}
