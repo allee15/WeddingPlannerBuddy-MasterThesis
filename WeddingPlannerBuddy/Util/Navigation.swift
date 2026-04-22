@@ -228,12 +228,28 @@ extension Navigation: UINavigationControllerDelegate {
     }
 }
 
-fileprivate class ViewWrapperController: UIHostingController<AnyView>, NavigationDestination {
+fileprivate class ViewWrapperController: UIViewController, NavigationDestination {
     private(set) var tag: String?
+    private let hostingController: UIHostingController<AnyView>
     
     init(tag: String?, rootView: AnyView) {
-        super.init(rootView: AnyView(rootView.navigationBarHidden(true)))
         self.tag = tag
+        self.hostingController = UIHostingController(rootView: AnyView(rootView.navigationBarHidden(true)))
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addChild(hostingController)
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(hostingController.view)
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: view.topAnchor),
+            hostingController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            hostingController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+        hostingController.didMove(toParent: self)
     }
     
     override func viewWillAppear(_ animated: Bool) {}
