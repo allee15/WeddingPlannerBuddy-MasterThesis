@@ -10,7 +10,8 @@ import weatherRoutes from './routes/weather';
 import { createDatabaseConnection } from './configs/db';
 import * as admin from "firebase-admin";
 
-const firebaseCertificate = require("./weddingplannerbuddy-firebase-adminsdk-bajjl-5027c2ca42.json");
+const serviceAccount = require('./configs/firebase-admin.js');
+const firebaseCertificate = serviceAccount;
 
 const app = express()
 dotenv.config({ path: "./.env"})
