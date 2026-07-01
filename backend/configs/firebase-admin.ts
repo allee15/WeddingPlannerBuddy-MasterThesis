@@ -1,10 +1,10 @@
 const serviceAccount = {
   type: "service_account",
-  project_id: process.env.FIREBASE_PROJECT_ID,
-  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID,
+  project_id: process.env.FIREBASE_PROJECT_ID as string,
+  private_key_id: process.env.FIREBASE_PRIVATE_KEY_ID as string,
 
   private_key: process.env.FIREBASE_PRIVATE_KEY ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n') : undefined,
-  client_email: process.env.FIREBASE_CLIENT_EMAIL,
+  client_email: process.env.FIREBASE_CLIENT_EMAIL as string,
   client_id: "109349022905145065900",
   auth_uri: "https://accounts.google.com/o/oauth2/auth",
   token_uri: "https://oauth2.googleapis.com/token",

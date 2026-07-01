@@ -2,6 +2,9 @@ import express from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import path from 'path';
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 import userRoutes from './routes/user';
 import weddingRoutes from './routes/wedding';
@@ -9,15 +12,12 @@ import tableRoutes from './routes/table';
 import weatherRoutes from './routes/weather';
 import { createDatabaseConnection } from './configs/db';
 import * as admin from "firebase-admin";
-
-const serviceAccount = require('./configs/firebase-admin.js');
-const firebaseCertificate = serviceAccount;
+import firebaseCertificate from './configs/firebase-admin';
 
 const app = express()
-dotenv.config({ path: "./.env"})
 
 admin.initializeApp({
-  credential: admin.credential.cert(firebaseCertificate),
+  credential: admin.credential.cert(firebaseCertificate as admin.ServiceAccount),
   databaseURL: "https://weddingplannerbuddy.firebaseio.com"
 });
 
